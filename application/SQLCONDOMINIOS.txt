@@ -1,0 +1,253 @@
+CREATE TABLE auditoria (
+    id serial NOT NULL,
+    tabla character varying(200),
+    codigo character varying(200),
+    accion character varying(200),
+    fecha character varying(10) NOT NULL,
+    hora character varying(12) NOT NULL,
+    usuario integer
+);
+
+
+--
+-- TOC entry 188 (class 1259 OID 41546)
+-- Name: auditoria_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE auditoria_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- TOC entry 3107 (class 0 OID 0)
+-- Dependencies: 188
+-- Name: auditoria_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+CREATE TABLE usuarios (
+    id serial NOT NULL,
+    username character varying(30),
+    password character varying(128),
+    cedula integer,
+    first_name character varying(70),
+    last_name character varying(70),
+    email character varying(75),
+    tipo_usuario character varying(100),
+    cargo character varying(100),
+    telefono character varying(20),
+    estatus boolean,
+    picture character varying(500),
+    fecha_create timestamp with time zone,
+    fecha_update timestamp with time zone,
+    user_create_id integer
+);
+
+INSERT INTO usuarios (id, username, password, cedula, first_name, last_name, email, tipo_usuario, cargo, telefono, estatus, picture, fecha_create, fecha_update, user_create_id) VALUES (26, 'cvcv', 'pbkdf2_sha256$12000$a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 8968968, 'JOSE ISABEL', 'MONTIEL ', 'tyrtyrtfy', '1', '7', '(4577) 567-6786', true, '', '2016-05-09 10:50:13-04', '2016-05-09 10:50:13-04', 4);
+INSERT INTO usuarios (id, username, password, cedula, first_name, last_name, email, tipo_usuario, cargo, telefono, estatus, picture, fecha_create, fecha_update, user_create_id) VALUES (25, 'gfg', 'pbkdf2_sha256$12000$a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 12112532, 'ADRIANA YELITZA', 'GOMEZ LA ROSA', 'fhdh', '1', '0', '(0022) 512-1011', false, '', '2016-05-09 10:51:35-04', '2016-05-09 10:51:35-04', 4);
+INSERT INTO usuarios (id, username, password, cedula, first_name, last_name, email, tipo_usuario, cargo, telefono, estatus, picture, fecha_create, fecha_update, user_create_id) VALUES (19, 'prueba', 'pbkdf2_sha256$12000$a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 15633221, 'ROBERT LUIS', 'BARCENAS ', 'dgdgdgs', '3', '0', '(1616) 311-1616', false, '', '2016-05-09 10:53:02-04', '2016-05-09 10:53:02-04', 4);
+INSERT INTO usuarios (id, username, password, cedula, first_name, last_name, email, tipo_usuario, cargo, telefono, estatus, picture, fecha_create, fecha_update, user_create_id) VALUES (4, 'admin', 'pbkdf2_sha256$12000$8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', 19653462, 'FRANCIS KATERINNEfgjfgj', 'MEDINA GONZALEZgjfgj', 'kafgjfgjfgj', '1', '7', '(0426) 666-9999', true, '19653462.jpg', '2016-06-08 12:38:55-04', '2016-06-08 12:38:55-04', 4);
+INSERT INTO usuarios (id, username, password, cedula, first_name, last_name, email, tipo_usuario, cargo, telefono, estatus, picture, fecha_create, fecha_update, user_create_id) VALUES (27, 'fghjdg', 'pbkdf2_sha256$12000$a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 5745757, 'CARLOS ALBERTO', 'GARCIA ESPINOLA', 'dgdg', 'Vendedor', 'fdhdfh', '(5778) 458-4585', true, '5745757.jpg', '2016-04-20 14:38:37-04:30', '2016-05-09 00:30:00-04', 4);
+
+
+CREATE TABLE conf_grupo_user (
+    id integer NOT NULL,
+    name character varying(50) NOT NULL,
+    activo boolean,
+    user_create integer,
+    date_create timestamp without time zone,
+    user_update integer,
+    date_update timestamp without time zone
+);
+INSERT INTO conf_grupo_user (id, name, activo, user_create, date_create, user_update, date_update) VALUES (1, 'Administrador', true, NULL, NULL, NULL, NULL);
+
+CREATE TABLE conf_bancos (
+    id serial NOT NULL,
+    codigo integer,
+    descripcion character varying(50),
+    activo boolean
+);
+CREATE TABLE conf_conceptos (
+    id serial NOT NULL,
+    codigo integer,
+    descripcion character varying(50),
+    activo boolean
+);
+CREATE TABLE conf_tipo_inmueble (
+    id serial NOT NULL,
+    codigo integer,
+    descripcion character varying(50),
+    activo boolean
+);
+
+CREATE TABLE conf_inmuebles (
+    id serial NOT NULL,
+    codigo integer,
+    descripcion character varying(50),
+    tipo_id integer,
+    prestaciones_id integer,
+    prestaciones float,
+    reserva_id integer,
+    reserva float,
+    morocidad float,
+    tot_prestaciones float,
+    tot_reservas float,
+    rif character varying(15),
+    direccion character varying(150),
+    pie_pagina character varying(250),
+    activo boolean
+);
+CREATE TABLE conf_copropietarios (
+    id serial NOT NULL,
+    codigo integer,
+    cedula integer,
+    nombre character varying(25),
+    apellido character varying(25),
+    inmueble_id integer,
+    telefono1 character varying(20),
+    telefono2 character varying(20),
+    apto character varying(10),
+    correo character varying(50),
+    alicuota float,
+    activo boolean
+);
+CREATE TABLE conf_rel_bancos (
+    id serial NOT NULL,
+    codigo integer,
+    banco_id integer,
+    tipo_cuenta_id integer,
+    num_cuenta character varying(25),
+    monto_inicial float,
+    monto_actual float,
+    inmueble_id integer,
+    tipo_destino_id integer
+);
+CREATE TABLE adm_empresa (
+    id serial NOT NULL,
+    codigo integer,
+    nombre_empresa character varying(50),
+    rif character varying(20),
+    cedula integer,
+    nombre character varying(25),
+    apellido character varying(25),
+    telefono1 character varying(20),
+    telefono2 character varying(20),
+    correo character varying(40),
+    direccion character varying(150),
+    logo character varying(500)
+);
+CREATE TABLE pro_recibos (
+    id serial NOT NULL,
+    codigo integer,
+    inmueble_id integer,
+    mes_id integer,
+    year integer,
+    estatus integer
+);
+CREATE TABLE conf_rel_recibos (
+    id serial NOT NULL,
+    codigo integer,
+    mes integer,
+    year integer,
+    monto float,
+    monto_abonado float,
+    monto_deuda float,
+    estatus integer,
+    copropietario_id integer,
+    monto_pendiente double precision,
+    recibo_id integer
+);
+CREATE TABLE pro_rel_recibos_ingresos (
+    id serial NOT NULL,
+    concepto character varying(100),
+    destino_id integer,
+    monto float,
+    recibo_id integer,
+    inmueble_id integer
+);
+CREATE TABLE pro_rel_recibos_gastos_comunes (
+    id serial NOT NULL,
+    concepto_id integer,
+    monto float,
+    recibo_id integer,
+    inmueble_id integer
+);
+CREATE TABLE pro_rel_recibos_gastos_no_comunes (
+    id serial NOT NULL,
+    concepto character varying(100),
+    monto float,
+    recibo_id integer,
+    inmueble_id integer,
+    copropietario_id integer
+);
+CREATE TABLE pro_rel_recibos_cargos (
+    id serial NOT NULL,
+    concepto character varying(100),
+    destino_id integer,
+    monto float,
+    recibo_id integer,
+    inmueble_id integer
+);
+CREATE TABLE pro_rel_fondos (
+    id serial NOT NULL,
+    anterior_fr float,
+    nuevo_fr float,
+    nuevo_fp float,
+    anterior_fp float,
+    recibo_id float
+);
+
+CREATE TABLE pro_pagos (
+    id serial NOT NULL,
+    codigo integer,
+    inmueble_id integer,
+    copropietario_id integer,
+    fecha character varying(20),
+    observaciones character varying(150),
+    cheque float,
+    num_cheque character varying(20),
+    banco_cheque_id integer,
+    deposito float,
+    num_deposito character varying(20),
+    banco_deposito_id integer,
+    efectivo float,
+    tarjeta float,
+    transferencia float,
+    num_transferencia character varying(20),
+    banco_transferencia_id integer,
+    total_pago float,
+    antigua_deuda float,
+    nueva_deuda float,
+    monto_abonado float,
+    estatus integer
+);
+CREATE TABLE pro_rel_pagos (
+    id serial NOT NULL,
+    recibo_id float,
+    monto_recibo float,
+    monto_pago float,
+    monto_abonado float,
+    monto_restante float,
+    abono_anterior float,
+    pago_id float
+);
+
+CREATE TABLE pro_re_egresos (
+    id serial NOT NULL,
+    inmueble_id integer,
+    mes_id integer,
+    year integer,
+    estatus integer
+);
+CREATE TABLE pro_rel_re_egresos (
+    id serial NOT NULL,
+    num_cheque character varying(20),
+    a_favor character varying(50),
+    concepto character varying(75),
+    cuenta_id integer,
+    monto float,
+    relacion_id integer,
+    inmueble_id integer
+);
