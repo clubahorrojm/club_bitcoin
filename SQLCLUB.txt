@@ -1,0 +1,214 @@
+CREATE TABLE auditoria (
+    id serial NOT NULL,
+    tabla character varying(200),
+    codigo character varying(200),
+    accion character varying(200),
+    fecha character varying(10) NOT NULL,
+    hora character varying(12) NOT NULL,
+    usuario integer
+);
+
+
+--
+-- TOC entry 188 (class 1259 OID 41546)
+-- Name: auditoria_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE auditoria_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- TOC entry 3107 (class 0 OID 0)
+-- Dependencies: 188
+-- Name: auditoria_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+CREATE TABLE usuarios (
+    id serial NOT NULL,
+	codigo integer,
+    username character varying(30),
+    password character varying(128),
+    cedula integer,
+    first_name character varying(70),
+    last_name character varying(70),
+    email character varying(75),
+    tipo_usuario character varying(100),
+    cargo character varying(100),
+    telefono character varying(20),
+    estatus boolean,
+    picture character varying(500),
+    fecha_create timestamp with time zone,
+    fecha_update timestamp with time zone,
+    user_create_id integer
+);
+
+INSERT INTO usuarios (id, username, password, cedula, first_name, last_name, email, tipo_usuario, cargo, telefono, estatus, picture, fecha_create, fecha_update, user_create_id) VALUES (26, 'cvcv', 'pbkdf2_sha256$12000$a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 8968968, 'JOSE ISABEL', 'MONTIEL ', 'tyrtyrtfy', '1', '7', '(4577) 567-6786', true, '', '2016-05-09 10:50:13-04', '2016-05-09 10:50:13-04', 4);
+INSERT INTO usuarios (id, username, password, cedula, first_name, last_name, email, tipo_usuario, cargo, telefono, estatus, picture, fecha_create, fecha_update, user_create_id) VALUES (25, 'gfg', 'pbkdf2_sha256$12000$a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 12112532, 'ADRIANA YELITZA', 'GOMEZ LA ROSA', 'fhdh', '1', '0', '(0022) 512-1011', false, '', '2016-05-09 10:51:35-04', '2016-05-09 10:51:35-04', 4);
+INSERT INTO usuarios (id, username, password, cedula, first_name, last_name, email, tipo_usuario, cargo, telefono, estatus, picture, fecha_create, fecha_update, user_create_id) VALUES (19, 'prueba', 'pbkdf2_sha256$12000$a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 15633221, 'ROBERT LUIS', 'BARCENAS ', 'dgdgdgs', '3', '0', '(1616) 311-1616', false, '', '2016-05-09 10:53:02-04', '2016-05-09 10:53:02-04', 4);
+INSERT INTO usuarios (id, username, password, cedula, first_name, last_name, email, tipo_usuario, cargo, telefono, estatus, picture, fecha_create, fecha_update, user_create_id) VALUES (4, 'admin', 'pbkdf2_sha256$12000$8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', 19653462, 'FRANCIS KATERINNEfgjfgj', 'MEDINA GONZALEZgjfgj', 'kafgjfgjfgj', '1', '7', '(0426) 666-9999', true, '19653462.jpg', '2016-06-08 12:38:55-04', '2016-06-08 12:38:55-04', 4);
+INSERT INTO usuarios (id, username, password, cedula, first_name, last_name, email, tipo_usuario, cargo, telefono, estatus, picture, fecha_create, fecha_update, user_create_id) VALUES (27, 'fghjdg', 'pbkdf2_sha256$12000$a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 5745757, 'CARLOS ALBERTO', 'GARCIA ESPINOLA', 'dgdg', 'Vendedor', 'fdhdfh', '(5778) 458-4585', true, '5745757.jpg', '2016-04-20 14:38:37-04:30', '2016-05-09 00:30:00-04', 4);
+
+
+CREATE TABLE conf_grupo_user (
+    id serial NOT NULL,
+	codigo integer,
+    name character varying(50) NOT NULL,
+    activo boolean,
+    user_create integer,
+    date_create timestamp without time zone,
+    user_update integer,
+    date_update timestamp without time zone
+);
+INSERT INTO conf_grupo_user (id, name, activo, user_create, date_create, user_update, date_update) VALUES (1, 'Administrador', true, NULL, NULL, NULL, NULL);
+
+CREATE TABLE conf_bancos (
+    id serial NOT NULL,
+    codigo integer,
+    descripcion character varying(50),
+    activo boolean
+);
+
+CREATE TABLE conf_tipos_monedas (
+    id serial NOT NULL,
+    codigo integer,
+    descripcion character varying(50),
+    activo boolean
+);
+CREATE TABLE conf_paises (
+    id serial NOT NULL,
+    codigo integer,
+    descripcion character varying(50),
+    activo boolean
+);
+
+CREATE TABLE adm_asignacion_montos (
+    id serial NOT NULL,
+    codigo integer,
+    porcentaje1 float,
+    porcentaje2 float,
+    porcentaje3 float,
+    porcentaje4 float,
+    porcentaje5 float,
+    porcentaje6 float,
+    porcentaje7 float,
+    porcentaje8 float
+);
+
+CREATE TABLE ref_perfil (
+    id serial NOT NULL,
+    codigo integer,
+    usuario_id integer,
+    maximo float,
+    disponible float,
+    estatus integer,
+    referido_id integer,
+    t_moneda_id integer
+);
+INSERT INTO ref_perfil(
+            usuario_id, maximo, disponible, estatus, t_moneda_id)
+    VALUES (4, 875350, 0, 1, 1)
+
+
+CREATE TABLE claves_sistema (
+    id integer NOT NULL,
+    clave character varying(128),
+    fecha character varying(10),
+    hora character varying(12),
+    user_create integer
+);
+
+
+--
+-- TOC entry 178 (class 1259 OID 48634)
+-- Name: claves_sistema_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE claves_sistema_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- TOC entry 2216 (class 0 OID 0)
+-- Dependencies: 178
+-- Name: claves_sistema_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+INSERT INTO claves_sistema (id, clave, fecha, hora, user_create) VALUES (1, 'pbkdf2_sha256$12000$ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f', '2016-10-29', '18:45:00 pm', 4);
+
+CREATE TABLE conf_cuentas (
+    id integer NOT NULL,
+    codigo integer,
+    descripcion character varying(20),
+    tipo_cuenta_id integer,
+    banco_id integer,
+    activo boolean
+);
+
+
+--
+-- TOC entry 186 (class 1259 OID 48654)
+-- Name: conf_cuentas_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE conf_cuentas_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- TOC entry 2220 (class 0 OID 0)
+-- Dependencies: 186
+-- Name: conf_cuentas_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+CREATE TABLE conf_tipo_cuentas (
+    id integer NOT NULL,
+    codigo integer,
+    descripcion character varying(50),
+    activo boolean
+);
+
+
+--
+-- TOC entry 196 (class 1259 OID 48679)
+-- Name: conf_tipo_cuentas_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE conf_tipo_cuentas_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- TOC entry 2225 (class 0 OID 0)
+-- Dependencies: 196
+-- Name: conf_tipo_cuentas_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+http://localhost/ClubAhorro2/index.php?codigo=28&link=2
+
+CREATE TABLE ref_rel_links (
+    id serial NOT NULL,
+    codigo integer,
+    usuario_id integer,
+    links character varying(100),
+    estatus integer,
+    referido_id integer,
+    num_link integer,
+    fecha character varying(20)
+);

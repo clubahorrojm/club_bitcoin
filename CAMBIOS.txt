@@ -1,0 +1,8 @@
+20-06-2017
+- Controllers/referidos/CReferidos.php (Realizado)
+	Correccion en consulta en el perfil de referidos para listar los pagos recibidos por el usuario. 'Linea 177'
+- Validar Menú con respecto a los Estatus (Pendiente)
+- Mensaje debajo del paso 1 en la modal a modo que el usuario entienda el porque aun no avanza al 2 (Pendiente)
+- Orden de los Pagos. (Pendiente)
+- Imagen de Fondo en modales. (Pendiente)
+- Moda 4 (Mensaje de Felicitaciones y de cierre (Pendiente)
