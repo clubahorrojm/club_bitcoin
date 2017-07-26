@@ -85,6 +85,16 @@ if (!function_exists('menu')) {
 		<?php endif; ?>
 		
 	    <?php if ($datos_sesion['tipouser'] == 'Administrador'): ?>
+	   <li class="treeview">
+            <a href="#">
+                <i class="fa fa-users text-gray"></i><span>Usuarios</span><i class="fa fa-angle-left pull-right"></i>
+            </a>
+            <ul class="treeview-menu">
+        		<li><a href="<?php echo base_url(); ?>index.php/configuracion/grupos_usuarios/ControllersGrupoUsuarios"><i class="fa fa-object-group text-gray"></i> Grupos de Usuarios</a></li>
+                <li><a href="<?php echo base_url(); ?>index.php/configuracion/usuarios/usuarios"><i class="fa fa-user text-gray"></i>Gestión de Usuarios</a></li>
+
+            </ul>
+        </li>
 	    <li class="treeview">
             <a href="#">
                 <i class="fa fa-shield text-orange"></i><span>Administración</span><i class="fa fa-angle-left pull-right"></i>
@@ -92,10 +102,9 @@ if (!function_exists('menu')) {
             <ul class="treeview-menu">
 				<li><a href="<?php echo base_url(); ?>index.php/administracion/CAMontos/"><i class="fa fa-dollar text-orange"></i>Asignación de Montos</a></li>
         		<li><a href="<?php echo base_url(); ?>index.php/administracion/CAuditoria"><i class="fa fa-book text-orange"></i>Bitacora</a></li>
+				<li><a href="<?php echo base_url(); ?>index.php/administracion/CBots"><i class="fa fa-user-secret text-orange"></i>Cuentas Bot</a></li>
         		<li><a href="<?php echo base_url(); ?>index.php/administracion/CEmpresa/"><i class="fa fa-industry text-orange"></i>Empresa</a></li>
-        		<li><a href="<?php echo base_url(); ?>index.php/configuracion/grupos_usuarios/ControllersGrupoUsuarios"><i class="fa fa-object-group text-orange"></i> Grupos de Usuarios</a></li>
-                <li><a href="<?php echo base_url(); ?>index.php/configuracion/usuarios/usuarios"><i class="fa fa-user text-orange"></i>Gestión de Usuarios</a></li>
-                <li><a href="<?php echo base_url(); ?>index.php/administracion/CBots"><i class="fa fa-user-secret text-orange"></i>Cuentas Bot</a></li>
+				<li><a href="<?php echo base_url(); ?>index.php/administracion/CMonedero"><i class="fa fa-btc text-orange"></i>Monedero</a></li>
                 <li><a href="#" id="rec_password"><i class="fa fa-shield text-orange"></i>Rec: Clave de Acceso</a></li>
             </ul>
         </li>
