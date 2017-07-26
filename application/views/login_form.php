@@ -2,7 +2,7 @@
     <?php
     if (isset($this->session->userdata['logged_in'])) {
 
-        header("location: http://localhost/clubahorro/index.php/User_Authentication/user_login_process");
+        header("location: http://localhost/club_bitcoin/index.php/User_Authentication/user_login_process");
     }
     
     $codigo = 'vacío';

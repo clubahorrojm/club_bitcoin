@@ -43,7 +43,7 @@
 							</div><!-- /.form-group -->
 						</div><!-- /.form-group -->
 
-						<div class="col-md-4">
+						<!--<div class="col-md-4">
 							<div class="form-group">
 								<label style="font-weight:bold">Tipo de cuenta</label>
 								<select id="tipo_cuenta_id" class="form-control select2">
@@ -52,15 +52,15 @@
 										<option value="<?php echo $tipo->codigo?>"><?php echo $tipo->descripcion?></option>
 									<?php }?>
 								</select>
-							</div><!-- /.form-group -->
-						</div><!-- /.form-group -->
+							</div>
+						</div>
 
 						<div class="col-md-4">
 							<div class="form-group">
 								<label style="font-weight:bold">Número de cuenta</label>
 								<input type="text" placeholder="Introdúzca el número de la cuenta" maxlength="20" id="num_cuenta_usu" value="<?php echo $editar[0]->num_cuenta_usu ?>" class="form-control" >
-							</div><!-- /.form-group -->
-						</div><!-- /.form-group -->
+							</div>
+						</div>
 						
 						<div class="col-md-4">
 							<div class="form-group">
@@ -71,8 +71,9 @@
 										<option value="<?php echo $banco->codigo?>"><?php echo $banco->descripcion?></option>
 									<?php }?>
 								</select>
-							</div><!-- /.form-group -->
-						</div><!-- /.form-group -->
+							</div>
+						</div>-->
+						
 						<div class="col-md-4">
 							<div class="form-group">
 								<br>

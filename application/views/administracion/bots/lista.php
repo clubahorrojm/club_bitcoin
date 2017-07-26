@@ -53,7 +53,9 @@ redirect(base_url());
 								<select id="moneda" name="moneda" class="form-control" >
 									<option value="0">Seleccione</option>
 									<?php foreach ($monedas as $moneda) { ?>
-										<option value="<?php echo $moneda->id ?>"><?php echo $moneda->descripcion ?></option>
+										<?php if ($moneda->id == 1) { ?>
+											<option value="<?php echo $moneda->id ?>"><?php echo $moneda->descripcion ?></option>
+										<?php } ?>
 									<?php } ?>
 								</select>
 							</div><!-- /.form-group -->

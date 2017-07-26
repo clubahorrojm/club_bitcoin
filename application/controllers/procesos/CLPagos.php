@@ -51,9 +51,9 @@ class CLPagos extends CI_Controller
         //Validación de configuración de primer uso
         //Al no existir registros por defecto carga algunos genéricos
         $data['listar'] = '';
-        $ultimo_id = $this->ModelsBusqueda->count_all_table('ref_rel_pagos');
+        $ultimo_id = $this->ModelsBusqueda->count_all_table('ref_rel_pagos_bitcoins');
         if ($ultimo_id > 0){
-            $data['listar'] = $this->MLPagos->obtenerPagos();
+            $data['listar'] = $this->MLPagos->obtenerPagosBit();
         }
         else{
             //~ $this->MCuentas->cargarCSV();
@@ -75,11 +75,11 @@ class CLPagos extends CI_Controller
             'fecha_verificacion' => date('Y-m-d'),
         );
         // Actualizamos el pago con los datos armados
-        $result = $this->MLPagos->actualizarPago($data);
+        $result = $this->MLPagos->actualizarPagoBit($data);
         // Registramos los cambios en la Bitacora
         if ($result) {
             $param = array(
-                'tabla' => 'ref_rel_pagos',
+                'tabla' => 'ref_rel_pagos_bitcoins',
                 'codigo' => $cod,
                 'accion' => 'Actualización de Pago',
                 'fecha' => date('Y-m-d'),
@@ -88,7 +88,7 @@ class CLPagos extends CI_Controller
             );
             $this->MAuditoria->add($param);
         }
-        $data['pagos'] = $this->MRelPagos->obtenerRelPagos2($cod);
+        $data['pagos'] = $this->MRelPagos->obtenerRelPagos2Bit($cod);
         $id_pefil = $data['pagos'][0]->perfil_id;
         $datos2 = array(
             'codigo'=> $id_pefil,
