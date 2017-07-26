@@ -121,19 +121,19 @@ class CReferidos extends CI_Controller
         $data['listar_usuarios'] = $this->Usuarios_model->obtenerUsuarios(); // Listado de usuarios
 
         /////// Al ingresar por primera vez se genera un registro vacio (pre-pago) del pago a la pag
-        $data['existe_pago'] = count($this->MRelPagos->obtenerRelPagos($cod_user));
+        $data['existe_pago'] = count($this->MRelPagos->obtenerRelPagosBit($cod_user));
         if ($data['existe_pago'] == 0){
           $datos = array(
-            'id' => $this->ModelsBusqueda->count_all_table('ref_rel_pagos') + 1,
-            'codigo' => $this->ModelsBusqueda->count_all_table('ref_rel_pagos') + 1,
+            'id' => $this->ModelsBusqueda->count_all_table('ref_rel_pagos_bitcoins') + 1,
+            'codigo' => $this->ModelsBusqueda->count_all_table('ref_rel_pagos_bitcoins') + 1,
             'usuario_id' => $cod_user,
             'estatus' => 99,
           );
-          $result = $this->MRelPagos->insertarRelPagos($datos);
+          $result = $this->MRelPagos->insertarRelPagosBit($datos);
         }
         //////////////////////////////////////////////////////////////////////////////////////////////////////
 		
-		$data['pago'] = $this->MRelPagos->obtenerRelPagos($cod_user); // Informacion del pago de ingreso al sistema
+		$data['pago'] = $this->MRelPagos->obtenerRelPagosBit($cod_user); // Informacion del pago de ingreso al sistema
 		
         $data['listar_retiros'] = $this->MRelRetiros->obtenerRelRetiros($cod_user); // Listado de Retiros solicitados
         $num_distri = $this->MRelDistribucion->obtenerDistribuciones($cod_user);
@@ -174,7 +174,7 @@ class CReferidos extends CI_Controller
         $data['listar_padres'] = $datos2; // Lista de referidos padres
         
         ///////////////////////////////////////////////////////////////////////////////////////////////////////
-        $data['listar_distribuciones'] = $this->MRelDistribucion->obtenerDistribucion($cod_user); //Listado de distribuciones realizadas
+        $data['listar_distribuciones'] = $this->MRelDistribucion->obtenerDistribuciones($cod_user); //Listado de distribuciones realizadas
 
         // La ruta a la vista a cargar
         $vista = "";

@@ -61,14 +61,14 @@ class CRelPagos extends CI_Controller
         $data['listar_cuentas'] = $this->MCuentas->obtenerCuentas(); // Listado de cuentas de la pagina
         $data['listar_bancos'] = $this->MBancos->obtenerBanco(); // Listado de Bancos
         $data['listar_t_cuentas'] = $this->MTiposCuenta->obtenerTiposCuenta(); // Listado de Tipo de cuentas
-        $data['pago'] = $this->MRelPagos->obtenerRelPagos($cod_user); // Informacion del pago de ingreso al sistema
+        $data['pago'] = $this->MRelPagos->obtenerRelPagosBit($cod_user); // Informacion del pago de ingreso al sistema
         $data['monto_pago'] = $data['editar'][0]->monto_pago; // Captura del monto del pago de ingreso al sistema
         $this->load->view('referidos/perfil/paneles/pagos',$data);
     }
     
     //metodo para guardar un nuevo registro
     public function guardar(){
-        $result = $this->MRelPagos->insertarRelPagos($datos);
+        $result = $this->MRelPagos->insertarRelPagosBit($datos);
         if ($result) {
             $param = array(
                 'tabla' => 'Rel Pagos',
@@ -94,7 +94,7 @@ class CRelPagos extends CI_Controller
         $fecha = explode('/',$this->input->post('fecha_pago'));
         $fecha = $fecha[2].'-'.$fecha[1].'-'.$fecha[0];
         $id_user = ($this->session->userdata['logged_in']['id']); // ID usuario
-        $data['pago'] = $this->MRelPagos->obtenerRelPagos($id_user); // Informacion del pago de ingreso al sistema
+        $data['pago'] = $this->MRelPagos->obtenerRelPagosBit($id_user); // Informacion del pago de ingreso al sistema
         $status_pago = $data['pago'][0]->estatus; // Estatus del pago
         if($status_pago == 2){
 			$status_pago = 2;
@@ -103,16 +103,17 @@ class CRelPagos extends CI_Controller
 		}
         $datos = array(
             'codigo' => $this->input->post('cod_pago'),
-            'cuenta_id' => $this->input->post('cuenta_id'),
-            'num_pago' => $this->input->post('num_pago'),
-            'tipo_pago'=> $this->input->post('tipo_pago'),
+            //~ 'cuenta_id' => $this->input->post('cuenta_id'),
+            //~ 'num_pago' => $this->input->post('num_pago'),
+            //~ 'tipo_pago'=> $this->input->post('tipo_pago'),
+            'dir_monedero'=> $this->input->post('dir_monedero'),
             'fecha_pago'=> $fecha,
             'monto'=> $this->input->post('monto'),
             'perfil_id'=> $this->input->post('pk_perfil'),
             'estatus'=> $status_pago,
         );
         //print_r($datos);
-        $result = $this->MRelPagos->actualizarRelPagos($datos);
+        $result = $this->MRelPagos->actualizarRelPagosBit($datos);
         $datos2 = array(
             'id'=> $this->input->post('pk_perfil'),
             'estatus'=> 2,
@@ -138,7 +139,7 @@ class CRelPagos extends CI_Controller
         $id_user = ($this->session->userdata['logged_in']['id']); // ID usuario
         $data['usuario'] = $this->Usuarios_model->obtenerUsuario($id_user);
         $cod_user = $data['usuario'][0]->codigo; // Codigo del Usuario
-        $data['pago'] = $this->MRelPagos->obtenerRelPagos($cod_user); // Informacion del pago de ingreso al sistema
+        $data['pago'] = $this->MRelPagos->obtenerRelPagosBit($cod_user); // Informacion del pago de ingreso al sistema
         $cuenta_id = $data['pago'][0]->cuenta_id;
         $perfil = $this->MReferidos->obtenerReferido($cod_user);
         

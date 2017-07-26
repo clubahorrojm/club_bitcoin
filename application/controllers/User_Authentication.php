@@ -42,7 +42,7 @@ Class User_Authentication extends CI_Controller {
 // Show login page
     public function index() {
         $data['fecha'] = $this->uri->segment(1);
-        print_r($data);
+        //~ print_r($data);
         $this->load->view('login_form');
     }
 

@@ -165,7 +165,7 @@ $(document).ready(function () {
 // Función para validar los datos del pago del usuario
 function valida_pago(){
 	
-	if ($("#cuenta_id").val() == 0 || $("#cuenta_id").val() == null) {
+	/*if ($("#cuenta_id").val() == 0 || $("#cuenta_id").val() == null) {
 		bootbox.alert("Debe selecionar la cuenta a la cual realizo el pago", function () {
 		}).on('hidden.bs.modal', function (event) {
 				$("#cuenta_id").parent('div').addClass('has-error')
@@ -183,6 +183,13 @@ function valida_pago(){
 			$("#num_pago").parent('div').addClass('has-error')
 			$("#num_pago").focus();
 		});
+	}*/
+	if ($("#dir_monedero").val() == '') {
+		bootbox.alert("Debe indicar la dirección de su monedero", function () {
+		}).on('hidden.bs.modal', function (event) {
+				$("#dir_monedero").parent('div').addClass('has-error')
+				$("#dir_monedero").focus();
+		});
 	}else if ($("#fecha_pago").val() == '') {
 		bootbox.alert("Debe indicar la fecha de pago", function () {
 		}).on('hidden.bs.modal', function (event) {
@@ -196,9 +203,10 @@ function valida_pago(){
 				$("#monto").focus();
 		});
 	}else{
-		cuenta_id = $('#cuenta_id').val()
-		num_pago = $('#num_pago').val()
-		tipo_pago = $('#tipo_pago').val()
+		//~ cuenta_id = $('#cuenta_id').val()
+		//~ num_pago = $('#num_pago').val()
+		//~ tipo_pago = $('#tipo_pago').val()
+		dir_monedero = $('#dir_monedero').val()
 		fecha_pago = $('#fecha_pago').val()
 		$('#monto').prop('disabled',false);
 		monto = $('#monto').val()
@@ -206,15 +214,14 @@ function valida_pago(){
 		cod_pago = $('#cod_pago').val()
 		
 		$.post(base_url+'index.php/referidos/CRelPagos/actualizar',
-		   $.param({'pk_perfil': pk_perfil})+'&'+$.param({'num_pago': num_pago})+'&'+$.param({'monto': monto})+'&'+$.param({'tipo_pago': tipo_pago})+'&'+
-		   $.param({'fecha_pago': fecha_pago})+'&'+$.param({'cuenta_id': cuenta_id})+'&'+$.param({'cod_pago': cod_pago}), 
+		   $.param({'pk_perfil': pk_perfil})+'&'+$.param({'dir_monedero': dir_monedero})+'&'+$.param({'monto': monto})+'&'+
+		   $.param({'fecha_pago': fecha_pago})+'&'+$.param({'cod_pago': cod_pago}), 
 		   function (response){
 			if (response[0] == 1) {
-				bootbox.alert("Disculpe, este num_pago ya fue registrado con este recibo", function () {
+				bootbox.alert("Disculpe, esta dirección ya fue registrada con este usuario", function () {
 				}).on('hidden.bs.modal', function (event) {
-					$("#num_pago,#tipo_pago").parent('div').addClass('has-error')
-					$("#num_pago,#tipo_pago").focus();
-					$("#reg_data_pago").val(0);
+					$("#dir_monedero").parent('div').addClass('has-error')
+					$("#dir_monedero").focus();
 				});
 			} else {
 				bootbox.alert("Se registró su pago con Exito", function (){
@@ -269,7 +276,7 @@ function valida_personal(){
 				$("#telefono").parent('div').addClass('has-error')
 				$("#telefono").focus();
 		});
-	}else if ($("#tipo_cuenta_id").val() == 0 || $("#tipo_cuenta_id").val() == null) {
+	}/*else if ($("#tipo_cuenta_id").val() == 0 || $("#tipo_cuenta_id").val() == null) {
 		bootbox.alert("Debe seleccionar el tipo de su cuenta bancaria", function () {
 		}).on('hidden.bs.modal', function (event) {
 				$("#tipo_cuenta_id").parent('div').addClass('has-error')
@@ -287,29 +294,27 @@ function valida_personal(){
 				$("#banco_usu_id").parent('div').addClass('has-error')
 				$("#banco_usu_id").focus();
 		});
-	}else{
+	}*/else{
 		cedula = $('#cedula').val()
 		nombre = $('#nombre').val()
 		apellido = $('#apellido').val()
 		correo = $('#correo').val()
 		telefono = $('#telefono').val()
-		tipo_cuenta_id = $('#tipo_cuenta_id').val()
+		//~ tipo_cuenta_id = $('#tipo_cuenta_id').val()
 		usuario_id = $('#usuario_id').val()
-		num_cuenta_usu = $('#num_cuenta_usu').val()
-		banco_usu_id = $('#banco_usu_id').val()
+		//~ num_cuenta_usu = $('#num_cuenta_usu').val()
+		//~ banco_usu_id = $('#banco_usu_id').val()
 		pk_perfil = $('#cod_perfil').val()
 		
 		$.post(base_url+'index.php/referidos/CRelInformacion/actualizar',
 		   $.param({'cedula': cedula})+'&'+$.param({'nombre': nombre})+'&'+$.param({'apellido': apellido})+'&'+$.param({'pk_perfil': pk_perfil})+'&'+
-		   $.param({'correo': correo})+'&'+$.param({'telefono': telefono})+'&'+$.param({'tipo_cuenta_id': tipo_cuenta_id})+'&'+
-		   $.param({'usuario_id': usuario_id})+'&'+$.param({'num_cuenta_usu': num_cuenta_usu})+'&'+$.param({'banco_usu_id': banco_usu_id}), 
+		   $.param({'correo': correo})+'&'+$.param({'telefono': telefono})+'&'+$.param({'usuario_id': usuario_id}), 
 		   function (response){
 			if (response[0] == 1) {
-				bootbox.alert("Disculpe, este num_pago ya fue registrado con este recibo", function () {
+				bootbox.alert("Disculpe, esta dirección ya fue registrada con este usuario", function () {
 				}).on('hidden.bs.modal', function (event) {
-					$("#num_pago,#tipo_pago").parent('div').addClass('has-error')
-					$("#num_pago,#tipo_pago").focus();
-					$("#reg_data_personal").val(0);
+					$("#cedula").parent('div').addClass('has-error')
+					$("#cedula").focus();
 				});
 			} else {
 				bootbox.alert("Se actualizó su información personal con Exito", function (){

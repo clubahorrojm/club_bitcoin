@@ -82,17 +82,17 @@ class CRelInformacion extends CI_Controller
 		//Si es primera actualizacion (cambia estatus)
 		if ($estatus == 2){
             $datos2 = array(
-				'tipo_cuenta_id' => $this->input->post('tipo_cuenta_id'),
-				'num_cuenta_usu' => $this->input->post('num_cuenta_usu'),
-				'banco_usu_id' => $this->input->post('banco_usu_id'),
+				//~ 'tipo_cuenta_id' => $this->input->post('tipo_cuenta_id'),
+				//~ 'num_cuenta_usu' => $this->input->post('num_cuenta_usu'),
+				//~ 'banco_usu_id' => $this->input->post('banco_usu_id'),
 				'codigo'=> $this->input->post('pk_perfil'),
 				'estatus'=> 3,
             );
 		}else{ //Si es una actualizacion secundaria
             $datos2 = array(
-				'tipo_cuenta_id' => $this->input->post('tipo_cuenta_id'),
-				'num_cuenta_usu' => $this->input->post('num_cuenta_usu'),
-				'banco_usu_id' => $this->input->post('banco_usu_id'),
+				//~ 'tipo_cuenta_id' => $this->input->post('tipo_cuenta_id'),
+				//~ 'num_cuenta_usu' => $this->input->post('num_cuenta_usu'),
+				//~ 'banco_usu_id' => $this->input->post('banco_usu_id'),
 				'codigo'=> $this->input->post('pk_perfil'),
             );
 		}

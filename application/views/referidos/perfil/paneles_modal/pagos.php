@@ -10,7 +10,7 @@
 				<div class="box box-primary">
 					<div class="panel-body">
 						
-						<div class="col-md-12">
+						<!--<div class="col-md-12">
 							<div class="form-group">
 								<label style="font-weight:bold">Cuenta</label><br>
 								<select id="cuenta_id" class="form-control select2" <?php if ($pago[0]->estatus == 2){echo "disabled='disabled'";}?>>
@@ -30,8 +30,8 @@
 										</option>
 									<?php }?>
 								</select>
-							</div><!-- /.form-group -->
-						</div><!-- /.form-group -->
+							</div>
+						</div>
 						<div class="col-md-4">
 							<div class="form-group">
 								<label style="font-weight:bold">Tipo de Pago</label><br>
@@ -39,14 +39,20 @@
 									<option value=1>DEPOSITO</option>
 									<option value=2>TRANSFERENCIA</option>
 								</select>
-							</div><!-- /.form-group -->
-						</div><!-- /.form-group -->
+							</div>
+						</div>
 						<div class="col-md-4">
 							<div class="form-group">
 								<label style="font-weight:bold">Nº Pago</label>
 								<input type="text" placeholder="Ej: 011494191" maxlength="8" id="num_pago" value="<?php echo $pago[0]->num_pago ?>" class="form-control" >
-							</div><!-- /.form-group -->
-						</div><!-- /.form-group -->
+							</div>
+						</div>-->
+						<div class="col-md-12">
+							<div class="form-group">
+								<label style="font-weight:bold">Dir. Monedero</label><br>
+								<input type="text" placeholder="Ej: AxYz125cdJklmn14PqRs87Vwxy54Q7YcV4" maxlength="34" id="dir_monedero" value="<?php echo $pago[0]->dir_monedero ?>" class="form-control" >
+							</div>
+						</div>
 						<div class="col-md-4">
 							<div class="form-group">
 								<label style="font-weight:bold">Fecha</label>
@@ -96,8 +102,8 @@
 								<input id="cod_perfil"  type='hidden' value="<?php echo $cod_perfil ?>" class="form-control" >
 								<input id="cod_pago"  type='hidden' value="<?php echo $pago[0]->codigo ?>" class="form-control" >
 								<input id="estatus"  type='hidden' value="<?php echo $pago[0]->estatus ?>" class="form-control" >
-								<input id="tipo_pago_id" type='hidden' value="<?php echo $pago[0]->tipo_pago ?>" class="form-control" >
-								<input id="cuenta_pago_id" type='hidden' value="<?php echo $pago[0]->cuenta_id ?>" class="form-control" >
+								<!--<input id="tipo_pago_id" type='hidden' value="<?php echo $pago[0]->tipo_pago ?>" class="form-control" >
+								<input id="cuenta_pago_id" type='hidden' value="<?php echo $pago[0]->cuenta_id ?>" class="form-control" >-->
 								<input id="base_url" type='hidden' value="<?php echo base_url(); ?>">
 								<input id="reg_data_pago" type='hidden' value="0">
 							</div><!-- /.form-group -->
