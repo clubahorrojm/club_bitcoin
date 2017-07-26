@@ -1,8 +1,31 @@
-20-06-2017
-- Controllers/referidos/CReferidos.php (Realizado)
-	Correccion en consulta en el perfil de referidos para listar los pagos recibidos por el usuario. 'Linea 177'
-- Validar Menú con respecto a los Estatus (Pendiente)
-- Mensaje debajo del paso 1 en la modal a modo que el usuario entienda el porque aun no avanza al 2 (Pendiente)
-- Orden de los Pagos. (Pendiente)
-- Imagen de Fondo en modales. (Pendiente)
-- Moda 4 (Mensaje de Felicitaciones y de cierre (Pendiente)
+CAMBIOS AL 26-07-2017
+
+-Editado archivo controlador 'CReferidos.php'
+-Editado archivo controlador 'CRelPagos.php'
+-Editado archivo controlador 'CLPagos.php'
+-Editado archivo controlador 'CRelInformacion.php'
+-Editado archivo de modelo 'MRelPagos.php'
+-Editado archivo de modelo 'MLPagos.php'
+-Editado archivo de vista 'views/procesos/pagos/lista2.php'
+-Editado archivo de vista 'views/referidos/perfil/paneles_modal/pagos.php'
+-Editado archivo de vista 'views/administracion/bots/lista.php'
+-Editado archivo de vista 'views/referidos/perfil/paneles_modal/información_personal.php'
+-Editado archivo de validaciones 'static/js/progress.js'
+-Editado archivo csv 'models/scripts/tipos_monedas.csv'
+
+-Añadido nuevo respaldo de base de datos en la raiz del proyecto (clubahorro_26-07-2017.sql) con la siguiente nueva tabla:
+
+CREATE TABLE ref_rel_pagos_bitcoins
+(
+  id serial NOT NULL,
+  codigo integer,
+  usuario_id integer,
+  monto double precision,
+  estatus integer,
+  dir_monedero character varying(34),
+  fecha_pago character varying(20),
+  operador_id integer,
+  fecha_verificacion character varying(20),
+  perfil_id integer,
+  CONSTRAINT pagos_bit_key PRIMARY KEY (id)
+)
