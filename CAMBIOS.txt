@@ -29,3 +29,15 @@ CREATE TABLE ref_rel_pagos_bitcoins
   perfil_id integer,
   CONSTRAINT pagos_bit_key PRIMARY KEY (id)
 )
+24-07-2017
+	- Cambio del Nombre de la tabla conf_grupo_user a usuarios_grupo_user
+	- Se agrego una nueva tabla a la BD.
+		CREATE TABLE adm_monedero (
+			id serial NOT NULL,
+			monedero character varying(34)
+		);
+	-Nuevo modulo Monedero donde se registra el codigo del monedero y se valida con la clave maestra del sistema
+	- Controllers/administracion/CMonedero.php
+	- Models/administracion/MMonedero.php
+	- Views/administracion/monedero/base.php
+	- Helpers/menu_helper.php
