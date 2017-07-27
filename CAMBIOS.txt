@@ -42,12 +42,15 @@ CREATE TABLE ref_rel_pagos_bitcoins
 	- Views/administracion/monedero/base.php
 	- Helpers/menu_helper.php
 
-CAMBIOS AL 26-07-2017
+CAMBIOS AL 27-07-2017
 	-Editado archivo controlador 'CReferidos.php'
+	-Editado archivo controlador 'CRelPagos.php'
 	-Editado archivo controlador 'CRelInformacion.php'
-	-Editado archivo de vista 'viewss/referidos/perfil/perfil.php'
 	-Editado archivo de vista 'viewss/referidos/perfil/paneles_modal/pagos.php'
 	-Editado archivo de vista 'viewss/referidos/perfil/paneles_modal/informacion_personal.php'
+	-Editado archivo de vista 'viewss/referidos/perfil/paneles/pagos.php'
+	-Editado archivo de vista 'viewss/referidos/perfil/paneles/informacion_personal.php'
+	-Editado archivo de formato pdf 'viewss/referidos/perfil/pdf/reporte_recibo_pago.php'
 	-Editado archivo de validaciones 'static/js/progress.js'
 	-Añadido nuevo campo 'dir_monedero' a la tabla de perfiles 'ref_perfil', quedando de la siguiente forma:
 	CREATE TABLE ref_perfil

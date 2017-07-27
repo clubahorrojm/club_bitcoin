@@ -140,7 +140,7 @@ class CRelPagos extends CI_Controller
         $data['usuario'] = $this->Usuarios_model->obtenerUsuario($id_user);
         $cod_user = $data['usuario'][0]->codigo; // Codigo del Usuario
         $data['pago'] = $this->MRelPagos->obtenerRelPagosBit($cod_user); // Informacion del pago de ingreso al sistema
-        $cuenta_id = $data['pago'][0]->cuenta_id;
+        //~ $cuenta_id = $data['pago'][0]->cuenta_id;
         $perfil = $this->MReferidos->obtenerReferido($cod_user);
         
         $data['empresa'] = $this->MEmpresa->obtenerEmpresa(1);
@@ -149,7 +149,7 @@ class CRelPagos extends CI_Controller
         $data['monedas'] = $this->MTiposMonedas->obtenerTiposMonedas($id_moneda);
         $data['moneda'] = $data['monedas'][0]->abreviatura; // Abreviatura de moneda
 
-        $data['listar_cuenta'] = $this->MCuentas->obtenerCuenta($cuenta_id); // Listado de cuentas de la pagina
+        //~ $data['listar_cuenta'] = $this->MCuentas->obtenerCuenta($cuenta_id); // Listado de cuentas de la pagina
         $data['listar_bancos'] = $this->MBancos->obtenerBanco(); // Listado de Bancos
         $data['listar_t_cuentas'] = $this->MTiposCuenta->obtenerTiposCuenta(); // Listado de Tipo de cuentas
         $data['listar_usuarios'] = $this->Usuarios_model->obtenerUsuarios(); // Listado de usuarios

@@ -88,39 +88,16 @@ if ($tipouser == 'Administrador') {
                                 </div><!-- /.form-group -->
                                 
                                 <div class="text-left">
-                                    <legend><H4  style=" color:#3C8DBC">Datos Bancarios</H4></legend>
+                                    <legend><H4  style=" color:#3C8DBC">Datos de Monedero</H4></legend>
                                 </div>
 
-                                <div class="col-md-2">
-                                    <div class="form-group">
-                                        <label style="font-weight:bold">Tipo de cuenta</label>
-                                        <select id="tipo_cuenta_id" class="form-control select2" >
-                                            <option value=0>SELECCIONE</option>
-                                            <?php foreach ($listar_t_cuentas as $tipo) { ?>
-                                                <option value="<?php echo $tipo->codigo?>"><?php echo $tipo->descripcion?></option>
-                                            <?php }?>
-                                        </select>
-                                    </div><!-- /.form-group -->
-                                </div><!-- /.form-group -->
-
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label style="font-weight:bold">Número de cuenta</label>
-                                        <input type="text" placeholder="Introdúzca el número de la cuenta" maxlength="20" id="num_cuenta_usu" value="<?php echo $editar[0]->num_cuenta_usu ?>" class="form-control" >
-                                    </div><!-- /.form-group -->
-                                </div><!-- /.form-group -->
+                                <div class="col-md-10">
+									<div class="form-group">
+										<label style="font-weight:bold">Dir. Monedero Personal</label>
+										<input type="text" class="form-control" placeholder="Ej: AxYz125cdJklmn14PqRs87Vwxy54Q7YcV4" value="<?php echo $editar[0]->dir_monedero ?>" maxlength="34" id="dir_monedero_per2" >
+									</div><!-- /.form-group -->
+								</div><!-- /.form-group -->
                                 
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label style="font-weight:bold">Banco</label>
-                                        <select id="banco_usu_id" class="form-control select2" >
-                                            <option value=0>SELECCIONE</option>
-                                            <?php foreach ($listar_bancos as $banco) { ?>
-                                                <option value="<?php echo $banco->codigo?>"><?php echo $banco->descripcion?></option>
-                                            <?php }?>
-                                        </select>
-                                    </div><!-- /.form-group -->
-                                </div><!-- /.form-group -->
                                 <div class="col-md-2">
                                     <div class="form-group">
                                         <br>
@@ -222,7 +199,7 @@ if ($tipouser == 'Administrador') {
                     $("#telefono").parent('div').addClass('has-error')
                     $("#telefono").focus();
             });
-        }else if ($("#tipo_cuenta_id").val() == 0 || $("#tipo_cuenta_id").val() == null) {
+        }/*else if ($("#tipo_cuenta_id").val() == 0 || $("#tipo_cuenta_id").val() == null) {
             bootbox.alert("Debe seleccionar el tipo de su cuenta bancaria", function () {
             }).on('hidden.bs.modal', function (event) {
                     $("#tipo_cuenta_id").parent('div').addClass('has-error')
@@ -241,21 +218,35 @@ if ($tipouser == 'Administrador') {
                     $("#banco_usu_id").parent('div').addClass('has-error')
                     $("#banco_usu_id").focus();
             });
+        }*/else if ($("#dir_monedero_per2").val() == '' || $("#dir_monedero_per2").val() == 0) {
+            bootbox.alert("Debe colocar su dirección de monedero personal", function () {
+            }).on('hidden.bs.modal', function (event) {
+                    $("#dir_monedero_per2").parent('div').addClass('has-error')
+                    $("#dir_monedero_per2").focus();
+                    $("#dir_monedero_per2").val('');
+            });
+        }else if ($("#dir_monedero_per2").val().trim().length < 34) {
+            bootbox.alert("La longitud de la dirección no puede ser menor a 34 dígitos", function () {
+            }).on('hidden.bs.modal', function (event) {
+                    $("#dir_monedero_per2").parent('div').addClass('has-error')
+                    $("#dir_monedero_per2").focus();
+            });
         }else{
             cedula = $('#cedula').val()
             nombre = $('#nombre').val()
             apellido = $('#apellido').val()
             correo = $('#correo').val()
             telefono = $('#telefono').val()
-            tipo_cuenta_id = $('#tipo_cuenta_id').val()
+            //~ tipo_cuenta_id = $('#tipo_cuenta_id').val()
             usuario_id = $('#usuario_id').val()
-            num_cuenta_usu = $('#num_cuenta_usu').val()
-            banco_usu_id = $('#banco_usu_id').val()
+            //~ num_cuenta_usu = $('#num_cuenta_usu').val()
+            //~ banco_usu_id = $('#banco_usu_id').val()
+            dir_monedero_per = $('#dir_monedero_per2').val()
             pk_perfil = $('#cod_perfil').val()
             $.post('<?php echo base_url(); ?>index.php/referidos/CRelInformacion/actualizar',
-                   $.param({'cedula': cedula})+'&'+$.param({'nombre': nombre})+'&'+$.param({'apellido': apellido})+'&'+$.param({'pk_perfil': pk_perfil})+'&'+
-                   $.param({'correo': correo})+'&'+$.param({'telefono': telefono})+'&'+$.param({'tipo_cuenta_id': tipo_cuenta_id})+'&'+
-                   $.param({'usuario_id': usuario_id})+'&'+$.param({'num_cuenta_usu': num_cuenta_usu})+'&'+$.param({'banco_usu_id': banco_usu_id}), 
+                   $.param({'cedula': cedula})+'&'+$.param({'nombre': nombre})+'&'+$.param({'apellido': apellido})+'&'+
+                   $.param({'pk_perfil': pk_perfil})+'&'+$.param({'correo': correo})+'&'+$.param({'telefono': telefono})+'&'+
+                   $.param({'usuario_id': usuario_id})+'&'+$.param({'dir_monedero_per': dir_monedero_per}), 
                    function (response){
                     if (response[0] == 1) {
                         bootbox.alert("Disculpe, este num_pago ya fue registrado con este recibo", function () {

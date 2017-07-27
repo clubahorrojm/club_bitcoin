@@ -297,7 +297,22 @@ function valida_personal(){
 				$("#banco_usu_id").parent('div').addClass('has-error')
 				$("#banco_usu_id").focus();
 		});
-	}*/else{
+	}*/
+	else if ($("#dir_monedero_per").val() == '' || $("#dir_monedero_per").val() == 0) {
+		bootbox.alert("Debe colocar su dirección de monedero personal", function () {
+		}).on('hidden.bs.modal', function (event) {
+				$("#dir_monedero_per").parent('div').addClass('has-error')
+				$("#dir_monedero_per").focus();
+				$("#dir_monedero_per").val('');
+		});
+	}else if ($("#dir_monedero_per2").val().trim().length < 34) {
+		bootbox.alert("La longitud de la dirección no puede ser menor a 34 dígitos", function () {
+		}).on('hidden.bs.modal', function (event) {
+				$("#dir_monedero_per").parent('div').addClass('has-error')
+				$("#dir_monedero_per").focus();
+				$("#dir_monedero_per").val('');
+		});
+	}else{
 		cedula = $('#cedula').val()
 		nombre = $('#nombre').val()
 		apellido = $('#apellido').val()
