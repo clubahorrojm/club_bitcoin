@@ -45,43 +45,12 @@ if ($tipouser == 'Administrador') {
                                 <h3 class="box-title" style="color:#3C8DBC">Información del pago</h3>
                             </div><!-- /.box-header -->
                             <div class="panel-body">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label style="font-weight:bold">Cuenta</label><br>
-                                        <select id="cuenta_id" class="form-control select2" >
-                                            <?php foreach ($listar_cuentas as $cuentas) { ?>
-                                                <option value="<?php echo $cuentas->codigo?>">
-                                                    <?php foreach ($listar_t_cuentas as $t_cuenta) { ?>
-                                                        <?php if ($t_cuenta->codigo == $cuentas->tipo_cuenta_id): ?>
-                                                            CTA. <?php echo $t_cuenta->descripcion?> 
-                                                       <?php endif; ?>
-                                                    <?php }?>
-                                                    <?php foreach ($listar_bancos as $bancos) { ?>
-                                                        <?php if ($bancos->codigo == $cuentas->banco_id): ?>
-                                                             <?php echo $bancos->descripcion?> 
-                                                       <?php endif; ?>
-                                                    <?php }?>
-                                                    <?php echo $cuentas->descripcion?>
-                                                </option>
-                                            <?php }?>
-                                        </select>
-                                    </div><!-- /.form-group -->
-                                </div><!-- /.form-group -->
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label style="font-weight:bold">Tipo de Pago</label><br>
-                                        <select id="tipo_pago" class="form-control select2" >
-                                            <option value=1>DEPOSITO</option>
-                                            <option value=2>TRANSFERENCIA</option>
-                                        </select>
-                                    </div><!-- /.form-group -->
-                                </div><!-- /.form-group -->
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label style="font-weight:bold">Nº Pago</label>
-                                        <input type="text" placeholder="Ej: 011494191" maxlength="8" id="num_pago" value="<?php echo $pago[0]->num_pago ?>" class="form-control" >
-                                    </div><!-- /.form-group -->
-                                </div><!-- /.form-group -->
+                                <div class="col-md-12">
+									<div class="form-group">
+										<label style="font-weight:bold">Dir. Monedero (desde la que realizó el pago)</label><br>
+										<input type="text" placeholder="Ej: AxYz125cdJklmn14PqRs87Vwxy54Q7YcV4" maxlength="34" id="dir_monedero" value="<?php echo $pago[0]->dir_monedero ?>" class="form-control" readonly="true">
+									</div>
+								</div>
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label style="font-weight:bold">Fecha</label>
@@ -123,14 +92,14 @@ if ($tipouser == 'Administrador') {
                                 <div class="col-md-12">
                                     <div class="form-group text-center">
                                         <br>
-                                        <button type="button" id="registrar_p" style="font-weight: bold;font-size: 13px" class="btn btn-info " >
+                                        <!--<button type="button" id="registrar_p" style="font-weight: bold;font-size: 13px" class="btn btn-info " >
                                             &nbsp;<span class="glyphicon glyphicon-floppy-disk"></span>&nbsp;Registrar
-                                        </button>
+                                        </button>-->
                                         <input id="cod_perfil"  type='hidden' value="<?php echo $cod_perfil ?>" class="form-control" >
                                         <input id="cod_pago"  type='hidden' value="<?php echo $pago[0]->codigo ?>" class="form-control" >
                                         <input id="estatus"  type='hidden' value="<?php echo $pago[0]->estatus ?>" class="form-control" >
-                                        <input id="tipo_pago_id" type='hidden' value="<?php echo $pago[0]->tipo_pago ?>" class="form-control" >
-                                        <input id="cuenta_id_id" type='hidden' value="<?php echo $pago[0]->cuenta_id ?>" class="form-control" >
+                                        <!--<input id="tipo_pago_id" type='hidden' value="<?php echo $pago[0]->tipo_pago ?>" class="form-control" >
+                                        <input id="cuenta_id_id" type='hidden' value="<?php echo $pago[0]->cuenta_id ?>" class="form-control" >-->
                                     </div><!-- /.form-group -->
                                 </div><!-- /.form-group -->
                     </div><!-- /.box-body-primary -->

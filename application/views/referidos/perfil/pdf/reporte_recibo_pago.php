@@ -49,30 +49,31 @@ $this->pdf->Cell(30,5,"Monto: $monto $moneda",'LBTR',0,'L',1);
 $fe = explode('-',$pago[0]->fecha_pago);
 $fecha = $fe[2].'-'.$fe[1].'-'.$fe[0];
 $this->pdf->Cell(35,5,utf8_decode("Fecha: $fecha"),'LBTR',0,'L',1);
-$tipo_pago = $pago[0]->tipo_pago;
-if ($tipo_pago ==1){
-    $tipo_pago = 'Desposito';
-}else{
-    $tipo_pago = 'Transferencia';
-}
-$this->pdf->Cell(50,5,"Tipo de Pago: $tipo_pago",'LBTR',0,'L',1);
+//~ $tipo_pago = $pago[0]->tipo_pago;
+//~ if ($tipo_pago ==1){
+    //~ $tipo_pago = 'Desposito';
+//~ }else{
+    //~ $tipo_pago = 'Transferencia';
+//~ }
+//~ $this->pdf->Cell(50,5,"Tipo de Pago: $tipo_pago",'LBTR',0,'L',1);
 
-$banco_id = $listar_cuenta[0]->banco_id;
-foreach ($listar_bancos as $bancos){
-    if ($bancos->codigo == $banco_id){
-        $banco = $bancos->descripcion;
-    }
-}
-$this->pdf->Cell(75,5,utf8_decode("Banco: $banco"),'LBTR',1,'L',1);
+//~ $banco_id = $listar_cuenta[0]->banco_id;
+//~ foreach ($listar_bancos as $bancos){
+    //~ if ($bancos->codigo == $banco_id){
+        //~ $banco = $bancos->descripcion;
+    //~ }
+//~ }
+//~ $this->pdf->Cell(75,5,utf8_decode("Banco: $banco"),'LBTR',1,'L',1);
 
-$num_cuenta = $listar_cuenta[0]->descripcion;
-$tipo_cuenta_id = $listar_cuenta[0]->tipo_cuenta_id;
-foreach ($listar_t_cuentas as $t_cuenta){
-    if ($t_cuenta->codigo == $tipo_cuenta_id){
-        $t_cuenta_nombre = $t_cuenta->descripcion;
-    }
-}
-$this->pdf->Cell(95,5,utf8_decode("Cuenta: $t_cuenta_nombre N° $num_cuenta "),'LBTR',0,'L',1);
+//~ $num_cuenta = $listar_cuenta[0]->descripcion;
+//~ $tipo_cuenta_id = $listar_cuenta[0]->tipo_cuenta_id;
+//~ foreach ($listar_t_cuentas as $t_cuenta){
+    //~ if ($t_cuenta->codigo == $tipo_cuenta_id){
+        //~ $t_cuenta_nombre = $t_cuenta->descripcion;
+    //~ }
+//~ }
+$dir_monedero = $pago[0]->dir_monedero;
+$this->pdf->Cell(125,5,utf8_decode("Dir. monedero: $dir_monedero"),'LBTR',1,'L',1);
 
 $operador_id = $pago[0]->operador_id;
 foreach ($listar_usuarios as $usuario){
@@ -80,7 +81,7 @@ foreach ($listar_usuarios as $usuario){
         $operador = $usuario->username;
     }
 }
-$this->pdf->Cell(95,5,utf8_decode("Operador: $operador"),'LBTR',1,'L',1);
+$this->pdf->Cell(65,5,utf8_decode("Operador: $operador"),'LBTR',1,'L',1);
 $this->pdf->Ln(1);
 $linea = '--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------';
 $this->pdf->Cell(190,5,$linea,'',1,'C',1);
