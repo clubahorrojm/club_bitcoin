@@ -175,6 +175,9 @@ class CReferidos extends CI_Controller
         
         ///////////////////////////////////////////////////////////////////////////////////////////////////////
         $data['listar_distribuciones'] = $this->MRelDistribucion->obtenerDistribuciones($cod_user); //Listado de distribuciones realizadas
+        
+        // Datos del monedero bitcoin de la empresa
+        $data['monedero_emp'] = $this->ModelsBusqueda->obtenerRegistro('adm_monedero', 'id', 1);
 
         // La ruta a la vista a cargar
         $vista = "";

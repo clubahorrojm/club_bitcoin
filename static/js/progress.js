@@ -6,6 +6,9 @@ $(document).ready(function () {
 	
 	// Configuración de campos
 	$('#fecha_pago').numeric({allow: "/"});
+    $('#dir_monedero').alphanumeric();
+    $('#dir_monedero_per').alphanumeric();
+    $('#cedula').numeric();
     $('#num_pago').numeric();
     $('#num_cuenta_usu').numeric();
     $('#monto').numeric({allow: "."});
@@ -304,11 +307,12 @@ function valida_personal(){
 		usuario_id = $('#usuario_id').val()
 		//~ num_cuenta_usu = $('#num_cuenta_usu').val()
 		//~ banco_usu_id = $('#banco_usu_id').val()
+		dir_monedero_per = $('#dir_monedero_per').val()
 		pk_perfil = $('#cod_perfil').val()
 		
 		$.post(base_url+'index.php/referidos/CRelInformacion/actualizar',
 		   $.param({'cedula': cedula})+'&'+$.param({'nombre': nombre})+'&'+$.param({'apellido': apellido})+'&'+$.param({'pk_perfil': pk_perfil})+'&'+
-		   $.param({'correo': correo})+'&'+$.param({'telefono': telefono})+'&'+$.param({'usuario_id': usuario_id}), 
+		   $.param({'correo': correo})+'&'+$.param({'telefono': telefono})+'&'+$.param({'usuario_id': usuario_id})+'&'+$.param({'dir_monedero_per': dir_monedero_per}), 
 		   function (response){
 			if (response[0] == 1) {
 				bootbox.alert("Disculpe, esta dirección ya fue registrada con este usuario", function () {
