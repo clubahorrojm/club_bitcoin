@@ -41,3 +41,35 @@ CREATE TABLE ref_rel_pagos_bitcoins
 	- Models/administracion/MMonedero.php
 	- Views/administracion/monedero/base.php
 	- Helpers/menu_helper.php
+
+CAMBIOS AL 26-07-2017
+	-Editado archivo controlador 'CReferidos.php'
+	-Editado archivo controlador 'CRelInformacion.php'
+	-Editado archivo de vista 'viewss/referidos/perfil/perfil.php'
+	-Editado archivo de vista 'viewss/referidos/perfil/paneles_modal/pagos.php'
+	-Editado archivo de vista 'viewss/referidos/perfil/paneles_modal/informacion_personal.php'
+	-Editado archivo de validaciones 'static/js/progress.js'
+	-Añadido nuevo campo 'dir_monedero' a la tabla de perfiles 'ref_perfil', quedando de la siguiente forma:
+	CREATE TABLE ref_perfil
+	(
+	  id serial NOT NULL,
+	  codigo integer,
+	  usuario_id integer,
+	  maximo double precision,
+	  disponible double precision,
+	  estatus integer,
+	  referido_id integer,
+	  t_moneda_id integer,
+	  tipo_cuenta_id integer,
+	  num_cuenta_usu character(20),
+	  banco_usu_id integer,
+	  cant_ref integer,
+	  fecha character varying(20),
+	  nivel integer,
+	  monto_pago double precision,
+	  monto_retiro_minimo double precision,
+	  cargo_mora double precision,
+	  dir_monedero character varying(34),
+	  CONSTRAINT prefil_key PRIMARY KEY (id)
+	)
+

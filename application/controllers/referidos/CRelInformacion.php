@@ -85,6 +85,7 @@ class CRelInformacion extends CI_Controller
 				//~ 'tipo_cuenta_id' => $this->input->post('tipo_cuenta_id'),
 				//~ 'num_cuenta_usu' => $this->input->post('num_cuenta_usu'),
 				//~ 'banco_usu_id' => $this->input->post('banco_usu_id'),
+				'dir_monedero' => $this->input->post('dir_monedero_per'),
 				'codigo'=> $this->input->post('pk_perfil'),
 				'estatus'=> 3,
             );
@@ -93,6 +94,7 @@ class CRelInformacion extends CI_Controller
 				//~ 'tipo_cuenta_id' => $this->input->post('tipo_cuenta_id'),
 				//~ 'num_cuenta_usu' => $this->input->post('num_cuenta_usu'),
 				//~ 'banco_usu_id' => $this->input->post('banco_usu_id'),
+				'dir_monedero' => $this->input->post('dir_monedero_per'),
 				'codigo'=> $this->input->post('pk_perfil'),
             );
 		}

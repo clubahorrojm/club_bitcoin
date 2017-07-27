@@ -1,6 +1,7 @@
 <fieldset id="fieldset_pago" style="display:block">
 	<h2 class="fs-title">Información del pago</h2>
 	<h3 class="fs-subtitle">Indica los datos de tu pago</h3>
+	<h3 class="fs-subtitle">( Usted debe realizar el pago a la dirección de nuestra empresa: <span style="color:#296293;"><?php $direccion = $monedero_emp->monedero; echo $direccion; ?></span> )</h3>
 	
 	<!-- Main content -->
 	<section class="content">
@@ -49,7 +50,7 @@
 						</div>-->
 						<div class="col-md-12">
 							<div class="form-group">
-								<label style="font-weight:bold">Dir. Monedero</label><br>
+								<label style="font-weight:bold">Dir. Monedero (desde la que realizó el pago)</label><br>
 								<input type="text" placeholder="Ej: AxYz125cdJklmn14PqRs87Vwxy54Q7YcV4" maxlength="34" id="dir_monedero" value="<?php echo $pago[0]->dir_monedero ?>" class="form-control" >
 							</div>
 						</div>
