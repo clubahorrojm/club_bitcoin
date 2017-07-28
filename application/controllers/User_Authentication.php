@@ -287,5 +287,10 @@ Class User_Authentication extends CI_Controller {
 		
 		$reg_perfil = $this->Usuarios_model->insertar_perfil($data_perfil);
 	}
+	
+	// Método para búsqueda de siguiente enlace correspondiente para registro de nuevo usuario
+	public function enlace_disponible(){
+		echo $result = $this->ModelsBusqueda->search_next_link();
+	}
 
 }

@@ -34,7 +34,8 @@
         <link rel="stylesheet" type="text/css" href="<?= base_url() ?>static/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="<?= base_url() ?>static/css/select2.css"/>
         <link rel="stylesheet" type="text/css" href="<?= base_url() ?>static/css/select2-bootstrap.css"/>
-        <script src="<?= base_url() ?>static/js/jquery-1.11.2.min.js"></script>
+        <!--<script src="<?= base_url() ?>static/js/jquery-1.11.2.min.js"></script>-->
+        <script src="<?= base_url() ?>static/plugins/jQuery/jQuery-2.1.4.min.js"></script>
         <script src="<?= base_url() ?>static/js/bootstrap.min.js"></script>
 
         <script src="<?= base_url() ?>static/js/bootstrap-datepicker.js"></script>
@@ -97,6 +98,7 @@
 								$("#username").css("display","none");
 								$("#password").css("display","none");
 								$("#submit").css("display","none");
+								$("#registrarse").css("display","none");
 								$("#registrar_referido").css("display","block");
 								$("#rec_password").css("display","none");
 							}else{
@@ -178,6 +180,23 @@
 						});
 					}
 				});
+				
+				// Generar enlace para registro de nuevo usuario
+				$("#registrarse").click(function (e) {
+					e.preventDefault();  // Para evitar que se envíe por defecto
+										
+					// Registramos el nuevo usuario
+					$.post('<?php echo base_url(); ?>index.php/User_Authentication/enlace_disponible/', function(response) {
+						//~ alert(response.trim());
+						if (response.trim() == "1"){
+							alert("No hay enlaces disponibles");
+							location.reload();
+						}else{
+							url = response.trim();
+							window.location = url
+						}
+					});
+				});
 			});
 		</script>
     </head>
@@ -239,11 +258,12 @@
 			<center>
 			<input type="text" id="username" name="username" placeholder="Usuario" >
 			<input type="password" id="password" name="password" placeholder="Contraseña">
-			<button  type="submit" id="submit" name="submit" style="width:25%">Entrar</button>
+			<button type="submit" id="submit" name="submit" style="width:25%">Entrar</button>
 			</br>
+			<a id="registrarse" style="color:#FFFFFF;font-size:20px;">Registrarse</a>
 			<!--<button type="button" id="rec_password" name="rec_password">Rec: Clave de Acceso</button>-->
 			</br></br>
-			<button  type="button" id="registrar_referido" name="registrar_referido">Registrar</button>
+			<button type="button" id="registrar_referido" name="registrar_referido">Registrar</button>
 			</center>
            </div> 
 		</form>
