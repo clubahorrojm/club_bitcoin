@@ -8,11 +8,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  */
 
 /**
- * Description of CRetiroMinimo
+ * Description of CComisionRetiro
  *
  * @author Ing. José Solorzano
  */
-class CRetiroMinimo extends CI_Controller
+class CComisionRetiro extends CI_Controller
 {
 
     public function __construct()
@@ -33,7 +33,7 @@ class CRetiroMinimo extends CI_Controller
         $this->load->library('session');
 
 // Load database
-        $this->load->model('configuracion/MRetiroMinimo');
+        $this->load->model('administracion/MComisionRetiro');
         $this->load->model('busquedas_ajax/ModelsBusqueda');
         $this->load->model('administracion/MAuditoria');
         
@@ -43,9 +43,9 @@ class CRetiroMinimo extends CI_Controller
     {
 		$this->load->view('base');
         $data['editar'] = '';
-        $ultimo_id = $this->ModelsBusqueda->count_all_table('conf_retiro_minimo');
+        $ultimo_id = $this->ModelsBusqueda->count_all_table('adm_comision_retiro');
         if ($ultimo_id > 0){
-            $data['editar'] = $this->MRetiroMinimo->obtenerRetiroMinimo($ultimo_id);
+            $data['editar'] = $this->MComisionRetiro->obtenerComisionRetiro($ultimo_id);
         }
         else{
             $datos = array(
@@ -54,29 +54,42 @@ class CRetiroMinimo extends CI_Controller
                 'fecha_create' => date('Y-m-d'),
                 'user_create' => $this->session->userdata['logged_in']['id'],
             );
-            $result = $this->MRetiroMinimo->insertarRetiroMinimo($datos);
+            $result = $this->MComisionRetiro->insertarComisionRetiro($datos);
+            // Registramos los cambios en la Bitacora
+            if ($result) {
+				$param = array(
+					'tabla' => 'Comision Retiro',
+					'codigo' => 1,
+					'accion' => 'Registro de nueva Comision Retiro',
+					'fecha' => date('Y-m-d'),
+					'hora' => date("h:i:s a"),
+					'usuario' => $this->session->userdata['logged_in']['id'],
+				);
+				$this->MAuditoria->add($param);
+				echo "registrado";
+			}
             $ultimo_id = 1;
-            $data['editar'] = $this->MRetiroMinimo->obtenerRetiroMinimo($ultimo_id);
+            $data['editar'] = $this->MComisionRetiro->obtenerComisionRetiro($ultimo_id);
         }
         //print_r($data);
-        $this->load->view('configuracion/retiro_minimo/editar', $data);
+        $this->load->view('administracion/comision_retiro/editar', $data);
     }
     //Metodo para actualizar
     function actualizar(){
-        
         $data = array(
 			'id' => 1,
             'codigo' => $_POST['codigo'],
-            'monto_retiro_minimo' => $_POST['monto_retiro_minimo'],
+            'porcentaje_comision' => $_POST['porcentaje_comision'],
             'fecha_update' => date('Y-m-d'),
             'user_update' => $this->session->userdata['logged_in']['id'],
+            'clave' => 'pbkdf2_sha256$12000$'.hash( "sha256", $this->input->post('clave')),
         );
-        $result = $this->MRetiroMinimo->actualizarRetiroMinimo($data);
+        $result = $this->MComisionRetiro->actualizarComisionRetiro($data);
         if ($result) {
             $param = array(
-                'tabla' => 'Monto de Retiro Minimo',
-                'codigo' => $this->input->post('id'),
-                'accion' => 'Editar Monto de Retiro Minimo',
+                'tabla' => 'Comisión Retiro',
+                'codigo' => $this->input->post('codigo'),
+                'accion' => 'Edición de Comisión de Retiro: '.$this->input->post('porcentaje_comision').'%',
                 'fecha' => date('Y-m-d'),
                 'hora' => date("h:i:s a"),
                 'usuario' => $this->session->userdata['logged_in']['id'],

@@ -57,7 +57,7 @@ if ($tipouser == 'Administrador') {
                             <form id="form_monedero">
 								<div class="col-md-12">
 									
-									<div class="col-md-3">
+									<div class="col-md-4">
 										<div class="input-group">
 											<label class="control-label" >Cuenta de Monedero digital</label>
 											<input type="text" placeholder="Ej: 10" maxlength="34" id="monedero" value="<?php echo $editar->monedero ?>" name="monedero"  class="form-control" >
@@ -67,14 +67,16 @@ if ($tipouser == 'Administrador') {
 									<div class="col-md-2">
 										<div class="input-group">
 											<label class="control-label" >Clave de Seguridad</label>
-											<input type="text" placeholder="Ej: 10" maxlength="8" id="codigo"  name="codigo"  class="form-control" >
+											<input type="password" placeholder="********" maxlength="8" id="codigo"  name="codigo"  class="form-control" >
 										</div> 
 									</div>
+
 									
 									<div class="form-group">
 										<div class="col-md-12" style="text-align: center ">
 											
 											<input class="form-control"  type='hidden' id="id" name="id" value="1"/>
+                                            <br>
 											<button type="submit" id="registrar" style="font-weight: bold;font-size: 13px" class="btn btn-success"/>
 											&nbsp;<span class="glyphicon glyphicon-floppy-disk"></span>&nbsp;Actualizar
 											</button>

@@ -76,3 +76,20 @@ CAMBIOS AL 27-07-2017
 	  CONSTRAINT prefil_key PRIMARY KEY (id)
 	)
 
+CAMBIOS AL 27-07-2017 (Marcel)
+	-Editado los Controladores: CAMontos.php, CEmpresa.php, CComisionRetiro.php
+	-Editado los Modelos: MAMontos.php, MEmpresa.php, MComisionRetiro.php, MLPagos.php
+	-Editado Views:
+		+ administracion/asignacion_montos/base.php
+		+ administracion/empresa/base.php
+		+ administracion/bots/lista.php
+		+ administracion/monedero/base.php
+		+ administracion/comision_retiro/editar.php
+		+ base.php (agrego el jquery.mins de forma directa)
+	-Editado Helpers: menu_helprs.php
+	- Se Eliminò por completo el Menu "Configuraciones" debido a que en su mayoria los sub-menus no van a trabajar en este sistema, y se bajo al menu de administrador el modelo "Comisiòin de retiro".
+	///////////////////////////// LEER AQUI ///////////////////////
+	-Editado los Controladores: CReferidos.php, CRelPagos.php, CRelInformacion.php, CRelRetiros.php. (Se //Comentarion todos los llamamos a los modelos que van a ser eliminados: Cuenta, tipo de cuenta, Bancos, Cargo Mora, Retiro Minito, MontoPago)
+	-Revisa La modal, no paso de registrar informacion, me dice algo del plugin
+	PENDIENTE:
+	Revisar los PDF!

@@ -78,31 +78,21 @@ class CEmpresa extends CI_Controller
         // Sección de carga de la foto en el servidor
 		$ruta = getcwd();  // Obtiene el directorio actual en donde se esta trabajando
 		
-		// Obtenemos la extensión de la foto
-		//~ if($_FILES['logo']['name'] != ''){
-			//~ $ext = explode(".",$_FILES['logo']['name']);
-			//~ $ext = $ext[1];
-			//~ //$nombre_foto = $_POST['cedula'].".".$ext;
-			//~ $nombre_foto = "logo.".$ext;
-			//~ ///var/www/html/SistemaAdministrativo/foto
-			//~ move_uploaded_file($_FILES['logo']['tmp_name'], $ruta."/foto/".$nombre_foto);  // Copiamos el archivo a la carpeta en el servidor
-		//~ }else{
-			//~ $nombre_foto = $_POST['img_id'];
-		//~ }
-        $data = array(
+		$data = array(
 			'id' => 1,
-            'codigo' => $_POST['codigo'],
-            'nombre_empresa' => $_POST['nombre_empresa'],
-            'rif' => $_POST['rif'],
-            'cedula' => $_POST['cedula'],
-            'nombre' => $_POST['nombre'],
-            'apellido' => $_POST['apellido'],
-            'telefono1' => $_POST['telefono1'],
-            'telefono2' => $_POST['telefono2'],
-            'correo' => $_POST['correo'],
-            'direccion' => $_POST['direccion'],
-			//~ 'logo' => $nombre_foto,
+			'codigo' => $this->input->post('monedero'),
+            'nombre_empresa' => $this->input->post('nombre_empresa'),
+            'rif' => $this->input->post('rif'),
+            'cedula' => $this->input->post('cedula'),
+            'nombre' => $this->input->post('nombre'),
+            'apellido' => $this->input->post('apellido'),
+            'telefono1' => $this->input->post('telefono1'),
+            'telefono2' => $this->input->post('telefono2'),
+            'correo' => $this->input->post('correo'),
+            'direccion' => $this->input->post('direccion'),
+			'clave' => 'pbkdf2_sha256$12000$'.hash( "sha256", $this->input->post('clave')),
         );
+
         $result = $this->MEmpresa->actualizarEmpresa($data);
         if ($result) {
             $param = array(

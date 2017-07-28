@@ -37,7 +37,7 @@ class CLPagos extends CI_Controller
 // Load database
 		$this->load->model('procesos/MLPagos');
         $this->load->model('configuracion/usuarios/Usuarios_model');
-        $this->load->model('configuracion/MCuentas');
+        // $this->load->model('configuracion/MCuentas');
         $this->load->model('busquedas_ajax/ModelsBusqueda');
         $this->load->model('administracion/MAuditoria');
         $this->load->model('referidos/MRelPagos');
@@ -61,7 +61,7 @@ class CLPagos extends CI_Controller
             $data['listar'] = [];
         }
         $data['listar_usuarios'] = $this->Usuarios_model->obtenerUsuarios();
-        $data['listar_cuentas'] = $this->MCuentas->obtenerCuentas();
+        // $data['listar_cuentas'] = $this->MCuentas->obtenerCuentas();
         $this->load->view('procesos/pagos/lista2', $data);
     }
     

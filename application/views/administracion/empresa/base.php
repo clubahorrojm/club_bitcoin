@@ -56,23 +56,7 @@ if ($tipouser == 'Administrador') {
                         <div class="box-body">
                             <form id="form_empresa">
                                 <div class="col-md-12">
-									
-<!--
-                                    <div class="col-md-3">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label class="control-label">Imagen</label>
-                                                <input id="logo" name="logo" type="file" multiple class="file-loading" >
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <div class="help-block file-error-message" id="errorBlock" style="display: none;"></div>
-                                            </div>
-                                        </div>
-                                    </div>
--->
-                                    
+                                    <h3 class="box-title">Información de la Empresa</h3>
                                     <div class="col-md-12">
                                         <div class="col-md-2">
                                             <div class="form-group">
@@ -138,6 +122,13 @@ if ($tipouser == 'Administrador') {
                                                 <input type="text" class="form-control" id="telefono2" value="<?php echo $editar->telefono2 ?>" placeholder="Teléfono secundario" name="telefono2" data-inputmask='"mask": "(9999) 999-9999"' data-mask>
                                             </div><!-- /.form-group -->
                                         </div><!-- /.form-group -->
+										
+										<div class="col-md-2">
+											<div class="input-group">
+												<label class="control-label" >Clave de Seguridad</label>
+												<input type="password" placeholder="********" maxlength="8" id="clave"  name="clave"  class="form-control" >
+											</div> 
+										</div>
                                      </div>
                                 </div>
                                 <div class="form-group">
@@ -248,35 +239,33 @@ if ($tipouser == 'Administrador') {
             bootbox.alert('Disculpe, Debe Colocar el apellido del representante de la empresa', function () {
                 $('#apellido').parent('div').addClass('has-error');
             });
-        }else {
-            $('#codigo').prop('disabled',false);
-            var formData = new FormData(document.getElementById("form_empresa"));
-            $.ajax({
-                url: '<?php echo base_url(); ?>index.php/administracion/CEmpresa/actualizar/',
-                type: "post",
-                dataType: "html",
-                data: formData,
-                cache: false,
-                contentType: false,
-                processData: false
-            }).done(function(res){				
-                var respuesta = res.split('<!DOCTYPE html>');
-                rep = respuesta[0].trim()
-                //alert(rep)
-                if (rep == 'fallo') {
-                    bootbox.alert("Error al cargar archivos", function () {
-                    }).on('hidden.bs.modal', function (event) {
-                        
-                    });
-                }else if(rep == 'registrado'){
-                    // Si dentro de la cadena de respuesta viene la palabra 'num_insert4', es porque no hubo error al cargar la data
-                    bootbox.alert("Se registró exitosamente", function () {
-                    }).on('hidden.bs.modal', function (event) {
-                        url = '<?php echo base_url(); ?>index.php/administracion/CEmpresa/'
-                        window.location = url
-                    });
-                }
+        }else if (($('#codigo').val().trim() == '')) {
+            bootbox.alert('Disculpe, debe introducir el código de seguridad', function () {
+                $('#codigo').parent('div').addClass('has-error');
             });
+        }else if (($('#clave').val().length  < 8)) {
+            bootbox.alert('Disculpe, la cantidad de digitos no es valida', function () {
+                $('#clave').parent('div').addClass('has-error');
+            });
+		}else {
+            $('#codigo').prop('disabled',false);
+			$.post('<?php echo base_url(); ?>index.php/administracion/CEmpresa/actualizar', $('#form_empresa').serialize(), function (response) {
+				//alert(response[0]);
+				if (response[0] == '1') {
+                    bootbox.alert("Disculpe, código de seguridad invalido", function () {
+                    }).on('hidden.bs.modal', function (event) {
+                        $("#clave").parent('div').addClass('has-error')
+                        $("#clave").focus();
+                    });
+                }else {
+                    bootbox.alert("Se registro con exito", function () {
+                    }).on('hidden.bs.modal', function (event) {
+                        url = '<?php echo base_url(); ?>index.php/administracion/CEmpresa'
+						window.location = url
+                    });
+				}
+			});
+
         }
     });
 

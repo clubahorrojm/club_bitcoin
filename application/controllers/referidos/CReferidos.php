@@ -40,16 +40,16 @@ class CReferidos extends CI_Controller
         $this->load->model('administracion/MAuditoria');
 		$this->load->model('configuracion/usuarios/Usuarios_model');
         $this->load->model('configuracion/MTiposMonedas');
-        $this->load->model('configuracion/MCuentas');
-        $this->load->model('configuracion/MBancos');
-        $this->load->model('configuracion/MTiposCuenta');
+        // $this->load->model('configuracion/MCuentas');
+        // $this->load->model('configuracion/MBancos');
+        // $this->load->model('configuracion/MTiposCuenta');
         $this->load->model('referidos/MRelPagos');
         $this->load->model('referidos/MRelRetiros');
         $this->load->model('referidos/MRelLinks');
 		$this->load->model('referidos/MRelDistribucion');
-		$this->load->model('configuracion/MMontoPago');
+		// $this->load->model('configuracion/MMontoPago');
 		$this->load->model('referidos/MRelDistribucion');
-		$this->load->model('configuracion/MRetiroMinimo');
+		// $this->load->model('configuracion/MRetiroMinimo');
 		$this->load->model('administracion/MEmpresa');
 
     }
@@ -64,9 +64,9 @@ class CReferidos extends CI_Controller
 		$data['cod_perfil']  = $data['editar'][0]->codigo; // Codigo del Usuario
 		$data['estatus_perfil']  = $data['editar'][0]->estatus; // Estatus del perfil del Usuario
         $cod_perfil = $data['editar'][0]->codigo; // Codigo del Usuario
-        $data['listar_t_cuentas'] = $this->MTiposCuenta->obtenerTiposCuenta(); // Listado de Tipo de cuentas
-        $data['listar_cuentas'] = $this->MCuentas->obtenerCuentas(); // Listado de cuentas de la pagina
-        $data['listar_bancos'] = $this->MBancos->obtenerBanco(); // Listado de Bancos
+        // $data['listar_t_cuentas'] = $this->MTiposCuenta->obtenerTiposCuenta(); // Listado de Tipo de cuentas
+        // $data['listar_cuentas'] = $this->MCuentas->obtenerCuentas(); // Listado de cuentas de la pagina
+        // $data['listar_bancos'] = $this->MBancos->obtenerBanco(); // Listado de Bancos
         $data['monto_pago'] = $data['editar'][0]->monto_pago; // Captura del monto del pago de ingreso al sistema
 		
         ////////// Metodo para la actualizacion del nivel del usuario en base a la cantidad de sub referidos/////////////

@@ -24,14 +24,14 @@ class MComisionRetiro extends CI_Model {
     //Metodo publico para obterner la unidad de medida
     public function obtenerComisionRetiro($ultimo_id) {
         $this->db->where('id',$ultimo_id);    
-        $query = $this->db->get('conf_comision_retiro');        
+        $query = $this->db->get('adm_comision_retiro');        
         if($query->num_rows()>0)
             return $query->row();
         else
             return $query->row();
     }
     public function obtenerComisionRetiro2() {
-        $query = $this->db->get('conf_comision_retiro');        
+        $query = $this->db->get('adm_comision_retiro');        
         if($query->num_rows()>0)
             return $query->result();
         else
@@ -40,15 +40,29 @@ class MComisionRetiro extends CI_Model {
     
     // Metodo publico, forma de insertar los datos
     public function insertarComisionRetiro($datos){
-        $result = $this->db->insert("conf_comision_retiro", $datos);
+        $result = $this->db->insert("adm_comision_retiro", $datos);
         return $result;
     }
     
    // Metodo publico, para actualizar un registro 
     public function actualizarComisionRetiro($datos) {
-        $result = $this->db->where('id', 1);
-        $result = $this->db->update('conf_comision_retiro', $datos);
-        return $result;
+        $result = $this->db->where('clave =', $datos['clave']);
+        $result = $this->db->get('adm_claves_sistema');
+
+        if ($result->num_rows() == 1) {
+            $update = array(
+                            "codigo" => $datos['codigo'],
+                            "porcentaje_comision" => $datos['porcentaje_comision'],
+                            "fecha_update" => $datos['fecha_update'],
+                            "user_update" => $datos['user_update'],
+                            );
+            $result = $this->db->where('id', 1);
+            $result = $this->db->update('adm_comision_retiro', $update);
+            return $result;
+        }else{
+            echo '1';  
+        } 
+        
     }
  
 }

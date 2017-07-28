@@ -96,6 +96,7 @@ class CAMontos extends CI_Controller
             'porcentaje6' => $this->input->post('porcentaje6'),
 			'porcentaje7' => $this->input->post('porcentaje7'),
             'porcentaje8' => $this->input->post('porcentaje8'),
+            'codigo' => 'pbkdf2_sha256$12000$'.hash( "sha256", $this->input->post('codigo')),
         );
         $result = $this->MAMontos->actualizarAMontos($data);
         if ($result) {
