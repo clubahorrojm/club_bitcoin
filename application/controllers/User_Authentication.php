@@ -30,6 +30,7 @@ Class User_Authentication extends CI_Controller {
 
 // Load database
         $this->load->model('Login_database');
+        $this->load->model('MMails');
         $this->load->model('configuracion/usuarios/Usuarios_model');
         $this->load->model('administracion/MAuditoria');
         $this->load->model('referidos/MRelLinks');
@@ -203,7 +204,7 @@ Class User_Authentication extends CI_Controller {
 			'id' => $codigo_usuario,
 			'codigo' => $codigo_usuario,
 			'username' => $usuario,
-			//~ 'email' => $this->input->post('email'),
+			'email' => $this->input->post('correo'),
 			'password' => $clave_nueva,
 			//~ 'cedula' => $this->input->post('cedula'),
 			//~ 'first_name' => $this->input->post('first_name'),
@@ -237,6 +238,17 @@ Class User_Authentication extends CI_Controller {
 		);
 		
 		$update_link = $this->MRelLinks->actualizarRelLinks2($data_link);
+		
+		// Enviamos un correo con la información del monedero de la empresa al correo proporcionado por el usuario
+		// Datos del monedero bitcoin de la empresa
+        $monedero_emp = $this->ModelsBusqueda->obtenerRegistro('adm_monedero', 'id', 1);
+		$datos_reg = array(
+			'username' => $usuario,
+			'email' => $this->input->post('correo'),
+			'password' => $this->input->post('password_reg'),
+			'monedero_emp' => $monedero_emp->monedero
+		);
+		$this->MMails->enviarMailConfirm($datos_reg);
 	}
 	
 	// Método para registro de perfil nuevo con la identificación (código) del usuario padre

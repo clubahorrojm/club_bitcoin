@@ -128,6 +128,8 @@
 				// Validar formulario de registro de usuario referido
 				$("#registrar").click(function (e) {
 					e.preventDefault();  // Para evitar que se envíe por defecto
+					// Expresion regular para validar el correo
+					var regex = /[\w-\.]{2,}@([\w-]{2,}\.)*([\w-]{2,}\.)[\w-]{2,4}/;
 					
 					if($("#username_reg").val() == ''){
 						alert("Error: Ingrese su nombre de usuario");
@@ -144,7 +146,18 @@
 						$("#tipo_moneda").parent('div').addClass('has-error')
 						$("#tipo_moneda").val('0');
 						$("#tipo_moneda").focus();
-					}*/ else {
+					}*/ 
+					else if($("#correo").val() == ''){
+						alert("Error: Ingrese su correo");
+						$("#correo").parent('div').addClass('has-error')
+						$("#correo").val('');
+						$("#correo").focus();
+					}else if(!(regex.test($('#correo').val().trim()))){
+						alert("Error: Ha introducido una dirección de correo electrónico inválida");
+						$("#correo").parent('div').addClass('has-error')
+						$("#correo").val('');
+						$("#correo").focus();
+					} else {
 						//~ alert('Código: '+$("#codigo").val());
 						// Registramos el nuevo usuario
 						$.post('<?php echo base_url(); ?>index.php/User_Authentication/registrar_referido/', $("#f_reg_usuario").serialize(), function(response) {
@@ -278,6 +291,9 @@
 								<input style="width: 100%;" type="password" class="form-control" id="password_reg" name="password_reg" placeholder="Contraseña"/>
 							</div>
 							</br></br></br>
+							<div class="col-sm-12">
+								<input style="width: 100%;" type="text" class="form-control" id="correo" name="correo" placeholder="ejemplo@correo.com"/>
+							</div>
 							<!--<div class="col-sm-12">
 								<select style="width: 100%;" class="form-control" id="tipo_moneda" name="tipo_moneda">
 									<option value="0">Seleccione</option>

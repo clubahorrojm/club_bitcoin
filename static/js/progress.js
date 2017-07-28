@@ -305,7 +305,7 @@ function valida_personal(){
 				$("#dir_monedero_per").focus();
 				$("#dir_monedero_per").val('');
 		});
-	}else if ($("#dir_monedero_per2").val().trim().length < 34) {
+	}else if ($("#dir_monedero_per").val().trim().length < 34) {
 		bootbox.alert("La longitud de la dirección no puede ser menor a 34 dígitos", function () {
 		}).on('hidden.bs.modal', function (event) {
 				$("#dir_monedero_per").parent('div').addClass('has-error')
