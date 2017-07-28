@@ -150,8 +150,8 @@ class CRelPagos extends CI_Controller
         $data['moneda'] = $data['monedas'][0]->abreviatura; // Abreviatura de moneda
 
         //~ $data['listar_cuenta'] = $this->MCuentas->obtenerCuenta($cuenta_id); // Listado de cuentas de la pagina
-        $data['listar_bancos'] = $this->MBancos->obtenerBanco(); // Listado de Bancos
-        $data['listar_t_cuentas'] = $this->MTiposCuenta->obtenerTiposCuenta(); // Listado de Tipo de cuentas
+        //~ $data['listar_bancos'] = $this->MBancos->obtenerBanco(); // Listado de Bancos
+        //~ $data['listar_t_cuentas'] = $this->MTiposCuenta->obtenerTiposCuenta(); // Listado de Tipo de cuentas
         $data['listar_usuarios'] = $this->Usuarios_model->obtenerUsuarios(); // Listado de usuarios
         
         $id_moneda = $perfil[0]->t_moneda_id; // ID Tipo de moneda

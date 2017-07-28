@@ -46,11 +46,11 @@ CAMBIOS AL 27-07-2017
 	-Editado archivo controlador 'CReferidos.php'
 	-Editado archivo controlador 'CRelPagos.php'
 	-Editado archivo controlador 'CRelInformacion.php'
-	-Editado archivo de vista 'viewss/referidos/perfil/paneles_modal/pagos.php'
-	-Editado archivo de vista 'viewss/referidos/perfil/paneles_modal/informacion_personal.php'
-	-Editado archivo de vista 'viewss/referidos/perfil/paneles/pagos.php'
-	-Editado archivo de vista 'viewss/referidos/perfil/paneles/informacion_personal.php'
-	-Editado archivo de formato pdf 'viewss/referidos/perfil/pdf/reporte_recibo_pago.php'
+	-Editado archivo de vista 'views/referidos/perfil/paneles_modal/pagos.php'
+	-Editado archivo de vista 'views/referidos/perfil/paneles_modal/informacion_personal.php'
+	-Editado archivo de vista 'views/referidos/perfil/paneles/pagos.php'
+	-Editado archivo de vista 'views/referidos/perfil/paneles/informacion_personal.php'
+	-Editado archivo de formato pdf 'views/referidos/perfil/pdf/reporte_recibo_pago.php'
 	-Editado archivo de validaciones 'static/js/progress.js'
 	-Añadido nuevo campo 'dir_monedero' a la tabla de perfiles 'ref_perfil', quedando de la siguiente forma:
 	CREATE TABLE ref_perfil
@@ -93,3 +93,13 @@ CAMBIOS AL 27-07-2017 (Marcel)
 	-Revisa La modal, no paso de registrar informacion, me dice algo del plugin
 	PENDIENTE:
 	Revisar los PDF!
+	
+CAMBIOS AL 28-07-2017 (José)
+	-Editado archivo de validaciones 'static/js/progress.js'
+	-Editado archivo controlador 'CRelPagos.php'
+	-Editado archivo controlador 'User_Authentication.php'
+	-Editado archivo de vista 'views/login_form.php'
+	-Editado archivo de configuración 'config/autoload.php'
+	-Añadido archivo helper 'helpers/static_helper.php'
+	-Añadido archivo de modelo 'MMails.php'
+	
