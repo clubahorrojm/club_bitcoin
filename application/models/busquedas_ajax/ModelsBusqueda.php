@@ -357,4 +357,22 @@ class ModelsBusqueda extends CI_Model
         $result = $query->result();
         return $result;
     }
+    
+    public function search_next_link()
+    {
+		$result = $this->db->where('estatus =', 1);
+        //~ $result = $this->db->select('codigo');
+        $result = $this->db->from('ref_rel_links');
+		$result = $this->db->order_by("id", "asc");
+		$result = $this->db->limit(1);
+        $result = $this->db->get();
+        //return $result->result();
+		if ($result->num_rows() > 0) {
+			$data = $result->row();
+			$new_link = $data->links;
+			return $new_link;
+		}else{
+			return '1';
+		}
+    }
 }
