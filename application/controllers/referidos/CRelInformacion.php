@@ -40,9 +40,9 @@ class CRelInformacion extends CI_Controller
         $this->load->model('busquedas_ajax/ModelsBusqueda');
         $this->load->model('administracion/MAuditoria');
         $this->load->model('configuracion/usuarios/Usuarios_model');
-        $this->load->model('configuracion/MCuentas');
-        $this->load->model('configuracion/MBancos');
-        $this->load->model('configuracion/MTiposCuenta');
+        // $this->load->model('configuracion/MCuentas');
+        // $this->load->model('configuracion/MBancos');
+        // $this->load->model('configuracion/MTiposCuenta');
         
     }
     // INDEX del modulo de perfil del referido
@@ -54,9 +54,9 @@ class CRelInformacion extends CI_Controller
         $nombre_ref = $data['usuario'][0]->first_name.' '.$data['usuario'][0]->last_name; // Variable que contiene el nombre del usuario completo
         $data['editar'] = $this->MReferidos->obtenerReferido($cod_user);
         $data['cod_perfil']  = $data['editar'][0]->codigo; // Codigo del Usuario
-        $data['listar_cuentas'] = $this->MCuentas->obtenerCuentas(); // Listado de cuentas de la pagina
-        $data['listar_bancos'] = $this->MBancos->obtenerBanco(); // Listado de Bancos
-        $data['listar_t_cuentas'] = $this->MTiposCuenta->obtenerTiposCuenta(); // Listado de Tipo de cuentas
+        // $data['listar_cuentas'] = $this->MCuentas->obtenerCuentas(); // Listado de cuentas de la pagina
+        // $data['listar_bancos'] = $this->MBancos->obtenerBanco(); // Listado de Bancos
+        // $data['listar_t_cuentas'] = $this->MTiposCuenta->obtenerTiposCuenta(); // Listado de Tipo de cuentas
 		$data['estatus_perfil']  = $data['editar'][0]->estatus; // Estatus del perfil del Usuario
         $this->load->view('referidos/perfil/paneles/informacion_personal',$data);
     }

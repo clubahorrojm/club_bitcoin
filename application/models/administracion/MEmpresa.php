@@ -54,9 +54,28 @@ class MEmpresa extends CI_Model {
     
    // Metodo publico, para actualizar un registro 
     public function actualizarEmpresa($datos) {
-        $result = $this->db->where('id', 1);
-        $result = $this->db->update('adm_empresa', $datos);
-        return $result;
+        $result = $this->db->where('clave =', $datos['clave']);
+        $result = $this->db->get('adm_claves_sistema');
+
+        if ($result->num_rows() == 1) {
+            $update = array(
+                            "codigo" => $datos['codigo'],
+                            "nombre_empresa" => $datos['nombre_empresa'],
+                            "rif" => $datos['rif'],
+                            "cedula" => $datos['cedula'],
+                            "nombre" => $datos['nombre'],
+                            "apellido" => $datos['apellido'],
+                            "telefono1" => $datos['telefono1'],
+                            "telefono2" => $datos['telefono2'],
+                            "correo" => $datos['correo'],
+                            "direccion" => $datos['direccion']
+                            );
+            $result = $this->db->where('id', 1);
+            $result = $this->db->update('adm_empresa', $update);
+            return $result;
+        }else{
+            echo '1';  
+        } 
     }
 
     // Metodo publico, para eliminar un registro 

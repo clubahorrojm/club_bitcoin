@@ -118,10 +118,15 @@ if ($tipouser == 'Administrador') {
                                         <span class="input-group-addon">%</span>
                                     </div> 
                                 </div>
-                                
+                                <br><br>
+                                <div class="col-md-2">
+                                    <div class="input-group">
+                                        <label class="control-label" >Clave de Seguridad</label>
+                                        <input type="password" placeholder="********" maxlength="8" id="codigo"  name="codigo"  class="form-control" >
+                                    </div> 
+                                </div>
                                 <div class="form-group">
                                     <div class="col-md-12" style="text-align: center ">
-                                        <input autofocus="" placeholder="Ej: 8" maxlength="1" id="codigo" name="codigo" value="<?php echo $editar->codigo ?>" type='hidden' class="form-control">
                                         <input class="form-control"  type='hidden' id="id" name="id" value="1"/>
                                         <button type="submit" id="registrar" style="font-weight: bold;font-size: 13px" class="btn btn-success"/>
                                         &nbsp;<span class="glyphicon glyphicon-floppy-disk"></span>&nbsp;Actualizar
@@ -224,59 +229,32 @@ if ($tipouser == 'Administrador') {
         }else if (suma != 100) {
             bootbox.alert('Disculpe, Debe revisar los valores asigandos, la sumatoria da '+suma+' % y debe ser 100', function () {
             });
+        }else if (($('#codigo').val().trim() == '')) {
+            bootbox.alert('Disculpe, debe introducir el código de seguridad', function () {
+                $('#codigo').parent('div').addClass('has-error');
+            });
+        }else if (($('#codigo').val().length  < 8)) {
+            bootbox.alert('Disculpe, la cantidad de digitos no es valida', function () {
+                $('#codigo').parent('div').addClass('has-error');
+            });
         }else {
             //$('#codigo').prop('disabled',false);
             $.post('<?php echo base_url(); ?>index.php/administracion/CAMontos/actualizar', $('#form_asig_montos').serialize(), function (response) {
-                //if (response[0] == '1') {
-                //    bootbox.alert("Disculpe, Esta código ya se encuentra registrado", function () {
-                //    }).on('hidden.bs.modal', function (event) {
-                //        $("#codigo").parent('div').addClass('has-error')
-                //        $("#codigo").focus();
-                //
-                //    });
-                //}else if (response[0] == '2') {
-                //    bootbox.alert("Disculpe, Esta banco ya se encuentra registrado", function () {
-                //    }).on('hidden.bs.modal', function (event) {
-                //        $("#descripcion").parent('div').addClass('has-error')
-                //        $("#descripcion").focus();
-                //    });
-                //}else {
-                bootbox.alert("Se registro con exito", function () {
-                }).on('hidden.bs.modal', function (event) {
-                    url = '<?php echo base_url(); ?>index.php/administracion/CAMontos'
-                    window.location = url
-                });
-                //}
-                
-
+                if (response[0] == '1') {
+                    bootbox.alert("Disculpe, código de seguridad invalido", function () {
+                    }).on('hidden.bs.modal', function (event) {
+                        $("#codigo").parent('div').addClass('has-error')
+                        $("#codigo").focus();
+                    });
+                }else {
+                    bootbox.alert("Se registro con exito", function () {
+                    }).on('hidden.bs.modal', function (event) {
+                        url = '<?php echo base_url(); ?>index.php/administracion/CAMontos'
+                        window.location = url
+                    });
+                }
             });
-            //var formData = new FormData(document.getElementById("form_empresa"));
-            //$.ajax({
-            //    url: '<?php echo base_url(); ?>index.php/administracion/CEmpresa/actualizar/',
-            //    type: "post",
-            //    dataType: "html",
-            //    data: formData,
-            //    cache: false,
-            //    contentType: false,
-            //    processData: false
-            //}).done(function(res){                
-            //    var respuesta = res.split('<!DOCTYPE html>');
-            //    rep = respuesta[0].trim()
-            //    //alert(rep)
-            //    if (rep == 'fallo') {
-            //        bootbox.alert("Error al cargar archivos", function () {
-            //        }).on('hidden.bs.modal', function (event) {
-            //            
-            //        });
-            //    }else if(rep == 'registrado'){
-            //        // Si dentro de la cadena de respuesta viene la palabra 'num_insert4', es porque no hubo error al cargar la data
-            //        bootbox.alert("Se registró exitosamente", function () {
-            //        }).on('hidden.bs.modal', function (event) {
-            //            url = '<?php echo base_url(); ?>index.php/administracion/CEmpresa/'
-            //            window.location = url
-            //        });
-            //    }
-            //});
+
         }
     });
 

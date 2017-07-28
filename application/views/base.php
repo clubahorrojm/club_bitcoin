@@ -38,7 +38,7 @@ if (isset($this->session->userdata['logged_in'])) {
 		<link rel="stylesheet" href="<?= base_url() ?>static/font-awesome/css/font-awesome.css">
 		<link rel="stylesheet" href="<?= base_url() ?>static/font-awesome/css/font-awesome.min.css">
         <!-- Ionicons -->
-        <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+        <!-- <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css"> -->
         <!-- Morris chart -->
         <link rel="stylesheet" href="<?= base_url() ?>static/plugins/morris/morris.css">
         <!-- jvectormap -->
@@ -423,7 +423,8 @@ if (isset($this->session->userdata['logged_in'])) {
         <!-- jQuery 2.1.4 -->
         <script src="<?= base_url() ?>static/plugins/jQuery/jQuery-2.1.4.min.js"></script>
         <!-- jQuery UI 1.11.4 -->
-        <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+        <!-- <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script> -->
+        
         <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
         <script>
             //$.widget.bridge('uibutton', $.ui.button);

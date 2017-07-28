@@ -27,13 +27,12 @@ if ($tipouser == 'Administrador' || $tipouser == 'OPERADOR') {
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1 style="color:#3C8DBC">
-                Bancos
+                Comision por Retiro
             </h1>
             <ol class="breadcrumb">
                 <li><a href="<?php echo base_url(); ?>index.php"  style="color:#3C8DBC"><i class="fa fa-home"></i> Inicio</a></li>
                 <li style="color:#3C8DBC">Configuraciones</li>
-                <li style="color:#3C8DBC">Bancos</li>
-                <li class="active">Registrar Banco</li>
+                <li class="active">Comision por Retiro</li>
             </ol>
         </section>
 
@@ -46,29 +45,38 @@ if ($tipouser == 'Administrador' || $tipouser == 'OPERADOR') {
                     <!-- SELECT2 EXAMPLE -->
                     <div class="box box-primary">
                         <div class="box-header with-border">
-                            <h3 class="box-title" style="color:#3C8DBC">Registro de Banco</h3>
+                            <h3 class="box-title" style="color:#3C8DBC">Actualizar Comisión por Retiro</h3>
                             <div class="box-tools pull-right">
 
                             </div>
                         </div><!-- /.box-header -->
                         <div class="box-body">
-                            <form id="form_bancos">
+                            <form id="form_comision">
                                 <div class="col-md-1">
                                     <div class="form-group">
                                         <label style="font-weight:bold">Código</label>
-                                        <input type="text" autofocus="" placeholder="Ej: 8" maxlength="2" id="codigo" value="<?php echo $ultimo_id +1 ?>" disabled="disabled" name="codigo"  class="form-control">
+                                        <input type="text" autofocus="" placeholder="Ej: 8" maxlength="2" id="codigo" value="<?php echo $editar->codigo ?>" readonly="true" name="codigo"  class="form-control">
                                     </div><!-- /.form-group -->
                                 </div><!-- /.form-group -->
-                                <div class="col-md-5">
+                                <div class="col-md-2">
                                     <div class="form-group">
-                                        <label style="font-weight:bold">Banco</label>
-                                        <input type="text" placeholder="Introduzca el nombre del banco" maxlength="50" id="descripcion" name="descripcion"  class="form-control" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();">
+                                        <label style="font-weight:bold">Porcentaje</label>
+                                        <div class="input-group" style="width: 50%">
+                                            <input style="text-align: right;" type="text" placeholder="10.5" maxlength="4" id="porcentaje_comision" name="porcentaje_comision" value="<?php echo $editar->porcentaje_comision; ?>" class="form-control">
+                                            <span class="input-group-addon">%</span>
+                                        </div>
+                                        
                                     </div><!-- /.form-group -->
                                 </div><!-- /.form-group -->
+                                <div class="col-md-2">
+                                    <div class="input-group">
+                                        <label class="control-label" >Clave de Seguridad</label>
+                                        <input type="password" placeholder="********" maxlength="8" id="clave"  name="clave"  class="form-control" >
+                                    </div> 
+                                </div>
                                 <div class="form-group">
                                     <div class="col-md-12" style="text-align: center">
-                                        <input class="form-control"  type='hidden' placeholder="user" id="activo" name="activo" value="true"/>
-                                        <input class="form-control"  type='hidden' id="id" name="id" value="<?php echo $ultimo_id +1 ?>"/>
+                                        <input class="form-control"  type='hidden' id="id" name="id" value="<?php echo $editar->id ?>"/>
                                         <a class="btn btn-app " data-toggle="tab" id="volver">
                                             <i class="glyphicon glyphicon-chevron-left text-orange"></i>Volver
                                         </a>
@@ -76,7 +84,7 @@ if ($tipouser == 'Administrador' || $tipouser == 'OPERADOR') {
                                             <i class="glyphicon glyphicon-retweet text-blue"></i>Limpiar
                                         </a>
                                         <a class="btn btn-app " type="submit" id="registrar" data-toggle="tab" >
-                                            <i class="glyphicon glyphicon-floppy-disk text-green"></i>Registrar
+                                            <i class="glyphicon glyphicon-floppy-disk text-green"></i>Actualizar
                                         </a>
                                     </div>
                                 </div>
@@ -104,7 +112,7 @@ if ($tipouser == 'Administrador' || $tipouser == 'OPERADOR') {
 
 <script>
     $('#codigo').numeric();
-    $('#descripcion').alphanumeric({allow: " "}); //Solo permite texto
+    $('#porcentaje_comision').numeric({allow: "."});
     $('input').on({
         keypress: function () {
             $(this).parent('div').removeClass('has-error');
@@ -119,33 +127,37 @@ if ($tipouser == 'Administrador' || $tipouser == 'OPERADOR') {
 
     $("#registrar").click(function (e) {
         e.preventDefault();  // Para evitar que se envíe por defecto
-        if (($('#descripcion').val().trim() == '')) {
-            bootbox.alert('Disculpe, Debe Colocar la banco de la Banco', function () {
-                $('#descripcion').parent('div').addClass('has-error');
+        if (($('#porcentaje_comision').val().trim() == '')) {
+            bootbox.alert('Disculpe, debe colocar el porcentaje de comisión', function () {
+                $('#porcentaje_comision').parent('div').addClass('has-error');
             });
-        } else {
-            $('#codigo').prop('disabled',false);
-            $.post('<?php echo base_url(); ?>index.php/configuracion/CBancos/guardar', $('#form_bancos').serialize(), function (response) {
+        } else if (($('#porcentaje_comision').val().trim() > 10)) {
+            bootbox.alert('Disculpe, el pocentaje de comision no puede ser mayor a 10', function () {
+                $('#porcentaje_comision').parent('div').addClass('has-error');
+            });
+        }else if (($('#clave').val().trim() == '')) {
+            bootbox.alert('Disculpe, debe introducir el código de seguridad', function () {
+                $('#clave').parent('div').addClass('has-error');
+            });
+        }else if (($('#clave').val().length  < 8)) {
+            bootbox.alert('Disculpe, la cantidad de digitos no es valida', function () {
+                $('#clave').parent('div').addClass('has-error');
+            });
+        }else {
+            $.post('<?php echo base_url(); ?>index.php/administracion/CComisionRetiro/actualizar', $('#form_comision').serialize(), function (response) {
                 if (response[0] == '1') {
-                    bootbox.alert("Disculpe, Esta código ya se encuentra registrado", function () {
+                    bootbox.alert("Disculpe, código de seguridad invalido", function () {
                     }).on('hidden.bs.modal', function (event) {
-                        $("#codigo").parent('div').addClass('has-error')
-                        $("#codigo").focus();
-                    });
-                }else if (response[0] == '2') {
-                    bootbox.alert("Disculpe, Esta banco ya se encuentra registrado", function () {
-                    }).on('hidden.bs.modal', function (event) {
-                        $("#descripcion").parent('div').addClass('has-error')
-                        $("#descripcion").focus();
+                        $("#clave").parent('div').addClass('has-error')
+                        $("#clave").focus();
                     });
                 }else {
-                    bootbox.alert("Se registro con exito", function () {
+                    bootbox.alert("Se actualizó con exito", function () {
                     }).on('hidden.bs.modal', function (event) {
-                        url = '<?php echo base_url(); ?>index.php/configuracion/CBancos'
+                        url = '<?php echo base_url(); ?>index.php/administracion/CComisionRetiro'
                         window.location = url
                     });
                 }
-                
 
             });
         }

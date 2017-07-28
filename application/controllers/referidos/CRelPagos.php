@@ -42,10 +42,10 @@ class CRelPagos extends CI_Controller
         $this->load->model('configuracion/usuarios/Usuarios_model');
         $this->load->model('administracion/MEmpresa');
         $this->load->model('configuracion/MTiposMonedas');
-        $this->load->model('configuracion/MCuentas');
-        $this->load->model('configuracion/MBancos');
-        $this->load->model('configuracion/MTiposCuenta');
-        $this->load->model('configuracion/MMontoPago');
+        // $this->load->model('configuracion/MCuentas');
+        // $this->load->model('configuracion/MBancos');
+        // $this->load->model('configuracion/MTiposCuenta');
+        // $this->load->model('configuracion/MMontoPago');
         
     }
         // INDEX del modulo de perfil del referido
@@ -58,9 +58,9 @@ class CRelPagos extends CI_Controller
         $data['editar'] = $this->MReferidos->obtenerReferido($cod_user);
         $data['cod_perfil']  = $data['editar'][0]->codigo; // Codigo del Usuario
         
-        $data['listar_cuentas'] = $this->MCuentas->obtenerCuentas(); // Listado de cuentas de la pagina
-        $data['listar_bancos'] = $this->MBancos->obtenerBanco(); // Listado de Bancos
-        $data['listar_t_cuentas'] = $this->MTiposCuenta->obtenerTiposCuenta(); // Listado de Tipo de cuentas
+        // $data['listar_cuentas'] = $this->MCuentas->obtenerCuentas(); // Listado de cuentas de la pagina
+        // $data['listar_bancos'] = $this->MBancos->obtenerBanco(); // Listado de Bancos
+        // $data['listar_t_cuentas'] = $this->MTiposCuenta->obtenerTiposCuenta(); // Listado de Tipo de cuentas
         $data['pago'] = $this->MRelPagos->obtenerRelPagosBit($cod_user); // Informacion del pago de ingreso al sistema
         $data['monto_pago'] = $data['editar'][0]->monto_pago; // Captura del monto del pago de ingreso al sistema
         $this->load->view('referidos/perfil/paneles/pagos',$data);

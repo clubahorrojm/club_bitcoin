@@ -66,7 +66,7 @@ redirect(base_url());
 								<input type="text" placeholder="0000" id="monto_pago" name="monto_pago" maxlength="6" class="form-control">
 							</div><!-- /.form-group -->
 						</div><!-- /.form-group --> 
-						<div class="col-md-3">
+						<div class="col-md-2">
 							<div class="form-group">
 								<label style="font-weight:bold">Monto mínimo de retiro</label>
 								<input type="text" placeholder="0000" id="monto_retiro_minimo" name="monto_retiro_minimo" maxlength="4" class="form-control">
@@ -77,8 +77,14 @@ redirect(base_url());
 								<label style="font-weight:bold">Cargo por Mora</label>
 								<input type="text" placeholder="0000" id="cargo_mora" name="cargo_mora" maxlength="4" class="form-control">
 							</div><!-- /.form-group -->
-						</div><!-- /.form-group --> 
-						<div class="col-md-3">
+						</div><!-- /.form-group -->
+						<div class="col-md-2">
+							<div class="input-group">
+								<label class="control-label" >Clave de Seguridad</label>
+								<input type="password" placeholder="*******" maxlength="8" id="codigo"  name="codigo"  class="form-control" >
+							</div> 
+						</div>
+						<div class="col-md-2">
 							<div class="form-group">
 								<label style="font-weight:bold"></label>
 								<br>

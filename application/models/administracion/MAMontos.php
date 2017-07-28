@@ -47,8 +47,26 @@ class MAMontos extends CI_Model {
     
    // Metodo publico, para actualizar un registro 
     public function actualizarAMontos($datos) {
-        $result = $this->db->where('id', 1);
-        $result = $this->db->update('adm_asignacion_montos', $datos);
-        return $result;
+        $result = $this->db->where('clave =', $datos['codigo']);
+        $result = $this->db->get('adm_claves_sistema');
+
+        if ($result->num_rows() == 1) {
+            $update = array(
+                            "porcentaje1" => $datos['porcentaje1'],
+                            "porcentaje2" => $datos['porcentaje2'],
+                            "porcentaje3" => $datos['porcentaje3'],
+                            "porcentaje4" => $datos['porcentaje4'],
+                            "porcentaje5" => $datos['porcentaje5'],
+                            "porcentaje6" => $datos['porcentaje6'],
+                            "porcentaje7" => $datos['porcentaje7'],
+                            "porcentaje8" => $datos['porcentaje8'],
+                            );
+            $$result = $this->db->where('id', 1);
+            $result = $this->db->update('adm_asignacion_montos', $update);
+            return $result;
+        }else{
+            echo '1';  
+        } 
+        
     }
 }

@@ -42,10 +42,10 @@ class CRelRetiros extends CI_Controller
         $this->load->model('configuracion/usuarios/Usuarios_model');
         $this->load->model('administracion/MEmpresa');
         $this->load->model('configuracion/MTiposMonedas');
-        $this->load->model('configuracion/MCuentas');
-        $this->load->model('configuracion/MBancos');
-        $this->load->model('configuracion/MTiposCuenta');
-        $this->load->model('configuracion/MRetiroMinimo');
+        // $this->load->model('configuracion/MCuentas');
+        // $this->load->model('configuracion/MBancos');
+        // $this->load->model('configuracion/MTiposCuenta');
+        // $this->load->model('configuracion/MRetiroMinimo');
         
     }
     // INDEX del modulo de perfil del referido
