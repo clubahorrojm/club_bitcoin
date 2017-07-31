@@ -104,7 +104,7 @@ if (isset($this->session->userdata['logged_in'])) {
                                                     <h3 class="box-title" style="font-weight:bold;">
                                                         <p style="font-weight:bold; color:#3C8DBC">Máximo</p>
                                                     </h3>
-                                                    <h5><label style="font-weight:bold;"><?php echo number_format($editar[0]->maximo, 2, ',', '.')?> <?php echo $moneda ?></label></h5>
+                                                    <h5><label style="font-weight:bold;"><?php echo number_format($editar[0]->maximo, 2, ',', '.')?> <?php echo $moneda ?> <span id="span_convert1"></span></label></h5>
                                                 </div><!-- /.form-group -->
                                             </div>
                                             <div class="col-md-6">
@@ -116,13 +116,15 @@ if (isset($this->session->userdata['logged_in'])) {
                                                         <h3 class="box-title" style="font-weight:bold; color:#3C8DBC">
                                                             <p style="font-weight:bold">Disponible</p>
                                                         </h3>
-                                                        <h5><label style="font-weight:bold"><?php echo number_format($editar[0]->disponible, 2, ',', '.')?> <?php echo $moneda ?></label></h5>
+                                                        <h5><label style="font-weight:bold"><?php echo number_format($editar[0]->disponible, 2, ',', '.')?> <?php echo $moneda ?> <span id="span_convert2"></span></label></h5>
                                                     </div><!-- /.form-group -->
                                                 </div><!-- /.form-group -->
                                             </div>
                                             <input class="form-control"  type='hidden' id="id" name="id" value="<?php echo $editar[0]->codigo ?>"/>
                                             <input id="estatus_perfil" type='hidden' value="<?php echo $editar[0]->estatus ?>" class="form-control" >
                                             <input class="form-control"  type='hidden' id="usuario_id" name="usuario_id" value="<?php echo $usuario[0]->codigo ?>"/>
+                                            <input class="form-control"  type='hidden' id="convert1" value="<?php echo $editar[0]->maximo; ?>"/>
+                                            <input class="form-control"  type='hidden' id="convert2" value="<?php echo $editar[0]->disponible; ?>"/>
                                         </div><!-- /.form-group -->
                                     </div><!-- /.form-group -->
                                 </div><!-- /.form-group -->
@@ -382,7 +384,23 @@ if (isset($this->session->userdata['logged_in'])) {
         URL = '<?php echo base_url(); ?>index.php/referidos/CReferidos/pdf_resumen_retiros/';
             $.fancybox.open({ padding : 0, href: URL, type: 'iframe',width: 1024, height: 520});
     });
-
-
+	
+	// Soporte para tipos de cambio sobre bitcoins (dólares en este caso) usando la api de blockchain Exchange Rates API
+	$.post('https://blockchain.info/ticker', function (response) {
+		//~ alert(response['USD']['last']);
+		//~ alert(response['USD']['symbol']);
+		//~ $.each(response, function (i) {
+			//~ $('#span_phone').text(response[i]['phone']);
+			//~ $('#span_cellphone').text(response[i]['cell_phone']);
+			//~ alert(response[i]);
+		//~ });
+		var convert1, conver2;
+		
+		convert1 = parseFloat($('#convert1').val())*parseFloat(response['USD']['last']);
+		convert2 = parseFloat($('#convert2').val())*parseFloat(response['USD']['last']);
+		$('#span_convert1').text(' ('+String(convert1)+' '+response['USD']['symbol']+')');
+		$('#span_convert2').text(' ('+String(convert2)+' '+response['USD']['symbol']+')');
+		
+	}, 'json');
 
 </script>
