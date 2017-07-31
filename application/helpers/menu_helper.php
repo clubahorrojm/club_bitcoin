@@ -64,6 +64,7 @@ if (!function_exists('menu')) {
                 <li><a href="<?php echo base_url(); ?>index.php/procesos/CLRetiros"><i class="fa fa-cc-discover text-teal"></i>Retiros</a></li>
                 <li><a href="<?php echo base_url(); ?>index.php/procesos/CLLinksCad"><i class="fa fa-unlink text-teal"></i>Links Caducados</a></li>
                 <li><a href="<?php echo base_url(); ?>index.php/procesos/CLDesvincular"><i class="fa fa-user-times text-teal"></i>Desvinculación</a></li>
+                <li><a href="<?php echo base_url(); ?>index.php/procesos/CAyuda"><i class="fa fa-info-circle text-teal"></i>Soporte a Usuarios</a></li>
             </ul>
         </li>
 		<?php endif; ?>

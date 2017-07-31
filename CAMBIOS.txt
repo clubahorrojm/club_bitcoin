@@ -102,4 +102,24 @@ CAMBIOS AL 28-07-2017 (José)
 	-Editado archivo de configuración 'config/autoload.php'
 	-Añadido archivo helper 'helpers/static_helper.php'
 	-Añadido archivo de modelo 'MMails.php'
+
+CAMBIOS AL 31-07-2017 (Marcel)
+	-Añadido archivo helper 'helpers/static_helper.php'.
+	-Añadido archivo controller 'Controller/procesos/CAyuda.php'
+	-Añadido archivo Models 'Models/procesos/MAyuda.php'
+	-Añadido archivo view 'views/procesos/ayudas/lista.php'
+	-Añadido archivo helper 'helpers/static_helper.php'
+	CREATE TABLE ref_rel_ayudas (
+	    id integer NOT NULL,
+	    codigo integer,
+	    usuario_id integer,
+	    motivo integer,
+	    pregunta text,
+	    estatus integer,
+	    fecha_pre character varying(20),
+	    operador_id integer,
+	    respuesta text,
+	    fecha_res character varying(20)
+	);
+
 	
