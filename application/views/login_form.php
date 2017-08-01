@@ -1,4 +1,4 @@
-
+<html>
     <?php
     if (isset($this->session->userdata['logged_in'])) {
 
@@ -202,12 +202,12 @@
     </head>
     <body>
 
-<!--        <div align="center">
+		<!--<div align="center">
             <img src="<?= base_url() ?>static/img/TOPE-SISTEM-ADMIN-003.jpg" style="width: 100%;"/>
         </div>-->
 
 
-         <?php
+        <?php
         if (isset($logout_message)) {
             echo "</br><div class='alert alert-dismissible alert-success' style='text-align: center'>";
             echo "<button type='button' class='close' data-dismiss='alert'>X</button>";
@@ -238,55 +238,59 @@
         ?>
                  
 
-        <div class="wrapper">
-                     
-      
-	<div class="container">
+		<div class="wrapper">
+							 
+			
+			<div class="container">
+				<?php echo form_open('User_Authentication/user_login_process'); ?>
+				<div class="col-lg-12">
+					<div class="col-lg-3"></div>
+					 <div class="col-lg-3"></div> 
+					<div class="col-lg-6">
+						<button class="text-center" id="registrarse" style="color:#126584;font-size:15px;font-weight:bold;cursor:pointer;" title="Usted será redirigido al área de registro">Solicitar link</button>
+					</div>
+				</div> 
 
-               
-		<h1>El juego del Ahorro</h1>
-		
-		 <?php echo form_open('User_Authentication/user_login_process'); ?>
-		<form id="frmlogin" class="form-horizontal"  method="POST" enctype="multipart/form-data" autocomplete="off" role="form">
-		   
-			<div class="col-lg-12">
-				<div class="col-lg-3"></div>
-				 <div class="col-lg-6"><img class="img-circle" src="<?= base_url() ?>static/img/default.gif" style="width: 80%" /></div> 
-				<div class="col-lg-3"></div>
-		   </div> 
-           <div class="col-lg-12">
-			<center>
-			<input type="text" id="username" name="username" placeholder="Usuario" >
-			<input type="password" id="password" name="password" placeholder="Contraseña">
-			<button type="submit" id="submit" name="submit" style="width:25%">Entrar</button>
-			</br>
-			<a id="registrarse" style="color:#FFFFFF;font-size:20px;">Registrarse</a>
-			<!--<button type="button" id="rec_password" name="rec_password">Rec: Clave de Acceso</button>-->
-			</br></br>
-			<button type="button" id="registrar_referido" name="registrar_referido">Registrar</button>
-			</center>
-           </div> 
-		</form>
-                
-	</div>
-	
-	<ul class="bg-bubbles">
-		<li></li>
-		<li></li>
-		<li></li>
-		<li></li>
-		<li></li>
-		<li></li>
-		<li></li>
-		<li></li>
-		<li></li>
-		<li></li>
-	</ul>
-             <?php echo form_close(); ?>
-                   
-</div>
+				<h1>El juego del Ahorro</h1>
+				
+				 <?php echo form_open('User_Authentication/user_login_process'); ?>
+				<form id="frmlogin" class="form-horizontal"  method="POST" enctype="multipart/form-data" autocomplete="off" role="form">
+							
+					<div class="col-lg-12">
+						<div class="col-lg-3"></div>
+						 <div class="col-lg-6"><img class="img-circle" src="<?= base_url() ?>static/img/default.gif" style="width: 80%" /></div> 
+						<div class="col-lg-3"></div>
+				   </div> 
+				   <div class="col-lg-12">
+					<center>
+					<input type="text" id="username" name="username" placeholder="Usuario" >
+					<input type="password" id="password" name="password" placeholder="Contraseña">
+					<button type="submit" id="submit" name="submit" style="width:25%">Entrar</button>
+					<!--<button type="button" id="rec_password" name="rec_password">Rec: Clave de Acceso</button>-->
+					</br></br>
+					<button type="button" id="registrar_referido" name="registrar_referido">Registrar</button>
+					</center>
+				   </div> 
+				</form>
+						
+			</div>
+			
+			<ul class="bg-bubbles">
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+			</ul>
+					 <?php echo form_close(); ?>
+						   
+		</div>
 
-		
 		
 		<div class="modal" id="modal_registrar">
 		   <div class="modal-dialog">
@@ -335,4 +339,7 @@
 			  </div>
 		   </div>
 		</div>
+		
+	</body>
+</html>
 
