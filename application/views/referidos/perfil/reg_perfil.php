@@ -25,14 +25,14 @@
 				  <ul id="progressbar">
 					<li id="progressbar_pago">Información del pago</li>
 					<li id="progressbar_personal">Información Personal</li>
-					<li id="progressbar_distribucion">Distribución de capital</li>
+					<!--<li id="progressbar_distribucion">Distribución de capital</li>-->
 					<li id="progressbar_finalizar">Finalizar</li>
 					<!--<li>Retiros</li>-->
 				  </ul>
 				  <!-- fieldsets -->
 				  <?php include("paneles_modal/pagos.php");?>
 				  <?php include("paneles_modal/informacion_personal.php");?>
-				  <?php include("paneles_modal/distribucion.php");?>
+				  <?php //include("paneles_modal/distribucion.php");?>
 				  <?php include("paneles_modal/finalizado.php");?>
 				</form>
 			 </div>

@@ -122,4 +122,8 @@ CAMBIOS AL 31-07-2017 (Marcel)
 	    fecha_res character varying(20)
 	);
 
-	
+CAMBIOS AL 01-08-2017 (José)
+	-Editado archivo controlador 'application/controllers/referidos/CReferidos.php'.
+	-Añadido archivo de vista modal 'application/views/referidos/perfil/paneles_modal/informacion_personal.php'
+	-Añadido archivo de vista 'application/views/referidos/perfil/reg_perfil.php'
+	-Añadido archivo de validaciones 'static/js/progress.js'
