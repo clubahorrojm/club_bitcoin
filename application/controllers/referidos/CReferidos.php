@@ -181,7 +181,7 @@ class CReferidos extends CI_Controller
 
         // La ruta a la vista a cargar
         $vista = "";
-		if ($data['estatus_perfil'] < 4){
+		if ($data['estatus_perfil'] < 3){
 			$vista = 'referidos/perfil/reg_perfil';
 		}else{
 			$vista = 'referidos/perfil/perfil';

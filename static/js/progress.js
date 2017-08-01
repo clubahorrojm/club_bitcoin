@@ -313,15 +313,37 @@ function valida_personal(){
 				$("#dir_monedero_per").val('');
 		});
 	}else{
+		// Recorrido de la tabla de referidos para distribuir el capital
+		$("#tab_rel_distribucion tbody tr").each(function () {
+			var id_niv;
+			id_niv = $(this).find('td').eq(0).find('button').attr('id');  // Id y nivel del referido
+			val = id_niv.split('-') //Se corta el value en 2 partes
+			id_ref = val[0] // Id del referido
+			nivel_ref = val[1] // nivel del referido
+			
+			//~ alert(id_ref+" - "+nivel_ref);
+			// Pago a cada referido padre
+			$.post(base_url+'index.php/referidos/CRelDistribucion/pagar',
+				   $.param({'id_ref': id_ref})+'&'+$.param({'nivel_ref': nivel_ref}), function (response){
+
+					if (response[0] == 1) {
+					   $("#dist_true").val(parseInt($("#dist_true").val())+0);
+					} else {
+					   $("#dist_true").val(parseInt($("#dist_true").val())+1);
+					}
+				
+			});
+		});
+		
 		cedula = $('#cedula').val()
 		nombre = $('#nombre').val()
 		apellido = $('#apellido').val()
 		correo = $('#correo').val()
 		telefono = $('#telefono').val()
-		//~ tipo_cuenta_id = $('#tipo_cuenta_id').val()
+		// tipo_cuenta_id = $('#tipo_cuenta_id').val()
 		usuario_id = $('#usuario_id').val()
-		//~ num_cuenta_usu = $('#num_cuenta_usu').val()
-		//~ banco_usu_id = $('#banco_usu_id').val()
+		// num_cuenta_usu = $('#num_cuenta_usu').val()
+		// banco_usu_id = $('#banco_usu_id').val()
 		dir_monedero_per = $('#dir_monedero_per').val()
 		pk_perfil = $('#cod_perfil').val()
 		
@@ -338,7 +360,7 @@ function valida_personal(){
 			} else {
 				bootbox.alert("Se actualizó su información personal con Exito", function (){
 				}).on('hidden.bs.modal', function (event) {
-					//~ window.location = '<?php echo base_url(); ?>index.php/referidos/CRelInformacion/';
+					//~ //window.location = '<?php echo base_url(); ?>index.php/referidos/CRelInformacion/';
 					window.location = base_url+'index.php/referidos/CReferidos/';
 					$("#reg_data_personal").val(1);
 				});
