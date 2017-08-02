@@ -162,7 +162,7 @@ redirect(base_url());
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 						<h4 class="modal-title">
 									<center><span class="glyphicon glyphicon-search"></span>
-									&nbsp;Ingrese el número de transferencia y la fecha de su realización</center>
+									&nbsp;Ingrese la respuesta o solución</center>
 						</h4>
 					</div>
 					<div class="modal-body">
