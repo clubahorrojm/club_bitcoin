@@ -41,7 +41,7 @@ if (!function_exists('menu')) {
 			<li><a href="<?php echo base_url(); ?>index.php/referidos/CRelDistribucion"><i class="fa fa-angle-double-up "></i>Distribución de Capital</a></li>
 			<li><a href="<?php echo base_url(); ?>index.php/referidos/CRelLinks"><i class="fa fa-envelope-o "></i>Links de Invitación</a></li>
             <li><a href="<?php echo base_url(); ?>index.php/referidos/CRelRetiros"><i class="fa fa-dollar "></i>Retiros</a></li> 
-            <!--<li><a href=""><i class="fa fa-exclamation-circle "></i>Ayuda</a></li>-->
+            <li><a href="<?php echo base_url(); ?>index.php/referidos/CRelAyudas"><i class="fa fa-info-circle "></i>Soporte a Usuarios</a></li> 
         </li>
         <?php endif; ?>
         

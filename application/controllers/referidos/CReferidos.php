@@ -174,7 +174,7 @@ class CReferidos extends CI_Controller
         $data['listar_padres'] = $datos2; // Lista de referidos padres
         
         ///////////////////////////////////////////////////////////////////////////////////////////////////////
-        $data['listar_distribuciones'] = $this->MRelDistribucion->obtenerDistribuciones($cod_user); //Listado de distribuciones realizadas
+        $data['listar_distribuciones'] = $this->MRelDistribucion->obtenerDistribucion($cod_user); //Listado de distribuciones realizadas
         
         // Datos del monedero bitcoin de la empresa
         $data['monedero_emp'] = $this->ModelsBusqueda->obtenerRegistro('adm_monedero', 'id', 1);

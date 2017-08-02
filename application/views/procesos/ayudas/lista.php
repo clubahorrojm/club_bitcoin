@@ -51,72 +51,90 @@ redirect(base_url());
                         <th style='text-align: center'>Item</th>
                         <th style='text-align: center'>Usuario</th>
                         <th style='text-align: center'>Motivo</th>
-																								<th style='text-align: center'>Fecha</th>
+						<th style='text-align: center'>Fecha</th>
                         <th style='text-align: center'>Estatus</th>
                         <th style='text-align: center'>Aprobar</th>
-																								<th style='text-align: center'>Consulta</th>
-																								<th style='text-align: center'>Respuesta</th>
-																								<th style='text-align: center'>Operador</th>
+						<th style='text-align: center'>Consulta</th>
+						<th style='text-align: center'>Respuesta</th>
+						<th style='text-align: center'>Operador</th>
                       </tr>
                     </thead>
                       <tbody >    
                             <?php $i = 1; ?>
 
-                            <?php foreach ($listar as $retiro) { ?>
+                            <?php foreach ($listar as $ayuda) { ?>
                                 <tr style="font-size: 16px;text-align: center" class="{% cycle 'impar' 'par' %}" >
                                     <td>
                                         <?php echo $i; ?>
                                     </td>
-                                    <td><?php echo $retiro->username;?></td>
-																																				<td>
-                                    <?php 
-																																					if($retiro->motivo == 1){
-																																						echo "<span style='color:blue'>Pregunta</span>";
-																																					}else if($retiro->motivo == 2){
-																																						echo "<span style='color:red'>Reclamos</span>";
-																																					}else if($retiro->motivo == 3){
-																																						echo "<span style='color:green'>Sugerencias</span>";
-																																					}else{
-																																						echo "";
-																																					}
-																																					?>
-																																				</td>
-																																				<td><?php echo $retiro->fecha_pre;?></td>
-																																				<td>
-																																					<?php 
-																																					if($retiro->estatus == 1){
-																																						echo "<span style='color:red'>Pendiente</span>";
-																																					}else if($retiro->estatus == 2){
-																																						echo "<span style='color:green'>Atendido</span>";
-																																					}else{
-																																						echo "";
-																																					}
-																																					?>
-																																				</td>
-																																				<td style='text-align: center'>
-																																					<?php if ($retiro->estatus == 2) {?>
-																																					<input class='aprobar' type="checkbox" checked="checked" disabled="disabled"/>
-																																					<?php }else if ($retiro->estatus == 1){ ?>
-																																					<input class='aprobar' id='<?php echo $retiro->codigo; ?>@@@<?php echo $retiro->pregunta; ?>' type="checkbox" title='Desea responder la siguiente pregunta?'/>
-																																					<?php } ?>
-																																				</td>
-																																				<td><?php echo $retiro->pregunta;?></td>
-																																				<td>
-																																							<?php 
-																																							if($retiro->estatus == 1){
-																																								echo "";
-																																							}else if($retiro->estatus == 2){
-																																								echo $retiro->respuesta;
-																																							}?>
-																																					</td>
-																																				<td><?php 
-																																							if($retiro->estatus == 1){
-																																								echo "";
-																																							}else if($retiro->estatus == 2){
-																																								echo $retiro->operador;
-																																							}?>
-																																					</td>
-                                </tr>
+                                    <td><?php foreach($listar_usuarios as $usuario){
+                                            if($usuario->codigo == $ayuda->usuario_id){
+                                                echo $usuario->first_name;
+                                                echo ' ';
+                                                echo $usuario->last_name;
+                                            }
+                                        }?>
+                                    </td>
+											<td>
+											<?php 
+												if($ayuda->motivo == 1){
+													echo "<span style='color:blue'>Pregunta</span>";
+												}else if($ayuda->motivo == 2){
+													echo "<span style='color:red'>Reclamos</span>";
+												}else if($ayuda->motivo == 3){
+													echo "<span style='color:green'>Sugerencias</span>";
+												}else{
+													echo "";
+												}
+												?>
+											</td>
+											<td><?php
+                                                $fe = explode('-',$ayuda->fecha_pre);
+                                                $fecha = $fe[2].'-'.$fe[1].'-'.$fe[0];
+                                                echo $fecha;
+                                                ?>
+                                            </td>
+											<td>
+												<?php 
+												if($ayuda->estatus == 1){
+													echo "<span style='color:red'>Pendiente</span>";
+												}else if($ayuda->estatus == 2){
+													echo "<span style='color:green'>Atendido</span>";
+												}else{
+													echo "";
+												}
+												?>
+											</td>
+											<td style='text-align: center'>
+												<?php if ($ayuda->estatus == 2) {?>
+												<input class='aprobar' type="checkbox" checked="checked" disabled="disabled"/>
+												<?php }else if ($ayuda->estatus == 1){ ?>
+												<input class='aprobar' id='<?php echo $ayuda->codigo; ?>@@@<?php echo $ayuda->pregunta; ?>' type="checkbox" title='Desea responder la siguiente pregunta?'/>
+												<?php } ?>
+											</td>
+											<td><?php echo $ayuda->pregunta;?></td>
+											<td>
+														<?php 
+														if($ayuda->estatus == 1){
+															echo "";
+														}else if($ayuda->estatus == 2){
+															echo $ayuda->respuesta;
+														}?>
+												</td>
+											<td><?php 
+												if($ayuda->estatus == 1){
+													echo "";
+												}else if($ayuda->estatus == 2){
+													foreach($listar_usuarios as $usuario){
+                                                        if($usuario->codigo == $ayuda->operador_id){
+                                                            echo $usuario->first_name;
+                                                            echo ' ';
+                                                            echo $usuario->last_name;
+                                                        }
+                                                    }
+												}?>
+										</td>
+								</tr>
                                 <?php $i++ ?>
                             <?php } ?>
 
@@ -230,7 +248,7 @@ redirect(base_url());
 					var pregunta = cadena[1];
 					//alert(pregunta)
 			
-					bootbox.confirm("¿Desea aprobar este retiro?", function(result) {
+					bootbox.confirm("¿Desea contestar esta pregunta ("+pregunta+")?", function(result) {
 							if (result) {
 									$("#codigo").val(cod);
 									//Se captura el elemento en la modal cuyo ID sea preguntas y se le agrega el texto 
@@ -249,13 +267,19 @@ redirect(base_url());
 					e.preventDefault();  // Para evitar que se envíe por defecto
 					
 					if($("#respuestas").val() == ''){
-								alert("Error: Ingrese el número de pago");
+								alert("Disculpe, aun no a respondido");
 								$("#respuestas").parent('div').addClass('has-error');
 								$("#respuestas").focus();
-					} else {
+					}else if ($("#respuestas").val().trim().length < 10){
+                        bootbox.alert("Su respuesta debe ser mayor a diez (10) caracteres, para ser valida", function () {
+                        }).on('hidden.bs.modal', function (event) {
+                                $("#respuestas").parent('div').addClass('has-error')
+                                $("#respuestas").focus();
+                        });
+                    } else {
 							var cod = $("#codigo").val();
 							$.post('<?php echo base_url(); ?>index.php/procesos/CAyuda/responder/', {'respuestas':$("#respuestas").val(), 'codigo':+ cod}, function(response) {
-									bootbox.alert("El retiro fue aprobado exitosamente", function () {
+									bootbox.alert("La respuesta se envio exitosamente", function () {
 									}).on('hidden.bs.modal', function (event) {
 										location.reload();
 									});
