@@ -52,12 +52,7 @@ class CAyuda extends CI_Controller
         //Al no existir registros por defecto carga algunos genéricos
         $data['listar'] = '';
         $ultimo_id = $this->ModelsBusqueda->count_all_table('ref_rel_ayudas');
-        if ($ultimo_id > 0){
-            $data['listar'] = $this->MAyuda->obtenerAyuda();
-        }
-        else{
-            $data['listar'] = [];
-        }
+        $data['listar'] = $this->MAyuda->obtenerAyuda();
         $data['listar_usuarios'] = $this->Usuarios_model->obtenerUsuarios();
         // $data['listar_cuentas'] = $this->MCuentas->obtenerCuentas();
         $this->load->view('procesos/ayudas/lista', $data);
