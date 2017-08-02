@@ -118,7 +118,7 @@ class MLPagos extends CI_Model {
     }
     
     // Método público para listar pagos específicos
-    public function obtenerPagosEspBit($cuenta,$estatus,$desde,$hasta)
+    public function obtenerPagosEspBit($estatus,$desde,$hasta)
     {
 		$query = "";
 		$sql = "";
@@ -127,7 +127,7 @@ class MLPagos extends CI_Model {
 		$fecha = "";
 		
 		$filtros = array(
-		'cuenta_id' => $cuenta,
+		//~ 'cuenta_id' => $cuenta,
 		'estatus' => $estatus);
 		
 		while ($filtro = current($filtros)) {

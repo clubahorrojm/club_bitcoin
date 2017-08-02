@@ -52,7 +52,7 @@ $this->pdf->Cell(60,5,utf8_decode("FECHA FINAL: $hasta"),'',1,'L',1);
 
 $this->pdf->Cell(30,5,"Usuario",'TB',0,'L',1);
 $this->pdf->Cell(30,5,utf8_decode("Monto"),'TB',0,'C',1);
-$this->pdf->Cell(85,5,utf8_decode("Cuenta"),'TB',0,'L',1);
+$this->pdf->Cell(85,5,utf8_decode("Dir. Monedero"),'TB',0,'L',1);
 $this->pdf->Cell(20,5,"Fecha ",'TB',0,'L',1);
 $this->pdf->Cell(20,5,"Estatus",'TB',1,'R',1);
 
@@ -89,7 +89,7 @@ foreach ($pagos as $pago){
 
 		$this->pdf->Cell(30,5,"Usuario",'TB',0,'L',1);
 		$this->pdf->Cell(30,5,utf8_decode("Monto"),'TB',0,'C',1);
-		$this->pdf->Cell(85,5,utf8_decode("Cuenta"),'TB',0,'L',1);
+		$this->pdf->Cell(85,5,utf8_decode("Dir. Monedero"),'TB',0,'L',1);
 		$this->pdf->Cell(20,5,"Fecha ",'TB',0,'L',1);
 		$this->pdf->Cell(20,5,"Estatus",'TB',1,'R',1);
 
@@ -105,12 +105,12 @@ foreach ($pagos as $pago){
 			$usu = $usuario->username;
 		}
 	}
-	$cnt = "";  // Variable para almacenar el número de cuenta
-	foreach($cuentas as $cuenta){
-		if($cuenta->id == $pago->cuenta_id){
-			$cnt = $cuenta->descripcion;
-		}
-	}
+	//~ $cnt = "";  // Variable para almacenar el número de cuenta
+	//~ foreach($cuentas as $cuenta){
+		//~ if($cuenta->id == $pago->cuenta_id){
+			//~ $cnt = $cuenta->descripcion;
+		//~ }
+	//~ }
 	$est = "";  // Variable para almacenar la descripción del estatus
 	if($pago->estatus == 1){
 		$est = "Pendiente";
@@ -119,7 +119,7 @@ foreach ($pagos as $pago){
 	}
 	$this->pdf->Cell(30,5,utf8_decode("$usu"),'',0,'L',1);
 	$this->pdf->Cell(30,5,"$pago->monto",'',0,'C',1);
-	$this->pdf->Cell(85,5,utf8_decode("$cnt"),'',0,'L',1);
+	$this->pdf->Cell(85,5,utf8_decode("$pago->dir_monedero"),'',0,'L',1);
 	$this->pdf->Cell(20,5,"$fecha_pago",'',0,'L',1);
 	$this->pdf->Cell(20,5,"$est",'',1,'R',1);
 	
