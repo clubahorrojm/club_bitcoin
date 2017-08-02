@@ -242,18 +242,19 @@
 							 
 			
 			<div class="container">
-				<?php echo form_open('User_Authentication/user_login_process'); ?>
+				<?php echo form_open(''); ?>
 				<div class="col-lg-12">
 					<div class="col-lg-3"></div>
 					 <div class="col-lg-3"></div> 
 					<div class="col-lg-6">
 						<button class="text-center" id="registrarse" style="color:#126584;font-size:15px;font-weight:bold;cursor:pointer;" title="Usted será redirigido al área de registro">Solicitar link</button>
 					</div>
-				</div> 
+				</div>
+				</form>
 
 				<h1>El juego del Ahorro</h1>
 				
-				 <?php echo form_open('User_Authentication/user_login_process'); ?>
+				<?php echo form_open('User_Authentication/user_login_process'); ?>
 				<form id="frmlogin" class="form-horizontal"  method="POST" enctype="multipart/form-data" autocomplete="off" role="form">
 							
 					<div class="col-lg-12">
