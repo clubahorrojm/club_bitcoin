@@ -23,7 +23,7 @@ class MAyuda extends CI_Model {
 
     //Metodo público para obterner una lista de las cuentas
     public function obtenerAyuda() {
-        $sql = "SELECT .codigo, usuario_id, motivo, fecha_pre, pregunta, estatus, operador, respuesta ";
+        $sql = "SELECT codigo, usuario_id, motivo, fecha_pre, pregunta, estatus, operador_id, respuesta ";
 		$sql .= "FROM ref_rel_ayudas AS rrpb ";
         $query = $this->db->query($sql);
         if($query->num_rows()>0) return $query->result();
