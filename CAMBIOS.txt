@@ -151,4 +151,4 @@ CAMBIOS AL 01-08-2017 (Marcel):
 CAMBIOS AL 02-08-2017 (José):
 	- Actualización de Controller: CRepPagos.php (obtenerPagos(), pdf_pagos())
 	- Actualización de Modelos: MLPagos.php (obtenerPagosEspBit())
-	- Actualización de Views: reportes/pagos.php, reportes/pdf/reporte_pagos.php
+	- Actualización de Views: reportes/pagos.php, reportes/retiros.php, reportes/pdf/reporte_pagos.php
