@@ -152,3 +152,8 @@ CAMBIOS AL 02-08-2017 (José):
 	- Actualización de Controller: CRepPagos.php (obtenerPagos(), pdf_pagos())
 	- Actualización de Modelos: MLPagos.php (obtenerPagosEspBit())
 	- Actualización de Views: reportes/pagos.php, reportes/retiros.php, reportes/pdf/reporte_pagos.php
+	
+CAMBIOS AL 08-08-2017 (José):
+	- Actualización de helper: menu_helper.php (para quitar unas barras que salían en el menú)
+	- Actualización de Views: base.php, referidos/perfil/paneles/soporte_usuario.php
+	- Creación de archivo de estilos: static/css/news_styles.css
