@@ -246,9 +246,9 @@
 				<div class="col-lg-12">
 					<div class="col-lg-3"></div>
 					 <div class="col-lg-3"></div> 
-					<div class="col-lg-6">
+<!-- 					<div class="col-lg-6">
 						<button class="text-center" id="registrarse" style="color:#126584;font-size:15px;font-weight:bold;cursor:pointer;" title="Usted será redirigido al área de registro">Solicitar link</button>
-					</div>
+					</div> -->
 				</div>
 				</form>
 
@@ -270,6 +270,9 @@
 					<!--<button type="button" id="rec_password" name="rec_password">Rec: Clave de Acceso</button>-->
 					</br></br>
 					<button type="button" id="registrar_referido" name="registrar_referido">Registrar</button>
+					<a class="text-center " id="registrarse" style="color: white;font-size:20px;font-weight:bold;cursor:pointer;text-decoration: underline" title="Usted será redirigido al área de registro">Solicitar link</a>
+
+
 					</center>
 				   </div> 
 				</form>

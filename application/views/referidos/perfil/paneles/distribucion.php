@@ -47,19 +47,19 @@ if ($tipouser == 'Administrador') {
                     <div class="box box-primary">
                         <div class="box-body">
 							<div class="text-left">
-                                <legend><H4  style=" color:#3C8DBC">Por favor realice el pago a cada uno de sus referidos padres</H4></legend>
+                                <legend><H4  style=" color:#3C8DBC">Listado de sus referidos padres</H4></legend>
                             </div>
 							<?php if ($editar[0]->estatus == 1 ) {?>
 							<br>
-							<div class="text-center">
+<!-- 							<div class="text-center">
 								<span  style="font-weight: bold; color:red">**Disculpe, debe primero formalizar su pago en el sistema antes de poder distribuir el capital **</span>
-							</div>
+							</div> -->
 							<br>
 							<?php } ?>
 							<table id="tab_rel_distribucion" class="table table-bordered table-striped table-hover table-condensed dt-responsive table-responsive">
 								<thead>
 									<tr class="info">
-										<th style='text-align: center'>Pagar</th>
+										<!-- <th style='text-align: center'>Pagar</th> -->
 										<th style='text-align: center'>Usuarios</th>
 										<th style='text-align: center'>Niveles</th>
 									</tr>
@@ -68,7 +68,7 @@ if ($tipouser == 'Administrador') {
 									<?php $i = 1; ?>
 									<?php foreach ($listar_padres as $padres) { ?>
 									<tr style="font-size: 16px;text-align: center" class="{% cycle 'impar' 'par' %}" >
-										<td>
+<!-- 										<td>
 											<button type="button" id="<?php echo $padres["codigo"].'-'.$padres['nivel']; ?>" style="font-weight: bold;font-size: 13px"
 												<?php foreach($listar_distribuciones as $distribuciones){
 													if($distribuciones->referido_id == $padres['codigo']){
@@ -82,7 +82,7 @@ if ($tipouser == 'Administrador') {
 												class="btn btn-success pagar " 
 												&nbsp;<span class="glyphicon glyphicon-floppy-disk"></span>&nbsp;Pagar
 											</button>
-										</td>
+										</td> -->
 										<td><?php echo $padres['nombre']; ?></td>
 										<td><span style="display: none"><?php echo $padres['nivel']; ?></span><img class="img-circle" src="<?= base_url() ?>static/img/iconos_pequeños/nivel<?php echo $padres['nivel']; ?>.jpg"  /></td>
 										
@@ -132,11 +132,11 @@ if ($tipouser == 'Administrador') {
         "decimal": ",",
         "thousands": ".",
         "aoColumns": [
-            {"sClass": "registro center", "sWidth": "1%"},
+            // {"sClass": "registro center", "sWidth": "1%"},
             {"sClass": "registro center", "sWidth": "5%"},
             {"sClass": "registro center", "sWidth": "5%"},
         ],
-        "order": [[ 2, "desc" ]]     
+        "order": [[ 1, "desc" ]]     
     });
      
 
