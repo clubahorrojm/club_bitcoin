@@ -86,16 +86,8 @@ if (isset($this->session->userdata['logged_in'])) {
             <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
             <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
-
-	<style>
-	    .fancybox-overlay-fixed {
-                z-index: 1000;
-            }
-
-            a{
-                cursor:pointer;
-            }
-        </style>
+		
+		<link rel="stylesheet" type="text/css" href="<?= base_url() ?>static/css/news_styles.css"/>
 
     </head>
 
