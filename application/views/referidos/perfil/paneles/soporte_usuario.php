@@ -126,7 +126,7 @@ if ($tipouser == 'Administrador') {
                                             <td>
                                                 <?php 
                                                 if($ayuda->estatus == 1){
-                                                    echo "<span style='color:red'>Pendiente</span>";
+                                                    echo "<span style='color:#D2BA12'>Pendiente</span>";
                                                 }else if($ayuda->estatus == 2){
                                                     echo "<span style='color:green'>Atendido</span>";
                                                 }else{

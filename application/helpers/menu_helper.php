@@ -13,7 +13,7 @@ if (!function_exists('menu')) {
         //foreach ($menu as $value) {
         //    $submenu = $ci->libreria->submenu($value->id);
         //    ?>
-        //    <!--<li class="active treeview">
+            <!--<li class="active treeview">
         //        <a href="#">
         //            <i class="fa fa-wrench"></i> <span><?php echo $value->modulo; ?></span> <i class="fa fa-angle-left pull-right"></i>
         //        </a>
@@ -30,7 +30,7 @@ if (!function_exists('menu')) {
         //        </ul>
         //
         //    </li>-->
-        //    <?php
+            <?php
         //}
         ?>
         <?php if ($datos_sesion['tipouser'] == 'BÁSICO' ): ?>
