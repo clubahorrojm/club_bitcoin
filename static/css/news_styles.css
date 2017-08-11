@@ -1,19 +1,19 @@
 body {
-    color: #011A5A !important;
+    color: #001A5A !important;
 }
 
 h1 {
-    color: #011A5A !important;
+    color: #001A5A !important;
     font-weight:bold;
 }
 
 h4, h3, p {
-    color: #011A5A !important;
+    color: #001A5A !important;
     font-weight:bold;
 }
 
 label {
-	color: #011A5A !important;
+	color: #001A5A !important;
 }
 
 .fancybox-overlay-fixed {
@@ -22,7 +22,7 @@ label {
 
 a{
 	cursor:pointer;
-	color:#011A5A;
+	color:#001A5A;
 }
 
 .navbar, .main-header, .logo {
@@ -30,7 +30,7 @@ a{
 }
 
 .main-sidebar, .wrapper {
-	background-color: #011A5A !important;
+	background-color: #001A5A !important;
 }
 
 .header {
@@ -38,19 +38,31 @@ a{
 }
 
 .box.box-primary {
-    border-top-color: #011A5A;
+    border-top-color: #001A5A;
 }
 
 .btn-success, .btn-info {
-    background-color: #EDD827;
+    background-color: #EDD727;
     border-color: #D2BA12;
-    color: #011A5A;
+    color: #001A5A;
 }
 
 .btn-success:hover, .btn-info:hover {
-	background-color: #EDD827;
+	background-color: #EDD727;
     border-color: #D2BA12;
     color: #FFFFFF;
+}
+
+#logo_info {
+	background-color: #C0C0C0;
+}
+
+#logo_maximo, #logo_disponible {
+	background-color: #001A5A;
+}
+
+.content-wrapper {
+	background-color: #EDEDED;
 }
 
 table.dataTable.dtr-inline.collapsed tbody td:first-child::before, table.dataTable.dtr-inline.collapsed tbody th:first-child::before {
@@ -58,12 +70,12 @@ table.dataTable.dtr-inline.collapsed tbody td:first-child::before, table.dataTab
 }
 
 .table > tbody > tr.info > td, .table > tbody > tr.info > th, .table > tbody > tr > td.info, .table > tbody > tr > th.info, .table > tfoot > tr.info > td, .table > tfoot > tr.info > th, .table > tfoot > tr > td.info, .table > tfoot > tr > th.info, .table > thead > tr.info > td, .table > thead > tr.info > th, .table > thead > tr > td.info, .table > thead > tr > th.info {
-	background-color: #29274C;
+	background-color: #29274B;
 	color: #FFFFFF;
 }
 
 .progress-bar {
-	border-color: #EDD827;
+	border-color: #EDD727;
 }
 
 .progress-bar-green, .progress-bar-success {
@@ -71,5 +83,5 @@ table.dataTable.dtr-inline.collapsed tbody td:first-child::before, table.dataTab
 }
 
 .progress-bar-success {
-    background-color: #EDD827;
+    background-color: #EDD727;
 }

@@ -97,7 +97,7 @@ if (isset($this->session->userdata['logged_in'])) {
             <header class="main-header" style="position: absolute; width: 100%" >
                 <!-- Logo -->
                 <a href="<?php echo base_url(); ?>index.php/" class="logo">
-				<img src="<?php echo base_url(); ?>static/img/logo3.png" style="width: 100%" >
+				<img src="<?php echo base_url(); ?>static/img/logo4.png" style="width: 100%;height:50px;" >
                 <!--<a href="<?php echo base_url(); ?>index.php/" class="logo">-->
                     <!--<span class="logo-mini"><b>CA</b></span>
                     <span class="logo-lg"><b>Club del Ahorro</b></span>-->
