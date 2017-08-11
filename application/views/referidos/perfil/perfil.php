@@ -51,7 +51,7 @@ if (isset($this->session->userdata['logged_in'])) {
                                 <div class="col-md-12">
                                     <div class="col-md-2">
                                         <div class="form-group">
-                                            <img class="img-circle" src="<?= base_url() ?>static/img/logo_usuario.jpg" style="width: 100%;" />
+                                            <img id="logo_info" class="img-circle" src="<?= base_url() ?>static/img/logo4.png" style="width: 100%;height:100%" />
                                         </div><!-- /.form-group -->
                                     </div><!-- /.form-group -->
                                     <div class="col-md-10">
@@ -98,7 +98,7 @@ if (isset($this->session->userdata['logged_in'])) {
                                         <div class="col-md-4">
                                             <div class="col-md-6">
                                                 <div class="text-center">
-                                                    <img class="img-circle" src="<?= base_url() ?>static/img/maximo.jpg" style="width: 70%" />
+                                                    <img id="logo_maximo" class="img-circle" src="<?= base_url() ?>static/img/maximo-01.png" style="width: 70%" />
                                                 </div><!-- /.form-group -->
                                                 <div class="form-group">
                                                     <h3 class="box-title" style="font-weight:bold;">
@@ -110,7 +110,7 @@ if (isset($this->session->userdata['logged_in'])) {
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <div class="text-center">
-                                                        <img class="img-circle" src="<?= base_url() ?>static/img/disponibilidad.jpg" style="width: 70%;" />
+                                                        <img id="logo_disponible" class="img-circle" src="<?= base_url() ?>static/img/disponible-01.png" style="width: 70%;" />
                                                     </div>
                                                     <div class="form-group">
                                                         <h3 class="box-title" style="font-weight:bold; color:#3C8DBC">
