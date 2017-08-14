@@ -51,7 +51,7 @@ if (isset($this->session->userdata['logged_in'])) {
                                 <div class="col-md-12">
                                     <div class="col-md-2">
                                         <div class="form-group">
-                                            <img id="logo_info" class="img-circle" src="<?= base_url() ?>static/img/logo4.png" style="width: 100%;height:100%" />
+                                            <img id="logo_info" class="img-circle" src="<?= base_url() ?>static/img/logo4.png"/>
                                         </div><!-- /.form-group -->
                                     </div><!-- /.form-group -->
                                     <div class="col-md-10">
@@ -91,7 +91,8 @@ if (isset($this->session->userdata['logged_in'])) {
                                                 </div>
                                                 <div class="text-center">
                                                     <h1 style="color:#3C8DBC">Nivel</h1>
-                                                    <img class="img" src="<?= base_url() ?>static/img/iconos_medianos/nivel<?php echo $editar[0]->nivel ?>.jpg" style="width: 25%;" />
+                                                    <img id="nivel" class="img-circle" src="<?= base_url() ?>static/img/iconos_medianos/Nivel<?php echo $editar[0]->nivel ?>-01.png" style="width: 25%;" />
+                                                    <!--<button id="nivel" class="img-circle" type="button"><?php echo $editar[0]->nivel; ?></button>-->
                                                 </div><!-- /.form-group -->
                                             </div>
                                         </div><!-- /.form-group -->
