@@ -1,7 +1,8 @@
 <fieldset id="fieldset_pago" style="display:block">
 	<h2 class="fs-title">Información del pago</h2>
-	<h3 class="fs-subtitle">Indica los datos de tu pago</h3>
+	<!--<h3 class="fs-subtitle">Indica los datos de tu pago</h3>-->
 	<h3 class="fs-subtitle">( Usted debe realizar el pago a la dirección de nuestra empresa: <span style="color:#296293;"><?php $direccion = $monedero_emp->monedero; echo $direccion; ?></span> )</h3>
+	<h3 class="fs-subtitle" style="color:red !important;font-size:20px;">( Valores actuales: <span id="precio_bitcoin"></span> )</h3>
 	
 	<!-- Main content -->
 	<section class="content">

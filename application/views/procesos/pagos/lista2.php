@@ -55,6 +55,7 @@ redirect(base_url());
                         <!--<th style='text-align: center'>Cuenta</th>
                         <th style='text-align: center'>N. Pago</th>-->
                         <th style='text-align: center'>Dir. Monedero</th>
+                        <th style='text-align: center'>Fecha</th>
                         <th style='text-align: center'>Estatus</th>
                         <th style='text-align: center'>Validar</th>
                       </tr>
@@ -72,6 +73,7 @@ redirect(base_url());
                                     <!--<td><?php echo $pago->cuenta;?></td>                                 
                                     <td><?php echo $pago->num_pago;?></td>-->
                                     <td><?php echo $pago->dir_monedero;?></td>
+                                    <td><?php echo $pago->fecha_pago." ".$pago->hora_pago;?></td>
 									<td>
 										<?php 
 										if($pago->estatus == 1){
@@ -131,10 +133,11 @@ redirect(base_url());
         "oLanguage": {"sUrl": "<?= base_url() ?>/static/js/es.txt"},
         "aoColumns": [
             {"sClass": "registro center", "sWidth": "5%"},
-            {"sClass": "registro center", "sWidth": "50%"},
+            {"sClass": "registro center", "sWidth": "20%"},
             //~ {"sClass": "registro center", "sWidth": "50%"},
-            {"sClass": "registro center", "sWidth": "50%"},
-            {"sClass": "registro center", "sWidth": "10%"},
+            {"sClass": "registro center", "sWidth": "20%"},
+            {"sClass": "registro center", "sWidth": "20%"},
+            {"sClass": "registro center", "sWidth": "30%"},
             {"sClass": "registro center", "sWidth": "3%"},
             {"sWidth": "3%", "bSortable": false, "sClass": "center sorting_false", "bSearchable": false}
         ]
