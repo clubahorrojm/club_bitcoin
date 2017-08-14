@@ -111,6 +111,7 @@ class CRelPagos extends CI_Controller
             'monto'=> $this->input->post('monto'),
             'perfil_id'=> $this->input->post('pk_perfil'),
             'estatus'=> $status_pago,
+            'hora_pago'=> date("h:i:s a"),
         );
         //print_r($datos);
         $result = $this->MRelPagos->actualizarRelPagosBit($datos);
@@ -125,7 +126,7 @@ class CRelPagos extends CI_Controller
                 'codigo' => $this->input->post('cod_pago'),
                 'accion' => 'Actualización Pago al sistema',
                 'fecha' => date('Y-m-d'),
-                'hora' => date("h :i:s a"),
+                'hora' => date("h:i:s a"),
                 'usuario' => $this->session->userdata['logged_in']['id'],
             );
             $this->MAuditoria->add($param);

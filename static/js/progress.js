@@ -2,6 +2,15 @@ $(document).ready(function () {
 	
 	base_url = $("#base_url").val();  // url base del sistema
 	
+	// Soporte para tipos de cambio sobre bitcoins (dólares en este caso) usando la api de blockchain Exchange Rates API
+	$.post('https://blockchain.info/ticker', function (response) {
+		var convert3;
+				
+		// Colocamos los valores actuales de conversión entre dólares y bitcoins y viceversa en la modal de pago
+		convert3 = 1 / parseFloat(response['USD']['last']);
+		$('#precio_bitcoin').text('1 $  =  '+convert3.toFixed(6)+' ฿    -    '+'1 ฿  =  '+parseFloat(response['USD']['last'])+' $');
+	}, 'json');
+	
 	$("#modal_registrar").modal('show');
 	
 	// Configuración de campos
