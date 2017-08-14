@@ -76,10 +76,11 @@ table.dataTable.dtr-inline.collapsed tbody td:first-child::before, table.dataTab
 
 .progress-bar {
 	border-color: #EDD727;
+	color: #001A5A !important;
 }
 
 .progress-bar-green, .progress-bar-success {
-    background-color: #D2BA12;
+    background-color: #FFA500;
 }
 
 .progress-bar-success {
