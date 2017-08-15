@@ -108,41 +108,42 @@ class CLLinksCad extends CI_Controller
         $this->load->view('base');
 		$links_dispo = $this->MRelLinks->obtenerLinksDisp();  // Obtenemos los perfiles en estatus 1, 2 y 3.
         
-        $perfiles_inactivos = array();  // Preparamos el contenedor de los perfiles a mostrar
-		foreach ($links_dispo as $links) {
-			
-			$tiempo = $this->tiempo_registro($links->fecha);  // Con esta línea calculamos el tiempo del registro
-			$tiempo = explode('-',$tiempo);
-			$anyos = explode(' ',$tiempo[0]);  // Años del registro
-			$meses = explode(' ',$tiempo[1]);  // Meses del registro
-			$dias = explode(' ',$tiempo[2]);  // Días del registro
-			
-			//Incluimos el perfil en la nueva lista sólo si tiene más de 15 días de inactividad luego de registrado
-			if($anyos[0] > 0 || $meses[0] > 0 || $dias[0] > 8){
-			
-				$usuario = $links->usuario_id;
-				$id_link = $links->codigo;
-				$perfil = $this->ModelsBusqueda->obtenerRegistro('ref_perfil', 'usuario_id', $usuario);
-				
-				$disponible = $perfil->disponible - $perfil->cargo_mora;
-				$datos = array(
-					'codigo' => $perfil->codigo,
-					'disponible' => $disponible,
-				);
-				$result = $this->MReferidos->actualizarReferidos($datos);
-				
-				$datos2 = array(
-					'codigo' => $id_link,
-					'estatus' => 3,
-				);
-				$result = $this->MRelLinks->actualizarRelLinks($datos2);
-				
-				//$result = $this->MRelPagos->insertarRelPagos($datos);
-				//$perfiles_inactivos[] = $links;
-				//MBots
-			}
-		}
-        $data['listar'] = $this->MLLinksCad->obtenerLinksCad();
+        //~ $perfiles_inactivos = array();  // Preparamos el contenedor de los perfiles a mostrar
+		//~ foreach ($links_dispo as $links) {
+			//~ 
+			//~ $tiempo = $this->tiempo_registro($links->fecha);  // Con esta línea calculamos el tiempo del registro
+			//~ $tiempo = explode('-',$tiempo);
+			//~ $anyos = explode(' ',$tiempo[0]);  // Años del registro
+			//~ $meses = explode(' ',$tiempo[1]);  // Meses del registro
+			//~ $dias = explode(' ',$tiempo[2]);  // Días del registro
+			//~ 
+			//~ //Incluimos el perfil en la nueva lista sólo si tiene más de 15 días de inactividad luego de registrado
+			//~ if($anyos[0] > 0 || $meses[0] > 0 || $dias[0] > 8){
+			//~ 
+				//~ $usuario = $links->usuario_id;
+				//~ $id_link = $links->codigo;
+				//~ $perfil = $this->ModelsBusqueda->obtenerRegistro('ref_perfil', 'usuario_id', $usuario);
+				//~ 
+				//~ $disponible = $perfil->disponible - $perfil->cargo_mora;
+				//~ $datos = array(
+					//~ 'codigo' => $perfil->codigo,
+					//~ 'disponible' => $disponible,
+				//~ );
+				//~ $result = $this->MReferidos->actualizarReferidos($datos);
+				//~ 
+				//~ $datos2 = array(
+					//~ 'codigo' => $id_link,
+					//~ 'estatus' => 3,
+				//~ );
+				//~ $result = $this->MRelLinks->actualizarRelLinks($datos2);
+				//~ 
+				//~ //$result = $this->MRelPagos->insertarRelPagos($datos);
+				//~ //$perfiles_inactivos[] = $links;
+				//~ //MBots
+			//~ }
+		//~ }
+        //~ $data['listar'] = $this->MLLinksCad->obtenerLinksCad();
+        $data['listar'] = $links_dispo;
         $data['listar_usuarios'] = $this->Usuarios_model->obtenerUsuarios();
         $this->load->view('procesos/links_cad/lista2', $data);
     }

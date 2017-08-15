@@ -22,12 +22,12 @@ redirect(base_url());
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1 style="color:#3C8DBC">
-           Links Caducados
+           Links Disponibles
           </h1>
           <ol class="breadcrumb">
             <li><a href="<?php echo base_url(); ?>index.php" style="color:#3C8DBC"><i class="fa fa-home"></i> Inicio</a></li>
             <li>Procesos</li>
-            <li class="active">Links Caducados</li>
+            <li class="active">Links Disponibles</li>
           </ol>
         </section>
 
@@ -40,7 +40,7 @@ redirect(base_url());
               <div class="box box-primary">
                 <div class="box-header">
 					<div class="text-left">
-						<legend><H4  style="color:#3C8DBC">Listado de Links Caducados</H4></legend>
+						<legend><H4  style="color:#3C8DBC">Listado de Links Disponibles</H4></legend>
 					</div>
                 </div><!-- /.box-header -->
                 <br/>
