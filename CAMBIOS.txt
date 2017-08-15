@@ -182,3 +182,9 @@ CAMBIOS AL 14-08-2017 (José):
 	  CONSTRAINT pagos_bit_key PRIMARY KEY (id)
 	)
 	
+CAMBIOS AL 15-08-2017 (José):
+	- Actualización de Controller: CLLinksCad (comentada validación de tiempo de link)
+	- Actualización de Modelo: MRelLinks (inclusión de campo links en consulta de listado)
+	- Actualización de Views: procesos/links_cad/lista2.php
+	- Actualización de menu_helper.php
+	

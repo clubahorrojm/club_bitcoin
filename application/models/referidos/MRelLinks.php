@@ -89,7 +89,7 @@ class MRelLinks extends CI_Model {
         // Metodo publico, para obterner la unidad de medida por id
     public function obtenerLinksDisp(){
         
-        $sql_select = "SELECT id, codigo, usuario_id, fecha FROM ref_rel_links WHERE estatus = 1";
+        $sql_select = "SELECT id, codigo, usuario_id, links, fecha FROM ref_rel_links WHERE estatus = 1";
         $query3 = $this->db->query($sql_select);
         return $query3->result(); 
     }
