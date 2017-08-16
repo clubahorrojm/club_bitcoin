@@ -1,12 +1,13 @@
 <?php
-if (isset($this->session->userdata['logged_in'])) {
-    $username = ($this->session->userdata['logged_in']['username']);
-    $email = ($this->session->userdata['logged_in']['email']);
-    $tipouser = 'Administrador';
-    $id_user = ($this->session->userdata['logged_in']['id']);
-} else {
-    redirect(base_url());
-}
+    if (isset($this->session->userdata['logged_in'])) {
+        $username = ($this->session->userdata['logged_in']['username']);
+        $email = ($this->session->userdata['logged_in']['email']);
+        $tipouser = 'Administrador';
+        $id_user = ($this->session->userdata['logged_in']['id']);
+    } else {
+        redirect(base_url());
+    }
+
 ?>
 
 
@@ -82,7 +83,7 @@ if (isset($this->session->userdata['logged_in'])) {
                                                              aria-valuemax="100" aria-valuemin="0" aria-valuenow="75" role="progressbar">
                                                             <span style="font-weight: bold">75% Completado</span>
                                                         </div>
-                                                    <?php }else if ($editar[0]->estatus == 4){ ?>
+                                                    <?php }else if ($editar[0]->estatus >= 4){ ?>
                                                         <div class="progress-bar progress-bar-success progress-bar-striped" style="width: 100%;"
                                                              aria-valuemax="100" aria-valuemin="0" aria-valuenow="100" role="progressbar">
                                                             <span style="font-weight: bold">100% Completado</span>
@@ -122,6 +123,7 @@ if (isset($this->session->userdata['logged_in'])) {
                                                 </div><!-- /.form-group -->
                                             </div>
                                             <input class="form-control"  type='hidden' id="id" name="id" value="<?php echo $editar[0]->codigo ?>"/>
+                                            <input class="form-control"  type='hidden' id="cant_ref" name="cant_ref" value="<?php echo $editar[0]->cant_ref ?>"/>
                                             <input id="estatus_perfil" type='hidden' value="<?php echo $editar[0]->estatus ?>" class="form-control" >
                                             <input class="form-control"  type='hidden' id="usuario_id" name="usuario_id" value="<?php echo $usuario[0]->codigo ?>"/>
                                             <input class="form-control"  type='hidden' id="convert1" value="<?php echo $editar[0]->maximo; ?>"/>
@@ -235,6 +237,90 @@ if (isset($this->session->userdata['logged_in'])) {
             <!-- PESTAÑAS -->
 
         </section><!-- /.content -->
+        
+        <!-- Modal -->
+        <div class="modal fade " id="modal_felictaciones" role="dialog">
+          <div class="modal-dialog">
+          
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header " style="background-color: #001a5a">
+                <strong style="color: white">&nbsp;FELICITACIONES !!!&nbsp;</strong>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="color: white">&times;</button>
+              </div>
+              <div class="modal-body " style="background-color: #FFFFFF">
+                <p  align="justify">Muchas Felicitaciones, has alcanzado 
+                el nivel <strong>7</strong> y obtenido el máximo de referidos de forma satisfactoria, te invitamos a retirar todo tu dinero en la opción de
+                <strong style="background-color: #001a5a; color: white">&nbsp;<img src="<?php echo base_url(); ?>static/img/retiro-01.png" style="width:20px;">&nbsp;Retiros&nbsp;</strong>
+                ubicada en el menú, y si desea jugar de nuevo desde cero, haga clic en el boton 
+                <strong style="background-color: #edd727; color: white">&nbsp;<i class="fa fa-refresh"></i>&nbsp;Volver a Jugar&nbsp;</strong>
+                 muchas gracias por haber participado.</p>
+              </div>
+              <div class="modal-footer " style="background-color: #c0c0c0" >
+                    <button type="button" class="btn btn-success" data-dismiss="modal" id="volver_jugar"><i class="fa fa-refresh"></i>&nbsp; Volver a Jugar</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal" id="cerrar_modal">Cerrar</button>
+              </div>
+              
+            </div>
+            
+          </div>
+        </div>
+        
+        
+        
+        <div class="modal" id="modal_aprobar">
+            <div class="modal-dialog">
+					<div class="modal-content">
+					<div class="modal-header" style="background-color:#296293;color:white;">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<center><strong style="color: white">&nbsp;Introdúzca su usuario y su contraseña para crear la cuenta&nbsp;</strong></center>
+					</div>
+					<div class="modal-body">
+						<form id="f_reg_usuario" name="f_reg_usuario" action="" method="post">
+									<div class="form-group">
+											<div class="col-sm-12">
+												<!--<input type="hidden" id="codigo" name="codigo">-->
+                                                <input type="hidden" id="codigo" name="codigo" >
+                                                <input type="hidden" id="link" name="link" >
+                                                <input class="form-control"  type='hidden' id="pk_perfil" name="pk_perfil" value="<?php echo $editar[0]->codigo ?>"/>
+												
+											</div>
+                                            <div class="col-sm-12"
+                                                <div class="col-sm-12">
+                                                    <label class="control-label" >Nombre de Usuario (Diferente al que ya esta usando)</label>
+                                                    <input type="text" class="form-control" style="width: 100%; " id="username_reg" name="username_reg" placeholder="Usuario" autofocus="true">
+                                                </div>
+                                                </br></br></br>
+                                                <div class="col-sm-12">
+                                                    <label class="control-label" >Contraseña</label>
+                                                    <input style="width: 100%;" type="password" class="form-control" id="password_reg" name="password_reg" placeholder="Contraseña"/>
+                                                </div>
+                                                </br></br></br>
+                                                <div class="col-sm-12">
+                                                    <label class="control-label" >Correo (Puede ser el que ya esta usando)</label>
+                                                    <input style="width: 100%;" type="text" class="form-control" id="correo" name="correo" placeholder="ejemplo@correo.com"/>
+                                                </div>
+                                                </br></br></br>
+                                            </div>
+											<div class="col-sm-12" align="center">
+												<span class="input-btn">
+													</br>
+													<button class="btn btn-primary" type="button" id="registrar">
+														Registrar&nbsp;<span class="glyphicon glyphicon-share-alt"></span>
+													</button>
+												</span>
+											</div>
+									</div>
+						</form>
+						</br></br></br>
+					</div>
+					
+					</div>
+            </div>
+        </div>
+        
+        
+        
     </div><!-- /.content-wrapper -->
     <footer class="main-footer">
         <div class="pull-right hidden-xs">
@@ -292,50 +378,82 @@ if (isset($this->session->userdata['logged_in'])) {
             {"sClass": "registro center", "sWidth": "5%"},
             {"sClass": "registro center", "sWidth": "5%"},
         ],
-        // "footerCallback": function ( row, data, start, end, display ) {
-        //     var api = this.api(), data;
-        //     // Remove the formatting to get integer data for summation
-        //     var numVal = function ( i ) {
-        //         return typeof i === 'string' ?
-        //             i.replace('.', ''):
-        //             typeof i === 'number' ?
-        //                 i : 0.0;
-        //     };
-        //     var floatVal = function ( i ) {
-        //         return typeof i === 'string' ?
-        //             i.replace(',', '.'):
-        //             typeof i === 'number' ?
-        //                 i : 0.0;
-        //     };
-        //     // Total over all pages
-        //     total = api
-        //         .column( 2 )
-        //         .data()
-        //         .reduce( function (a, b) {
-        //             a = numVal(a);
-        //             b = numVal(b);
-        //             return parseFloat(floatVal(a)) + parseFloat(floatVal(b));
-        //         }, 0 );
-            
-        //     // Total over this page
-        //     pageTotal = api
-        //         .column( 2, { page: 'current'} )
-        //         .data()
-        //         .reduce( function (a, b) {
-        //             a = numVal(a);
-        //             b = numVal(b);
-        //             //alert(b)
-        //             return parseFloat(floatVal(a)) + parseFloat(floatVal(b));
-        //         }, 0 );
-        //     // Update footer;
-        //     $( api.column( 2 ).footer() ).html(
-        //         '<spam style="font-size:16px"><spam style="color: red">'+(pageTotal.toLocaleString('de-DE'))+'</spam> Bs'+' (<spam style="color: red;">'+(total.toLocaleString('de-DE')) +'</spam> Bs en total)</spam>'
-        //     );
-        // }
+    });
+    
+    
+    // Show the Modal on load
+    if($("#cant_ref").val() == 78125 && $("#estatus_perfil").val() == 4){
+        $("#modal_felictaciones").modal("show");
+    }
+    // Generar enlace para registro de nuevo usuario
+    $("#volver_jugar").click(function (e) {
+        e.preventDefault();  // Para evitar que se envíe por defecto
+                            
+        // Registramos el nuevo usuario
+        $.post('<?php echo base_url(); ?>index.php/User_Authentication/enlace_disponible2/', function(response) {
+            //alert(response);
+            var cadena = response.split("@@@");
+            var cod_link = cadena[0];
+            //var userd_id = cadena[1];
+            var num_link = cadena[1];
+            $("#codigo").val(cod_link);
+            $("#link").val(num_link);
+            $("#modal_aprobar").modal('show'); 
+        });
+    });
+    
+    // Validar formulario de registro de usuario referido
+    $("#registrar").click(function (e) {
+        e.preventDefault();  // Para evitar que se envíe por defecto
+        // Expresion regular para validar el correo
+        var regex = /[\w-\.]{2,}@([\w-]{2,}\.)*([\w-]{2,}\.)[\w-]{2,4}/;
         
-        
+        if($("#username_reg").val() == ''){
+            alert("Error: Ingrese su nombre de usuario");
+            $("#username_reg").parent('div').addClass('has-error')
+            $("#username_reg").val('');
+            $("#username_reg").focus();
+        } else if($("#password_reg").val() == ''){
+            alert("Error: Ingrese su contraseña");
+            $("#password_reg").parent('div').addClass('has-error')
+            $("#password_reg").val('');
+            $("#password_reg").focus();
+        } else if($("#correo").val() == ''){
+            alert("Error: Ingrese su correo");
+            $("#correo").parent('div').addClass('has-error')
+            $("#correo").val('');
+            $("#correo").focus();
+        }else if(!(regex.test($('#correo').val().trim()))){
+            alert("Error: Ha introducido una dirección de correo electrónico inválida");
+            $("#correo").parent('div').addClass('has-error')
+            $("#correo").val('');
+            $("#correo").focus();
+        } else {
+            //~ alert('Código: '+$("#codigo").val());
+            // Registramos el nuevo usuario
+            $.post('<?php echo base_url(); ?>index.php/User_Authentication/registrar_referido/', $("#f_reg_usuario").serialize(), function(response) {
+                //~ alert(response.trim());
+                if (response.trim() == "1"){
+                    alert("El usuario ya existe");
+                    location.reload();
+                }else{
+                    // Generamos el perfil del nuevo usuario
+                    $.post('<?php echo base_url(); ?>index.php/User_Authentication/registrar_perfil/', $("#f_reg_usuario").serialize(), function(response) {
+                        //console.log(response);
+                    });
+                    $.post('<?php echo base_url(); ?>index.php/User_Authentication/actualizar_perfil/', $("#f_reg_usuario").serialize(), function(response) {
+                        //console.log(response);
+                    });
+                    alert('Nueva cuenta registrada exitosamente');
+                    url = '<?php echo base_url(); ?>index.php/'
+                    window.location = url
+                }
+            });
+        }
     });
 
+    
+    
     $(".select2").select2();
     $('#codigo,#cedula').numeric();
     $('#direccion').alphanumeric({allow: ", .#"});
@@ -354,21 +472,7 @@ if (isset($this->session->userdata['logged_in'])) {
             $(this).parent('div').removeClass('has-error');
         }
     });
-    ////////////////// CONSULTA DE CEDULA A BASE DE DATOS ////////////////////
-    //$("#cedula").change(function (event) {
-    //    var cedula = $('#cedula').val();
-    //    var hosting = "consultaelectoral.bva.org.ve/cedula="
-    //    if (hosting) {
-    //        $.get("http://" + hosting + cedula, function (data) {
-    //            var option = "";
-    //            $.each(data, function (i) {
-    //                $("#nombre").val(data[i].p_nombre + " " + data[i].s_nombre)
-    //                $("#apellido").val(data[i].p_apellido + " " + data[i].s_apellido)
-    //            });
-    //            // Proceso para validar con la clase error 404 Not Found
-    //        }, 'json');
-    //    }
-    //});
+
     
     $("#res_pagos").click(function (e) {
         e.preventDefault();  // Para evitar que se envíe por defecto

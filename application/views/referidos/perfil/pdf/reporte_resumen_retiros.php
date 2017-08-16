@@ -19,7 +19,7 @@ $this->pdf->SetMargins(10,15,10); # MARGEN DEL DOCUMENTO
 $this->pdf->SetFillColor(255,255,255);
 $this->pdf->SetFont('Arial','B',14);
 $this->pdf->Ln(1);
-$this->pdf->Image(base_url().'static/img/logo_reporte.jpg',15,15,45);
+$this->pdf->Image(base_url().'static/img/logo4.png',15,15,45);
 $this->pdf->Cell(190,5,"",'',1,'C',1);
 $this->pdf->Cell(30,5,utf8_decode(''),'',0,'C',0);
 $this->pdf->Cell(140,5,utf8_decode("$empresa->nombre_empresa"),'',1,'C',0);
@@ -29,8 +29,8 @@ $this->pdf->Cell(140,5,utf8_decode("Teléfonos: $empresa->telefono1 / $empresa->
 $this->pdf->Cell(30,5,utf8_decode(''),'',0,'C',0);
 $this->pdf->Cell(140,4,utf8_decode("Correo: $empresa->correo"),'',1,'C',0);
 $this->pdf->Ln(5);
-$this->pdf->SetFillColor(60,141,188); # COLOR DE BOLDE DE LA CELDA
-$this->pdf->SetDrawColor(60,141,188); 
+$this->pdf->SetFillColor(0,26,90); # COLOR DE BOLDE DE LA CELDA
+$this->pdf->SetDrawColor(0,26,90); 
 $this->pdf->SetTextColor(255,255,255); # COLOR DEL TEXTO
 $this->pdf->SetFont('Arial','B',10);
 $this->pdf->Cell(190,5,"Resumen de retiros realizados",'LBTR',1,'C',1);
@@ -58,7 +58,7 @@ foreach ($listar_retiros as $retiros){
 	if ($i == 20){
 		$this->pdf->AddPage();
 		$this->pdf->SetFillColor(255,255,255);
-		$this->pdf->Image(base_url().'static/img/logo_condominios.jpg',15,10,40);
+		$this->pdf->Image(base_url().'static/img/logo4.png',15,15,45);
         $this->pdf->Cell(190,5,"",'',1,'C',1);
         $this->pdf->Cell(40,5,utf8_decode(''),'',0,'C',0);
         $this->pdf->Cell(150,5,utf8_decode("$empresa->nombre_empresa"),'',1,'C',0);
@@ -68,8 +68,8 @@ foreach ($listar_retiros as $retiros){
         $this->pdf->Cell(40,5,utf8_decode(''),'',0,'C',0);
         $this->pdf->Cell(150,4,utf8_decode("Correo: $empresa->correo"),'',1,'C',0);
         $this->pdf->Ln(5);
-        $this->pdf->SetFillColor(60,141,188); # COLOR DE BOLDE DE LA CELDA
-        $this->pdf->SetDrawColor(60,141,188); 
+        $this->pdf->SetFillColor(0,26,90); # COLOR DE BOLDE DE LA CELDA
+        $this->pdf->SetDrawColor(0,26,90); 
         $this->pdf->SetTextColor(255,255,255); # COLOR DEL TEXTO
         $this->pdf->SetFont('Arial','B',10);
         $this->pdf->Cell(190,5,"Resumen de retiros realizados",'LBTR',1,'C',1);

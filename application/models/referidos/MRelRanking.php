@@ -25,7 +25,7 @@ class MRelRanking extends CI_Model {
     // Metodo publico, para obterner el top 100 de Usuarios con mayor cantidad de ingresos disponibles
     public function obtenerTopCantDisp(){
         $sql = "SELECT id, codigo, usuario_id, disponible, nivel ";
-		$sql .= "FROM ref_perfil ";
+		$sql .= "FROM ref_perfil WHERE estatus >= 4 ";
 		$sql .= " ORDER BY disponible DESC LIMIT 100";
         $query = $this->db->query($sql);
         if($query->num_rows()>0)
@@ -36,7 +36,7 @@ class MRelRanking extends CI_Model {
     // Metodo publico, para obterner el top 100 de Usuarios con mayor cantidad de referidos
     public function obtenerTopCantRef(){
         $sql = "SELECT id, codigo, usuario_id, cant_ref, nivel ";
-        $sql .= "FROM ref_perfil ";
+        $sql .= "FROM ref_perfil WHERE estatus >= 4";
         $sql .= " ORDER BY cant_ref DESC LIMIT 100";
         $query = $this->db->query($sql);
         if($query->num_rows()>0)

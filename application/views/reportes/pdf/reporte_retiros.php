@@ -21,19 +21,23 @@ $this->pdf->SetMargins(15,15,10); # MARGEN DEL DOCUMENTO
 $this->pdf->SetFillColor(255,255,255);
 $this->pdf->SetFont('Arial','B',14);
 $this->pdf->Ln(1);
-$this->pdf->Cell(185,5,"",'',1,'C',1);
-$this->pdf->MultiCell(185,5,utf8_decode("$empresa->nombre_empresa"),'','C',0);
-$this->pdf->SetFont('Arial','',8);
-//~ $this->pdf->Cell(30,5,"RIF:",'',0,'C',1);
-$this->pdf->Cell(185,5,"RIF:   G-20010539-9",'',1,'C',1);
-$texto = 'AV. SUCRE. URB. SAN ISIDRO - MARACAY. EDIF. BIBLIOTECA VIRTUAL. NRO. 26';
-$this->pdf->MultiCell(185,5,utf8_decode("Teléfonos: $empresa->telefono1 / $empresa->telefono2"),'','C',0);
+$this->pdf->Image(base_url().'static/img/logo4.png',15,15,45);
+$this->pdf->Cell(190,5,"",'',1,'C',1);
+$this->pdf->Cell(30,5,utf8_decode(''),'',0,'C',0);
+$this->pdf->Cell(140,5,utf8_decode("$empresa->nombre_empresa"),'',1,'C',0);
+$this->pdf->SetFont('Arial','',10);
+$this->pdf->Cell(30,5,utf8_decode(''),'',0,'C',0);
+$this->pdf->Cell(140,5,utf8_decode("Teléfonos: $empresa->telefono1 / $empresa->telefono2"),'',1,'C',0);
+$this->pdf->Cell(30,5,utf8_decode(''),'',0,'C',0);
+$this->pdf->Cell(140,4,utf8_decode("Correo: $empresa->correo"),'',1,'C',0);
+$this->pdf->Ln(5);
+
 $fecha = date('d/m/Y');
 $hora = date("h:i:s a");
-$this->pdf->Cell(30,5,"FECHA: $fecha",'B',0,'L',1);
-$this->pdf->Cell(30,5,"",'B',0,'L',1);
-$this->pdf->Cell(30,5,"HORA: $hora",'B',0,'L',1);
-$this->pdf->Cell(95,5,"",'B',1,'R',1);
+$this->pdf->SetFont('Arial','B',7);
+$this->pdf->Cell(185,5,"FECHA: $fecha HORA: $hora",'B',1,'R',1);
+
+
 
 if ($desde != "xxx" && $hasta != "xxx"){
 	$desde = explode("-",$desde);
@@ -41,19 +45,23 @@ if ($desde != "xxx" && $hasta != "xxx"){
 	$hasta = explode("-",$hasta);
 	$hasta = $hasta[2]."-".$hasta[1]."-".$hasta[0];
 }
-
-$this->pdf->Cell(30,5,"DATOS DEL REPORTE (RETIROS)",'T',1,'L',1);
-//~ $this->pdf->Cell(35,5,"RIF/CI: ".$cliente->tipocliente."-".$cliente->cirif,'',0,'L',1);
-$this->pdf->Cell(35,5,utf8_decode("USUARIO: $usuario->username"),'',0,'L',1);
+$this->pdf->SetFillColor(0,26,90); # COLOR DE BOLDE DE LA CELDA
+$this->pdf->SetDrawColor(0,26,90); 
+$this->pdf->SetTextColor(255,255,255); # COLOR DEL TEXTO
+$this->pdf->SetFont('Arial','B',10);
+$this->pdf->Cell(185,5,"DATOS DEL REPORTE (RETIROS)",'T',1,'L',1);
+$this->pdf->Cell(45,5,utf8_decode("USUARIO: $usuario->username"),'',0,'L',1);
 $this->pdf->Cell(60,5,utf8_decode("FECHA INICIAL: $desde"),'',0,'L',1);
-$this->pdf->Cell(60,5,utf8_decode("FECHA FINAL: $hasta"),'',1,'L',1);
+$this->pdf->Cell(80,5,utf8_decode("FECHA FINAL: $hasta"),'',1,'L',1);
+$this->pdf->SetFillColor(255,255,255); # COLOR DE BOLDE DE LA CELDA
+$this->pdf->SetTextColor(0,0,0); # COLOR DEL TEXTO
 
 
 $this->pdf->Cell(55,5,"Usuario",'TB',0,'L',1);
 $this->pdf->Cell(50,5,utf8_decode("Monto"),'TB',0,'C',1);
 $this->pdf->Cell(40,5,"Fecha ",'TB',0,'C',1);
 $this->pdf->Cell(40,5,"Estatus",'TB',1,'R',1);
-
+$this->pdf->SetFont('Arial','',10);
 $j = 0;  # Contador para el salto de página
 
 foreach ($retiros as $retiro){
@@ -64,32 +72,47 @@ foreach ($retiros as $retiro){
 		$this->pdf->SetFillColor(255,255,255);
 		$this->pdf->SetFont('Arial','B',14);
 		$this->pdf->Ln(1);
-		$this->pdf->Cell(185,5,"",'',1,'C',1);
-		$this->pdf->MultiCell(185,5,utf8_decode("$empresa->nombre_empresa"),'','C',0);
-		$this->pdf->SetFont('Arial','',8);
-		//~ $this->pdf->Cell(30,5,"RIF:",'',0,'C',1);
-		$this->pdf->Cell(185,5,"RIF:   G-20010539-9",'',1,'C',1);
-		$texto = 'AV. SUCRE. URB. SAN ISIDRO - MARACAY. EDIF. BIBLIOTECA VIRTUAL. NRO. 26';
-		$this->pdf->MultiCell(185,5,utf8_decode("Teléfonos: $empresa->telefono1 / $empresa->telefono2"),'','C',0);
+		$this->pdf->Image(base_url().'static/img/logo4.png',15,15,45);
+		$this->pdf->Cell(190,5,"",'',1,'C',1);
+		$this->pdf->Cell(30,5,utf8_decode(''),'',0,'C',0);
+		$this->pdf->Cell(140,5,utf8_decode("$empresa->nombre_empresa"),'',1,'C',0);
+		$this->pdf->SetFont('Arial','',10);
+		$this->pdf->Cell(30,5,utf8_decode(''),'',0,'C',0);
+		$this->pdf->Cell(140,5,utf8_decode("Teléfonos: $empresa->telefono1 / $empresa->telefono2"),'',1,'C',0);
+		$this->pdf->Cell(30,5,utf8_decode(''),'',0,'C',0);
+		$this->pdf->Cell(140,4,utf8_decode("Correo: $empresa->correo"),'',1,'C',0);
+		$this->pdf->Ln(5);
+
 		$fecha = date('d/m/Y');
 		$hora = date("h:i:s a");
-		$this->pdf->Cell(30,5,"FECHA: $fecha",'B',0,'L',1);
-		$this->pdf->Cell(30,5,"",'B',0,'L',1);
-		$this->pdf->Cell(30,5,"HORA: $hora",'B',0,'L',1);
-		$this->pdf->Cell(95,5,"",'B',1,'R',1);
-		
-		$this->pdf->Cell(30,5,"DATOS DEL REPORTE (RETIROS)",'T',1,'L',1);
-		//~ $this->pdf->Cell(35,5,"RIF/CI: ".$cliente->tipocliente."-".$cliente->cirif,'',0,'L',1);
-		$this->pdf->Cell(35,5,utf8_decode("USUARIO: $usuario->username"),'',0,'L',1);
+		$this->pdf->SetFont('Arial','B',7);
+		$this->pdf->Cell(185,5,"FECHA: $fecha HORA: $hora",'B',1,'R',1);
+
+
+
+		if ($desde != "xxx" && $hasta != "xxx"){
+			$desde = explode("-",$desde);
+			$desde = $desde[2]."-".$desde[1]."-".$desde[0];
+			$hasta = explode("-",$hasta);
+			$hasta = $hasta[2]."-".$hasta[1]."-".$hasta[0];
+		}
+		$this->pdf->SetFillColor(0,26,90); # COLOR DE BOLDE DE LA CELDA
+		$this->pdf->SetDrawColor(0,26,90); 
+		$this->pdf->SetTextColor(255,255,255); # COLOR DEL TEXTO
+		$this->pdf->SetFont('Arial','B',10);
+		$this->pdf->Cell(185,5,"DATOS DEL REPORTE (RETIROS)",'T',1,'L',1);
+		$this->pdf->Cell(45,5,utf8_decode("USUARIO: $usuario->username"),'',0,'L',1);
 		$this->pdf->Cell(60,5,utf8_decode("FECHA INICIAL: $desde"),'',0,'L',1);
-		$this->pdf->Cell(60,5,utf8_decode("FECHA FINAL: $hasta"),'',1,'L',1);
+		$this->pdf->Cell(80,5,utf8_decode("FECHA FINAL: $hasta"),'',1,'L',1);
+		$this->pdf->SetFillColor(255,255,255); # COLOR DE BOLDE DE LA CELDA
+		$this->pdf->SetTextColor(0,0,0); # COLOR DEL TEXTO
 
 
 		$this->pdf->Cell(55,5,"Usuario",'TB',0,'L',1);
 		$this->pdf->Cell(50,5,utf8_decode("Monto"),'TB',0,'C',1);
 		$this->pdf->Cell(40,5,"Fecha ",'TB',0,'C',1);
 		$this->pdf->Cell(40,5,"Estatus",'TB',1,'R',1);
-
+$this->pdf->SetFont('Arial','',10);
 		#pdf.ln(60)
 		$j = 0;
 	}

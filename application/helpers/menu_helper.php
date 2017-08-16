@@ -46,7 +46,8 @@ if (!function_exists('menu')) {
             <li><a href="<?php echo base_url(); ?>index.php/referidos/CReferidos"><img src="<?php echo base_url(); ?>static/img/casita-01.png" style="width:20px;">&nbsp;Perfil</a></li>
 			<li><a href="<?php echo base_url(); ?>index.php/referidos/CRelPagos"><img src="<?php echo base_url(); ?>static/img/billete-dolar-01.png" style="width:20px;">&nbsp;Registrar Pago</a></li>
 			<li><a href="<?php echo base_url(); ?>index.php/referidos/CRelInformacion"><img src="<?php echo base_url(); ?>static/img/candado-01.png" style="width:20px;">&nbsp;Información Personal</a></li>
-			<li><a href="<?php echo base_url(); ?>index.php/referidos/CRelRanking"><img src="<?php echo base_url(); ?>static/img/bolsa-de-dinero-01.png" style="width:20px;">&nbsp;Posición en la Tabla</a></li>
+            <li><a href="<?php echo base_url(); ?>index.php/referidos/CRelDistribucion"><img src="<?php echo base_url(); ?>static/img/bolsa-de-dinero-01.png" style="width:20px;">&nbsp;Distribución de Capital</a></li>
+            <li><a href="<?php echo base_url(); ?>index.php/referidos/CRelRanking"><i class="fa fa-fire"></i>Posición en la Tabla</a></li>
 			<li><a href="<?php echo base_url(); ?>index.php/referidos/CRelLinks"><img src="<?php echo base_url(); ?>static/img/link-de-invitados-01.png" style="width:20px;">&nbsp;Links de Invitación</a></li>
             <li><a href="<?php echo base_url(); ?>index.php/referidos/CRelRetiros"><img src="<?php echo base_url(); ?>static/img/retiro-01.png" style="width:20px;">&nbsp;Retiros</a></li>
             <!--<li><a href="<?php echo base_url(); ?>index.php/referidos/CRelRanking"><i class="fa fa-fire "></i>&nbsp;Ranking de Usuarios</a></li>-->

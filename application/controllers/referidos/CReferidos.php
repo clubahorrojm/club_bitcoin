@@ -137,14 +137,15 @@ class CReferidos extends CI_Controller
 		
         $data['listar_retiros'] = $this->MRelRetiros->obtenerRelRetiros($cod_user); // Listado de Retiros solicitados
         $num_distri = $this->MRelDistribucion->obtenerDistribuciones($cod_user);
-        // Si el numero de pagos por este usuario es igual a 8 (cantidad maxima)
-        if (count($num_distri) == 8){//Se procede a la actualizacion de estatus de perfil a 100%
-           $datos_act_est_perfil = array(
-               'estatus'=> 4,
-               'codigo'=> $cod_perfil,
-           );
-           $result = $this->MReferidos->actualizarReferidos($datos_act_est_perfil);
-        }
+        // Si el numero de pagos por este usuario es igual a 8 (cantidad maxima) y el estatus es menor a 4 (debido a que en 4 ya es 100% y en 5 culmino y creo otra cuenta)
+		if ($data['estatus_perfil'] < 4 && count($num_distri) == 8){
+			//if (count($num_distri) == 8){//Se procede a la actualizacion de estatus de perfil a 100%
+			$datos_act_est_perfil = array(
+				'estatus'=> 4,
+				'codigo'=> $cod_perfil,
+			);
+			$result = $this->MReferidos->actualizarReferidos($datos_act_est_perfil);
+		}
         
         /////////// Generacion de usuarios referidos padres  //////////////////////////////////////////////////////
         $cod_ref = $cod_user; //Se declara una variable con el codigo del usuario
@@ -186,7 +187,7 @@ class CReferidos extends CI_Controller
 		}else{
 			$vista = 'referidos/perfil/perfil';
 		}
-		//~ $vista = 'referidos/perfil/perfil';
+
 		// Carga de la vista
 		$this->load->view($vista,$data);
     }

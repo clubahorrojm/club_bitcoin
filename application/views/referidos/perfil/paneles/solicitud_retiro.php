@@ -46,7 +46,7 @@ if ($tipouser == 'Administrador') {
                             <div class="text-left">
                                 <legend><H4  style="color:#3C8DBC">Solicitud de retiro</H4></legend>
                             </div>
-                        <?php if ($editar[0]->estatus != 4) {?>
+                        <?php if ($editar[0]->estatus < 4) {?>
                         <br>
                         <div class="text-center">
                             <span  style="font-weight: bold; color:red">**Disculpe, su perfil debe estar al 100% completado para poder realizar retiros **</span>
@@ -103,7 +103,7 @@ if ($tipouser == 'Administrador') {
                                 <tr style="font-size: 16px;text-align: center" class="{% cycle 'impar' 'par' %}" >
                                     <td><?php echo $i; ?></td>
                                     <td><?php echo $retiros->codigo; ?></td>
-                                    <td><?php echo number_format($retiros->monto, 2, ',', '.') ; ?></td>
+                                    <td><?php echo number_format($retiros->monto, 2, ',', '.') ; ?><i class="fa fa-btc"></i></td>
                                     <td><?php
                                         $fe = explode('-',$retiros->fecha_solicitud);
                                         $fecha = $fe[2].'-'.$fe[1].'-'.$fe[0];
@@ -214,7 +214,7 @@ if ($tipouser == 'Administrador') {
                 }, 0 );
             // Update footer;
             $( api.column( 2 ).footer() ).html(
-                '<spam style="font-size:16px"><spam style="color: red">'+(pageTotal.toLocaleString('de-DE'))+'</spam> Bs'+' (<spam style="color: red;">'+(total.toLocaleString('de-DE')) +'</spam> Bs en total)</spam>'
+                '<spam style="font-size:16px"><spam style="color: red">'+(pageTotal.toLocaleString('de-DE'))+'</spam> <i class="fa fa-btc"></i>'+' (<spam style="color: red;">'+(total.toLocaleString('de-DE')) +'</spam> <i class="fa fa-btc"></i> en total)</spam>'
             );
         }
         
@@ -243,7 +243,7 @@ if ($tipouser == 'Administrador') {
     var cuenta = $("#cuenta_id_id").val()
     $("#tipo_pago").val(tipo);
     $("#cuenta_id").val(cuenta);
-    if ($("#estatus_perfil").val() == 4)  {
+    if ($("#estatus_perfil").val() >= 4)  {
         $("#monto_retiro,#agregar_r").prop('disabled',false)
     }else{
         $("#monto_retiro,#agregar_r").prop('disabled',true)

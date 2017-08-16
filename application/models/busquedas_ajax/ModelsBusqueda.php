@@ -375,4 +375,21 @@ class ModelsBusqueda extends CI_Model
 			return '1';
 		}
     }
+	public function search_next_link2()
+    {
+		$result = $this->db->where('estatus =', 1);
+        //~ $result = $this->db->select('codigo');
+        $result = $this->db->from('ref_rel_links');
+		$result = $this->db->order_by("id", "asc");
+		$result = $this->db->limit(1);
+        $result = $this->db->get();
+        //return $result->result();
+		if ($result->num_rows() > 0) {
+			$data = $result->row();
+			$new_link = $data->usuario_id.'@@@'.$data->num_link;
+			return $new_link;
+		}else{
+			return '1';
+		}
+    }
 }

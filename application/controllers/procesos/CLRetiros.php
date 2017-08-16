@@ -37,7 +37,7 @@ class CLRetiros extends CI_Controller
 // Load database
         $this->load->model('procesos/MLRetiros');
         $this->load->model('configuracion/usuarios/Usuarios_model');
-        $this->load->model('configuracion/MComisionRetiro');
+        $this->load->model('administracion/MComisionRetiro');
         $this->load->model('referidos/MReferidos');
         $this->load->model('busquedas_ajax/ModelsBusqueda');
         $this->load->model('administracion/MAuditoria');
@@ -70,7 +70,7 @@ class CLRetiros extends CI_Controller
 		$fecha = $fecha[2]."-".$fecha[1]."-".$fecha[0];
 		
 		// Capturamos el monto del porcentaje de comisión por retiro registrado en el sistema
-		$comision = $this->ModelsBusqueda->obtenerRegistro('comision_retiro', 'codigo', 1);
+		$comision = $this->ModelsBusqueda->obtenerRegistro('adm_comision_retiro', 'codigo', 1);
         
         // Armamos la data a actualizar
         $data = array(
@@ -102,7 +102,7 @@ class CLRetiros extends CI_Controller
 		$id_usu_retiro = $retiro[0]->usuario_id;
 		$monto_retiro = $retiro[0]->monto;
 		//Buscamos el porcentaje de comisión por retiro y se lo sumamos al monto de retiro
-		$comision = $this->ModelsBusqueda->obtenerRegistro('comision_retiro', 'codigo', 1);
+		$comision = $this->ModelsBusqueda->obtenerRegistro('adm_comision_retiro', 'codigo', 1);
 		$comision = $comision->porcentaje_comision;
 		$comision = $monto_retiro*$comision/100;
 		$monto_retiro += $comision;

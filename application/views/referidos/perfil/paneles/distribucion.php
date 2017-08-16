@@ -84,7 +84,7 @@ if ($tipouser == 'Administrador') {
 											</button>
 										</td> -->
 										<td><?php echo $padres['nombre']; ?></td>
-										<td><span style="display: none"><?php echo $padres['nivel']; ?></span><img class="img-circle" src="<?= base_url() ?>static/img/iconos_pequeños/nivel<?php echo $padres['nivel']; ?>.jpg"  /></td>
+										<td><span style="display: none"><?php echo $padres['nivel']; ?></span><img id="nivel" class="img-circle" src="<?= base_url() ?>static/img/iconos_medianos/Nivel<?php echo $padres['nivel']; ?>-01.png" style="width: 10%;"  /></td>
 										
 									</tr>
 									<?php $i++ ?>
