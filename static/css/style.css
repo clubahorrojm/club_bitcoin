@@ -105,9 +105,10 @@ body :-ms-input-placeholder {
   overflow: hidden;
 }*/
 .wrapper {
-  background: #3C8DBC;
-  background: -webkit-linear-gradient(top left, #00A2DB 0%, #222D32 100%);
-  background: linear-gradient(to bottom right, #00A2DB 0%, #222D32 100%);
+  /*background: #3C8DBC;*/
+  background-image:url('../../static/img/portada-sistema-01.jpg');
+  /*background: -webkit-linear-gradient(top left, #00A2DB 0%, #222D32 100%);
+  background: linear-gradient(to bottom right, #00A2DB 0%, #222D32 100%);*/
   position: absolute;
 /*  top: 50%;*/
   left: 0;
