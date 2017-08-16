@@ -37,7 +37,7 @@ Class User_Authentication extends CI_Controller {
         $this->load->model('referidos/MReferidos');
         $this->load->model('configuracion/grupos_usuarios/ModelsGruposUsuarios');
         $this->load->model('busquedas_ajax/ModelsBusqueda');
-        //$this->load->model('configuracion/cargos/ModelsCargos');
+		$this->load->model('referidos/MReferidos');
     }
 
 // Show login page
@@ -196,7 +196,7 @@ Class User_Authentication extends CI_Controller {
 		$codigo = $this->input->post('codigo');
 		$link = $this->input->post('link');
 		$enlace = base_url().'index.php?codigo='.$codigo.'&link='.$link;
-		
+
 		$codigo_usuario = $this->ModelsBusqueda->count_all_table('usuarios') + 1;
 		
 		// Preparamos los datos del nuevo usuario
@@ -206,16 +206,10 @@ Class User_Authentication extends CI_Controller {
 			'username' => $usuario,
 			'email' => $this->input->post('correo'),
 			'password' => $clave_nueva,
-			//~ 'cedula' => $this->input->post('cedula'),
-			//~ 'first_name' => $this->input->post('first_name'),
-			//~ 'last_name' => $this->input->post('last_name'),
 			'tipo_usuario' => '3',
-			//~ 'cargo' => $this->input->post('cargo'),
-			//~ 'telefono' => $this->input->post('telefono'),
 			'estatus' => True,
 			'fecha_create' => date('Y-m-d H:i:s'),
 			'fecha_update' => date('Y-m-d H:i:s'),
-			//~ 'user_create_id' => $this->input->post('user_create_id'),
 		);
 		
 		// Registramos los datos del usuario y su perfil
@@ -287,10 +281,22 @@ Class User_Authentication extends CI_Controller {
 		
 		$reg_perfil = $this->Usuarios_model->insertar_perfil($data_perfil);
 	}
+	// Método para registro de perfil nuevo con la identificación (código) del usuario padre
+	public function actualizar_perfil(){
+		$datos2 = array(
+            'codigo'=> $this->input->post('pk_perfil'),
+            'estatus'=> 5,
+        );
+		$result = $this->MReferidos->actualizarReferidos($datos2);
+	}
 	
 	// Método para búsqueda de siguiente enlace correspondiente para registro de nuevo usuario
 	public function enlace_disponible(){
 		echo $result = $this->ModelsBusqueda->search_next_link();
+	}
+	// Método para búsqueda de siguiente enlace correspondiente para registro de nuevo usuario
+	public function enlace_disponible2(){
+		echo $result = $this->ModelsBusqueda->search_next_link2();
 	}
 
 }

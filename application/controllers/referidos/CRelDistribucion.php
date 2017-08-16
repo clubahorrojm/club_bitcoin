@@ -71,12 +71,12 @@ class CRelDistribucion extends CI_Controller
             $datos2[] = $datos; // Se arma una lista de una lista
         }
         // Por ultimo se le anexa a la lista el referido "EMPRESA"
-		$datos3 = array(
-			'codigo' => '99',
-			'nombre' => 'Empresa',
-			'nivel' => 8,
-		);
-		$datos2[] = $datos3;
+		// $datos3 = array(
+		// 	'codigo' => '99',
+		// 	'nombre' => 'Empresa',
+		// 	'nivel' => 8,
+		// );
+		// $datos2[] = $datos3;
 
         $data['listar_padres'] = $datos2; // Lista de referidos padres
         /////////////////////////////////////////////////////////////////////////////////////////////

@@ -187,4 +187,26 @@ CAMBIOS AL 15-08-2017 (José):
 	- Actualización de Modelo: MRelLinks (inclusión de campo links en consulta de listado)
 	- Actualización de Views: procesos/links_cad/lista2.php
 	- Actualización de menu_helper.php
+
+CAMBIOS AL 15-08-2017 (MArcel):
+	- Actualización de Controllers: User_Autentication.php, CReferidos.php
+	- Actualización de Modelos: ModelBusqueda.php, Mayuda.php
+	- Actualización de Views: referidos/perfil/perfil.php (Inclusion de modal de finalizacion de la matriz), referidos/perfil/paneles/distribucion.php
+	- Actualización de Helpers: menu_helprs.php
 	
+CAMBIOS2 AL 15-08-2017 (MArcel):
+	- Actualización de Controllers: CLRetiros.php, CRelDistribucion.php
+	- Actualización de Modelos: MRelRanking.php
+	- Actualización de Views: 
+		+ referidos/perfil/perfil.php
+		+ referidos/perfil/paneles/distribucion.php
+		+ referidos/perfil/paneles/solicitud_retiro.php
+	- Actualizacion de Reportes:
+		+ referidos/perfil/pdf/reporte_recibo_pago.php
+		+ referidos/perfil/pdf/reporte_recibo_retiro.php
+		+ referidos/perfil/pdf/reporte_resumen_pagos.php
+		+ referidos/perfil/pdf/reporte_resumen_retiros.php
+		+ reportes/reportes/pdf/reporte_pagos.php
+		+ reportes/reportes/pdf/reporte_retiros.php
+	OBSRVACION:
+		Revisar que cambie el si pagò o no un usuario en la tabla link
