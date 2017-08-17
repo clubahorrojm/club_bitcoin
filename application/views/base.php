@@ -201,7 +201,7 @@ if (isset($this->session->userdata['logged_in'])) {
                     <!-- /.search form -->
                     <!-- sidebar menu: : style can be found in sidebar.less -->
                     <ul class="sidebar-menu">
-                        <li class="header">Menú</li>
+                        <li class="header" style="color: white">Menú</li>
                         <?php echo menu($datos_sesion); ?>
 
                     </ul>
