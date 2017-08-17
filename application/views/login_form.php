@@ -199,6 +199,20 @@
 				});
 			});
 		</script>
+		
+		
+		<style type="text/css">
+			input::-webkit-input-placeholder {
+                color: yellow !important;
+            }
+            input::-moz-placeholder {
+                color: yellow !important; 
+            }
+            input::-ms-input-placeholder { 
+                color: yellow !important; 
+            }
+		</style>
+		
     </head>
     <body>
 
@@ -243,37 +257,32 @@
 			
 			<div class="container">
 				<?php echo form_open(''); ?>
-				<div class="col-lg-12">
-					<div class="col-lg-3"></div>
-					 <div class="col-lg-3"></div> 
-<!-- 					<div class="col-lg-6">
-						<button class="text-center" id="registrarse" style="color:#126584;font-size:15px;font-weight:bold;cursor:pointer;" title="Usted será redirigido al área de registro">Solicitar link</button>
-					</div> -->
-				</div>
 				</form>
 
-				<h1>El juego del Ahorro</h1>
+				<h2 style="color: #edd727; font-weight: bold" >TÚ PARTICIPACIÓN ES LA MEJOR OPCIÓN</h2>
 				
 				<?php echo form_open('User_Authentication/user_login_process'); ?>
 				<form id="frmlogin" class="form-horizontal"  method="POST" enctype="multipart/form-data" autocomplete="off" role="form">
-							
+						
 					<div class="col-lg-12">
-						<div class="col-lg-3"></div>
-						 <div class="col-lg-6"><img class="img-circle" src="<?= base_url() ?>static/img/default.gif" style="width: 80%" /></div> 
-						<div class="col-lg-3"></div>
-				   </div> 
+						<center>
+							<img style="background-color: #c0c0c0; width: 50%"  id="logo_info" class="img-circle" src="<?= base_url() ?>static/img/circulo-01.png"/>
+						</center>
+				   </div>
+					
 				   <div class="col-lg-12">
-					<center>
-					<input type="text" id="username" name="username" placeholder="Usuario" >
-					<input type="password" id="password" name="password" placeholder="Contraseña">
-					<button type="submit" id="submit" name="submit" style="width:25%">Entrar</button>
-					<!--<button type="button" id="rec_password" name="rec_password">Rec: Clave de Acceso</button>-->
-					</br></br>
-					<button type="button" id="registrar_referido" name="registrar_referido">Registrar</button>
-					<a class="text-center " id="registrarse" style="color: white;font-size:20px;font-weight:bold;cursor:pointer;text-decoration: underline" title="Usted será redirigido al área de registro">Solicitar link</a>
-
-
-					</center>
+						<br><br>
+						<center>
+						<input style="background-color: #22274b; width: 50%; color: #edd727; font-weight: bold "  type="text" id="username" name="username" placeholder="Usuario" >
+						<input style="background-color: #22274b; width: 50%; color: #edd727; font-weight: bold "  type="password" id="password" name="password" placeholder="Contraseña">
+						<button style=" background: linear-gradient(#edd727 , #998809); width:25%; font-weight: bold; color: white"  type="submit"  id="submit" name="submit" >Entrar</button>
+						<!--<button type="button" id="rec_password" name="rec_password">Rec: Clave de Acceso</button>-->
+						</br></br>
+						<button style=" background: linear-gradient(#edd727 , #998809); width:25%; font-weight: bold; color: white" type="button" id="registrar_referido" name="registrar_referido">Registrar</button>
+						<a class="text-center " id="registrarse" style="color: white;font-size:20px;font-weight:bold;cursor:pointer;text-decoration: underline" title="Usted será redirigido al área de registro">Solicitar link</a>
+	
+	
+						</center>
 				   </div> 
 				</form>
 						
@@ -299,7 +308,7 @@
 		<div class="modal" id="modal_registrar">
 		   <div class="modal-dialog">
 			  <div class="modal-content">
-				 <div class="modal-header" style="background-color:#296293">
+				 <div class="modal-header" style="background-color:#22274b">
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 					<h4 class="modal-title">
 					   <center><span class="glyphicon glyphicon-search"></span>
@@ -312,15 +321,15 @@
 							<div class="col-sm-12">
 								<input type="hidden" id="codigo" name="codigo" value="<?php echo $codigo;?>">
 								<input type="hidden" id="link" name="link" value="<?php echo $link;?>">
-								<input type="text" class="form-control" style="width: 100%; " id="username_reg" name="username_reg" placeholder="Usuario" autofocus="true">
+								<input type="text" class="form-control" style="background-color: #22274b; width: 100%; color: #edd727 " id="username_reg" name="username_reg" placeholder="Usuario" autofocus="true">
 							</div>
 							</br></br></br>
 							<div class="col-sm-12">
-								<input style="width: 100%;" type="password" class="form-control" id="password_reg" name="password_reg" placeholder="Contraseña"/>
+								<input style="background-color: #22274b; width: 100%; color: #edd727 "  type="password" class="form-control" id="password_reg" name="password_reg" placeholder="Contraseña"/>
 							</div>
 							</br></br></br>
 							<div class="col-sm-12">
-								<input style="width: 100%;" type="text" class="form-control" id="correo" name="correo" placeholder="ejemplo@correo.com"/>
+								<input style="background-color: #22274b; width: 100%; color: #edd727 "  type="text" class="form-control" id="correo" name="correo" placeholder="ejemplo@correo.com"/>
 							</div>
 							<!--<div class="col-sm-12">
 								<select style="width: 100%;" class="form-control" id="tipo_moneda" name="tipo_moneda">

@@ -70,7 +70,7 @@
 						<div class="col-md-4">
 							<div class="form-group">
 								<label style="font-weight:bold">Monto</label>
-								<input type="text" placeholder="Ej: 50" maxlength="10" id="monto" disabled="disabled"  value="<?php echo $monto_pago ?>" class="form-control" >
+								<input type="text" placeholder="Ej: 50" maxlength="10" id="monto"  class="form-control" >
 							</div><!-- /.form-group -->
 						</div><!-- /.form-group -->
 						<div class="col-md-4">

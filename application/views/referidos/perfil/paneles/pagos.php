@@ -66,7 +66,7 @@ if ($tipouser == 'Administrador') {
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label style="font-weight:bold">Monto</label>
-                                        <input type="text" placeholder="Ej: 50" maxlength="10" id="monto" disabled="disabled"  value="<?php echo $monto_pago ?>" class="form-control" >
+                                        <input type="text" placeholder="Ej: 50" maxlength="10" id="monto" disabled="disabled"  value="<?php echo $pago[0]->monto ?>" class="form-control" >
                                     </div><!-- /.form-group -->
                                 </div><!-- /.form-group -->
                                 <div class="col-md-3">
