@@ -219,3 +219,6 @@ CAMBIOS AL 16-08-2017 (Marcel):
 		- Actualización de Helpers: menu_helprs.php
 		- static/css/style.css
 		- static/img
+		
+CAMBIOS AL 24-08-2017 (José):
+	- Actualización de Controller: CLDesvincular

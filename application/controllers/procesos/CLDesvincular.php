@@ -119,10 +119,17 @@ class CLDesvincular extends CI_Controller
 			$meses = explode(' ',$tiempo[1]);  // Meses del registro
 			$dias = explode(' ',$tiempo[2]);  // Días del registro
 			
-			// Incluimos el perfil en la nueva lista sólo si tiene más de 15 días de inactividad luego de registrado
-			if($anyos[0] > 0 || $meses[0] > 0 || $dias[0] > 15){
-				//~ echo "Cumplió el plazo";
-				$perfiles_inactivos[] = $perfil;
+			// Incluimos el perfil en la nueva lista si tiene estaus 1 y más de tres días de registrado o si tiene estatus 2 o 3 y más de 15 días inactivo
+			if($perfil->estatus_perfil == 2 || $perfil->estatus_perfil == 3){
+				if($anyos[0] > 0 || $meses[0] > 0 || $dias[0] > 15){
+					//~ echo "Cumplió el plazo";
+					$perfiles_inactivos[] = $perfil;
+				}
+			}else if($perfil->estatus_perfil == 1){
+				if($anyos[0] > 0 || $meses[0] > 0 || $dias[0] > 3){
+					//~ echo "Cumplió el plazo";
+					$perfiles_inactivos[] = $perfil;
+				}
 			}
 		}
 		
