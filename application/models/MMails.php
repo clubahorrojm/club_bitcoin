@@ -386,7 +386,7 @@ class MMails extends CI_Model {
 		//cargamos la configuración para enviar con mailtrap (config), gamil (configGmail) o yahoo (configYahoo)
 		$this->email->initialize($this->config);
 
-		$this->email->from('contacto@wamzone.com');
+		$this->email->from('contacto@criptozone.com');
 		$this->email->to($para);
 		$this->email->subject($título);
 		$this->email->message($mensaje);

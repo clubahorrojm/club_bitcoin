@@ -50,8 +50,11 @@ redirect(base_url());
                       <tr>
                         <th style='text-align: center'>Item</th>
                         <th style='text-align: center'>Usuario</th>
+																								<th style='text-align: center'>Monedero</th>
+																								<th style='text-align: center'>Fecha Solicitud</th>
                         <th style='text-align: center'>Monto</th>
                         <th style='text-align: center'>N. Transferencia</th>
+																								<th style='text-align: center'>Fecha Cancelación</th>
                         <th style='text-align: center'>Estatus</th>
                         <th style='text-align: center'>Aprobar</th>
                       </tr>
@@ -64,27 +67,40 @@ redirect(base_url());
                                     <td>
                                         <?php echo $i; ?>
                                     </td>
-                                    <td><?php echo $retiro->username;?></td> 
+                                    <td><?php echo $retiro->username;?></td>
+																																				<td><?php echo $retiro->dir_monedero;?></td>
+																																				<td><?php
+																																								$fe = explode('-',$retiro->fecha_solicitud);
+																																								$fecha = $fe[2].'-'.$fe[1].'-'.$fe[0];
+																																								echo $fecha;
+																																								?>
+																																				</td>
                                     <td><?php echo $retiro->monto;?> <?php echo $retiro->abreviatura;?></td>                                 
                                     <td><?php echo $retiro->num_pago;?></td>
-									<td>
-										<?php 
-										if($retiro->estatus == 1){
-											echo "<span style='color:red'>Pendiente</span>";
-										}else if($retiro->estatus == 2){
-											echo "<span style='color:green'>Aprobado</span>";
-										}else{
-											echo "";
-										}
-										?>
-									</td>
-									<td style='text-align: center'>
-										<?php if ($retiro->estatus == 2) {?>
-										<input class='aprobar' type="checkbox" checked="checked" disabled="disabled"/>
-										<?php }else if ($retiro->estatus == 1){ ?>
-										<input class='aprobar' id='<?php echo $retiro->codigo; ?>' type="checkbox" title='aprobar el pago <?php echo $retiro->codigo;?>'/>
-										<?php } ?>
-									</td>
+																																				<td><?php
+																																								$fe = explode('-',$retiro->fecha_verificacion);
+																																								$fecha = $fe[2].'-'.$fe[1].'-'.$fe[0];
+																																								echo $fecha;
+																																								?>
+																																				</td>
+																																				<td>
+																																					<?php 
+																																					if($retiro->estatus == 1){
+																																						echo "<span style='color:red'>Pendiente</span>";
+																																					}else if($retiro->estatus == 2){
+																																						echo "<span style='color:green'>Aprobado</span>";
+																																					}else{
+																																						echo "";
+																																					}
+																																					?>
+																																				</td>
+																																				<td style='text-align: center'>
+																																					<?php if ($retiro->estatus == 2) {?>
+																																					<input class='aprobar' type="checkbox" checked="checked" disabled="disabled"/>
+																																					<?php }else if ($retiro->estatus == 1){ ?>
+																																					<input class='aprobar' id='<?php echo $retiro->codigo; ?>' type="checkbox" title='aprobar el pago <?php echo $retiro->codigo;?>'/>
+																																					<?php } ?>
+																																				</td>
                                 </tr>
                                 <?php $i++ ?>
                             <?php } ?>
@@ -111,23 +127,23 @@ redirect(base_url());
 	  <div class="modal-content">
 		 <div class="modal-header" style="background-color:#296293;color:white;">
 			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-			<h4 class="modal-title">
-			   <center><span class="glyphicon glyphicon-search"></span>
+			   <center><span class="glyphicon glyphicon-search" style="color: #FFFFFF; font-weight: bold"></span>
 			   &nbsp;Ingrese el número de transferencia y la fecha de su realización</center>
-			</h4>
 		 </div>
 		 <div class="modal-body">
 			<form id="f_aprobacion" name="f_aprobacion" action="" method="post">
 			   <div class="form-group">
 					<div class="col-sm-12">
 						<input type="hidden" id="codigo" name="codigo">
-						<input type="text" class="form-control" style="width: 100%; " id="num_pago" name="num_pago" placeholder="Número de transferencia" autofocus="true">
+						<label style="font-weight:bold">Número de transferencia</label>
+						<input type="text" class="form-control" style="width: 100%; " id="num_pago" name="num_pago" maxlength=10 placeholder="Número de transferencia" autofocus="true" onkeypress="return valida(event)">
 					</div>
 					</br></br></br>
 					<div class="col-sm-12">
+						<label style="font-weight:bold">Fecha de canalización del retiro</label>
 						<input style="width: 100%;" type="text" class="form-control" id="fecha_verificacion" name="fecha_verificacion" placeholder="Fecha de verificación" maxlength="10"/>
 					</div>
-					</br></br></br>
+					</br></br></br></br>
 					<div class="col-sm-12" align="right">
 						<span class="input-btn">
 							<button class="btn btn-primary" type="button" id="enviar">
@@ -135,7 +151,7 @@ redirect(base_url());
 							</button>
 						</span>
 					</div>
-					</br></br>
+					</br>
 			   </div>
 			</form>
 		 </div>
@@ -160,9 +176,12 @@ redirect(base_url());
         "oLanguage": {"sUrl": "<?= base_url() ?>/static/js/es.txt"},
         "aoColumns": [
             {"sClass": "registro center", "sWidth": "5%"},
-            {"sClass": "registro center", "sWidth": "50%"},
-            {"sClass": "registro center", "sWidth": "50%"},
+            {"sClass": "registro center", "sWidth": "15%"},
+												{"sClass": "registro center", "sWidth": "25%"},
+												{"sClass": "registro center", "sWidth": "10%"},
+            {"sClass": "registro center", "sWidth": "20%"},
             {"sClass": "registro center", "sWidth": "10%"},
+												{"sClass": "registro center", "sWidth": "10%"},
             {"sClass": "registro center", "sWidth": "3%"},
             {"sWidth": "3%", "bSortable": false, "sClass": "center sorting_false", "bSearchable": false}
         ]
@@ -176,7 +195,19 @@ redirect(base_url());
 		language: "es",
 		autoclose: true,
 	})
-	
+	function valida(e){
+				tecla = (document.all) ? e.keyCode : e.which;
+
+				//Tecla de retroceso para borrar, siempre la permite
+				if (tecla==8){
+								return true;
+				}
+								
+				// Patron de entrada, en este caso solo acepta numeros
+				patron =/[0-9]/;
+				tecla_final = String.fromCharCode(tecla);
+				return patron.test(tecla_final);
+	}
 	$('#fecha_verificacion').numeric({allow: "/"});
 	$('#num_pago').numeric();
             

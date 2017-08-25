@@ -58,7 +58,7 @@ if ($tipouser == 'Administrador') {
                                 <label class="control-label" >Nivel 1</label>
                                 <div class="col-md-2">
                                     <div class="input-group">
-                                        <input type="text" placeholder="Ej: 10" maxlength="2" id="porcentaje1" value="<?php echo $editar->porcentaje1 ?>" name="porcentaje1"  class="form-control" >
+                                        <input type="text" placeholder="Ej: 10" maxlength="5" id="porcentaje1" value="<?php echo $editar->porcentaje1 ?>" name="porcentaje1"  class="form-control" onkeyup="validaFloat(this.value), suma()"  >
                                         <span class="input-group-addon">%</span>
                                     </div> 
                                 </div>
@@ -66,7 +66,7 @@ if ($tipouser == 'Administrador') {
                                 <label class="control-label" >Nivel 2</label>
                                 <div class="col-md-2">
                                     <div class="input-group">
-                                        <input type="text" placeholder="Ej: 10" maxlength="2" id="porcentaje2" value="<?php echo $editar->porcentaje2 ?>" name="porcentaje2"  class="form-control" >
+                                        <input type="text" placeholder="Ej: 10" maxlength="5" id="porcentaje2" value="<?php echo $editar->porcentaje2 ?>" name="porcentaje2"  class="form-control" onKeyUp="suma();">
                                         <span class="input-group-addon">%</span>
                                     </div> 
                                 </div>
@@ -74,7 +74,7 @@ if ($tipouser == 'Administrador') {
                                 <label class="control-label" >Nivel 3</label>
                                 <div class="col-md-2">
                                     <div class="input-group">
-                                        <input type="text" placeholder="Ej: 10" maxlength="2" id="porcentaje3" value="<?php echo $editar->porcentaje3 ?>" name="porcentaje3"  class="form-control" >
+                                        <input type="text" placeholder="Ej: 10" maxlength="5" id="porcentaje3" value="<?php echo $editar->porcentaje3 ?>" name="porcentaje3"  class="form-control" onKeyUp="suma();">
                                         <span class="input-group-addon">%</span>
                                     </div> 
                                 </div>
@@ -82,7 +82,7 @@ if ($tipouser == 'Administrador') {
                                 <label class="control-label" >Nivel 4</label>
                                 <div class="col-md-2">
                                     <div class="input-group">
-                                        <input type="text" placeholder="Ej: 10" maxlength="2" id="porcentaje4" value="<?php echo $editar->porcentaje4 ?>" name="porcentaje4"  class="form-control" >
+                                        <input type="text" placeholder="Ej: 10" maxlength="5" id="porcentaje4" value="<?php echo $editar->porcentaje4 ?>" name="porcentaje4"  class="form-control" onKeyUp="suma();">
                                         <span class="input-group-addon">%</span>
                                     </div> 
                                 </div>
@@ -90,7 +90,7 @@ if ($tipouser == 'Administrador') {
                                 <label class="control-label" >Nivel 5</label>
                                 <div class="col-md-2">
                                     <div class="input-group">
-                                        <input type="text" placeholder="Ej: 10" maxlength="2" id="porcentaje5" value="<?php echo $editar->porcentaje5 ?>" name="porcentaje5"  class="form-control" >
+                                        <input type="text" placeholder="Ej: 10" maxlength="5" id="porcentaje5" value="<?php echo $editar->porcentaje5 ?>" name="porcentaje5"  class="form-control" onKeyUp="suma();">
                                         <span class="input-group-addon">%</span>
                                     </div> 
                                 </div>
@@ -98,7 +98,7 @@ if ($tipouser == 'Administrador') {
                                 <label class="control-label" >Nivel 6</label>
                                 <div class="col-md-2">
                                     <div class="input-group">
-                                        <input type="text" placeholder="Ej: 10" maxlength="2" id="porcentaje6" value="<?php echo $editar->porcentaje6 ?>" name="porcentaje6"  class="form-control" >
+                                        <input type="text" placeholder="Ej: 10" maxlength="5" id="porcentaje6" value="<?php echo $editar->porcentaje6 ?>" name="porcentaje6"  class="form-control" onKeyUp="suma();">
                                         <span class="input-group-addon">%</span>
                                     </div> 
                                 </div>
@@ -106,15 +106,15 @@ if ($tipouser == 'Administrador') {
                                 <label class="control-label" >Nivel 7</label>
                                 <div class="col-md-2">
                                     <div class="input-group">
-                                        <input type="text" placeholder="Ej: 10" maxlength="2" id="porcentaje7" value="<?php echo $editar->porcentaje7 ?>" name="porcentaje7"  class="form-control" >
+                                        <input type="text" placeholder="Ej: 10" maxlength="5" id="porcentaje7" value="<?php echo $editar->porcentaje7 ?>" name="porcentaje7"  class="form-control" onKeyUp="suma();">
                                         <span class="input-group-addon">%</span>
                                     </div> 
                                 </div>
                                 <br><br>
-                                <label class="control-label" >Nivel 8</label>
+                                <label class="control-label" >Nivel 8 (Empresa)</label>
                                 <div class="col-md-2">
                                     <div class="input-group">
-                                        <input type="text" placeholder="Ej: 10" maxlength="2" id="porcentaje8" value="<?php echo $editar->porcentaje8 ?>" name="porcentaje8"  class="form-control" >
+                                        <input type="text" placeholder="Ej: 10" maxlength="5" id="porcentaje8" value="<?php echo $editar->porcentaje8 ?>" name="porcentaje8" readonly="readonly" class="form-control" >
                                         <span class="input-group-addon">%</span>
                                     </div> 
                                 </div>
@@ -157,7 +157,7 @@ if ($tipouser == 'Administrador') {
 
 <script>
     $(".select2").select2();
-    $('#porcentaje1,#porcentaje2,#porcentaje3,#porcentaje4,#porcentaje5,#porcentaje6,#porcentaje7,#porcentaje8').numeric();
+    $('#porcentaje1,#porcentaje2,#porcentaje3,#porcentaje4,#porcentaje5,#porcentaje6,#porcentaje7,#porcentaje8').numeric({allow: ", ."});
     $('#direccion').alphanumeric({allow: ", .#"});
     $('#correo').alphanumeric({allow: "_-.@"});
     $('#nombre,#apellido').alpha({allow: " "})
@@ -175,7 +175,58 @@ if ($tipouser == 'Administrador') {
         }
     });
 
+    function validaFloat(numero) {
 
+        if (!/^([0-9])*[.]?[0-9]*$/.test(numero))
+            bootbox.alert('Disculpe, El valor '+ numero +' no es un número', function () {
+                // $('#porcentaje1').parent('div').addClass('has-error');
+            });
+    }
+
+
+    function suma(){
+        
+        var sum1 = document.getElementById("porcentaje1");
+        var sum2 = document.getElementById("porcentaje2");
+        var sum3 = document.getElementById("porcentaje3");
+        var sum4 = document.getElementById("porcentaje4");
+        var sum5 = document.getElementById("porcentaje5");
+        var sum6 = document.getElementById("porcentaje6");
+        var sum7 = document.getElementById("porcentaje7");
+        var diferencia = document.getElementById("porcentaje8");
+        // var div = document.getElementById("resultado");
+        if ($("#porcentaje1").val() == ''){
+            $('#porcentaje1').parent('div').addClass('has-error');
+        }
+        if ($("#porcentaje2").val() == ''){
+            $('#porcentaje2').parent('div').addClass('has-error');
+        }
+        if ($("#porcentaje3").val() == ''){
+            $('#porcentaje3').parent('div').addClass('has-error');
+        }
+        if ($("#porcentaje4").val() == ''){
+            $('#porcentaje4').parent('div').addClass('has-error');
+        }
+        if ($("#porcentaje5").val() == ''){
+            $('#porcentaje5').parent('div').addClass('has-error');
+        }
+        if ($("#porcentaje6").val() == ''){
+            $('#porcentaje6').parent('div').addClass('has-error');
+        }
+        if ($("#porcentaje6").val() == ''){
+            $('#porcentaje6').parent('div').addClass('has-error');
+        }
+        
+        resultado = parseFloat(sum1.value) + parseFloat(sum2.value) + parseFloat(sum3.value) + parseFloat(sum4.value) + parseFloat(sum5.value) + parseFloat(sum6.value) + parseFloat(sum7.value);
+        diferencia = 100 - resultado;
+        diferencia = diferencia.toFixed(2);
+        $("#porcentaje8").val(diferencia);
+        if (($('#porcentaje8').val().trim() <= 0)) {
+            bootbox.alert('Disculpe, el nivel 8 no puede dar igual o menor a 0 por favor verifique los montos asignados', function () {
+                $('#porcentaje8').parent('div').addClass('has-error');
+            });
+        }
+    }
 
 
     $("#registrar").click(function (e) {
@@ -190,44 +241,41 @@ if ($tipouser == 'Administrador') {
         var por8 = $('#porcentaje8').val()
         var suma = parseInt(por1) + parseInt(por2) + parseInt(por3) + parseInt(por4) + parseInt(por5) + parseInt(por6) + parseInt(por7) + parseInt(por8)
         //alert(suma)
-        if (($('#porcentaje1').val().trim() == '')) {
-            bootbox.alert('Disculpe, Debe Colocar el porcentaje que se le otorgará ', function () {
+        if (($('#porcentaje1').val().trim() == '' || $('#porcentaje1').val().trim() == 0)) {
+            bootbox.alert('Disculpe, Debe Colocar el porcentaje que se le otorgará al nivel 1', function () {
                 $('#porcentaje1').parent('div').addClass('has-error');
             });
-        }else if (($('#porcentaje2').val().trim() == '')) {
-            bootbox.alert('Disculpe, Debe Colocar el porcentaje que se le otorgará ', function () {
+        }else if (($('#porcentaje2').val().trim() == '' || $('#porcentaje2').val().trim() == 0)) {
+            bootbox.alert('Disculpe, Debe Colocar el porcentaje que se le otorgará al nivel 2', function () {
                 $('#porcentaje2').parent('div').addClass('has-error');
             });
-        }else if (($('#porcentaje3').val().trim() == '')) {
-            bootbox.alert('Disculpe, Debe Colocar el porcentaje que se le otorgará ', function () {
+        }else if (($('#porcentaje3').val().trim() == '' || $('#porcentaje3').val().trim() == 0)) {
+            bootbox.alert('Disculpe, Debe Colocar el porcentaje que se le otorgará al nivel 3', function () {
                 $('#porcentaje3').parent('div').addClass('has-error');
             });
-        }else if (($('#porcentaje3').val().trim() == '')) {
-            bootbox.alert('Disculpe, Debe Colocar el porcentaje que se le otorgará ', function () {
-                $('#porcentaje3').parent('div').addClass('has-error');
-            });
-        }else if (($('#porcentaje4').val().trim() == '')) {
-            bootbox.alert('Disculpe, Debe Colocar el porcentaje que se le otorgará ', function () {
+        }else if (($('#porcentaje4').val().trim() == '' || $('#porcentaje4').val().trim() == 0)) {
+            bootbox.alert('Disculpe, Debe Colocar el porcentaje que se le otorgará al nivel 4', function () {
                 $('#porcentaje4').parent('div').addClass('has-error');
             });
-        }else if (($('#porcentaje5').val().trim() == '')) {
-            bootbox.alert('Disculpe, Debe Colocar el porcentaje que se le otorgará ', function () {
+        }else if (($('#porcentaje5').val().trim() == '' || $('#porcentaje5').val().trim() == 0)) {
+            bootbox.alert('Disculpe, Debe Colocar el porcentaje que se le otorgará al nivel 5', function () {
                 $('#porcentaje5').parent('div').addClass('has-error');
             });
-        }else if (($('#porcentaje6').val().trim() == '')) {
-            bootbox.alert('Disculpe, Debe Colocar el porcentaje que se le otorgará ', function () {
+        }else if (($('#porcentaje6').val().trim() == '' || $('#porcentaje6').val().trim() == 0)) {
+            bootbox.alert('Disculpe, Debe Colocar el porcentaje que se le otorgará al nivel 6', function () {
                 $('#porcentaje6').parent('div').addClass('has-error');
             });
-        }else if (($('#porcentaje7').val().trim() == '')) {
-            bootbox.alert('Disculpe, Debe Colocar el porcentaje que se le otorgará ', function () {
+        }else if (($('#porcentaje7').val().trim() == '' || $('#porcentaje7').val().trim() == 0)) {
+            bootbox.alert('Disculpe, Debe Colocar el porcentaje que se le otorgará al nivel 7', function () {
                 $('#porcentaje7').parent('div').addClass('has-error');
             });
-        }else if (($('#porcentaje8').val().trim() == '')) {
-            bootbox.alert('Disculpe, Debe Colocar el porcentaje que se le otorgará ', function () {
+        }else if (($('#porcentaje8').val().trim() == 'NaN')) {
+            bootbox.alert('Disculpe, Revise alguno de los porcentajes colocados debido a uno (1) o más campos estan vacios o con algun valor no válido ', function () {
                 $('#porcentaje8').parent('div').addClass('has-error');
             });
-        }else if (suma != 100) {
-            bootbox.alert('Disculpe, Debe revisar los valores asigandos, la sumatoria da '+suma+' % y debe ser 100', function () {
+        }else if (($('#porcentaje8').val().trim() <= 0)) {
+            bootbox.alert('Disculpe, el nivel 8 no puede dar igual o menor a 0 por favor verifique los montos asignados', function () {
+                $('#porcentaje8').parent('div').addClass('has-error');
             });
         }else if (($('#codigo').val().trim() == '')) {
             bootbox.alert('Disculpe, debe introducir el código de seguridad', function () {

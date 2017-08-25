@@ -29,7 +29,7 @@
     
     ?>
     <head>
-        <title>.:: Club del Ahorro ::.</title>
+        <title>.:: Criptozone ::.</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
         <link rel="stylesheet" type="text/css" href="<?= base_url() ?>static/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="<?= base_url() ?>static/css/select2.css"/>
@@ -49,10 +49,13 @@
 
 
         <link rel="stylesheet" type="text/css" href="<?php echo base_url('static/css/style.css'); ?>">
-     
+		<!-- Jquery numeric -->
+        <script src="<?= base_url() ?>static/js/jquery.numeric.js"></script>  
+        <!-- Jquery alphanumeric -->
+        <script src="<?= base_url() ?>static/js/jquery.alphanumeric.js"></script>  
 		<script>
 			$(document).ready(function () {
-				
+
 				$('select').on({
                     change: function () {
                         $(this).parent('div').removeClass('has-error');
@@ -66,6 +69,29 @@
 
                 $("select").select2();
                 
+				
+				$('#username').alphanumeric();
+				$('#password').alphanumeric({allow: "+-/#@*"});
+				
+				// CAMBIO DE COLOR DE TEXBOX
+				
+				document.getElementById("username").addEventListener("click", function() {
+					document.getElementById('username').style.backgroundColor ='#FFFFFF';
+					document.getElementById('username').style.color ='#000000';
+					document.getElementById('password').style.backgroundColor ='#22274b';
+					document.getElementById('password').style.color ='#edd727';
+					//document.getElementById("username").className += " placOn";
+					//document.getElementById("password").className += " placOff";
+				}, false);
+				document.getElementById("password").addEventListener("click", function() {
+					document.getElementById('password').style.backgroundColor ='#FFFFFF';
+					document.getElementById('password').style.color ='#000000';
+					document.getElementById('username').style.backgroundColor ='#22274b';
+					document.getElementById('username').style.color ='#edd727';
+					//document.getElementById("username").className += " placOff";
+					//document.getElementById("password").className += " placOn";
+				}, false);
+				
                 // Pre-carga de la lista de tipos de moneda
                 $('#tipo_moneda').find('option:gt(0)').remove().end().select2('val', '0');
 				$.get('<?php echo base_url(); ?>index.php/busquedas_ajax/ControllersBusqueda/monedas/', function (data) {
@@ -143,13 +169,7 @@
 						$("#password_reg").parent('div').addClass('has-error')
 						$("#password_reg").val('');
 						$("#password_reg").focus();
-					} /*else if($("#tipo_moneda").val() == '0'){
-						alert("Error: Seleccione la moneda");
-						$("#tipo_moneda").parent('div').addClass('has-error')
-						$("#tipo_moneda").val('0');
-						$("#tipo_moneda").focus();
-					}*/ 
-					else if($("#correo").val() == ''){
+					} else if($("#correo").val() == ''){
 						alert("Error: Ingrese su correo");
 						$("#correo").parent('div').addClass('has-error')
 						$("#correo").val('');
@@ -160,7 +180,6 @@
 						$("#correo").val('');
 						$("#correo").focus();
 					} else {
-						//~ alert('Código: '+$("#codigo").val());
 						// Registramos el nuevo usuario
 						$.post('<?php echo base_url(); ?>index.php/User_Authentication/registrar_referido/', $("#f_reg_usuario").serialize(), function(response) {
 							//~ alert(response.trim());
@@ -184,17 +203,15 @@
 				// Generar enlace para registro de nuevo usuario
 				$("#registrarse").click(function (e) {
 					e.preventDefault();  // Para evitar que se envíe por defecto
-										
-					// Registramos el nuevo usuario
-					$.post('<?php echo base_url(); ?>index.php/User_Authentication/enlace_disponible/', function(response) {
-						//~ alert(response.trim());
-						if (response.trim() == "1"){
-							alert("No hay enlaces disponibles");
-							location.reload();
-						}else{
-							url = response.trim();
-							window.location = url
-						}
+					$.post('<?php echo base_url(); ?>index.php/User_Authentication/enlace_disponible2/', function(response) {
+						//alert(response);
+						var cadena = response.split("@@@");
+						var cod_link = cadena[0];
+						//var userd_id = cadena[1];
+						var num_link = cadena[1];
+						$("#codigo").val(cod_link);
+						$("#link").val(num_link);
+						$("#modal_registrar").modal('show'); 
 					});
 				});
 			});
@@ -202,15 +219,12 @@
 		
 		
 		<style type="text/css">
-			input::-webkit-input-placeholder {
-                color: yellow !important;
-            }
-            input::-moz-placeholder {
-                color: yellow !important; 
-            }
-            input::-ms-input-placeholder { 
-                color: yellow !important; 
-            }
+			input.placOn::-moz-placeholder {
+				color: #22274b !important; 
+			}
+			input.placOff::-moz-placeholder {
+				color: #edd727 !important; 
+			}
 		</style>
 		
     </head>
@@ -259,7 +273,7 @@
 				<?php echo form_open(''); ?>
 				</form>
 
-				<h2 style="color: #edd727; font-weight: bold" >TÚ PARTICIPACIÓN ES LA MEJOR OPCIÓN</h2>
+				<h2 style="color: #edd727; font-weight: bold" >DONDE TÚ PARTICIPACIÓN ES LA MEJOR OPCIÓN</h2>
 				
 				<?php echo form_open('User_Authentication/user_login_process'); ?>
 				<form id="frmlogin" class="form-horizontal"  method="POST" enctype="multipart/form-data" autocomplete="off" role="form">
@@ -278,7 +292,6 @@
 						<button style=" background: linear-gradient(#edd727 , #998809); width:25%; font-weight: bold; color: white"  type="submit"  id="submit" name="submit" >Entrar</button>
 						<!--<button type="button" id="rec_password" name="rec_password">Rec: Clave de Acceso</button>-->
 						</br></br>
-						<button style=" background: linear-gradient(#edd727 , #998809); width:25%; font-weight: bold; color: white" type="button" id="registrar_referido" name="registrar_referido">Registrar</button>
 						<a class="text-center " id="registrarse" style="color: white;font-size:20px;font-weight:bold;cursor:pointer;text-decoration: underline" title="Usted será redirigido al área de registro">Solicitar link</a>
 	
 	
@@ -312,24 +325,30 @@
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 					<h4 class="modal-title">
 					   <center><span class="glyphicon glyphicon-search"></span>
-					   &nbsp;Introdúzca su usuario y su contraseña para crear la cuenta</center>
+					   &nbsp;Formulario de Registro</center>
 					</h4>
 				 </div>
 				 <div class="modal-body">
 					<form id="f_reg_usuario" name="f_reg_usuario" action="" method="post">
+					
 					   <div class="form-group">
+							<div class="col-sm-12">
+								<h4 style="color: #22274b; text-align: justify">Llene los datos solicitados en el formulario, recuerde que los campos identificados con (*) son obligatorios,
+									por lo tanto no pueden quedar en blanco.
+								</h4>
+							</div>
 							<div class="col-sm-12">
 								<input type="hidden" id="codigo" name="codigo" value="<?php echo $codigo;?>">
 								<input type="hidden" id="link" name="link" value="<?php echo $link;?>">
-								<input type="text" class="form-control" style="background-color: #22274b; width: 100%; color: #edd727 " id="username_reg" name="username_reg" placeholder="Usuario" autofocus="true">
+								<input type="text" class="form-control" style="background-color: #22274b; width: 100%; color: #edd727 " id="username_reg" name="username_reg" placeholder="Usuario (*)" autofocus="true">
 							</div>
 							</br></br></br>
 							<div class="col-sm-12">
-								<input style="background-color: #22274b; width: 100%; color: #edd727 "  type="password" class="form-control" id="password_reg" name="password_reg" placeholder="Contraseña"/>
+								<input style="background-color: #22274b; width: 100%; color: #edd727 "  type="password" class="form-control" id="password_reg" name="password_reg" placeholder="Contraseña (*)"/>
 							</div>
 							</br></br></br>
 							<div class="col-sm-12">
-								<input style="background-color: #22274b; width: 100%; color: #edd727 "  type="text" class="form-control" id="correo" name="correo" placeholder="ejemplo@correo.com"/>
+								<input style="background-color: #22274b; width: 100%; color: #edd727 "  type="text" class="form-control" id="correo" name="correo" placeholder="Coreo Electrónico (*)"/>
 							</div>
 							<!--<div class="col-sm-12">
 								<select style="width: 100%;" class="form-control" id="tipo_moneda" name="tipo_moneda">
@@ -344,7 +363,7 @@
 									</button>
 								</span>
 							</div>
-							</br></br>
+							</br></br></br></br></br></br>
 					   </div>
 					</form>
 				 </div>

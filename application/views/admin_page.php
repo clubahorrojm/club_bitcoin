@@ -24,19 +24,19 @@
                       <div class="item active">
                         <img style="width: 50%; text-align: center " src="<?= base_url() ?>/static/img/img3.jpg" alt="First slide">
                         <div style="font-weight: bold; text-align: center; color: black" class="carousel-caption">
-                          El Juego del Ahorro
+                          Criptozone
                         </div>
                       </div>
                       <div class="item">
                           <img style="width: 50%; text-align: center " src="<?= base_url() ?>/static/img/img1.jpg"  alt="Second slide">
                         <div style="font-weight: bold; text-align: center; color: black" class="carousel-caption">
-                          El Juego del Ahorro
+                          Criptozone
                         </div>
                       </div>
                       <div class="item">
                         <img style="width: 70%; text-align: center " src="<?= base_url() ?>/static/img/img4.jpg" alt="Third slide">
                         <div style="font-weight: bold; text-align: center; color: black" class="carousel-caption">
-                          El Juego del Ahorro
+                          Criptozone
                         </div>
                       </div>
                     </div>

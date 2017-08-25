@@ -39,8 +39,6 @@ if ($tipouser == 'Administrador') {
 
             <div class="row">
                 <div class="col-xs-12">
-
-                    <div class="col-xs-6">
                         <div class="box box-primary">
                             <div class="box-header with-border col-md-6">
                                 <h3 class="box-title" style="font-weight:bold; color:#29274b">Más dinero recaudado</h3>
@@ -77,46 +75,6 @@ if ($tipouser == 'Administrador') {
                             </div><!-- /.box-body -->
                         </div><!-- /.box-body -->
                     </div><!-- /.box-body-primary -->
-
-                    <!-- SELECT2 EXAMPLE -->
-                <div class="col-xs-6">
-                    <div class="box box-primary">
-                        <div class="box-header with-border col-md-6">
-                                <h3 class="box-title" style="font-weight:bold; color:#29274b">Más referidos</h3>
-                            </div><!-- /.box-header -->
-                        <div class="panel-body">
-                            <table id="tab_top_ref" class="table table-bordered table-striped table-hover table-condensed dt-responsive table-responsive">
-                            <thead style="color:white" bgcolor='#29274b'>
-                              <tr>
-                                <th style='text-align: center'>Item</th>
-                                <th style='text-align: center'>Usuario</th>
-                                <th style='text-align: center'>Cant. Referidos</th>
-                                <!-- <th style='text-align: center'>Nivel</th> -->
-                              </tr>
-                            </thead>
-                            <tbody >    
-                                <?php $i = 1; ?>
-                                    <?php foreach ($listar_top_ref as $top_ref) { ?>
-                                        <tr style="font-size: 16px;text-align: center" class="{% cycle 'impar' 'par' %}" >
-                                            <td <?php if($i < 11){ echo " bgcolor='#edd727'"; }?>><?php echo $i; ?></td>
-                                            <td><?php foreach($listar_usuarios as $usuario){
-                                                if($usuario->codigo == $top_ref->usuario_id){
-                                                    echo $usuario->first_name;
-                                                    echo ' ';
-                                                    echo $usuario->last_name;
-                                                }}?>
-                                            </td>
-                                            <td><?php echo $top_ref->cant_ref;?></td>
-                                            <!-- <td><?php echo $top_ref->nivel;?>        -->
-                                        </tr>
-                                    <?php $i++ ?>
-                                <?php } ?>
-                            </tbody>
-                        </table>
-                        </div><!-- /.box-body -->
-                    </div><!-- /.box-body -->
-                </div><!-- /.box-body-primary -->
-
             </div><!-- /.box-body-primary -->
         </section><!-- /.content -->
     </div><!-- /.content-wrapper -->
