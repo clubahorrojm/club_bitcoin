@@ -25,7 +25,7 @@ class MLRetiros extends CI_Model {
     public function obtenerRetiros() {
 		//~ $query = $this->db->order_by('estatus asc, id asc');
         //~ $query = $this->db->get('ref_rel_retiros');
-        $sql = "SELECT rrr.codigo, usu.username, monto, cftm.abreviatura, num_pago, rrr.estatus FROM ref_rel_retiros AS rrr ";
+        $sql = "SELECT rrr.codigo, usu.username, monto, cftm.abreviatura, num_pago, rrr.estatus, rpf.dir_monedero, rrr.fecha_verificacion , rrr.fecha_solicitud  FROM ref_rel_retiros AS rrr ";
         $sql .= "INNER JOIN ref_perfil AS rpf ON rrr.usuario_id=rpf.usuario_id ";
         $sql .= "INNER JOIN usuarios AS usu ON rrr.usuario_id=usu.id ";
         $sql .= "INNER JOIN conf_tipos_monedas AS cftm ON rpf.t_moneda_id=cftm.id ";

@@ -31,9 +31,10 @@ class MAuditoria extends CI_Model
     }
     
     // Método público para listar las auditorías generales
-    public function obtenerAuditorias()
-    {                                                                                      
-        $query = $this->db->get('auditoria');                        
+    public function obtenerAuditorias(){
+        $query = $this->db->order_by("id", "desc");
+        $query = $this->db->get('auditoria');     
+            
 
         if ($query->num_rows() > 0)
             return $query->result();

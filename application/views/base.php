@@ -28,7 +28,7 @@ if (isset($this->session->userdata['logged_in'])) {
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Club del Ahorro | Version 0.1</title>
+        <title>Criptozone | Version 0.1</title>
         <!-- Tell the browser to be responsive to screen width -->
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
         <!-- Bootstrap 3.3.5 -->
@@ -100,7 +100,7 @@ if (isset($this->session->userdata['logged_in'])) {
 				<img src="<?php echo base_url(); ?>static/img/logo4.png" style="width: 100%;height:50px;" >
                 <!--<a href="<?php echo base_url(); ?>index.php/" class="logo">-->
                     <!--<span class="logo-mini"><b>CA</b></span>
-                    <span class="logo-lg"><b>Club del Ahorro</b></span>-->
+                    <span class="logo-lg"><b>Criptozone</b></span>-->
                 </a>
                 <!-- Header Navbar: style can be found in header.less -->
                 <nav class="navbar navbar-static-top" role="navigation">
@@ -182,7 +182,7 @@ if (isset($this->session->userdata['logged_in'])) {
 							<?php } ?> 
                         </div>
                         <div class="pull-left info">
-                            <p style="color:#FFFFFF !important;"><?php echo"$username ($tipouser)" ?> <i class="fa fa-circle text-success"></i></p>
+                            <p><?php echo"$username ($tipouser)" ?> <i class="fa fa-circle text-success"></i></p>
 <!--
                             <a href="<?php echo base_url(); ?>index.php/User_Authentication/logout/<?php echo $id ?>"><i class="glyphicon glyphicon-log-out"></i> Cerrar Sesión</a>
 -->
@@ -491,7 +491,10 @@ if (isset($this->session->userdata['logged_in'])) {
 
         <script src="<?= base_url() ?>static/js/jquery.qrcode.js"></script>
         <script src="<?= base_url() ?>static/js/qrcode.js"></script>
-
+		
+		<script src="<?= base_url() ?>static/js/jquery.countdown.js"></script>
+<!--         // <script type="text/javascript" async="" src="http://www.google-analytics.com/ga.js"></script>
+        // <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script> -->
  
         <script>
 			$(document).ready(function () {

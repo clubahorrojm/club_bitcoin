@@ -222,3 +222,11 @@ CAMBIOS AL 16-08-2017 (Marcel):
 		
 CAMBIOS AL 24-08-2017 (José):
 	- Actualización de Controller: CLDesvincular
+
+CAMBIOS AL 24-08-2017 (Marcel):
+		- Actualización de Views: 
+			+ Cambio en el login.php, base.php, admin_page.php, procesos/retiros/lista2.php, referidos/perfil/paneles/ranking.php
+			+ Cambio en el administracion/asignacion_montos/base.php
+		- Actualización de Modelos: MMails.php, MLRetiros.php, MAuditoria.php
+		- Incorporacion de 3 campos (fecha_na, pais_id, patrocinador_id) a la tapla usuarios y eliminacion de 1 (telefono)
+		- Incorporado dl js reloj con sus imagenes
