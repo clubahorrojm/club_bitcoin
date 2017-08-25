@@ -182,7 +182,7 @@ if (isset($this->session->userdata['logged_in'])) {
 							<?php } ?> 
                         </div>
                         <div class="pull-left info">
-                            <p><?php echo"$username ($tipouser)" ?> <i class="fa fa-circle text-success"></i></p>
+                            <p style="color:#FFFFFF !important"><?php echo"$username ($tipouser)" ?> <i class="fa fa-circle text-success"></i></p>
 <!--
                             <a href="<?php echo base_url(); ?>index.php/User_Authentication/logout/<?php echo $id ?>"><i class="glyphicon glyphicon-log-out"></i> Cerrar Sesión</a>
 -->

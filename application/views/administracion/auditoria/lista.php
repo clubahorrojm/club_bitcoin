@@ -65,7 +65,7 @@ redirect(base_url());
 			<div class="col-md-2">
 			    <div class="form-group">
 				<label style="font-weight:bold">&nbsp;</label><br>
-				<button type="submit" id="generar" style="font-weight: bold;font-size: 13px" class="btn btn-danger"/>
+				<button type="submit" id="generar_pdf_auditoria" style="font-weight: bold;font-size: 13px" class="btn btn-danger"/>
 				&nbsp;<span class="glyphicon glyphicon-file"></span>&nbsp;Generar
 				</button>
 			    </div><!-- /.form-group -->
@@ -188,52 +188,52 @@ $(document).ready(function(){
                 
                 
 
-    $("#generar").click(function (e) {
-	e.preventDefault();  // Para evitar que se envíe por defecto
-	
-	if($('#usuario').val().trim() == '' && $('#desde').val().trim() == '' && $('#hasta').val().trim() == ''){
-	    bootbox.alert("Debe indicar algún parámetro de búsqueda", function () {
-	    }).on('hidden.bs.modal', function (event) {
-		    $('#usuario').parent('div').addClass('has-error');
-		    $('#desde').parent('div').addClass('has-error');
-		    $('#hasta').parent('div').addClass('has-error');
-	    });
-	}else if(($('#desde').val().trim() != '' && $('#hasta').val().trim() == '') || ($('#desde').val().trim() == '' && $('#hasta').val().trim() != '')){
-	    bootbox.alert("Debe completar el rango de fechas", function () {
-	    }).on('hidden.bs.modal', function (event) {
-		    $('#usuario').parent('div').addClass('has-error');
-		    $('#desde').parent('div').addClass('has-error');
-		    $('#hasta').parent('div').addClass('has-error');
-	    });
-	}else{
-	    var usuario = $('#usuario').val().trim();
-	    var desde = $('#desde').val().trim();
-	    var hasta = $('#hasta').val().trim();
-	    if (usuario == ""){
-		    usuario = "xxx";
-	    }
-	    if(desde == "" && hasta == ""){
-		    desde = "xxx";
-		    hasta = "xxx";
-	    }else{
-		    desde = desde.split("/");
-		    desde = desde[2]+"-"+desde[1]+"-"+desde[0];
-		    hasta = hasta.split("/");
-		    hasta = hasta[2]+"-"+hasta[1]+"-"+hasta[0];
-	    }
-	    // Función para validar si hay registros para la búsqueda especificada
-	    $.post('<?php echo base_url(); ?>index.php/administracion/CAuditoria/obtenerAuditorias/' + usuario + '/' + desde + '/' + hasta + '', function (response) {
-		    //~ alert(response);
-		    if (response[1] == '0') {
-			bootbox.alert("No hay registros para la consulta especificada", function () {
-			}).on('hidden.bs.modal', function (event) {    
+    $("#generar_pdf_auditoria").click(function (e) {
+		e.preventDefault();  // Para evitar que se envíe por defecto
+		
+		if($('#usuario').val().trim() == '' && $('#desde').val().trim() == '' && $('#hasta').val().trim() == ''){
+			bootbox.alert("Debe indicar algún parámetro de búsqueda", function () {
+			}).on('hidden.bs.modal', function (event) {
+				$('#usuario').parent('div').addClass('has-error');
+				$('#desde').parent('div').addClass('has-error');
+				$('#hasta').parent('div').addClass('has-error');
 			});
-		    }else{
-			URL = '<?php echo base_url(); ?>index.php/administracion/CAuditoria/pdf_auditoria/' + usuario + '/' + desde + '/' + hasta + '';
-			$.fancybox.open({ padding : 0, href: URL, type: 'iframe',width: 1024, height: 860, });
-		    }
-	    });
-	} 
+		}else if(($('#desde').val().trim() != '' && $('#hasta').val().trim() == '') || ($('#desde').val().trim() == '' && $('#hasta').val().trim() != '')){
+			bootbox.alert("Debe completar el rango de fechas", function () {
+			}).on('hidden.bs.modal', function (event) {
+				$('#usuario').parent('div').addClass('has-error');
+				$('#desde').parent('div').addClass('has-error');
+				$('#hasta').parent('div').addClass('has-error');
+			});
+		}else{
+			var usuario = $('#usuario').val().trim();
+			var desde = $('#desde').val().trim();
+			var hasta = $('#hasta').val().trim();
+			if (usuario == ""){
+				usuario = "xxx";
+			}
+			if(desde == "" && hasta == ""){
+				desde = "xxx";
+				hasta = "xxx";
+			}else{
+				desde = desde.split("/");
+				desde = desde[2]+"-"+desde[1]+"-"+desde[0];
+				hasta = hasta.split("/");
+				hasta = hasta[2]+"-"+hasta[1]+"-"+hasta[0];
+			}
+			// Función para validar si hay registros para la búsqueda especificada
+			$.post('<?php echo base_url(); ?>index.php/administracion/CAuditoria/obtenerAuditorias/' + usuario + '/' + desde + '/' + hasta + '', function (response) {
+				//~ alert(response);
+				if (response[1] == '0') {
+				bootbox.alert("No hay registros para la consulta especificada", function () {
+				}).on('hidden.bs.modal', function (event) {    
+				});
+				}else{
+				URL = '<?php echo base_url(); ?>index.php/administracion/CAuditoria/pdf_auditoria/' + usuario + '/' + desde + '/' + hasta + '';
+				$.fancybox.open({ padding : 0, href: URL, type: 'iframe',width: 1024, height: 860, });
+				}
+			});
+		} 
     });
 });
 </script>
