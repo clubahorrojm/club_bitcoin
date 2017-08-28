@@ -265,3 +265,11 @@ CAMBIOS AL 28-08-2017 (MARCEL):
 			CONSTRAINT ubicacion_key PRIMARY KEY (id)
 		)
 		- Actualización de Modelos: ModelsBusqueda.php
+
+CAMBIOS AL 28-08-2017 (José):
+	- Actualización de Controllers: CReferidos, CRelLinks.
+	- Actualización de views: 
+	   views/referidos/perfil/paneles_modal/informacion_personal.php, 
+	   views/referidos/perfil/reg_perfil.php y 
+	   views/referidos/perfil/perfil.php
+	-Actualización de js de validación: static/js/progress.js
