@@ -166,7 +166,7 @@ class CRelDistribucion extends CI_Controller
             // Se consulta la cantidad de pagos/distribuciones realizadas
             $num_distri = $this->MRelDistribucion->obtenerDistribuciones($cod_user);
             // Si el numero de pagos por este usuario es igual a 8 (cantidad maxima)
-            if (count($num_distri) == 8){//Se procede a la actualizacion de estatus de perfil a 100%
+            if (count($num_distri) >= 7){//Se procede a la actualizacion de estatus de perfil a 100%
                
                 $perfil = $this->MReferidos->obtenerReferido($cod_user);
                 $cod_perfil_usu = $perfil[0]->codigo; // Codigo del perfil del referido
@@ -181,8 +181,8 @@ class CRelDistribucion extends CI_Controller
                 // PASO 6 (Notificacion del pago a tu padre referido principal)
                 // Se actualiza el estatus en la tabla del padre de los links a pago
                 $datos_links = array(
-                    'verif_pago'=> 1,
-                    'referido_id'=> $cod_perfil,
+                    'verif_pago'=> 2,
+                    'referido_id'=> $id_user,
                 );
                 $result = $this->MRelLinks->actualizarReferidoLinks($datos_links);
             }

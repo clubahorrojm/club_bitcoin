@@ -230,3 +230,6 @@ CAMBIOS AL 24-08-2017 (Marcel):
 		- Actualización de Modelos: MMails.php, MLRetiros.php, MAuditoria.php
 		- Incorporacion de 3 campos (fecha_na, pais_id, patrocinador_id) a la tapla usuarios y eliminacion de 1 (telefono)
 		- Incorporado dl js reloj con sus imagenes
+		
+CAMBIOS AL 28-08-2017 (José):
+	- Actualización de Controllers: CLPagos, CReferidos y CRelDistribucion (Ajustes en la distribución de capital y en el estatus del pago)
