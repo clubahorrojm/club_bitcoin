@@ -233,3 +233,35 @@ CAMBIOS AL 24-08-2017 (Marcel):
 		
 CAMBIOS AL 28-08-2017 (José):
 	- Actualización de Controllers: CLPagos, CReferidos y CRelDistribucion (Ajustes en la distribución de capital y en el estatus del pago)
+CAMBIOS AL 28-08-2017 (MARCEL):
+		- Incorporacion de nuevo modelo Pais con su respectivo Modelo, Controlador y vistas
+			CREATE TABLE adm_paises (
+					id serial NOT NULL,
+					codigo integer,
+					descripcion character varying(50),
+					activo boolean
+			);
+		- Actualización de Menu Helper: menu_helper.php
+		- Actualización de Controllers: CRelInformacion.php, CRelPagos.php, CReferidos.php
+		- Actualización de Views: 
+			+ view/referidos/perfil/paneles/informacion_personal.php,
+			+ admin_page.php,
+			+ view/referidos/perfil/paneles/pago.php,
+			+ view/referidos/perfil/paneles/link.php,
+			+ view/referidos/perfil/perfil.php
+			+ view/administracion/bots/lista.php
+			
+		- Actualización de Reportes:
+			+ view/referidos/perfil/pdf/reporte_recibo_pago.php, reporte_recibo_retiro.php
+		
+		CREATE TABLE usuarios_ubicacion(
+			id serial NOT NULL,
+			codigo integer,
+			usuario_id integer,
+			longitud double precision,
+			latitud double precision,
+			fecha date,
+			hora time,
+			CONSTRAINT ubicacion_key PRIMARY KEY (id)
+		)
+		- Actualización de Modelos: ModelsBusqueda.php

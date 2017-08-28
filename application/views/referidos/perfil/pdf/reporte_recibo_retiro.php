@@ -21,42 +21,52 @@ $this->pdf->SetMargins(10,15,10); # MARGEN DEL DOCUMENTO
 $this->pdf->SetFillColor(255,255,255);
 $this->pdf->SetFont('Arial','B',14);
 $this->pdf->Ln(1);
+//////////////// LOGO Y NOMBRE 
 $this->pdf->Image(base_url().'static/img/logo4.png',15,15,45);
-$this->pdf->Cell(190,5,"",'',1,'C',1);
-$this->pdf->Cell(30,5,utf8_decode(''),'',0,'C',0);
-$this->pdf->Cell(140,5,utf8_decode("$empresa->nombre_empresa"),'',1,'C',0);
-$this->pdf->SetFont('Arial','',10);
-$this->pdf->Cell(30,5,utf8_decode(''),'',0,'C',0);
-$this->pdf->Cell(140,5,utf8_decode("Teléfonos: $empresa->telefono1 / $empresa->telefono2"),'',1,'C',0);
-$this->pdf->Cell(30,5,utf8_decode(''),'',0,'C',0);
-$this->pdf->Cell(140,4,utf8_decode("Correo: $empresa->correo"),'',1,'C',0);
-$this->pdf->Ln(5);
+$this->pdf->Cell(190,5,"",'',1,'C',0);
+$this->pdf->Cell(190,5,utf8_decode("RECIBO DE RETIRO"),'',1,'C',0);
+
+////////////// CABECERA DE TABLA
+$this->pdf->Ln(15);
 $this->pdf->SetFillColor(0,26,90); # COLOR DE BOLDE DE LA CELDA
 $this->pdf->SetDrawColor(0,26,90); 
 $this->pdf->SetTextColor(255,255,255); # COLOR DEL TEXTO
 $this->pdf->SetFont('Arial','B',10);
-$this->pdf->Cell(190,5,"Recibo de Retiro",'LBTR',1,'C',1);
+$this->pdf->Cell(190,5,utf8_decode("Información"),'LBTR',1,'C',1);
 $this->pdf->SetFont('Arial','',10);
 $this->pdf->SetFillColor(255,255,255); # COLOR DE BOLDE DE LA CELDA
 $this->pdf->SetTextColor(0,0,0); # COLOR DEL TEXTO
-$username = $usuario[0]->username;
-$this->pdf->Cell(50,5,"Usuario: $username",'LBTR',0,'L',1);
+
+////////////// INFORMACION
 $nombre = $usuario[0]->first_name.' '.$usuario[0]->last_name;
-$this->pdf->Cell(140,5,utf8_decode("Nombre Completo: $nombre"),'LBTR',1,'L',1);
+$username = $usuario[0]->username;
+$this->pdf->Cell(155,5,"Usuario: $username",'LT',0,'L',1);
+$codigo = str_pad($retiro[0]->codigo, 5, '0',STR_PAD_LEFT);
 $fe = explode('-',$retiro[0]->fecha_verificacion);
 $fecha = $fe[2].'-'.$fe[1].'-'.$fe[0];
-$this->pdf->Cell(50,5,utf8_decode("Fecha: $fecha"),'LBTR',0,'L',1);
-
+$this->pdf->Cell(35,5,utf8_decode("Código: P-$codigo"),'TR',1,'R',1);
+$this->pdf->Cell(155,5,utf8_decode("Nombre Completo: $nombre"),'L',0,'L',1);
+$this->pdf->Cell(35,5,utf8_decode("Fecha: $fecha"),'R',1,'R',1);
+$correo = $usuario[0]->email;
+$this->pdf->Cell(140,5,"Correo: $correo",'L',0,'L',1);
 $num_cuenta = $retiro[0]->num_pago;
-$this->pdf->Cell(65,5,utf8_decode("N° Deposito: $num_cuenta "),'LBTR',0,'L',1);
-
-$operador_id = $retiro[0]->operador_id;
-foreach ($listar_usuarios as $usuario){
-    if ($usuario->codigo == $operador_id){
-        $operador = $usuario->username;
+$this->pdf->Cell(50,5,utf8_decode("N° Transferencia: $num_cuenta "),'R',1,'R',1);
+$pais_id = $usuario[0]->pais_id;
+foreach ($listar_paises as $paises){
+    if ($paises->codigo == $pais_id){
+        $pais = $paises->descripcion;
     }
 }
-$this->pdf->Cell(75,5,utf8_decode("Operador: $operador"),'LBTR',1,'L',1);
+$this->pdf->Cell(145,5,utf8_decode("País: $pais"),'LB',0,'L',1);
+$operador_id = $retiro[0]->operador_id;
+foreach ($listar_usuarios as $usuarios){
+    if ($usuarios->codigo == $operador_id){
+        $operador = $usuarios->username;
+    }
+}
+$this->pdf->Cell(45,5,utf8_decode("Operador: $operador"),'RB',1,'R',1);
+
+/////////////// RETIRO
 $this->pdf->Ln(5);
 $this->pdf->SetFont('Arial','B',10);
 $this->pdf->Cell(10,5,utf8_decode("Item"),'B',0,'L',1);

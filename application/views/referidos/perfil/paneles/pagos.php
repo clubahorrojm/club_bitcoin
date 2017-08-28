@@ -45,13 +45,13 @@ if ($tipouser == 'Administrador') {
                                 <h3 class="box-title" style="color:#3C8DBC">Información del pago</h3>
                             </div><!-- /.box-header -->
                             <div class="panel-body">
-                                <div class="col-md-12">
+                                <div class="col-md-4">
 									<div class="form-group">
 										<label style="font-weight:bold">Dir. Monedero (desde la que realizó el pago)</label><br>
 										<input type="text" placeholder="Ej: AxYz125cdJklmn14PqRs87Vwxy54Q7YcV4" maxlength="34" id="dir_monedero" value="<?php echo $pago[0]->dir_monedero ?>" class="form-control" readonly="true">
 									</div>
 								</div>
-                                <div class="col-md-3">
+                                <div class="col-md-2">
                                     <div class="form-group">
                                         <label style="font-weight:bold">Fecha</label>
                                         <input type="text" placeholder="Ej: 01/10/2016" maxlength="10" id="fecha_pago"
@@ -63,13 +63,13 @@ if ($tipouser == 'Administrador') {
                                             ?>" class="form-control" >
                                     </div><!-- /.form-group -->
                                 </div><!-- /.form-group -->
-                                <div class="col-md-3">
+                                <div class="col-md-2">
                                     <div class="form-group">
                                         <label style="font-weight:bold">Monto</label>
                                         <input type="text" placeholder="Ej: 50" maxlength="10" id="monto" disabled="disabled"  value="<?php echo $pago[0]->monto ?>" class="form-control" >
                                     </div><!-- /.form-group -->
                                 </div><!-- /.form-group -->
-                                <div class="col-md-3">
+                                <div class="col-md-1">
                                     <div class="form-group">
                                         <label style="font-weight:bold">Estatus</label><br>
                                         <?php if ($pago[0]->estatus == 1) {?>
@@ -80,7 +80,7 @@ if ($tipouser == 'Administrador') {
                                     </div><!-- /.form-group -->
                                 </div><!-- /.form-group -->
                                 <?php if ($pago[0]->estatus == 2){ ?>
-                                   <div class="col-md-2">
+                                <div class="col-md-2">
                                     <div class="form-group text-left">
                                         <a class="btn btn-app ver" data-toggle="tab" id="recibo_pago" >
                                             <i class="fa fa-file-pdf-o text-red "></i>
@@ -91,10 +91,6 @@ if ($tipouser == 'Administrador') {
                                 <?php } ?>
                                 <div class="col-md-12">
                                     <div class="form-group text-center">
-                                        <br>
-                                        <!--<button type="button" id="registrar_p" style="font-weight: bold;font-size: 13px" class="btn btn-info " >
-                                            &nbsp;<span class="glyphicon glyphicon-floppy-disk"></span>&nbsp;Registrar
-                                        </button>-->
                                         <input id="cod_perfil"  type='hidden' value="<?php echo $cod_perfil ?>" class="form-control" >
                                         <input id="cod_pago"  type='hidden' value="<?php echo $pago[0]->codigo ?>" class="form-control" >
                                         <input id="estatus"  type='hidden' value="<?php echo $pago[0]->estatus ?>" class="form-control" >
