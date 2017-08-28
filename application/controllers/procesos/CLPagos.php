@@ -41,6 +41,7 @@ class CLPagos extends CI_Controller
         $this->load->model('busquedas_ajax/ModelsBusqueda');
         $this->load->model('administracion/MAuditoria');
         $this->load->model('referidos/MRelPagos');
+        $this->load->model('referidos/MRelLinks');
         $this->load->model('referidos/MReferidos');
         
     }
@@ -88,10 +89,12 @@ class CLPagos extends CI_Controller
             );
             $this->MAuditoria->add($param);
         }
+        // Actualizamos el perfil
         $data['pagos'] = $this->MRelPagos->obtenerRelPagos2Bit($cod);
-        $id_pefil = $data['pagos'][0]->perfil_id;
+        $id_perfil = $data['pagos'][0]->perfil_id;
+        $id_usuario = $data['pagos'][0]->usuario_id;
         $datos2 = array(
-            'codigo'=> $id_pefil,
+            'codigo'=> $id_perfil,
             'estatus'=> 2,
         );
         // print_r($datos2);
@@ -99,9 +102,16 @@ class CLPagos extends CI_Controller
         $result = $this->MReferidos->actualizarReferidos($datos2);
         // Registramos los cambios en la Bitacora
         if ($result) {
+			// Primero actualizamos el link con la verificación del pago
+			$datos3 = array(
+				'referido_id'=> $id_usuario,
+				'verif_pago'=> 1
+			);
+			$result = $this->MRelLinks->actualizarReferidoLinks($datos3);
+			
             $param = array(
                 'tabla' => 'ref_perfil',
-                'codigo' => $id_pefil,
+                'codigo' => $id_perfil,
                 'accion' => 'Actualización de Perfil',
                 'fecha' => date('Y-m-d'),
                 'hora' => date("h:i:s a"),
