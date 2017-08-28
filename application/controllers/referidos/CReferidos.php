@@ -38,6 +38,7 @@ class CReferidos extends CI_Controller
         $this->load->model('referidos/MReferidos');
         $this->load->model('busquedas_ajax/ModelsBusqueda');
         $this->load->model('administracion/MAuditoria');
+        $this->load->model('administracion/MPaises');
 		$this->load->model('configuracion/usuarios/Usuarios_model');
         $this->load->model('configuracion/MTiposMonedas');
         // $this->load->model('configuracion/MCuentas');
@@ -62,6 +63,7 @@ class CReferidos extends CI_Controller
 		$nombre_ref = $data['usuario'][0]->first_name.' '.$data['usuario'][0]->last_name; // Variable que contiene el nombre del usuario completo
 		$data['editar'] = $this->MReferidos->obtenerReferido($cod_user);
 		$data['cod_perfil']  = $data['editar'][0]->codigo; // Codigo del Usuario
+		$data['listar_paises'] = $this->MPaises->obtenerPais(); // Listado de cuentas de la pagina
 		$data['estatus_perfil']  = $data['editar'][0]->estatus; // Estatus del perfil del Usuario
         $cod_perfil = $data['editar'][0]->codigo; // Codigo del Usuario
         // $data['listar_t_cuentas'] = $this->MTiposCuenta->obtenerTiposCuenta(); // Listado de Tipo de cuentas
