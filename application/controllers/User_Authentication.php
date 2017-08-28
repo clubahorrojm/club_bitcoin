@@ -299,4 +299,30 @@ Class User_Authentication extends CI_Controller {
 		echo $result = $this->ModelsBusqueda->search_next_link2();
 	}
 
+	function cargar_punteros(){
+        $resultado = $this->ModelsBusqueda->search_punteros();
+		//print_r($resultado);
+		//saco el numero de elementos
+		$longitud = count($resultado);
+		 
+		//Recorro todos los elementos
+		for($i=0; $i<$longitud; $i++) {
+			  //saco el valor de cada elemento
+			  $nombre = $resultado[$i]->username;
+			  $longitud = $resultado[$i]->longitud;
+			  $latitud = $resultado[$i]->latitud;
+			  print_r("{ latLng:[".$longitud.",".$latitud."], name:'".$nombre."'}, ");
+			  //print_r("<br>");
+		}
+
+		
+		//$todas = new ArrayObject();
+		//for ($i=0; $i<3; $i++){
+		//	$usuario = $resultado[$i]->username;
+		//	print_r($usuario);
+		//	//$todas->append($resultado[$i]->username+'@@@'+$resultado[$i]->longitud+'###'+$resultado[$i]->latitud+';;');
+		//	//print_r($todas);
+		//}
+		
+    }
 }
