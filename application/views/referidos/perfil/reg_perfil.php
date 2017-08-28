@@ -34,6 +34,7 @@
 				  <?php include("paneles_modal/informacion_personal.php");?>
 				  <?php //include("paneles_modal/distribucion.php");?>
 				  <?php include("paneles_modal/finalizado.php");?>
+				  <input type="hidden" id="id_user" value="<?php echo $this->session->userdata['logged_in']['id'];?>"/>
 				</form>
 			 </div>
 			 

@@ -14,6 +14,7 @@ $(document).ready(function () {
 	$("#modal_registrar").modal('show');
 	
 	// Configuración de campos
+	$('#fecha_na').numeric({allow: "/"});
 	$('#fecha_pago').numeric({allow: "/"});
     $('#dir_monedero').alphanumeric();
     $('#dir_monedero_per').alphanumeric();
@@ -37,6 +38,11 @@ $(document).ready(function () {
         language: "es",
         autoclose: true,
     })
+    $('#fecha_na').datepicker({
+        format: "dd/mm/yyyy",
+        language: "es",
+        autoclose: true,
+    })
     
     // Carga de datos
     var tipo = $("#tipo_pago_id").val();
@@ -53,6 +59,11 @@ $(document).ready(function () {
     }else{
         $("#tipo_pago,#num_pago,#fecha_pago,#registrar_p").prop('readonly',true)
     }
+    
+    var pais_id = $("#pais_id_id").val()
+    var patrocinador_id = $("#patrocinador_id_id").val()
+    $("#pais_id").val(pais_id);
+    $("#patrocinador_id").val(patrocinador_id);
     
     // Validar las secciones a mostrar u ocultar
     if($("#estatus_perfil").val() == 1){
@@ -282,13 +293,13 @@ function valida_personal(){
 				$("#correo").parent('div').addClass('has-error')
 				$("#correo").focus();
 		});
-	}else if ($("#telefono").val() == '') {
+	}/*else if ($("#telefono").val() == '') {
 		bootbox.alert("Debe colocar su teléfono", function () {
 		}).on('hidden.bs.modal', function (event) {
 				$("#telefono").parent('div').addClass('has-error')
 				$("#telefono").focus();
 		});
-	}/*else if ($("#tipo_cuenta_id").val() == 0 || $("#tipo_cuenta_id").val() == null) {
+	}else if ($("#tipo_cuenta_id").val() == 0 || $("#tipo_cuenta_id").val() == null) {
 		bootbox.alert("Debe seleccionar el tipo de su cuenta bancaria", function () {
 		}).on('hidden.bs.modal', function (event) {
 				$("#tipo_cuenta_id").parent('div').addClass('has-error')
@@ -306,8 +317,26 @@ function valida_personal(){
 				$("#banco_usu_id").parent('div').addClass('has-error')
 				$("#banco_usu_id").focus();
 		});
-	}*/
-	else if ($("#dir_monedero_per").val() == '' || $("#dir_monedero_per").val() == 0) {
+	}*/else if ($("#fecha_na").val() == '') {
+		bootbox.alert("Debe seleccionar su fecha de nacimiento", function () {
+		}).on('hidden.bs.modal', function (event) {
+				$("#fecha_na").parent('div').addClass('has-error')
+				$("#fecha_na").focus();
+		});
+	}else if ($("#pais_id").val() == 0) {
+		bootbox.alert("Debe seleccionar su país", function () {
+		}).on('hidden.bs.modal', function (event) {
+				$("#pais_id").parent('div').addClass('has-error')
+				$("#pais_id").focus();
+				$("#pais_id").val('0');
+		});
+	}else if ($("#patrocinador_id").val() == 0) {
+		bootbox.alert("Debe indicar como nos conoció", function () {
+		}).on('hidden.bs.modal', function (event) {
+				$("#patrocinador_id").parent('div').addClass('has-error')
+				$("#patrocinador_id").focus();
+		});
+	}else if ($("#dir_monedero_per").val() == '' || $("#dir_monedero_per").val() == 0) {
 		bootbox.alert("Debe colocar su dirección de monedero personal", function () {
 		}).on('hidden.bs.modal', function (event) {
 				$("#dir_monedero_per").parent('div').addClass('has-error')
@@ -333,24 +362,28 @@ function valida_personal(){
 			//~ alert(id_ref+" - "+nivel_ref);
 			// Pago a cada referido padre
 			$.post(base_url+'index.php/referidos/CRelDistribucion/pagar',
-				   $.param({'id_ref': id_ref})+'&'+$.param({'nivel_ref': nivel_ref}), function (response){
+				$.param({'id_ref': id_ref})+'&'+$.param({'nivel_ref': nivel_ref}), function (response){
 
-					if (response[0] == 1) {
-					   $("#dist_true").val(parseInt($("#dist_true").val())+0);
-					} else {
-					   $("#dist_true").val(parseInt($("#dist_true").val())+1);
-					}
+				if (response[0] == 1) {
+				   $("#dist_true").val(parseInt($("#dist_true").val())+0);
+				} else {
+				   $("#dist_true").val(parseInt($("#dist_true").val())+1);
+				}
 				
 			});
 		});
 		
+		// Actualización de la información personal
 		cedula = $('#cedula').val()
 		nombre = $('#nombre').val()
 		apellido = $('#apellido').val()
 		correo = $('#correo').val()
-		telefono = $('#telefono').val()
+		//~ telefono = $('#telefono').val()
 		// tipo_cuenta_id = $('#tipo_cuenta_id').val()
+		fecha_na = $('#fecha_na').val()
 		usuario_id = $('#usuario_id').val()
+		pais_id = $('#pais_id').val()
+		patrocinador_id = $('#patrocinador_id').val()
 		// num_cuenta_usu = $('#num_cuenta_usu').val()
 		// banco_usu_id = $('#banco_usu_id').val()
 		dir_monedero_per = $('#dir_monedero_per').val()
@@ -358,7 +391,8 @@ function valida_personal(){
 		
 		$.post(base_url+'index.php/referidos/CRelInformacion/actualizar',
 		   $.param({'cedula': cedula})+'&'+$.param({'nombre': nombre})+'&'+$.param({'apellido': apellido})+'&'+$.param({'pk_perfil': pk_perfil})+'&'+
-		   $.param({'correo': correo})+'&'+$.param({'telefono': telefono})+'&'+$.param({'usuario_id': usuario_id})+'&'+$.param({'dir_monedero_per': dir_monedero_per}), 
+		   $.param({'correo': correo})+'&'+$.param({'usuario_id': usuario_id})+'&'+$.param({'dir_monedero_per': dir_monedero_per})+'&'+
+		   $.param({'pais_id': pais_id})+'&'+$.param({'patrocinador_id': patrocinador_id})+'&'+$.param({'fecha_na': fecha_na}), 
 		   function (response){
 			if (response[0] == 1) {
 				bootbox.alert("Disculpe, esta dirección ya fue registrada con este usuario", function () {
@@ -367,9 +401,17 @@ function valida_personal(){
 					$("#cedula").focus();
 				});
 			} else {
+				// Generación automática de links del usuario
+				usuario_id = $('#id_user').val();
+				$.post(base_url+'index.php/referidos/CRelLinks/guardar', $.param({'usuario_id': usuario_id}), function (response){
+					
+				});
+				
 				bootbox.alert("Se actualizó su información personal con Exito", function (){
 				}).on('hidden.bs.modal', function (event) {
 					//~ //window.location = '<?php echo base_url(); ?>index.php/referidos/CRelInformacion/';
+					
+					// Recarga de página
 					window.location = base_url+'index.php/referidos/CReferidos/';
 					$("#reg_data_personal").val(1);
 				});

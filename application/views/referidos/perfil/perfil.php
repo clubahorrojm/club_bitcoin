@@ -393,7 +393,7 @@
         
         if($("#username_reg").val() == ''){
             alert("Error: Ingrese su nombre de usuario");
-            $("#username_reg"moneda).parent('div').addClass('has-error')
+            $("#username_reg").parent('div').addClass('has-error')
             $("#username_reg").val('');
             $("#username_reg").focus();
         } else if($("#password_reg").val() == ''){

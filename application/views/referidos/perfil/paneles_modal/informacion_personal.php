@@ -36,12 +36,53 @@
 								<input type="text" placeholder="Correo electrónico del usuario" value="<?php echo $usuario[0]->email ?>" maxlength="50" id="correo" class="form-control" >
 							</div><!-- /.form-group -->
 						</div><!-- /.form-group -->
-						<div class="col-md-4">
+						<!--<div class="col-md-4">
 							<div class="form-group">
 								<label style="font-weight:bold">Telefono</label>
 								<input type="text" class="form-control" placeholder="(0243) 999-9999" value="<?php echo $usuario[0]->telefono ?>" id="telefono" data-inputmask='"mask": "(9999) 999-9999"' data-mask>
+							</div>
+						</div>-->
+						<div class="col-md-4">
+							<div class="form-group">
+								<label style="font-weight:bold">Fecha de Nacimiento</label>
+								<input type="text" class="form-control" placeholder=""  id="fecha_na" value="<?php if ($usuario[0]->fecha_na != ''){
+										$fe = explode('-',$usuario[0]->fecha_na);
+										$fecha = $fe[2].'/'.$fe[1].'/'.$fe[0];
+										echo $fecha;
+										}
+									?>">
 							</div><!-- /.form-group -->
 						</div><!-- /.form-group -->
+						<div class="col-md-8">
+							<div class="form-group">
+								<label style="font-weight:bold">País</label>
+								<select class="form-control" autofocus="" id="pais_id" maxlength="7" name="pais_id">
+									<option value="">Seleccione</option>
+									<?php foreach ($listar_paises as $pais) { ?>
+										<option value="<?php echo $pais->codigo;?>"><?php echo $pais->descripcion;?></option>
+									 <?php }?> 
+								</select>
+							</div><!-- /.form-group -->
+						</div><!-- /.form-group -->
+						<div class="col-md-4">
+							<div class="form-group">
+								<label style="font-weight:bold">Llegaste a nosotros por </label>
+								<select class="form-control" autofocus="" id="patrocinador_id" maxlength="7" name="patrocinador_id">
+									<option value="">Seleccione</option>
+									<option value="1">Facebook</option>
+									<option value="2">Twitter</option>
+									<option value="3">Instagram</option>
+									<option value="4">Google +</option>
+									<option value="5">Página web</option>
+									<option value="6">Por un amigo</option>
+									<option value="7">Por Tv</option>
+									<option value="8">Youtube</option>
+								</select>
+							</div><!-- /.form-group -->
+						</div><!-- /.form-group -->
+						<div class="text-left col-md-12">
+							<legend><H4  style=" color:#3C8DBC">Datos de Monedero</H4></legend>
+						</div>
 						<div class="col-md-12">
 							<div class="form-group">
 								<label style="font-weight:bold">Dir. Monedero Personal</label>
@@ -91,6 +132,8 @@
 								<input id="tipo_cuenta_id_id" type='hidden' value="<?php echo $editar[0]->tipo_cuenta_id ?>" class="form-control" >
 								<input id="cuenta_id_id" type='hidden' value="<?php echo $editar[0]->num_cuenta_usu ?>" class="form-control" >
 								<input id="banco_usu_id_id" type='hidden' value="<?php echo $editar[0]->banco_usu_id ?>" class="form-control" >
+								<input id="pais_id_id" type='hidden' value="<?php echo $usuario[0]->pais_id ?>" class="form-control" >
+								<input id="patrocinador_id_id" type='hidden' value="<?php echo $usuario[0]->patrocinador_id ?>" class="form-control" >
 								<input class="form-control"  type='hidden' id="usuario_id" name="usuario_id" value="<?php echo $usuario[0]->codigo ?>"/>
 								<input id="base_url" type='hidden' value="<?php echo base_url(); ?>">
 								<input id="reg_data_personal" type='hidden' value="0">

@@ -59,7 +59,7 @@ class CRelLinks extends CI_Controller
         $this->load->view('referidos/perfil/paneles/links',$data);
     }
     
-    //metodo para guardar un nuevo registro
+    //Método para guardar un nuevo registro
     public function guardar(){
         $u_id = $this->input->post('usuario_id');
 		$data['usuario'] = $this->Usuarios_model->obtenerUsuario($u_id);
