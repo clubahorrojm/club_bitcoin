@@ -80,14 +80,51 @@ if ($tipouser == 'Administrador') {
                                         <input type="text" placeholder="Correo electrónico del usuario" value="<?php echo $usuario[0]->email ?>" maxlength="50" id="correo" class="form-control" >
                                     </div><!-- /.form-group -->
                                 </div><!-- /.form-group -->
+                                <!--<div class="col-md-2">-->
+                                <!--    <div class="form-group">-->
+                                <!--        <label style="font-weight:bold">Telefono</label>-->
+                                <!--        <input type="text" class="form-control" placeholder="(0243) 999-9999" value="<?php echo $usuario[0]->telefono ?>" id="telefono" data-inputmask='"mask": "(9999) 999-9999"' data-mask>-->
+                                <!--    </div>-->
+                                <!--</div>-->
                                 <div class="col-md-2">
                                     <div class="form-group">
-                                        <label style="font-weight:bold">Telefono</label>
-                                        <input type="text" class="form-control" placeholder="(0243) 999-9999" value="<?php echo $usuario[0]->telefono ?>" id="telefono" data-inputmask='"mask": "(9999) 999-9999"' data-mask>
+                                        <label style="font-weight:bold">Fecha de Nacimiento</label>
+                                        <input type="text" class="form-control" placeholder=""  id="fecha_na" value="<?php if ($usuario[0]->fecha_na != ''){
+                                                $fe = explode('-',$usuario[0]->fecha_na);
+                                                $fecha = $fe[2].'/'.$fe[1].'/'.$fe[0];
+                                                echo $fecha;
+                                                }
+                                            ?>">
                                     </div><!-- /.form-group -->
                                 </div><!-- /.form-group -->
-                                
-                                <div class="text-left">
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label style="font-weight:bold">País</label>
+                                        <select class="form-control" autofocus="" id="pais_id" maxlength="7" name="pais_id">
+                                            <option value="">Seleccione</option>
+											<?php foreach ($listar_paises as $pais) { ?>
+												<option value="<?php echo $pais->codigo;?>"><?php echo $pais->descripcion;?></option>
+											 <?php }?> 
+                                        </select>
+                                    </div><!-- /.form-group -->
+                                </div><!-- /.form-group -->
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label style="font-weight:bold">Llegaste a nosotros por </label>
+                                        <select class="form-control" autofocus="" id="patrocinador_id" maxlength="7" name="patrocinador_id">
+                                            <option value="0">Seleccione</option>
+                                            <option value="1">Facebook</option>
+                                            <option value="2">Twitter</option>
+                                            <option value="3">Instagram</option>
+                                            <option value="4">Google +</option>
+                                            <option value="5">Página web</option>
+                                            <option value="6">Por un amigo</option>
+                                            <option value="7">Por Tv</option>
+                                            <option value="8">Youtube</option>
+                                        </select>
+                                    </div><!-- /.form-group -->
+                                </div><!-- /.form-group -->
+                                <div class="text-left col-md-12">
                                     <legend><H4  style=" color:#3C8DBC">Datos de Monedero</H4></legend>
                                 </div>
 
@@ -106,8 +143,8 @@ if ($tipouser == 'Administrador') {
                                         </button>
                                         <input id="cod_perfil"  type='hidden' value="<?php echo $cod_perfil ?>" class="form-control" >
                                         <input id="estatus_perfil"  type='hidden' value="<?php echo $estatus_perfil ?>" class="form-control" >
-                                        <input id="tipo_cuenta_id_id" type='hidden' value="<?php echo $editar[0]->tipo_cuenta_id ?>" class="form-control" >
-                                        <input id="banco_usu_id_id" type='hidden' value="<?php echo $editar[0]->banco_usu_id ?>" class="form-control" >
+                                        <input id="pais_id_id" type='hidden' value="<?php echo $usuario[0]->pais_id ?>" class="form-control" >
+                                        <input id="patrocinador_id_id" type='hidden' value="<?php echo $usuario[0]->patrocinador_id ?>" class="form-control" >
                                         <input class="form-control"  type='hidden' id="usuario_id" name="usuario_id" value="<?php echo $usuario[0]->codigo ?>"/>
                                     </div><!-- /.form-group -->
                                 </div><!-- /.form-group -->
@@ -135,7 +172,7 @@ if ($tipouser == 'Administrador') {
 
 <script>
      
-    $('#fecha_pago').numeric({allow: "/"});
+    $('#fecha_na').numeric({allow: "/"});
     $('#num_pago').numeric();
     $('#num_cuenta_usu').numeric();
     $('#monto').numeric({allow: "."});
@@ -150,20 +187,20 @@ if ($tipouser == 'Administrador') {
             $(this).parent('div').removeClass('has-error');
         }
     });
-    $('#fecha_pago').datepicker({
+    $('#fecha_na').datepicker({
         format: "dd/mm/yyyy",
         language: "es",
         autoclose: true,
     })
-    var tipo = $("#tipo_cuenta_id_id").val()
-    var cuenta = $("#banco_usu_id_id").val()
-    $("#tipo_cuenta_id").val(tipo);
-    $("#banco_usu_id").val(cuenta);
-    if ($("#estatus_perfil").val() == '1'){
-        $("#cedula,#nombre,#apellido,#correo,#tipo_cuenta_id,#num_cuenta_usu,#banco_usu_id,#telefono,#agregar4").attr('disabled',true)
-    }else{
-        $("#cedula,#nombre,#apellido,#correo,#tipo_cuenta_id,#num_cuenta_usu,#banco_usu_id,#telefono,#agregar4").attr('disabled',false)
-    }
+    var pais_id = $("#pais_id_id").val()
+    var patrocinador_id = $("#patrocinador_id_id").val()
+    $("#pais_id").val(pais_id);
+    $("#patrocinador_id").val(patrocinador_id);
+    //if ($("#estatus_perfil").val() == '1'){
+    //    $("#cedula,#nombre,#apellido,#correo,#tipo_cuenta_id,#num_cuenta_usu,#banco_usu_id,#telefono,#agregar4").attr('disabled',true)
+    //}else{
+    //    $("#cedula,#nombre,#apellido,#correo,#tipo_cuenta_id,#num_cuenta_usu,#banco_usu_id,#telefono,#agregar4").attr('disabled',false)
+    //}
 
     
     $('#agregar4').click(function(e){
@@ -193,32 +230,32 @@ if ($tipouser == 'Administrador') {
                     $("#correo").parent('div').addClass('has-error')
                     $("#correo").focus();
             });
-        }else if ($("#telefono").val() == '') {
+        }/*else if ($("#telefono").val() == '') {
             bootbox.alert("Debe colocar su telefono", function () {
             }).on('hidden.bs.modal', function (event) {
                     $("#telefono").parent('div').addClass('has-error')
                     $("#telefono").focus();
             });
-        }/*else if ($("#tipo_cuenta_id").val() == 0 || $("#tipo_cuenta_id").val() == null) {
-            bootbox.alert("Debe seleccionar el tipo de su cuenta bancaria", function () {
+        }*/else if ($("#fecha_na").val() == '') {
+            bootbox.alert("Debe seleccionar su fecha de nacimiento", function () {
             }).on('hidden.bs.modal', function (event) {
-                    $("#tipo_cuenta_id").parent('div').addClass('has-error')
-                    $("#tipo_cuenta_id").focus();
+                    $("#fecha_na").parent('div').addClass('has-error')
+                    $("#fecha_na").focus();
             });
-        }else if ($("#num_cuenta_usu").val() == '' || $("#num_cuenta_usu").val() == 0) {
-            bootbox.alert("Debe colocar su nùmero de cuenta bancaria", function () {
+        }else if ($("#pais_id").val() == 0) {
+            bootbox.alert("Debe seleccionar su país", function () {
             }).on('hidden.bs.modal', function (event) {
-                    $("#num_cuenta_usu").parent('div').addClass('has-error')
-                    $("#num_cuenta_usu").focus();
-                    $("#num_cuenta_usu").val('');
+                    $("#pais_id").parent('div').addClass('has-error')
+                    $("#pais_id").focus();
+                    $("#pais_id").val('0');
             });
-        }else if ($("#banco_usu_id").val() == 0 || $("#banco_usu_id").val() == null) {
-            bootbox.alert("Debe colocar su banco", function () {
+        }else if ($("#patrocinador_id").val() == 0) {
+            bootbox.alert("Debe indicar como nos conoció", function () {
             }).on('hidden.bs.modal', function (event) {
-                    $("#banco_usu_id").parent('div').addClass('has-error')
-                    $("#banco_usu_id").focus();
+                    $("#patrocinador_id").parent('div').addClass('has-error')
+                    $("#patrocinador_id").focus();
             });
-        }*/else if ($("#dir_monedero_per2").val() == '' || $("#dir_monedero_per2").val() == 0) {
+        }else if ($("#dir_monedero_per2").val() == '' || $("#dir_monedero_per2").val() == 0) {
             bootbox.alert("Debe colocar su dirección de monedero personal", function () {
             }).on('hidden.bs.modal', function (event) {
                     $("#dir_monedero_per2").parent('div').addClass('has-error')
@@ -236,16 +273,17 @@ if ($tipouser == 'Administrador') {
             nombre = $('#nombre').val()
             apellido = $('#apellido').val()
             correo = $('#correo').val()
-            telefono = $('#telefono').val()
-            //~ tipo_cuenta_id = $('#tipo_cuenta_id').val()
+            //telefono = $('#telefono').val()
+            fecha_na = $('#fecha_na').val()
             usuario_id = $('#usuario_id').val()
-            //~ num_cuenta_usu = $('#num_cuenta_usu').val()
-            //~ banco_usu_id = $('#banco_usu_id').val()
+            pais_id = $('#pais_id').val()
+            patrocinador_id = $('#patrocinador_id').val()
             dir_monedero_per = $('#dir_monedero_per2').val()
             pk_perfil = $('#cod_perfil').val()
             $.post('<?php echo base_url(); ?>index.php/referidos/CRelInformacion/actualizar',
                    $.param({'cedula': cedula})+'&'+$.param({'nombre': nombre})+'&'+$.param({'apellido': apellido})+'&'+
-                   $.param({'pk_perfil': pk_perfil})+'&'+$.param({'correo': correo})+'&'+$.param({'telefono': telefono})+'&'+
+                   $.param({'pk_perfil': pk_perfil})+'&'+$.param({'correo': correo})+'&'+$.param({'fecha_na': fecha_na})+'&'+
+				   $.param({'pais_id': pais_id})+'&'+$.param({'patrocinador_id': patrocinador_id})+'&'+
                    $.param({'usuario_id': usuario_id})+'&'+$.param({'dir_monedero_per': dir_monedero_per}), 
                    function (response){
                     if (response[0] == 1) {

@@ -39,6 +39,7 @@ class CRelInformacion extends CI_Controller
         $this->load->model('referidos/MReferidos');
         $this->load->model('busquedas_ajax/ModelsBusqueda');
         $this->load->model('administracion/MAuditoria');
+		$this->load->model('administracion/MPaises');
         $this->load->model('configuracion/usuarios/Usuarios_model');
         // $this->load->model('configuracion/MCuentas');
         // $this->load->model('configuracion/MBancos');
@@ -54,7 +55,7 @@ class CRelInformacion extends CI_Controller
         $nombre_ref = $data['usuario'][0]->first_name.' '.$data['usuario'][0]->last_name; // Variable que contiene el nombre del usuario completo
         $data['editar'] = $this->MReferidos->obtenerReferido($cod_user);
         $data['cod_perfil']  = $data['editar'][0]->codigo; // Codigo del Usuario
-        // $data['listar_cuentas'] = $this->MCuentas->obtenerCuentas(); // Listado de cuentas de la pagina
+        $data['listar_paises'] = $this->MPaises->obtenerPais(); // Listado de cuentas de la pagina
         // $data['listar_bancos'] = $this->MBancos->obtenerBanco(); // Listado de Bancos
         // $data['listar_t_cuentas'] = $this->MTiposCuenta->obtenerTiposCuenta(); // Listado de Tipo de cuentas
 		$data['estatus_perfil']  = $data['editar'][0]->estatus; // Estatus del perfil del Usuario
@@ -63,12 +64,17 @@ class CRelInformacion extends CI_Controller
     
    //Metodo para actualizar
    function actualizar(){
+		$fecha = explode('/',$this->input->post('fecha_na'));
+        $fecha = $fecha[2].'-'.$fecha[1].'-'.$fecha[0];
         $datos = array(
             'cedula' => $this->input->post('cedula'),
             'first_name' => $this->input->post('nombre'),
             'last_name' => $this->input->post('apellido'),
             'email'=> $this->input->post('correo'),
-            'telefono'=> $this->input->post('telefono'),
+			'fecha_na' => $fecha,
+            'pais_id' => $this->input->post('pais_id'),
+            'patrocinador_id'=> $this->input->post('patrocinador_id'),
+            //'telefono'=> $this->input->post('telefono'),
         );
         $id = $this->input->post('usuario_id');
 		$result = $this->Usuarios_model->actualizar($id, $datos);

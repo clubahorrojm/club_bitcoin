@@ -64,31 +64,14 @@
                                                 </div><!-- /.form-group -->
                                             </div>
                                             <div class="col-md-3">
-                                                <label style="color:#3C8DBC">Su Perfil está: </label>
+                                                <label style="color:#3C8DBC">Estatus para el siguiente nivel: </label>
                                             </div>
                                             <div class="col-md-8">
                                                 <div class="progress progress-md active  ">
-                                                    <?php if ($editar[0]->estatus == 1) {?>
-                                                        <div class="progress-bar progress-bar-danger progress-bar-striped" style="width: 25%;"
-                                                             aria-valuemax="100" aria-valuemin="0" aria-valuenow="25" role="progressbar">
-                                                            <span style="font-weight: bold">25% Completado</span>
-                                                        </div>
-                                                    <?php }else if ($editar[0]->estatus == 2){ ?>
-                                                        <div class="progress-bar progress-bar-warning progress-bar-striped" style="width: 50%;"
-                                                             aria-valuemax="100" aria-valuemin="0" aria-valuenow="50" role="progressbar">
-                                                            <span style="font-weight: bold">50% Completado</span>
-                                                        </div>
-                                                    <?php }else if ($editar[0]->estatus == 3){ ?>
-                                                        <div class="progress-bar progress-bar-teal progress-bar-striped" style="width: 75%;"
-                                                             aria-valuemax="100" aria-valuemin="0" aria-valuenow="75" role="progressbar">
-                                                            <span style="font-weight: bold">75% Completado</span>
-                                                        </div>
-                                                    <?php }else if ($editar[0]->estatus >= 4){ ?>
-                                                        <div class="progress-bar progress-bar-success progress-bar-striped" style="width: 100%;"
-                                                             aria-valuemax="100" aria-valuemin="0" aria-valuenow="100" role="progressbar">
-                                                            <span style="font-weight: bold">100% Completado</span>
-                                                        </div>
-                                                    <?php } ?>
+                                                    <div class="progress-bar progress-bar-success progress-bar-striped" style="width: <?php echo $porcentaje ?>%;"
+                                                         aria-valuemax="100" aria-valuemin="0" aria-valuenow="<?php echo $porcentaje ?>" role="progressbar">
+                                                        <span style="font-weight: bold"><?php echo $porcentaje ?>% Completado (<?php echo $cant_ref.'/'.$cant_ref_necesarios ?>)</span>
+                                                    </div>
                                                 </div>
                                                 <div class="text-center">
                                                     <h1 style="color:#3C8DBC">Nivel</h1>
@@ -410,7 +393,7 @@
         
         if($("#username_reg").val() == ''){
             alert("Error: Ingrese su nombre de usuario");
-            $("#username_reg").parent('div').addClass('has-error')
+            $("#username_reg"moneda).parent('div').addClass('has-error')
             $("#username_reg").val('');
             $("#username_reg").focus();
         } else if($("#password_reg").val() == ''){

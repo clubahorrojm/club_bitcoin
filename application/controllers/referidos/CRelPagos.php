@@ -42,6 +42,7 @@ class CRelPagos extends CI_Controller
         $this->load->model('configuracion/usuarios/Usuarios_model');
         $this->load->model('administracion/MEmpresa');
         $this->load->model('configuracion/MTiposMonedas');
+		$this->load->model('administracion/MPaises');
         // $this->load->model('configuracion/MCuentas');
         // $this->load->model('configuracion/MBancos');
         // $this->load->model('configuracion/MTiposCuenta');
@@ -144,7 +145,7 @@ class CRelPagos extends CI_Controller
         //~ $cuenta_id = $data['pago'][0]->cuenta_id;
         $perfil = $this->MReferidos->obtenerReferido($cod_user);
         
-        $data['empresa'] = $this->MEmpresa->obtenerEmpresa(1);
+        //$data['empresa'] = $this->MEmpresa->obtenerEmpresa(1);
         $data['editar'] = $this->MReferidos->obtenerReferido($cod_user);
         $id_moneda = $data['editar'][0]->t_moneda_id; // ID Tipo de moneda
         $data['monedas'] = $this->MTiposMonedas->obtenerTiposMonedas($id_moneda);
@@ -154,7 +155,7 @@ class CRelPagos extends CI_Controller
         //~ $data['listar_bancos'] = $this->MBancos->obtenerBanco(); // Listado de Bancos
         //~ $data['listar_t_cuentas'] = $this->MTiposCuenta->obtenerTiposCuenta(); // Listado de Tipo de cuentas
         $data['listar_usuarios'] = $this->Usuarios_model->obtenerUsuarios(); // Listado de usuarios
-        
+        $data['listar_paises'] = $this->MPaises->obtenerPais(); // Listado de cuentas de la pagina
         $id_moneda = $perfil[0]->t_moneda_id; // ID Tipo de moneda
         $data['monedas'] = $this->MTiposMonedas->obtenerTiposMonedas($id_moneda);
         $data['moneda'] = $data['monedas'][0]->abreviatura; // Abreviatura de moneda

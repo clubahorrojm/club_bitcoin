@@ -46,81 +46,59 @@ if ($tipouser == 'Administrador') {
                             <div class="text-left">
                                 <legend><H4  style="color:#3C8DBC">Links para referir tu cuenta</H4></legend>
                             </div>
-                        <?php if ($editar[0]->estatus != 4) {?>
-                        <br>
-                        <div class="text-center">
-                            <span  style="font-weight: bold; color:red">**Disculpe, su perfil debe estar al 100% completado para poder generar los links de invitación **</span>
-                        </div>
-                        <br>
-                        <?php } ?>
-                        <input class="form-control"  type='hidden' id="usuario_id" name="usuario_id" value="<?php echo $usuario[0]->codigo ?>"/>
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <br>
-                                <label style="font-weight:bold">Click en el boton para generar los links de invitación -></label>&nbsp;&nbsp;
-                                <button type="button" id="generar_links" style="font-weight: bold;font-size: 13px" class="btn btn-info " 
-                                <?php if (($val_links == 5) || ($editar[0]->estatus != 4)) {?>
-                                            disabled='disabled'
-                                <?php } ?>
-                                         >
-                                    &nbsp;<span class="glyphicon glyphicon-floppy-disk"></span>&nbsp;Generar
-                                </button>
-                            </div><!-- /.form-group -->
-                        </div><!-- /.form-group -->
-
-                        <table id="tab_rel_links" class="table table-bordered table-striped table-hover table-condensed dt-responsive table-responsive">
-                            <thead>
-                                <tr class="info">
-                                    <th style='text-align: center'>#</th>
-                                    <th style='text-align: center'>Links</th>
-                                    <th style='text-align: center'>Estatus</th>
-                                    <th style='text-align: center'>Referido</th>
-                                    <th style='text-align: center'>Cant. Sub-Referidos</th>
-                                    <th style='text-align: center'>¿Pagó?</th>
-                                </tr>
-                            </thead>
-                            <tbody >       
-                                <?php $i = 1; ?>
-                                <?php foreach ($listar_links as $links) { ?>
-                                <tr style="font-size: 16px;text-align: center" class="{% cycle 'impar' 'par' %}" >
-                                    <td><?php echo $links->num_link; ?></td>
-                                    <td><?php echo $links->links; ?></td>
-                                    <td><?php if ($links->estatus == 1) {?>
-                                            <label style="font-weight:bold; color: blue">Disponible</label>
-                                        <?php }else if ($links->estatus == 2){ ?>
-                                            <label style="font-weight:bold; color: green">Ocupado</label>
-                                        <?php }else if ($links->estatus == 3){ ?>
-                                            <label style="font-weight:bold; color: red">Caduco</label>
-                                        <?php }else if ($links->estatus == 4){ ?>
-                                            <label style="font-weight:bold; color: green">Ocupado <span style="color:red">(*)</span></label>
-                                        <?php } ?>
-                                    </td>
-                                    <td><?php foreach($listar_usuarios as $usuario){
-                                            if($usuario->codigo == $links->referido_id){
-                                                echo $usuario->first_name;
-                                                echo ' ';
-                                                echo $usuario->last_name;
-                                            }
-                                        }?> 
-                                    </td>
-                                    <td><?php foreach($listar_cant_links as $usuario_link){
-                                            if($usuario_link->usuario_id == $links->referido_id){
-                                                echo $usuario_link->cantidad;
-                                                echo ' /5';
-                                            }
-                                        }?> 
-                                    </td>
-                                    <td><?php if ($links->verif_pago == 1) {?>
-                                            <label style="font-weight:bold; color: blue">SI</label>
-                                        <?php }else{ ?>
-                                            <label style="font-weight:bold; color: red">No</label>
-                                        <?php } ?>
-                                    </td>
-                                </tr>
-                                <?php $i++ ?>
-                                <?php } ?>
-                            </tbody>
-                        </table>
+                            <table id="tab_rel_links" class="table table-bordered table-striped table-hover table-condensed dt-responsive table-responsive">
+                                <thead>
+                                    <tr class="info">
+                                        <th style='text-align: center'>#</th>
+                                        <th style='text-align: center'>Links</th>
+                                        <th style='text-align: center'>Estatus</th>
+                                        <th style='text-align: center'>Referido</th>
+                                        <th style='text-align: center'>Cant. Sub-Referidos</th>
+                                        <th style='text-align: center'>¿Pagó?</th>
+                                    </tr>
+                                </thead>
+                                <tbody >       
+                                    <?php $i = 1; ?>
+                                    <?php foreach ($listar_links as $links) { ?>
+                                    <tr style="font-size: 16px;text-align: center" class="{% cycle 'impar' 'par' %}" >
+                                        <td><?php echo $links->num_link; ?></td>
+                                        <td><?php echo $links->links; ?></td>
+                                        <td><?php if ($links->estatus == 1) {?>
+                                                <label style="font-weight:bold; color: blue">Disponible</label>
+                                            <?php }else if ($links->estatus == 2){ ?>
+                                                <label style="font-weight:bold; color: green">Ocupado</label>
+                                            <?php }else if ($links->estatus == 3){ ?>
+                                                <label style="font-weight:bold; color: red">Caduco</label>
+                                            <?php }else if ($links->estatus == 4){ ?>
+                                                <label style="font-weight:bold; color: green">Ocupado <span style="color:red">(*)</span></label>
+                                            <?php } ?>
+                                        </td>
+                                        <td><?php foreach($listar_usuarios as $usuario){
+                                                if($usuario->codigo == $links->referido_id){
+                                                    echo $usuario->first_name;
+                                                    echo ' ';
+                                                    echo $usuario->last_name;
+                                                }
+                                            }?> 
+                                        </td>
+                                        <td><?php foreach($listar_cant_links as $usuario_link){
+                                                if($usuario_link->usuario_id == $links->referido_id){
+                                                    echo $usuario_link->cantidad;
+                                                    echo ' /5';
+                                                }
+                                            }?> 
+                                        </td>
+                                        <td><?php if ($links->verif_pago == 1) {?>
+                                                <label style="font-weight:bold; color: blue">SI</label>
+                                            <?php }else{ ?>
+                                                <label style="font-weight:bold; color: red">No</label>
+                                            <?php } ?>
+                                        </td>
+                                    </tr>
+                                    <?php $i++ ?>
+                                    <?php } ?>
+                                </tbody>
+                            </table>
 
                         </div><!-- /.box-body -->
                     </div><!-- /.box-body-primary -->

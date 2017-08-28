@@ -53,7 +53,7 @@ redirect(base_url());
 								<select id="moneda" name="moneda" class="form-control" >
 									<option value="0">Seleccione</option>
 									<?php foreach ($monedas as $moneda) { ?>
-										<?php if ($moneda->id == 1) { ?>
+										<?php if ($moneda->id == 3) { ?>
 											<option value="<?php echo $moneda->id ?>"><?php echo $moneda->descripcion ?></option>
 										<?php } ?>
 									<?php } ?>
@@ -281,12 +281,12 @@ redirect(base_url());
 				$('#cargo_mora').val('');
 				$("#cargo_mora").focus();
 			});
-		}else if (parseFloat($('#monto_retiro_minimo').val()) > parseFloat($('#monto_pago').val())) {
-			bootbox.alert("El monto mínimo de retiro no puede ser mayor al monto de pago", function () {
-			}).on('hidden.bs.modal', function (event) {
-				$("#monto_retiro_minimo").parent('div').addClass('has-error');
-				$("#monto_retiro_minimo").focus();
-			});
+		//}else if (parseFloat($('#monto_retiro_minimo').val()) > parseFloat($('#monto_pago').val())) {
+		//	bootbox.alert("El monto mínimo de retiro no puede ser mayor al monto de pago", function () {
+		//	}).on('hidden.bs.modal', function (event) {
+		//		$("#monto_retiro_minimo").parent('div').addClass('has-error');
+		//		$("#monto_retiro_minimo").focus();
+		//	});
 		}else if (parseFloat($('#cargo_mora').val()) > diez_por_ciento($('#monto_pago').val())) {
 			bootbox.alert("El monto de cargo por mora no puede ser mayor al 10 % del monto de pago", function () {
 			}).on('hidden.bs.modal', function (event) {

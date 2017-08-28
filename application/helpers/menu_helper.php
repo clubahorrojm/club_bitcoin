@@ -35,14 +35,6 @@ if (!function_exists('menu')) {
         ?>
         <?php if ($datos_sesion['tipouser'] == 'BÁSICO' ): ?>
 		<li class="treeview">
-            <!--<li><a href="<?php echo base_url(); ?>index.php/referidos/CReferidos"><i class="fa fa-star "></i>Perfil</a></li>
-			<li><a href="<?php echo base_url(); ?>index.php/referidos/CRelPagos"><i class="fa fa-money "></i>Registrar Pago</a></li>
-			<li><a href="<?php echo base_url(); ?>index.php/referidos/CRelInformacion"><i class="fa fa-user "></i>Información Personal</a></li>
-			<li><a href="<?php echo base_url(); ?>index.php/referidos/CRelDistribucion"><i class="fa fa-angle-double-up "></i>Distribución de Capital</a></li>
-			<li><a href="<?php echo base_url(); ?>index.php/referidos/CRelLinks"><i class="fa fa-envelope-o "></i>Links de Invitación</a></li>
-            <li><a href="<?php echo base_url(); ?>index.php/referidos/CRelRetiros"><i class="fa fa-dollar "></i>Retiros</a></li>
-            <li><a href="<?php echo base_url(); ?>index.php/referidos/CRelRanking"><i class="fa fa-fire "></i>Ranking de Usuarios</a></li>  
-            <li><a href="<?php echo base_url(); ?>index.php/referidos/CRelAyudas"><i class="fa fa-info-circle "></i>Soporte a Usuarios</a></li>-->
             <li><a href="<?php echo base_url(); ?>index.php/referidos/CReferidos"><img src="<?php echo base_url(); ?>static/img/casita-01.png" style="width:20px;">&nbsp;Perfil</a></li>
 			<li><a href="<?php echo base_url(); ?>index.php/referidos/CRelPagos"><img src="<?php echo base_url(); ?>static/img/billete-dolar-01.png" style="width:20px;">&nbsp;Registrar Pago</a></li>
 			<li><a href="<?php echo base_url(); ?>index.php/referidos/CRelInformacion"><img src="<?php echo base_url(); ?>static/img/candado-01.png" style="width:20px;">&nbsp;Información Personal</a></li>
@@ -50,7 +42,6 @@ if (!function_exists('menu')) {
             <li><a href="<?php echo base_url(); ?>index.php/referidos/CRelRanking"><img src="<?php echo base_url(); ?>static/img/ranking-01.png" style="width:20px;">Ranking</a></li>
 			<li><a href="<?php echo base_url(); ?>index.php/referidos/CRelLinks"><img src="<?php echo base_url(); ?>static/img/link-de-invitados-01.png" style="width:20px;">&nbsp;Links de Invitación</a></li>
             <li><a href="<?php echo base_url(); ?>index.php/referidos/CRelRetiros"><img src="<?php echo base_url(); ?>static/img/retiro-01.png" style="width:20px;">&nbsp;Retiros</a></li>
-            <!--<li><a href="<?php echo base_url(); ?>index.php/referidos/CRelRanking"><i class="fa fa-fire "></i>&nbsp;Ranking de Usuarios</a></li>-->
             <li><a href="<?php echo base_url(); ?>index.php/referidos/CRelAyudas"><i class="fa fa-gear "></i>Soporte a Usuarios</a></li> 
         </li>
         <?php endif; ?>
@@ -101,6 +92,7 @@ if (!function_exists('menu')) {
 				<li><a href="<?php echo base_url(); ?>index.php/administracion/CBots"><i class="fa fa-user-secret text-orange"></i>Cuentas Bot</a></li>
         		<li><a href="<?php echo base_url(); ?>index.php/administracion/CEmpresa/"><i class="fa fa-industry text-orange"></i>Empresa</a></li>
 				<li><a href="<?php echo base_url(); ?>index.php/administracion/CMonedero"><i class="fa fa-btc text-orange"></i>Monedero</a></li>
+				<li><a href="<?php echo base_url(); ?>index.php/administracion/CPaises"><i class="fa fa-globe text-orange"></i>Paises</a></li>
                 <li><a href="#" id="rec_password"><i class="fa fa-shield text-orange"></i>Rec: Clave de Acceso</a></li>
             </ul>
         </li>

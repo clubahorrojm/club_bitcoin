@@ -77,43 +77,60 @@ class CReferidos extends CI_Controller
             'nivel' => 1,
           );
           $result = $this->MReferidos->actualizarReferidos($niveles);
+		  $porcentaje = ($cant_ref * 100) / 5;
+		  $cant_ref_necesarios = 5;
         }else if ($cant_ref > 5 && $cant_ref < 26){
           $niveles = array(
             'codigo' => $cod_perfil,
             'nivel' => 2,
           );
           $result = $this->MReferidos->actualizarReferidos($niveles);
+		  $porcentaje = ($cant_ref * 100) / 25;
+		  $cant_ref_necesarios = 25;
         }else if ($cant_ref > 25 && $cant_ref < 126){
           $niveles = array(
             'codigo' => $cod_perfil,
             'nivel' => 3,
           );
           $result = $this->MReferidos->actualizarReferidos($niveles);
+		  $porcentaje = ($cant_ref * 100) / 125;
+		  $cant_ref_necesarios = 125;
         }else if ($cant_ref > 125 && $cant_ref < 626){
           $niveles = array(
             'codigo' => $cod_perfil,
             'nivel' => 4,
           );
           $result = $this->MReferidos->actualizarReferidos($niveles);
+		  $porcentaje = ($cant_ref * 100) / 625;
+		  $cant_ref_necesarios = 625;
         }else if ($cant_ref > 625 && $cant_ref < 3126){
           $niveles = array(
             'codigo' => $cod_perfil,
             'nivel' => 5,
           );
           $result = $this->MReferidos->actualizarReferidos($niveles);
+		  $porcentaje = ($cant_ref * 100) / 3125;
+		  $cant_ref_necesarios = 3125;
         }else if ($cant_ref > 3125 && $cant_ref < 15626){
           $niveles = array(
             'codigo' => $cod_perfil,
             'nivel' => 6,
           );
           $result = $this->MReferidos->actualizarReferidos($niveles);
+		  $porcentaje = ($cant_ref * 100) / 15625;
+		  $cant_ref_necesarios = 15625;
         }else if ($cant_ref > 15625 && $cant_ref < 78126){
           $niveles = array(
             'codigo' => $cod_perfil,
             'nivel' => 7,
           );
           $result = $this->MReferidos->actualizarReferidos($niveles);
+		  $porcentaje = ($cant_ref * 100) / 78125;
+		  $cant_ref_necesarios = 78125;
         }
+		$data['porcentaje'] = $porcentaje;
+		$data['cant_ref'] = $cant_ref;
+		$data['cant_ref_necesarios'] = $cant_ref_necesarios;
         /////////////////////////////////////////////////////////////////////////////////////////
         $id_moneda = $data['editar'][0]->t_moneda_id; // ID Tipo de moneda
         $data['monedas'] = $this->MTiposMonedas->obtenerTiposMonedas($id_moneda);

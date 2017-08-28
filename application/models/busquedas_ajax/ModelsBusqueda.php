@@ -392,4 +392,12 @@ class ModelsBusqueda extends CI_Model
 			return '1';
 		}
     }
+	public function search_punteros()
+    {
+		$sql_select = "SELECT usu.username, map.longitud, map.latitud ";
+		$sql_select .= " FROM usuarios_ubicacion as map ";
+		$sql_select .= " INNER JOIN usuarios as usu ON map.usuario_id=usu.id ";
+		$query3 = $this->db->query($sql_select);
+		return $query3->result();
+    }
 }
