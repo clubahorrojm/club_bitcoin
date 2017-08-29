@@ -41,17 +41,13 @@ class CReferidos extends CI_Controller
         $this->load->model('administracion/MPaises');
 		$this->load->model('configuracion/usuarios/Usuarios_model');
         $this->load->model('configuracion/MTiposMonedas');
-        // $this->load->model('configuracion/MCuentas');
-        // $this->load->model('configuracion/MBancos');
-        // $this->load->model('configuracion/MTiposCuenta');
         $this->load->model('referidos/MRelPagos');
         $this->load->model('referidos/MRelRetiros');
         $this->load->model('referidos/MRelLinks');
 		$this->load->model('referidos/MRelDistribucion');
-		// $this->load->model('configuracion/MMontoPago');
 		$this->load->model('referidos/MRelDistribucion');
-		// $this->load->model('configuracion/MRetiroMinimo');
 		$this->load->model('administracion/MEmpresa');
+		$this->load->model('administracion/MNotificaciones');
 
     }
     // INDEX del modulo de perfil del referido
@@ -71,14 +67,15 @@ class CReferidos extends CI_Controller
         // $data['listar_bancos'] = $this->MBancos->obtenerBanco(); // Listado de Bancos
         $data['monto_pago'] = $data['editar'][0]->monto_pago; // Captura del monto del pago de ingreso al sistema
 		
-        ////////// Metodo para la actualizacion del nivel del usuario en base a la cantidad de sub referidos/////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ////////// Metodo para la actualizacion del nivel del usuario en base a la cantidad de sub referidos Y Calculo de % que lleva el usuario para el proximo nivel/////////////
+		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         $cant_ref = $data['editar'][0]->cant_ref; // Cantidad de sub referidos
         if ($cant_ref < 6){
           $niveles = array(
             'codigo' => $cod_perfil,
             'nivel' => 1,
           );
-          $result = $this->MReferidos->actualizarReferidos($niveles);
 		  $porcentaje = ($cant_ref * 100) / 5;
 		  $cant_ref_necesarios = 5;
         }else if ($cant_ref > 5 && $cant_ref < 26){
@@ -86,7 +83,6 @@ class CReferidos extends CI_Controller
             'codigo' => $cod_perfil,
             'nivel' => 2,
           );
-          $result = $this->MReferidos->actualizarReferidos($niveles);
 		  $porcentaje = ($cant_ref * 100) / 25;
 		  $cant_ref_necesarios = 25;
         }else if ($cant_ref > 25 && $cant_ref < 126){
@@ -94,7 +90,6 @@ class CReferidos extends CI_Controller
             'codigo' => $cod_perfil,
             'nivel' => 3,
           );
-          $result = $this->MReferidos->actualizarReferidos($niveles);
 		  $porcentaje = ($cant_ref * 100) / 125;
 		  $cant_ref_necesarios = 125;
         }else if ($cant_ref > 125 && $cant_ref < 626){
@@ -102,7 +97,6 @@ class CReferidos extends CI_Controller
             'codigo' => $cod_perfil,
             'nivel' => 4,
           );
-          $result = $this->MReferidos->actualizarReferidos($niveles);
 		  $porcentaje = ($cant_ref * 100) / 625;
 		  $cant_ref_necesarios = 625;
         }else if ($cant_ref > 625 && $cant_ref < 3126){
@@ -110,7 +104,6 @@ class CReferidos extends CI_Controller
             'codigo' => $cod_perfil,
             'nivel' => 5,
           );
-          $result = $this->MReferidos->actualizarReferidos($niveles);
 		  $porcentaje = ($cant_ref * 100) / 3125;
 		  $cant_ref_necesarios = 3125;
         }else if ($cant_ref > 3125 && $cant_ref < 15626){
@@ -118,7 +111,6 @@ class CReferidos extends CI_Controller
             'codigo' => $cod_perfil,
             'nivel' => 6,
           );
-          $result = $this->MReferidos->actualizarReferidos($niveles);
 		  $porcentaje = ($cant_ref * 100) / 15625;
 		  $cant_ref_necesarios = 15625;
         }else if ($cant_ref > 15625 && $cant_ref < 78126){
@@ -126,10 +118,28 @@ class CReferidos extends CI_Controller
             'codigo' => $cod_perfil,
             'nivel' => 7,
           );
-          $result = $this->MReferidos->actualizarReferidos($niveles);
 		  $porcentaje = ($cant_ref * 100) / 78125;
 		  $cant_ref_necesarios = 78125;
         }
+		$result = $this->MReferidos->actualizarReferidos($niveles); // SE ACTUALIZA EL NIVEL DEL USUARIO
+		
+		//////////////  Metodo para Generar notificacion de cambi de nivel comparando el ultimo nivel con el calculado por los referidos ///////
+		$ultimo_lvl = $data['editar'][0]->nivel;
+		$actual_lvl = $niveles['nivel'];
+		if ($ultimo_lvl < $actual_lvl){
+			// SE GENERA LA NOTIFICACION AL USUARIO QUE SUBIO DE NIVEL
+			$param2 = array(
+				'usuario_id' => $id_user,
+				'tipo' => 4,
+				'accion' => '¡Felicitaciones ha alcanzado el nivel '.$actual_lvl.'!.',
+				'fecha' => date('Y-m-d'),
+				'hora' => date("h:i:s a"),
+				'estatus' => 1,
+			);
+			$this->MNotificaciones->insertarNotificacion($param2);
+		};
+		
+		
 		$data['porcentaje'] = $porcentaje;
 		$data['cant_ref'] = $cant_ref;
 		$data['cant_ref_necesarios'] = $cant_ref_necesarios;

@@ -26,7 +26,7 @@ class CLRetiros extends CI_Controller
 
         $this->load->helper(array('url'));
 
-        $this->load->view('base');
+        $this->load->view('base2');
 
 // Load form validation library
         $this->load->library('form_validation');
@@ -39,6 +39,7 @@ class CLRetiros extends CI_Controller
         $this->load->model('configuracion/usuarios/Usuarios_model');
         $this->load->model('administracion/MComisionRetiro');
         $this->load->model('referidos/MReferidos');
+		$this->load->model('administracion/MNotificaciones');
         $this->load->model('busquedas_ajax/ModelsBusqueda');
         $this->load->model('administracion/MAuditoria');
         
@@ -85,6 +86,19 @@ class CLRetiros extends CI_Controller
         // Actualizamos el tipo de cuenta con los datos armados
         $result = $this->MLRetiros->actualizarRetiro($data);
         
+		// SE GENERA LA NOTIFICACION AL USUARIO QUE SU PREGUNTA FUE RESPONDIDA
+		$data['listar'] = $this->MNotificaciones->obtener_user_id_retiro($cod); // Listado de Retiros solicitados
+		$param2 = array(
+			'usuario_id' => $data['listar'][0]->usuario_id,
+			'tipo' => 2,
+			'accion' => 'Su solicitud de retiro fue canalizada.',
+			'fecha' => date('Y-m-d'),
+			'hora' => date("h:i:s a"),
+			'estatus' => 1,
+		);
+		$this->MNotificaciones->insertarNotificacion($param2);
+		
+		
         // Registramos los cambios en la Bitacora
 		$param = array(
 			'tabla' => 'ref_rel_retiros',

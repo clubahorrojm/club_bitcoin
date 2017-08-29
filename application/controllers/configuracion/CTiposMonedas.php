@@ -26,7 +26,7 @@ class CTiposMonedas extends CI_Controller
 
         $this->load->helper(array('url'));
 
-        $this->load->view('base');
+        $this->load->view('base2');
 
 // Load form validation library
         $this->load->library('form_validation');

@@ -41,7 +41,9 @@ class CAyuda extends CI_Controller
         $this->load->model('busquedas_ajax/ModelsBusqueda');
         $this->load->model('administracion/MAuditoria');
         $this->load->model('referidos/MRelPagos');
+		$this->load->model('referidos/MRelAyudas');
         $this->load->model('referidos/MReferidos');
+		$this->load->model('administracion/MNotificaciones');
         
     }
 
@@ -62,15 +64,29 @@ class CAyuda extends CI_Controller
     function responder(){
         // Armamos la data a actualizar
 		$data = array(
-			'id' => 1,
             'codigo' => $this->input->post('codigo'),
 			'operador_id' => $this->session->userdata['logged_in']['id'],
 			'respuesta' => $this->input->post('respuestas'),
 			'estatus' => 2,
         );
-
         // Actualizamos la consulta del usuario con los datos armados
         $result = $this->MAyuda->actualizarConsulta($data);
+		
+		// SE GENERA LA NOTIFICACION AL USUARIO QUE SU PREGUNTA FUE RESPONDIDA
+		$cod_ayuda = $this->input->post('codigo');
+		$data['listar'] = $this->MNotificaciones->obtener_user_id_ayuda($cod_ayuda); // Listado de Retiros solicitados
+		$param2 = array(
+			'usuario_id' => $data['listar'][0]->usuario_id,
+			'tipo' => 3,
+			'accion' => 'Mensaje respondido',
+			'fecha' => date('Y-m-d'),
+			'hora' => date("h:i:s a"),
+			'estatus' => 1,
+		);
+		$this->MAuditoria->insertarNotificacion($param2);
+		
+		
+		
         // Registramos los cambios en la Bitacora
         if ($result) {
             $param = array(
