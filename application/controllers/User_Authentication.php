@@ -304,25 +304,43 @@ Class User_Authentication extends CI_Controller {
 		//print_r($resultado);
 		//saco el numero de elementos
 		$longitud = count($resultado);
-		 
+		
+		//~ echo $longitud;
+		
+		// Arreglo para retornar la data
+		$lista_regs = array();
+		
 		//Recorro todos los elementos
 		for($i=0; $i<$longitud; $i++) {
 			  //saco el valor de cada elemento
 			  $nombre = $resultado[$i]->username;
-			  $longitud = $resultado[$i]->longitud;
-			  $latitud = $resultado[$i]->latitud;
-			  print_r("{ latLng:[".$longitud.",".$latitud."], name:'".$nombre."'}, ");
-			  //print_r("<br>");
+			  $lgt = $resultado[$i]->longitud;
+			  $ltd = $resultado[$i]->latitud;
+			  // print_r("{ latLng:[".$longitud.",".$latitud."], name:'".$nombre."'}, ");
+			  // Armamos el registro
+			  $reg['latLng'][0] = $lgt;
+			  $reg['latLng'][1] = $ltd;
+			  $reg['name'] = $nombre;
+			  // Listamos el registro
+			  $lista_regs[$i] = $reg;
 		}
-
 		
-		//$todas = new ArrayObject();
-		//for ($i=0; $i<3; $i++){
-		//	$usuario = $resultado[$i]->username;
-		//	print_r($usuario);
-		//	//$todas->append($resultado[$i]->username+'@@@'+$resultado[$i]->longitud+'###'+$resultado[$i]->latitud+';;');
-		//	//print_r($todas);
-		//}
+		// Alternativa que también funciona
+		//~ foreach($resultado as $r){
+			//~ $reg = array();
+			//~ $latLng = array();
+			//~ $nombre = $r->username;
+			//~ $lgt = $r->longitud;
+			//~ $ltd = $r->latitud;
+			//~ // Armamos el registro
+			//~ $latLng[0] = $lgt;
+			//~ $latLng[1] = $ltd;
+			//~ $reg['latLng'] = $latLng;
+			//~ $reg['name'] = $nombre;
+			//~ // Listamos el registro
+			//~ $lista_regs[] = $reg;
+		//~ }
 		
+		echo json_encode($lista_regs);
     }
 }

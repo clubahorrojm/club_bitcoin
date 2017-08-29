@@ -86,7 +86,7 @@
 	$.post('<?php echo base_url(); ?>index.php/User_Authentication/cargar_punteros/', function(response) {
 		var lista = response;
 		//$('#lista').val(response);
-		alert(lista);
+		//~ alert(lista);
 		//var obj = jQuery.parseJSON(lista); 
 		$('#world-map-markers').vectorMap({
 				map              : 'world_mill_en',
@@ -117,10 +117,10 @@
 					stroke: '#111'
 				  }
 				},
-				markers          : [{ latLng:[45.9,12.45], name:'operador'}, { latLng:[1.3,103.18], name:'marcuri'}, { latLng:[-0.52,166.93], name:'jsolorzano'}, ]
+				markers          : response
 		});
 		
-	});
+	}, 'json');
 	//var lista = $("#lista").val();
 	//alert(lista);
 	
