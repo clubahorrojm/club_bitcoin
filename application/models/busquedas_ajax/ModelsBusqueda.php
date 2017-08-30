@@ -428,4 +428,13 @@ class ModelsBusqueda extends CI_Model
 		$query3 = $this->db->query($sql_select);
 		return $query3->result();
     }
+	public function search_pagos($id)
+    {
+		$sql_select = "SELECT fecha, count(referido_id) total";
+		$sql_select .= " FROM ref_rel_distribucion ";
+		$sql_select .= " WHERE usuario_id = ".$id." group by fecha ";
+		//echo $sql_select;
+		$query3 = $this->db->query($sql_select);
+		return $query3->result();
+    }
 }

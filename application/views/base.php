@@ -8,7 +8,28 @@ if (isset($this->session->userdata['logged_in'])) {
     $picture = ($this->session->userdata['logged_in']['picture']);
     //$cargo = ($this->session->userdata['logged_in']['cargo']);
     $fecha = ($this->session->userdata['logged_in']['fecha_create']);
-
+	//echo "HOLAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA".$id;
+	// Velidacion para las alertas de notificaciones al usuario
+	//$this->load->model('busquedas_ajax/ModelsBusqueda');
+	$tipo_usuario = $this->ModelsBusqueda->search_tipo_usuario($id);
+	
+	$tipo_usuario = $tipo_usuario[0]->tipo_usuario;
+	// Si es tipo basico se buscan las notifiaciones
+	if ($tipo_usuario == 3 ){
+		$hoy = date('Y-m-d');
+		$lista_notificaciones = $this->ModelsBusqueda->search_notificaciones($id, $hoy);
+		$lista_new_notificaciones = $this->ModelsBusqueda->search_new_notificaciones($id);
+		
+		$notificaciones = count($lista_new_notificaciones);
+		
+		if ($notificaciones == 0){
+			$cant_notif = '';
+		}else{
+			$cant_notif = $notificaciones;
+		}
+	}
+	
+	
 // Arreglo con la data de sesión para pasarla al menú
     $datos_sesion = array(
 	'username' => $username,
@@ -105,67 +126,104 @@ if (isset($this->session->userdata['logged_in'])) {
                 <!-- Header Navbar: style can be found in header.less -->
                 <nav class="navbar navbar-static-top" role="navigation">
                     <!-- Sidebar toggle button-->
-                    <!--<a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+<!--                    <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
                         <span class="sr-only">Toggle navigation</span>
-                    </a>
+                    </a>-->
                     <div class="navbar-custom-menu" style=" z-index: 100;">
                         <ul class="nav navbar-nav">
                             <li class="dropdown messages-menu">
-
-                            </li>
-                            <li class="dropdown notifications-menu">
-
-                            </li>
-                            <li class="dropdown tasks-menu">
-
-
-                            </li>
-                            <li class="dropdown user user-menu">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                   
-                                    
-                                     <?php if ($picture == '') { ?>
-                                            <img src="<?php echo base_url(); ?>static/img/default.gif" class="user-image" alt="User Image">
-                                        <?php } else { ?>
-                                            <img src="<?php echo base_url(); ?>uploads/images/<?php echo $picture ?>" class="user-image" alt="User Image">
-                                        <?php } ?> 
-                                    <span class="hidden-xs"><?php echo"$username ($tipouser)" ?> </span>
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li class="user-header">
-                                       
-                                        
-                                         <?php if ($picture == '') { ?>
-                                            <img src="<?php echo base_url(); ?>static/img/default.gif" class="img-circle" alt="User Image">
-                                        <?php } else { ?>
-                                            <img src="<?php echo base_url(); ?>uploads/images/<?php echo $picture ?>" class="img-circle" alt="User Image">
-                                        <?php } ?> 
-                                        <p>
-                                            <?php echo"$username" ?> 
-
-                                             <small> Registrado desde <?php 
-                                            
-                                            $fecha_new = date("d M Y", strtotime($fecha));
-                                           //echo"($fecha_new)" ?>
-                                            </small>
-                                        </p>
-                                    </li>
-
-                                    <li class="user-footer">
-                                        <div class="pull-left">
-                                            <a href="<?php echo base_url()?>index.php/configuracion/usuarios/usuarios/perfil/<?= $id; ?>" class="btn btn-default btn-flat">Perfil</a>
-                                        </div>
-                                        <div class="pull-right">
-                                            <a href="<?php echo base_url(); ?>index.php/User_Authentication/logout/<?php echo $id ?>" class="btn btn-default btn-flat">Cerrar Sesión</a>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
-                            </li>
+								<?php if ($tipo_usuario == 3 ): ?>
+									<a href="#" class="dropdown-toggle" data-toggle="dropdown" onclick="limpiar();">
+									  <i class="fa fa-bell-o"></i>
+									  <span class="label label-danger" id="cant_notif"><?php echo $cant_notif ?></span>
+									</a>
+									<ul class="dropdown-menu">
+										<li class="header" style="color: white">Tiene <?php echo $notificaciones ?> notificaciones nuevas</li>
+										<li>
+										
+										
+										<!-- inner menu: contains the actual data -->
+										<ul class="menu">
+											
+												<?php foreach ($lista_notificaciones as $retiros) { ?>
+													<?php if($retiros->dias == 0){
+														$tiempo = 'Hoy';
+													}else if($retiros->dias == 1){
+														$tiempo = $retiros->dias.' Día';
+													}else{
+														$tiempo = $retiros->dias.' Días';
+													}?>
+													<?php if ($retiros->tipo == 1) {?>
+														<li ><!-- ###############  NOTIFICACION DE PAGO #############-->
+															<a href="#" >
+																<div class="pull-left">
+																	<img src="<?php echo base_url(); ?>static/img/bolsa-de-dinero-01.png" style="background-color: #22274b" class="img-circle" alt="User Image">
+																</div>
+																<h4>
+																	Pago de referido
+																	<small><i class="fa fa-clock-o"></i><span id="myspan"></span>&nbsp;<?php echo $tiempo ?></small>
+																</h4>
+																<p><?php echo $retiros->accion ?></p>
+															</a>
+														</li>
+													<?php }else if ($retiros->tipo == 2){ ?>
+														<li><!-- ###############  NOTIFICACION DE RETIRO ############# -->
+															<a href="<?php echo base_url(); ?>index.php/referidos/CRelRetiros/" >
+																<div class="pull-left">
+																	<img src="<?php echo base_url(); ?>static/img/retiro-01.png" style="background-color: #FF5C00" class="img-circle" alt="User Image">
+																</div>
+																<h4>
+																	Retiro canalizado
+																	<small><i class="fa fa-clock-o"></i><span id="myspan"></span>&nbsp;<?php echo $tiempo ?></small>
+																</h4>
+																<p><?php echo $retiros->accion ?></p>
+															</a>
+														</li>
+													<?php }else if ($retiros->tipo == 3){ ?>
+														<li><!-- ###############  NOTIFICACION DE Soporte a usuario ############# -->
+															<a href="<?php echo base_url(); ?>index.php/referidos/CRelAyudas/" >
+																<div class="pull-left">
+																	<img src="<?php echo base_url(); ?>static/img/link-de-invitados-01.png" style="background-color: #edd727" class="img-circle" alt="User Image">
+																</div>
+																<h4>
+																	Soporte a usuario
+																	<small><i class="fa fa-clock-o"></i><span id="myspan"></span>&nbsp;<?php echo $tiempo ?></small>
+																</h4>
+																<p><?php echo $retiros->accion ?></p>
+															</a>
+														</li>
+													<?php }else if ($retiros->tipo == 4){ ?>
+														<li><!-- ###############  NOTIFICACION DE NUEVO NIVEL ############# -->
+															<a href="#" >
+																<div class="pull-left">
+																	<img src="<?php echo base_url(); ?>static/img/ranking-01.png" style="background-color: #37BA16" class="img-circle" alt="User Image">
+																</div>
+																<h4>
+																	Nuevo nivel alcanzado
+																	<small><i class="fa fa-clock-o"></i><span id="myspan"></span>&nbsp;<?php echo $tiempo ?></small>
+																</h4>
+																<p><?php echo $retiros->accion ?></p>
+															</a>
+														</li>
+													<?php } ?>
+												<?php }?>
+											
+											
+											<!-- end message -->
+											
+											
+											
+											
+											
+										</ul>
+									</li>
+									
+								</ul>
+								<?php endif; ?>
+							</li>
+                            
                         </ul>
-                    </div>-->
+                    </div>
                 </nav>
             </header>
             <!-- Left side column. contains the logo and sidebar -->
@@ -497,6 +555,16 @@ if (isset($this->session->userdata['logged_in'])) {
         // <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script> -->
  
         <script>
+
+			
+			function limpiar() {
+				$.post('<?php echo base_url(); ?>index.php/busquedas_ajax/ControllersBusqueda/actualizar_notifiaciones/', function(response) {
+				
+				});
+				document.getElementById("cant_notif").innerHTML="";
+				//alert('Chupalo');
+			}
+			
 			$(document).ready(function () {
 							
 				// Activar modal al hacer click en el enlace de recuperación

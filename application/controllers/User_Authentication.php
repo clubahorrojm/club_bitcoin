@@ -343,4 +343,33 @@ Class User_Authentication extends CI_Controller {
 		
 		echo json_encode($lista_regs);
     }
+	function cargar_grafica_pagos(){
+		$cod_user = $this->session->userdata['logged_in']['id'];
+        $resultado = $this->ModelsBusqueda->search_pagos($cod_user);
+		//print_r($resultado);
+		//saco el numero de elementos
+		$longitud = count($resultado);
+		
+		//~ echo $longitud;
+		// Arreglo para retornar la data
+		$lista_fechas = array();
+		$lista_cant_pagos = array();
+		//Recorro todos los elementos
+		for($i=0; $i<$longitud; $i++) {
+			  //saco el valor de cada elemento
+			  //$fecha = $resultado[$i]->fecha;
+			  $total = $resultado[$i]->total;
+			  //$ltd = $resultado[$i]->latitud;
+			  // print_r("{ latLng:[".$longitud.",".$latitud."], name:'".$nombre."'}, ");
+			  // Armamos el registro
+			  //$reg_fec['fecha'][0] = $fecha;
+			  $reg_tot = $total;
+			  //$reg['name'] = $nombre;
+			  // Listamos el registro
+			  //$lista_fechas[$i] = $reg_fec;
+			  $lista_cant_pagos[$i] = $reg_tot;
+		}		
+		echo json_encode($lista_cant_pagos);
+		//echo json_encode($lista_cant_pagos);
+    }
 }

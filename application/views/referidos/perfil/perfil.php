@@ -9,6 +9,9 @@
     }
 
 ?>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+
 
 
 <div class="wrapper">
@@ -41,71 +44,81 @@
                     <div class="box box-primary">
                         <div class="box-header with-border col-md-12">
                             <div class="col-md-6">
-                                <h3 class="box-title" style="font-weight:bold; color:#3C8DBC">Información de cuenta</h3>
+                                <img style="width: 30%" src="<?= base_url() ?>static/img/logo4.png"/>
                             </div>
                             <div class="col-md-6 text-right" >
-                                <h3 class="box-title" style="font-weight:bold; color:#3C8DBC">Código: <?php echo str_pad($editar[0]->codigo, 5, '0',STR_PAD_LEFT) ?></h3>
+                                <h3 style="font-weight:bold; color:#3C8DBC">Hola, <?php echo $usuario[0]->first_name ?>
+                                <?php echo $usuario[0]->last_name ?></h3>
+                                <label style="color:#3C8DBC" >nro. de usuario: <?php echo str_pad($editar[0]->codigo, 5, '0',STR_PAD_LEFT) ?></label>
                             </div>
                         </div><!-- /.box-header -->
                         <div class="box-body">
                             <form id="form_empresa">
                                 <div class="col-md-12">
-                                    <div class="col-md-2">
-                                        <div class="form-group">
-                                            <img id="logo_info" class="img-circle" src="<?= base_url() ?>static/img/logo4.png"/>
-                                        </div><!-- /.form-group -->
-                                    </div><!-- /.form-group -->
-                                    <div class="col-md-10">
-                                        <div class="col-md-8">
-                                            <div class="col-md-12">
-                                                <div class="form-group">
-                                                    <h3 class="box-title" style="font-weight:bold; color:#3C8DBC">Hola de nuevo, <?php echo $usuario[0]->first_name ?>
-                                                    <?php echo $usuario[0]->last_name ?></h3>
-                                                </div><!-- /.form-group -->
-                                            </div>
-                                            <div class="col-md-3">
-                                                <label style="color:#3C8DBC">Estatus para el siguiente nivel: </label>
-                                            </div>
-                                            <div class="col-md-8">
-                                                <div class="progress progress-md active  ">
-                                                    <div class="progress-bar progress-bar-success progress-bar-striped" style="width: <?php echo $porcentaje ?>%;"
-                                                         aria-valuemax="100" aria-valuemin="0" aria-valuenow="<?php echo $porcentaje ?>" role="progressbar">
-                                                        <span style="font-weight: bold"><?php echo $porcentaje ?>% Completado (<?php echo $cant_ref.'/'.$cant_ref_necesarios ?>)</span>
-                                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="col-md-1"> </div><!-- /.form-group -->
+                                        <div class="col-md-10">
+                                            <div class="text-center">
+                                                <h1 style="color:#3C8DBC">Nivel</h1>
+                                                <img id="nivel" class="img-circle" src="<?= base_url() ?>static/img/iconos_medianos/Nivel<?php echo $editar[0]->nivel ?>-01.png" style="width: 40%;" />
+                                            </div><!-- /.form-group -->
+                                            <br>
+                                            <div  class="progress progress-md active " style="background-color: #E5E3E3 ">
+                                                <div class="progress-bar progress-bar-success progress-bar-striped" style="width: <?php echo $porcentaje ?>%; "
+                                                     aria-valuemax="100" aria-valuemin="0" aria-valuenow="<?php echo $porcentaje ?>" role="progressbar">
+                                                    <span style="font-weight: bold"><?php echo $porcentaje ?>% Completado</span>
                                                 </div>
-                                                <div class="text-center">
-                                                    <h1 style="color:#3C8DBC">Nivel</h1>
-                                                    <img id="nivel" class="img-circle" src="<?= base_url() ?>static/img/iconos_medianos/Nivel<?php echo $editar[0]->nivel ?>-01.png" style="width: 25%;" />
-                                                    <!--<button id="nivel" class="img-circle" type="button"><?php echo $editar[0]->nivel; ?></button>-->
-                                                </div><!-- /.form-group -->
                                             </div>
-                                        </div><!-- /.form-group -->
-                                        <div class="col-md-4">
-                                            <div class="col-md-6">
-                                                <div class="text-center">
-                                                    <img id="logo_maximo" class="img-circle" src="<?= base_url() ?>static/img/maximo-01.png" style="width: 70%" />
-                                                </div><!-- /.form-group -->
-                                                <div class="form-group">
-                                                    <h3 class="box-title" style="font-weight:bold;">
-                                                        <p style="font-weight:bold; color:#3C8DBC">Máximo</p>
-                                                    </h3>
-                                                    <h5><label style="font-weight:bold;"><?php echo number_format($editar[0]->maximo, 2, ',', '.')?> <?php echo $moneda ?> <span id="span_convert1"></span></label></h5>
-                                                </div><!-- /.form-group -->
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <div class="text-center">
-                                                        <img id="logo_disponible" class="img-circle" src="<?= base_url() ?>static/img/disponible-01.png" style="width: 70%;" />
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <h3 class="box-title" style="font-weight:bold; color:#3C8DBC">
-                                                            <p style="font-weight:bold">Disponible</p>
-                                                        </h3>
-                                                        <h5><label style="font-weight:bold"><?php echo number_format($editar[0]->disponible, 2, ',', '.')?> <?php echo $moneda ?> <span id="span_convert2"></span></label></h5>
+                                            <div class="text-center">
+                                                <label style="color:#3C8DBC">Progreso de nivel</label>
+                                            </div><!-- /.form-group -->
+                                        </div>
+                                        <div class="col-md-1"> </div><!-- /.form-group -->
+                                    </div><!-- /.form-group -->
+                                    <div class="col-md-9">
+                                        <div class="col-md-1"> </div><!-- /.form-group -->
+                                        <div class="col-md-5">
+                                            <br><br>
+                                            <div class="small-box" style="background-color: #C9B72E">
+                                                <div >
+                                                  <span style="color: white; font-size: 150%">MÁXIMO A COBRAR</span>
+                                                </div>
+                                                <div class="text-right" >
+                                                    <img class="img-circle" src="<?= base_url() ?>static/img/maximo-01.png" style="width: 25%;" />
+                                                </div>
+                                                <div >
+                                                    <div class="col-md-6 text-left" style="background-color: #47411D; ">
+                                                        <span style="font-weight:bold;color: white">BIT <?php echo number_format($editar[0]->maximo, 2, ',', '.')?></span>
                                                     </div><!-- /.form-group -->
-                                                </div><!-- /.form-group -->
-                                            </div>
+                                                    <div class="col-md-6 text-right" style="background-color: #47411D; ">
+                                                        <span style="font-weight:bold;color: white"><?php echo number_format($editar[0]->maximo, 2, ',', '.')?> $</span>
+                                                    </div><!-- /.form-group -->
+                                                </div>
+                                              </div>
+                                        </div><!-- /.form-group -->
+                                        <div class="col-md-5">
+                                            <br><br>
+                                            <div class="small-box" style="background-color: #22274b">
+                                                <div >
+                                                  <span style="color: white; font-size: 150%">DISPONIBLE</span>
+                                                </div>
+                                                <div class="text-right" >
+                                                    <img class="img-circle" src="<?= base_url() ?>static/img/disponible-01.png" style="width: 25%;" />
+                                                </div>
+                                                <div >
+                                                    <div class="col-md-6 text-left" style="background-color: #000000; ">
+                                                        <span style="font-weight:bold;color: white">BIT <?php echo number_format($editar[0]->disponible, 2, ',', '.')?></span>
+                                                    </div><!-- /.form-group -->
+                                                    <div class="col-md-6 text-right" style="background-color: #000000; ">
+                                                        <span style="font-weight:bold;color: white"><?php echo number_format($editar[0]->disponible, 2, ',', '.')?> $</span>
+                                                    </div><!-- /.form-group -->
+                                                </div>
+                                              </div>
+                                        </div><!-- /.form-group -->
+                                        <div class="col-md-1">
+                                            
                                             <input class="form-control"  type='hidden' id="id" name="id" value="<?php echo $editar[0]->codigo ?>"/>
+                                            <input class="form-control"  type='hidden' id="disponible" name="disponible" value="<?php echo $editar[0]->disponible ?>"/>
                                             <input class="form-control"  type='hidden' id="cant_ref" name="cant_ref" value="<?php echo $editar[0]->cant_ref ?>"/>
                                             <input id="estatus_perfil" type='hidden' value="<?php echo $editar[0]->estatus ?>" class="form-control" >
                                             <input class="form-control"  type='hidden' id="usuario_id" name="usuario_id" value="<?php echo $usuario[0]->codigo ?>"/>
@@ -120,105 +133,12 @@
 
                 </div><!-- /.col -->
                 <!-- PESTAÑAS -->
-                <div class="col-xs-6">
+                <!-- PESTAÑAS -->
+                <div class="col-xs-12">
                     <div class="box box-primary">
-                        <div class="box-header with-border col-md-6">
-                            <h3 class="box-title" style="font-weight:bold; color:#3C8DBC">Pagos de referidos recibidos</h3>
-                        </div><!-- /.box-header -->
-                        <div class="col-md-6 text-right" >
-                            <button type="button" id="res_pagos" style="font-weight: bold;font-size: 13px" class="btn btn-success btn-xs " >
-                                &nbsp;<span class="fa fa-file-text"></span>&nbsp;Resumen de pagos
-                            </button>
-                        </div>
-                            <div class="panel-body">
-                                <table id="tab_rel_links" class="table table-bordered table-striped table-hover table-condensed dt-responsive table-responsive">
-                                    <thead>
-                                        <tr class="info">
-                                            <th style='text-align: center'>#</th>
-                                            <th style='text-align: center'>Usuario</th>
-                                            <th style='text-align: center'>Monto</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody >       
-                                        <?php $i = 1; ?>
-                                        <?php foreach ($listar_distribuciones as $debitado) { ?>
-                                        <tr style="font-size: 16px;text-align: center" class="{% cycle 'impar' 'par' %}" >
-                                            <td><?php echo $i; ?></td>
-                                            <td><?php foreach($listar_usuarios as $usuario){
-                                                    if($usuario->codigo == $debitado->usuario_id){
-                                                        echo $usuario->first_name;
-                                                        echo ' ';
-                                                        echo $usuario->last_name;
-                                                    }
-                                                }?> 
-                                            </td>
-                                            <td><?php echo $debitado->monto; ?> <?php echo $moneda ?></td>
-                                        </tr>
-                                        <?php $i++ ?>
-                                        <?php } ?>
-                                    </tbody>
-                                </table>
-
-                            </div>
-                        </div><!-- /.box-body -->
+                        <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+                    </div><!-- /.box-body -->
                 </div><!-- /.box-body-primary -->
-
-                <div class="col-xs-6">
-                    <div class="box box-primary">
-                        <div class="box-header with-border col-md-6">
-                            <h3 class="box-title" style="font-weight:bold; color:#3C8DBC">Retiros</h3>
-                        </div><!-- /.box-header -->
-                        <div class="col-md-6 text-right" >
-                            <button type="button" id="res_retiros" style="font-weight: bold;font-size: 13px" class="btn btn-success btn-xs " >
-                                &nbsp;<span class="fa fa-file-text"></span>&nbsp;Resumen de retiros
-                            </button>
-                        </div>
-                            <div class="panel-body">
-                                <table id="tab_rel_retiros" class="table table-bordered table-striped table-hover table-condensed dt-responsive table-responsive">
-                            <thead>
-                                <tr class="info">
-                                    <th style='text-align: center'>#</th>
-                                    <th style='text-align: center'>Fecha</th>
-                                    <th style='text-align: center'>Monto</th>
-                                    <th style='text-align: center'>Estatus</th>
-                                </tr>
-                            </thead>
-<!--                             <tfoot>
-                                <tr>
-                                    <th colspan="2" style="text-align:right; font-size: 16px">Total retirado:</th>
-                                    <th colspan="2"></th>
-                                </tr>
-                            </tfoot> -->
-                            <tbody >       
-                                <?php $i = 1; ?>
-                                <?php foreach ($listar_retiros as $retiros) { ?>
-                                <tr style="font-size: 16px;text-align: center" class="{% cycle 'impar' 'par' %}" >
-                                    <td><?php echo $i; ?></td>
-                                    <td><?php
-                                    
-                                    $fe = explode('-',$retiros->fecha_solicitud);
-                                    $fecha = $fe[2].'-'.$fe[1].'-'.$fe[0];
-                                    echo $fecha;
-                                    ?></td>
-                                    
-                                    <td><?php echo number_format($retiros->monto, 2, ',', '.') ; ?> <?php echo $moneda ?></td>
-                                    <td><?php if ($retiros->estatus == 1) {?>
-                                            <label style="font-weight:bold; color: blue">Solicitado</label>
-                                        <?php }else if ($retiros->estatus == 2){ ?>
-                                            <label style="font-weight:bold; color: green">Procesado</label>
-                                        <?php } ?>
-                                    </td>
-                                </tr>
-                                <?php $i++ ?>
-                                <?php } ?>
-                            </tbody>
-                        </table>
-
-                            </div>
-                        </div><!-- /.box-body -->
-                </div><!-- /.box-body-primary -->
-            <!-- PESTAÑAS -->
-
         </section><!-- /.content -->
         
         <!-- Modal -->
@@ -320,47 +240,64 @@
 
 
 <script>
-
-    var Tusuarios = $('#tab_rel_links').dataTable({
-        "paging": true,
-        "lengthChange": false,
-        "autoWidth": false,
-        "searching": false,
-        "ordering": true,
-        "info": true,
-        "iDisplayLength": 5,
-        "iDisplayStart": 0,
-        "sPaginationType": "full_numbers",
-        "aLengthMenu": [5,10,15],
-        "oLanguage": {"sUrl": "<?= base_url() ?>/static/js/es.txt"},
-        "decimal": ",",
-        "thousands": ".",
-        "aoColumns": [
-            {"sClass": "registro center", "sWidth": "1%"},
-            {"sClass": "registro center", "sWidth": "15%"},
-            {"sClass": "registro center", "sWidth": "5%"},
-        ],        
-    });
-        var Tusuarios = $('#tab_rel_retiros').dataTable({
-        "paging": true,
-        "lengthChange": false,
-        "autoWidth": false,
-        "searching": false,
-        "ordering": true,
-        "info": true,
-        "iDisplayLength": 10,
-        "iDisplayStart": 0,
-        "sPaginationType": "full_numbers",
-        "aLengthMenu": [5,10,15],
-        "oLanguage": {"sUrl": "<?= base_url() ?>/static/js/es.txt"},
-        "decimal": ",",
-        "thousands": ".",
-        "aoColumns": [
-            {"sClass": "registro center", "sWidth": "1%"},
-            {"sClass": "registro center", "sWidth": "5%"},
-            {"sClass": "registro center", "sWidth": "5%"},
-            {"sClass": "registro center", "sWidth": "5%"},
-        ],
+    $.post('<?php echo base_url(); ?>index.php/User_Authentication/cargar_grafica_pagos/', function(response) {
+        var lista = response;
+        //alert(lista);
+        Highcharts.chart('container', {
+            chart: {
+                type: 'areaspline'
+            },
+            title: {
+                text: 'Average fruit consumption during one week'
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'left',
+                verticalAlign: 'top',
+                x: 150,
+                y: 100,
+                floating: true,
+                borderWidth: 1,
+                backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
+            },
+            xAxis: {
+                categories: [
+                    '2017-05-10',
+                    '2017-06-10',
+                    '2017-07-10',
+                    '2017-08-10',
+                    '2017-09-10',
+                    '2017-10-10',
+                    '2017-11-10'
+                ],
+                //plotBands: [{ // visualize the weekend
+                //    from: 4.5,
+                //    to: 6.5,
+                //    color: 'rgba(68, 170, 213, .2)'
+                //}]
+            },
+            yAxis: {
+                title: {
+                    text: 'Fruit units'
+                }
+            },
+            tooltip: {
+                shared: true,
+                valueSuffix: ' units'
+            },
+            credits: {
+                enabled: false
+            },
+            plotOptions: {
+                areaspline: {
+                    fillOpacity: 0.5
+                }
+            },
+            series: [{
+                name: 'Marcel',
+                data: [3, 4, 3, 18, 4, 10, 12]
+            }]
+        });
     });
     
     
@@ -368,6 +305,11 @@
     if($("#cant_ref").val() == 78125 && $("#estatus_perfil").val() == 4){
         $("#modal_felictaciones").modal("show");
     }
+    // Show the Modal on load
+    //if($("#disponible").val() >= 60 ){
+    //    bootbox.alert('Felicitaciones, ya puedes retirar tu dinero', function () {    
+    //    });
+    //}
     // Generar enlace para registro de nuevo usuario
     $("#volver_jugar").click(function (e) {
         e.preventDefault();  // Para evitar que se envíe por defecto
