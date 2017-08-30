@@ -400,4 +400,32 @@ class ModelsBusqueda extends CI_Model
 		$query3 = $this->db->query($sql_select);
 		return $query3->result();
     }
+	
+	public function search_notificaciones($usuario, $hoy){
+		$sql_select = "SELECT tipo, accion, date_part('DAY', TIMESTAMP '".$hoy."' - fecha::date) AS dias FROM notificaciones ";
+		$sql_select .= " WHERE usuario_id =".$usuario." ORDER BY id DESC LIMIT 10";
+		$query3 = $this->db->query($sql_select);
+		return $query3->result();
+    }
+	public function search_new_notificaciones($usuario){
+		$sql_select = "SELECT tipo, accion FROM notificaciones ";
+		$sql_select .= " WHERE usuario_id =".$usuario." AND estatus = 1 ORDER BY id DESC LIMIT 10";
+		$query3 = $this->db->query($sql_select);
+		return $query3->result();
+    }
+	// Metodo público, para actualizar un registro 
+    public function actualizar_notifiaciones($usuario) {
+		$sql_select = "UPDATE notificaciones  ";
+		$sql_select .= " SET estatus=2  ";
+		$sql_select .= " WHERE usuario_id =".$usuario;
+
+		$query3 = $this->db->query($sql_select);
+		//return $query3->result();
+    }
+	public function search_tipo_usuario($id){
+		$sql_select = "SELECT tipo_usuario FROM usuarios ";
+		$sql_select .= " WHERE id  =".$id;
+		$query3 = $this->db->query($sql_select);
+		return $query3->result();
+    }
 }

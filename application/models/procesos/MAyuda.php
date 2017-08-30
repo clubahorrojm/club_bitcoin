@@ -37,61 +37,6 @@ class MAyuda extends CI_Model {
 		$result = $this->db->where('codigo', $datos['codigo']);
 		$result = $this->db->update('ref_rel_ayudas', $datos);
     }
-   
-    // Método público para listar pagos específicos
-    public function obtenerPagosEspBit($cuenta,$estatus,$desde,$hasta)
-    {
-		$query = "";
-		$sql = "";
-		
-		$condicion = " WHERE ";
-		$fecha = "";
-		
-		$filtros = array(
-		'cuenta_id' => $cuenta,
-		'estatus' => $estatus);
-		
-		while ($filtro = current($filtros)) {
-			if($filtro != 'xxx'){
-				if($condicion == " WHERE "){
-					$condicion .= key($filtros).'='.$filtro;
-				}else{
-					$condicion .= " AND ".key($filtros).'='.$filtro;
-				}
-			}
-			
-			next($filtros);
-		}
-		
-		if($desde != "xxx" and $hasta != "xxx"){
-			$fecha = " AND fecha_pago BETWEEN '".$desde."' AND '".$hasta."'";
-		}
-		
-		$condicion .= $fecha;
-		
-		//~ echo "Condición: ".$condicion;
-		
-		$sql = "SELECT * FROM ref_rel_ayudas".$condicion;
-		
-		//~ echo $sql;
-		
-		// La consulta se hace dependiendo de los parámetros de búsqueda
-		//~ if($estatus != "xxx" and $desde == "xxx" and $hasta == "xxx"){
-			//~ $sql = "SELECT * FROM ref_rel_pagos_bitcoins WHERE estatus=".$estatus;
-		//~ }else if($estatus != "xxx" and $desde != "xxx" and $hasta != "xxx"){
-			//~ $sql = "SELECT * FROM ref_rel_pagos_bitcoins WHERE estatus=".$estatus." AND fecha BETWEEN '".$desde."' AND '".$hasta."'";
-		//~ }else if($estatus == "xxx" and $desde != "xxx" and $hasta != "xxx"){
-			//~ $sql = "SELECT * FROM ref_rel_pagos_bitcoins WHERE fecha BETWEEN '".$desde."' AND '".$hasta."'";
-		//~ }
-		
-		$query = $this->db->query($sql);
-        //~ $query = $this->db->get('ref_rel_pagos_bitcoins');  No es necesario cuando se usa db->query()
-        //~ 
-        if ($query->num_rows() > 0)
-			return $query->result();
-        else
-            echo '0';
-    }
     
 }
 

@@ -248,4 +248,16 @@ class ControllersBusqueda extends CI_Controller {
         $result = $this->ModelsBusqueda->search_bus_link($enlace);
         echo json_encode($result);
     }
+    public function busqueda_notificaciones(){
+          $usuario = $this->session->userdata['logged_in']['id'];
+          $result = 
+          $data['lista_notificaciones'] = $this->ModelsBusqueda->search_notificaciones($usuario);
+          echo json_encode($result);
+    }
+    public function actualizar_notifiaciones(){
+          $usuario = $this->session->userdata['logged_in']['id'];
+          $result = 
+          $data['lista_notificaciones'] = $this->ModelsBusqueda->actualizar_notifiaciones($usuario);
+          echo json_encode($result);
+    }
 }
