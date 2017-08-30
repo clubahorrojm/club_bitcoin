@@ -31,13 +31,16 @@
     <head>
         <title>.:: Criptozone ::.</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-        <link rel="stylesheet" type="text/css" href="<?= base_url() ?>static/css/bootstrap.min.css">
+        <link rel="stylesheet" href="<?= base_url() ?>static/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="<?= base_url() ?>static/plugins/datepicker/datepicker3.css">
+        <link rel="stylesheet" href="<?= base_url() ?>static/plugins/daterangepicker/daterangepicker-bs3.css">
         <link rel="stylesheet" type="text/css" href="<?= base_url() ?>static/css/select2.css"/>
         <link rel="stylesheet" type="text/css" href="<?= base_url() ?>static/css/select2-bootstrap.css"/>
         <!--<script src="<?= base_url() ?>static/js/jquery-1.11.2.min.js"></script>-->
         <script src="<?= base_url() ?>static/plugins/jQuery/jQuery-2.1.4.min.js"></script>
-        <script src="<?= base_url() ?>static/js/bootstrap.min.js"></script>
+        <script src="<?= base_url() ?>static/bootstrap/js/bootstrap.min.js"></script>
 
+        <script src="<?= base_url() ?>static/plugins/datepicker/bootstrap-datepicker.js"></script>
         <script src="<?= base_url() ?>static/js/bootstrap-datepicker.js"></script>
         <script src="<?= base_url() ?>static/js/bootstrap-datepicker.es.min.js"></script>
         <script src="<?= base_url() ?>static/js/select2.js"></script>
@@ -69,9 +72,15 @@
 
                 $("select").select2();
                 
-				
+				$('#fecha_na').numeric({allow: "/"});
 				$('#username').alphanumeric();
 				$('#password').alphanumeric({allow: "+-/#@*"});
+				
+				$('#fecha_na').datepicker({
+					format: "dd/mm/yyyy",
+					language: "es",
+					autoclose: true,
+				})
 				
 				// CAMBIO DE COLOR DE TEXBOX
 				
@@ -209,7 +218,7 @@
 						var cod_link = cadena[0];
 						//var userd_id = cadena[1];
 						var num_link = cadena[1];
-						$("#codigo").val(cod_link);
+						$("#codigo").val(cod_link.trim());
 						$("#link").val(num_link);
 						$("#modal_registrar").modal('show'); 
 					});
@@ -224,6 +233,14 @@
 			}
 			input.placOff::-moz-placeholder {
 				color: #edd727 !important; 
+			}
+			.select2-container .select2-choice {
+				background-color: #22274b;
+				width: 100%; 
+				color: #edd727;
+			}
+			.datepicker-dropdown {
+				background-color: #22274b !important;
 			}
 		</style>
 		
@@ -318,9 +335,9 @@
 		</div>
 
 		
-		<div class="modal" id="modal_registrar">
-		   <div class="modal-dialog">
-			  <div class="modal-content">
+		<div class="modal" id="modal_registrar" style="height:auto;">
+		   <div class="modal-dialog" style="height:auto;">
+			  <div class="modal-content" style="height:auto;">
 				 <div class="modal-header" style="background-color:#22274b">
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 					<h4 class="modal-title">
@@ -328,7 +345,7 @@
 					   &nbsp;Formulario de Registro</center>
 					</h4>
 				 </div>
-				 <div class="modal-body">
+				 <div class="modal-body" style="height:auto;">
 					<form id="f_reg_usuario" name="f_reg_usuario" action="" method="post">
 					
 					   <div class="form-group">
@@ -337,19 +354,56 @@
 									por lo tanto no pueden quedar en blanco.
 								</h4>
 							</div>
-							<div class="col-sm-12">
+							<div class="col-sm-6">
+								<input type="text" class="form-control" style="background-color: #22274b; width: 100%; color: #edd727 " id="first_name" name="first_name" placeholder="Nombre" autofocus="true">
+							</div>
+							<div class="col-sm-6">
+								<input type="text" class="form-control" style="background-color: #22274b; width: 100%; color: #edd727 " id="last_name" name="last_name" placeholder="Apellido" autofocus="true">
+							</div>
+							<div class="col-sm-6">
+								<input type="text" class="form-control" style="background-color: #22274b; width: 100%; color: #edd727 " id="fecha_na" name="fecha_na" placeholder="00/00/0000" autofocus="true">
+							</div>
+							</br></br></br>
+							<div class="col-sm-6">
+								<input style="background-color: #22274b; width: 100%; color: #edd727 "  type="text" class="form-control" id="correo" name="correo" placeholder="Coreo Electrónico (*)"/>
+							</div>
+							<div class="col-sm-6">
 								<input type="hidden" id="codigo" name="codigo" value="<?php echo $codigo;?>">
 								<input type="hidden" id="link" name="link" value="<?php echo $link;?>">
 								<input type="text" class="form-control" style="background-color: #22274b; width: 100%; color: #edd727 " id="username_reg" name="username_reg" placeholder="Usuario (*)" autofocus="true">
 							</div>
 							</br></br></br>
-							<div class="col-sm-12">
+							<div class="col-sm-6">
 								<input style="background-color: #22274b; width: 100%; color: #edd727 "  type="password" class="form-control" id="password_reg" name="password_reg" placeholder="Contraseña (*)"/>
 							</div>
 							</br></br></br>
-							<div class="col-sm-12">
-								<input style="background-color: #22274b; width: 100%; color: #edd727 "  type="text" class="form-control" id="correo" name="correo" placeholder="Coreo Electrónico (*)"/>
-							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label style="font-weight:bold">País</label>
+									<select class="form-control" id="pais_id" maxlength="7" name="pais_id">
+										<option value="">Seleccione</option>
+										<?php foreach ($listar_paises as $pais) { ?>
+											<option value="<?php echo $pais->codigo;?>"><?php echo $pais->descripcion;?></option>
+										 <?php }?> 
+									</select>
+								</div><!-- /.form-group -->
+							</div><!-- /.form-group -->
+							<div class="col-md-6">
+								<div class="form-group">
+									<label style="font-weight:bold">Llegaste a nosotros por </label>
+									<select class="form-control" id="patrocinador_id" maxlength="7" name="patrocinador_id">
+										<option value="">Seleccione</option>
+										<option value="1">Facebook</option>
+										<option value="2">Twitter</option>
+										<option value="3">Instagram</option>
+										<option value="4">Google +</option>
+										<option value="5">Página web</option>
+										<option value="6">Por un amigo</option>
+										<option value="7">Por Tv</option>
+										<option value="8">Youtube</option>
+									</select>
+								</div><!-- /.form-group -->
+							</div><!-- /.form-group -->
 							<!--<div class="col-sm-12">
 								<select style="width: 100%;" class="form-control" id="tipo_moneda" name="tipo_moneda">
 									<option value="0">Seleccione</option>
@@ -363,7 +417,7 @@
 									</button>
 								</span>
 							</div>
-							</br></br></br></br></br></br>
+							</br></br></br></br></br></br></br></br>
 					   </div>
 					</form>
 				 </div>

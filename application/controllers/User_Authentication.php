@@ -33,6 +33,7 @@ Class User_Authentication extends CI_Controller {
         $this->load->model('MMails');
         $this->load->model('configuracion/usuarios/Usuarios_model');
         $this->load->model('administracion/MAuditoria');
+        $this->load->model('administracion/MPaises');
         $this->load->model('referidos/MRelLinks');
         $this->load->model('referidos/MReferidos');
         $this->load->model('configuracion/grupos_usuarios/ModelsGruposUsuarios');
@@ -44,7 +45,8 @@ Class User_Authentication extends CI_Controller {
     public function index() {
         $data['fecha'] = $this->uri->segment(1);
         //~ print_r($data);
-        $this->load->view('login_form');
+        $data['listar_paises'] = $this->MPaises->obtenerPais();  // Lista de países
+        $this->load->view('login_form', $data);
     }
 
 // Check for user login process
@@ -149,6 +151,7 @@ Class User_Authentication extends CI_Controller {
         );
         $this->session->unset_userdata('logged_in', $sess_array);
         $data['message_display'] = 'Sesión Cerrada con exito';
+        $data['listar_paises'] = $this->MPaises->obtenerPais();  // Lista de países
         $this->load->view('login_form', $data);
         $param   = array(
             
@@ -196,6 +199,8 @@ Class User_Authentication extends CI_Controller {
 		$codigo = $this->input->post('codigo');
 		$link = $this->input->post('link');
 		$enlace = base_url().'index.php?codigo='.$codigo.'&link='.$link;
+		$fecha = explode('/',$this->input->post('fecha_na'));
+        $fecha = $fecha[2].'-'.$fecha[1].'-'.$fecha[0];
 
 		$codigo_usuario = $this->ModelsBusqueda->count_all_table('usuarios') + 1;
 		
@@ -203,11 +208,17 @@ Class User_Authentication extends CI_Controller {
 		$data_usuario = array(
 			'id' => $codigo_usuario,
 			'codigo' => $codigo_usuario,
+			'first_name' => $this->input->post('first_name'),
+			'last_name' => $this->input->post('last_name'),
+			'fecha_na' => $fecha,
+			'email' => $this->input->post('correo'),
 			'username' => $usuario,
 			'email' => $this->input->post('correo'),
 			'password' => $clave_nueva,
 			'tipo_usuario' => '3',
 			'estatus' => True,
+			'pais_id' => $this->input->post('pais_id'),
+			'patrocinador_id' => $this->input->post('patrocinador_id'),
 			'fecha_create' => date('Y-m-d H:i:s'),
 			'fecha_update' => date('Y-m-d H:i:s'),
 		);
