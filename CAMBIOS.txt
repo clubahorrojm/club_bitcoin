@@ -292,3 +292,11 @@ CAMBIOS AL 29-08-2017 (MARCEL):
 		- Actualización de Views: 
 			+ admin_page.php, base.php, base2.php
 			+ view/referidos/perfil/perfil.php
+			
+CAMBIOS AL 29-08-2017 2(MARCEL):
+		- Actualización de Views: 
+			+ admin_page.php, perfil.php, base.php
+		- Actualizacion de Controlador
+			+ User_Autentication.php,
+		- Actualización de Modelos:
+			+ ModelsBusqueda.php,
