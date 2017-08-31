@@ -72,7 +72,8 @@ Class User_Authentication extends CI_Controller {
 				}
                                
             } else {
-                $this->load->view('login_form');
+				$data['listar_paises'] = $this->MPaises->obtenerPais();  // Lista de países
+                $this->load->view('login_form', $data);
             }
             
         } else {
@@ -137,6 +138,7 @@ Class User_Authentication extends CI_Controller {
                 $data = array(
                     'error_message' => 'Usuario y Contraseñas Invalidos'
                 );
+                $data['listar_paises'] = $this->MPaises->obtenerPais();  // Lista de países
                 $this->load->view('login_form', $data);
             }
         }
@@ -213,7 +215,6 @@ Class User_Authentication extends CI_Controller {
 			'fecha_na' => $fecha,
 			'email' => $this->input->post('correo'),
 			'username' => $usuario,
-			'email' => $this->input->post('correo'),
 			'password' => $clave_nueva,
 			'tipo_usuario' => '3',
 			'estatus' => True,
