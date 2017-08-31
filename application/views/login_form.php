@@ -168,7 +168,32 @@
 					// Expresion regular para validar el correo
 					var regex = /[\w-\.]{2,}@([\w-]{2,}\.)*([\w-]{2,}\.)[\w-]{2,4}/;
 					
-					if($("#username_reg").val() == ''){
+					if($("#first_name").val() == ''){
+						alert("Error: Ingrese su nombre");
+						$("#first_name").parent('div').addClass('has-error')
+						$("#first_name").val('');
+						$("#first_name").focus();
+					} else if($("#last_name").val() == ''){
+						alert("Error: Ingrese su apellido");
+						$("#last_name").parent('div').addClass('has-error')
+						$("#last_name").val('');
+						$("#last_name").focus();
+					} else if($("#fecha_na").val() == ''){
+						alert("Error: Ingrese su fecha de nacimiento");
+						$("#fecha_na").parent('div').addClass('has-error')
+						$("#fecha_na").val('');
+						$("#fecha_na").focus();
+					} else if($("#correo").val() == ''){
+						alert("Error: Ingrese su correo");
+						$("#correo").parent('div').addClass('has-error')
+						$("#correo").val('');
+						$("#correo").focus();
+					} else if(!(regex.test($('#correo').val().trim()))){
+						alert("Error: Ha introducido una dirección de correo electrónico inválida");
+						$("#correo").parent('div').addClass('has-error')
+						$("#correo").val('');
+						$("#correo").focus();
+					} else if($("#username_reg").val() == ''){
 						alert("Error: Ingrese su nombre de usuario");
 						$("#username_reg").parent('div').addClass('has-error')
 						$("#username_reg").val('');
@@ -178,23 +203,23 @@
 						$("#password_reg").parent('div').addClass('has-error')
 						$("#password_reg").val('');
 						$("#password_reg").focus();
-					} else if($("#correo").val() == ''){
-						alert("Error: Ingrese su correo");
-						$("#correo").parent('div').addClass('has-error')
-						$("#correo").val('');
-						$("#correo").focus();
-					}else if(!(regex.test($('#correo').val().trim()))){
-						alert("Error: Ha introducido una dirección de correo electrónico inválida");
-						$("#correo").parent('div').addClass('has-error')
-						$("#correo").val('');
-						$("#correo").focus();
+					} else if ($("#pais_id").val() == 0) {
+						alert("Error: Seleccione el país");
+						$("#pais_id").parent('div').addClass('has-error')
+						$("#pais_id").val('');
+						$("#pais_id").focus();
+					} else if ($("#patrocinador_id").val() == 0) {
+						alert("Error: Seleccione su procedencia");
+						$("#patrocinador_id").parent('div').addClass('has-error')
+						$("#patrocinador_id").val('');
+						$("#patrocinador_id").focus();
 					} else {
 						// Registramos el nuevo usuario
 						$.post('<?php echo base_url(); ?>index.php/User_Authentication/registrar_referido/', $("#f_reg_usuario").serialize(), function(response) {
 							//~ alert(response.trim());
 							if (response.trim() == "1"){
 								alert("El usuario ya existe");
-								location.reload();
+								//~ location.reload();
 							}else{
 								// Generamos el perfil del nuevo usuario
 								$.post('<?php echo base_url(); ?>index.php/User_Authentication/registrar_perfil/', $("#f_reg_usuario").serialize(), function(response) {
@@ -379,7 +404,7 @@
 							</br></br></br>
 							<div class="col-md-6">
 								<div class="form-group">
-									<label style="font-weight:bold">País</label>
+									<label style="font-weight:bold;color:#22274b;">País</label>
 									<select class="form-control" id="pais_id" maxlength="7" name="pais_id">
 										<option value="">Seleccione</option>
 										<?php foreach ($listar_paises as $pais) { ?>
@@ -390,7 +415,7 @@
 							</div><!-- /.form-group -->
 							<div class="col-md-6">
 								<div class="form-group">
-									<label style="font-weight:bold">Llegaste a nosotros por </label>
+									<label style="font-weight:bold;color:#22274b;">Llegaste a nosotros por </label>
 									<select class="form-control" id="patrocinador_id" maxlength="7" name="patrocinador_id">
 										<option value="">Seleccione</option>
 										<option value="1">Facebook</option>
