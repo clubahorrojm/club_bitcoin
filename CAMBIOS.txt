@@ -300,3 +300,11 @@ CAMBIOS AL 29-08-2017 2(MARCEL):
 			+ User_Autentication.php,
 		- Actualización de Modelos:
 			+ ModelsBusqueda.php,
+
+CAMBIOS AL 31-08-2017 (José):
+		- Actualización de View: 
+			+ login_form.php
+		- Actualizacion de Controlador
+			+ User_Autentication.php,
+		- Actualización de Modelo:
+			+ MMails.php,
