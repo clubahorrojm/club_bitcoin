@@ -20,15 +20,6 @@ class MRelAyudas extends CI_Model {
         parent::__construct();
         $this->load->database();
     }
-
-    //Metodo publico para obterner la unidad de medida
-    public function obtenerBanco() {
-        $query = $this->db->get('ref_rel_ayudas');
-        
-        if($query->num_rows()>0) return $query->result();
-         else return $query->result();
-    }
-
     
     // Metodo publico, forma de insertar los datos
     public function insertarRelAyudas($datos){

@@ -50,7 +50,7 @@ class CMonedero extends CI_Controller
         else{
             $datos = array(
                 'id' => 1,
-				'monedero' => 'JGQko7DZfuNqgyMkiSM6TKJBmAMCHhZL7',
+				'monedero' => '1H25ZkhsEjGTuJ7aBV3Hu9PcZ4EobToBek',
             );
             $result = $this->MMonedero->insertarMonedero($datos);
             if ($result) {

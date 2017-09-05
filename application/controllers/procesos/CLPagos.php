@@ -37,7 +37,6 @@ class CLPagos extends CI_Controller
 // Load database
 		$this->load->model('procesos/MLPagos');
         $this->load->model('configuracion/usuarios/Usuarios_model');
-        // $this->load->model('configuracion/MCuentas');
         $this->load->model('busquedas_ajax/ModelsBusqueda');
         $this->load->model('administracion/MAuditoria');
         $this->load->model('referidos/MRelPagos');
@@ -57,8 +56,6 @@ class CLPagos extends CI_Controller
             $data['listar'] = $this->MLPagos->obtenerPagosBit();
         }
         else{
-            //~ $this->MCuentas->cargarCSV();
-            //~ redirect('configuracion/CCuentas');
             $data['listar'] = [];
         }
         $data['listar_usuarios'] = $this->Usuarios_model->obtenerUsuarios();
@@ -97,7 +94,6 @@ class CLPagos extends CI_Controller
             'codigo'=> $id_perfil,
             'estatus'=> 2,
         );
-        // print_r($datos2);
         // Actualizamos el perfil
         $result = $this->MReferidos->actualizarReferidos($datos2);
         // Registramos los cambios en la Bitacora

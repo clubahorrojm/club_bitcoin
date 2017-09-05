@@ -38,9 +38,10 @@ class CRelLinks extends CI_Controller
         $this->load->model('referidos/MReferidos');
         $this->load->model('busquedas_ajax/ModelsBusqueda');
         $this->load->model('administracion/MAuditoria');
-		    $this->load->model('configuracion/usuarios/Usuarios_model');
+		$this->load->model('configuracion/usuarios/Usuarios_model');
         $this->load->model('referidos/MRelPagos');
         $this->load->model('referidos/MRelLinks');
+		$this->load->model('referidos/MRelNivel');
     }
     // INDEX del modulo de perfil del referido
     function index(){
@@ -52,7 +53,7 @@ class CRelLinks extends CI_Controller
 
         $data['listar_usuarios'] = $this->Usuarios_model->obtenerUsuarios(); // Listado de usuarios
         //$data['pago'] = $this->MRelPagos->obtenerRelPagos($cod_user); // Informacion del pago de ingreso al sistema
-        $data['listar_links'] = $this->MRelLinks->obtenerRelLinks($cod_user); // Listado de links de invitacion 
+        $data['listar_links'] = $this->MRelLinks->obtenerLinksDisp(); // Listado de links de invitacion 
         $data['val_links'] = count($data['listar_links']); //Captura de numero de links generados
         $data['listar_cant_links'] = $this->MRelLinks->obtenerCantRelLinks($cod_user); // Cantidad de links ocupados por referido hijo
 
@@ -65,6 +66,8 @@ class CRelLinks extends CI_Controller
 		$data['usuario'] = $this->Usuarios_model->obtenerUsuario($u_id);
 		$username = $data['usuario'][0]->username; // Codigo del Usuario
         $result = $this->MRelLinks->obtenerRelLinks($u_id);
+		$data['editar'] = $this->MReferidos->obtenerReferido($u_id);
+		$cod_perfil = $data['editar'][0]->codigo;
         if (count($result) == 0){
             for ($i=1; $i<6; $i++){
                 $datos = array(
@@ -78,6 +81,21 @@ class CRelLinks extends CI_Controller
                 );
                 $result = $this->MRelLinks->insertarRelLinks($datos);
             }
+			//Registro del nivel 0
+			if ($result) {
+                $param = array(
+					'usuario_id' => $this->session->userdata['logged_in']['id'],
+                    'nivel' => 0,
+                    'tiempo' => 0,
+                    'fecha' => date('Y-m-d'),                    
+                );
+                $this->MRelNivel->insertarRelNivel($param);
+            }
+			$niveles = array(
+				'codigo' => $cod_perfil,
+				'nivel' => 1,
+			);
+			$result = $this->MReferidos->actualizarReferidos($niveles); // SE ACTUALIZA EL NIVEL DEL USUARIO		
             if ($result) {
                 $param = array(
                     'tabla' => 'RelLinks',

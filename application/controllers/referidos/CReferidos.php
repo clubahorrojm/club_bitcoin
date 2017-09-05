@@ -46,7 +46,6 @@ class CReferidos extends CI_Controller
         $this->load->model('referidos/MRelLinks');
 		$this->load->model('referidos/MRelDistribucion');
 		$this->load->model('referidos/MRelDistribucion');
-		$this->load->model('administracion/MEmpresa');
 		$this->load->model('administracion/MNotificaciones');
 
     }
@@ -62,82 +61,34 @@ class CReferidos extends CI_Controller
 		$data['listar_paises'] = $this->MPaises->obtenerPais(); // Listado de cuentas de la pagina
 		$data['estatus_perfil']  = $data['editar'][0]->estatus; // Estatus del perfil del Usuario
         $cod_perfil = $data['editar'][0]->codigo; // Codigo del Usuario
-        // $data['listar_t_cuentas'] = $this->MTiposCuenta->obtenerTiposCuenta(); // Listado de Tipo de cuentas
-        // $data['listar_cuentas'] = $this->MCuentas->obtenerCuentas(); // Listado de cuentas de la pagina
-        // $data['listar_bancos'] = $this->MBancos->obtenerBanco(); // Listado de Bancos
         $data['monto_pago'] = $data['editar'][0]->monto_pago; // Captura del monto del pago de ingreso al sistema
 		
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        ////////// Metodo para la actualizacion del nivel del usuario en base a la cantidad de sub referidos Y Calculo de % que lleva el usuario para el proximo nivel/////////////
-		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ////////// Metodo para el calculo del porcentaje avance por nivel en base a la cantidad de referidos actuales /////////////
+		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         $cant_ref = $data['editar'][0]->cant_ref; // Cantidad de sub referidos
         if ($cant_ref < 6){
-          $niveles = array(
-            'codigo' => $cod_perfil,
-            'nivel' => 1,
-          );
 		  $porcentaje = ($cant_ref * 100) / 5;
 		  $cant_ref_necesarios = 5;
         }else if ($cant_ref > 5 && $cant_ref < 26){
-          $niveles = array(
-            'codigo' => $cod_perfil,
-            'nivel' => 2,
-          );
 		  $porcentaje = ($cant_ref * 100) / 25;
 		  $cant_ref_necesarios = 25;
         }else if ($cant_ref > 25 && $cant_ref < 126){
-          $niveles = array(
-            'codigo' => $cod_perfil,
-            'nivel' => 3,
-          );
 		  $porcentaje = ($cant_ref * 100) / 125;
 		  $cant_ref_necesarios = 125;
         }else if ($cant_ref > 125 && $cant_ref < 626){
-          $niveles = array(
-            'codigo' => $cod_perfil,
-            'nivel' => 4,
-          );
 		  $porcentaje = ($cant_ref * 100) / 625;
 		  $cant_ref_necesarios = 625;
         }else if ($cant_ref > 625 && $cant_ref < 3126){
-          $niveles = array(
-            'codigo' => $cod_perfil,
-            'nivel' => 5,
-          );
 		  $porcentaje = ($cant_ref * 100) / 3125;
 		  $cant_ref_necesarios = 3125;
         }else if ($cant_ref > 3125 && $cant_ref < 15626){
-          $niveles = array(
-            'codigo' => $cod_perfil,
-            'nivel' => 6,
-          );
 		  $porcentaje = ($cant_ref * 100) / 15625;
 		  $cant_ref_necesarios = 15625;
         }else if ($cant_ref > 15625 && $cant_ref < 78126){
-          $niveles = array(
-            'codigo' => $cod_perfil,
-            'nivel' => 7,
-          );
 		  $porcentaje = ($cant_ref * 100) / 78125;
 		  $cant_ref_necesarios = 78125;
         }
-		$result = $this->MReferidos->actualizarReferidos($niveles); // SE ACTUALIZA EL NIVEL DEL USUARIO
-		
-		//////////////  Metodo para Generar notificacion de cambi de nivel comparando el ultimo nivel con el calculado por los referidos ///////
-		$ultimo_lvl = $data['editar'][0]->nivel;
-		$actual_lvl = $niveles['nivel'];
-		if ($ultimo_lvl < $actual_lvl){
-			// SE GENERA LA NOTIFICACION AL USUARIO QUE SUBIO DE NIVEL
-			$param2 = array(
-				'usuario_id' => $id_user,
-				'tipo' => 4,
-				'accion' => '¡Felicitaciones ha alcanzado el nivel '.$actual_lvl.'!.',
-				'fecha' => date('Y-m-d'),
-				'hora' => date("h:i:s a"),
-				'estatus' => 1,
-			);
-			$this->MNotificaciones->insertarNotificacion($param2);
-		};
 		
 		
 		$data['porcentaje'] = $porcentaje;
@@ -227,16 +178,13 @@ class CReferidos extends CI_Controller
         $data['usuario'] = $this->Usuarios_model->obtenerUsuario($id_user);
         $cod_user = $data['usuario'][0]->codigo; // Codigo del Usuario
 		$data['listar_distribuciones'] = $this->MRelDistribucion->obtenerDistribucion($cod_user); //Listado de distribuciones realizadas
-        
-        $data['empresa'] = $this->MEmpresa->obtenerEmpresa(1);
+
         $data['editar'] = $this->MReferidos->obtenerReferido($cod_user);
         $id_moneda = $data['editar'][0]->t_moneda_id; // ID Tipo de moneda
         $data['monedas'] = $this->MTiposMonedas->obtenerTiposMonedas($id_moneda);
         $data['moneda'] = $data['monedas'][0]->abreviatura; // Abreviatura de moneda
 
-        //$data['listar_cuenta'] = $this->MCuentas->obtenerCuenta($cuenta_id); // Listado de cuentas de la pagina
-        //$data['listar_bancos'] = $this->MBancos->obtenerBanco(); // Listado de Bancos
-        //$data['listar_t_cuentas'] = $this->MTiposCuenta->obtenerTiposCuenta(); // Listado de Tipo de cuentas
+
         $data['listar_usuarios'] = $this->Usuarios_model->obtenerUsuarios(); // Listado de usuarios
         $data['listar_distribuciones'] = $this->MRelDistribucion->obtenerDistribucion($cod_user); //Listado de distribuciones realizadas
 
@@ -249,15 +197,11 @@ class CReferidos extends CI_Controller
         $cod_user = $data['usuario'][0]->codigo; // Codigo del Usuario
 		$data['listar_distribuciones'] = $this->MRelDistribucion->obtenerDistribucion($cod_user); //Listado de distribuciones realizadas
         
-        $data['empresa'] = $this->MEmpresa->obtenerEmpresa(1);
         $data['editar'] = $this->MReferidos->obtenerReferido($cod_user);
         $id_moneda = $data['editar'][0]->t_moneda_id; // ID Tipo de moneda
         $data['monedas'] = $this->MTiposMonedas->obtenerTiposMonedas($id_moneda);
         $data['moneda'] = $data['monedas'][0]->abreviatura; // Abreviatura de moneda
 
-        //$data['listar_cuenta'] = $this->MCuentas->obtenerCuenta($cuenta_id); // Listado de cuentas de la pagina
-        //$data['listar_bancos'] = $this->MBancos->obtenerBanco(); // Listado de Bancos
-        //$data['listar_t_cuentas'] = $this->MTiposCuenta->obtenerTiposCuenta(); // Listado de Tipo de cuentas
         $data['listar_usuarios'] = $this->Usuarios_model->obtenerUsuarios(); // Listado de usuarios
         $data['listar_retiros'] = $this->MRelRetiros->obtenerRelRetiros($cod_user); // Listado de Retiros solicitados
 

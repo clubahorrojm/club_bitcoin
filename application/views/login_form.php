@@ -55,7 +55,8 @@
 		<!-- Jquery numeric -->
         <script src="<?= base_url() ?>static/js/jquery.numeric.js"></script>  
         <!-- Jquery alphanumeric -->
-        <script src="<?= base_url() ?>static/js/jquery.alphanumeric.js"></script>  
+        <script src="<?= base_url() ?>static/js/jquery.alphanumeric.js"></script>
+		<script src="<?= base_url() ?>static/js/bootbox.js"></script>  
 		<script>
 			$(document).ready(function () {
 
@@ -83,23 +84,23 @@
 				})
 				
 				// CAMBIO DE COLOR DE TEXBOX
-				
-				document.getElementById("username").addEventListener("click", function() {
-					document.getElementById('username').style.backgroundColor ='#FFFFFF';
-					document.getElementById('username').style.color ='#000000';
-					document.getElementById('password').style.backgroundColor ='#22274b';
-					document.getElementById('password').style.color ='#edd727';
-					//document.getElementById("username").className += " placOn";
-					//document.getElementById("password").className += " placOff";
-				}, false);
-				document.getElementById("password").addEventListener("click", function() {
-					document.getElementById('password').style.backgroundColor ='#FFFFFF';
-					document.getElementById('password').style.color ='#000000';
-					document.getElementById('username').style.backgroundColor ='#22274b';
-					document.getElementById('username').style.color ='#edd727';
-					//document.getElementById("username").className += " placOff";
-					//document.getElementById("password").className += " placOn";
-				}, false);
+				//
+				//document.getElementById("username").addEventListener("click", function() {
+				//	document.getElementById('username').style.backgroundColor ='#FFFFFF';
+				//	document.getElementById('username').style.color ='#000000';
+				//	document.getElementById('password').style.backgroundColor ='#22274b';
+				//	document.getElementById('password').style.color ='#edd727';
+				//	//document.getElementById("username").className += " placOn";
+				//	//document.getElementById("password").className += " placOff";
+				//}, false);
+				//document.getElementById("password").addEventListener("click", function() {
+				//	document.getElementById('password').style.backgroundColor ='#FFFFFF';
+				//	document.getElementById('password').style.color ='#000000';
+				//	document.getElementById('username').style.backgroundColor ='#22274b';
+				//	document.getElementById('username').style.color ='#edd727';
+				//	//document.getElementById("username").className += " placOff";
+				//	//document.getElementById("password").className += " placOn";
+				//}, false);
 				
                 // Pre-carga de la lista de tipos de moneda
                 $('#tipo_moneda').find('option:gt(0)').remove().end().select2('val', '0');
@@ -168,67 +169,47 @@
 					// Expresion regular para validar el correo
 					var regex = /[\w-\.]{2,}@([\w-]{2,}\.)*([\w-]{2,}\.)[\w-]{2,4}/;
 					
-					if($("#first_name").val() == ''){
-						alert("Error: Ingrese su nombre");
-						$("#first_name").parent('div').addClass('has-error')
-						$("#first_name").val('');
-						$("#first_name").focus();
-					} else if($("#last_name").val() == ''){
-						alert("Error: Ingrese su apellido");
-						$("#last_name").parent('div').addClass('has-error')
-						$("#last_name").val('');
-						$("#last_name").focus();
-					} else if($("#fecha_na").val() == ''){
-						alert("Error: Ingrese su fecha de nacimiento");
-						$("#fecha_na").parent('div').addClass('has-error')
-						$("#fecha_na").val('');
-						$("#fecha_na").focus();
-					} else if($("#correo").val() == ''){
-						alert("Error: Ingrese su correo");
-						$("#correo").parent('div').addClass('has-error')
-						$("#correo").val('');
-						$("#correo").focus();
-					} else if(!(regex.test($('#correo').val().trim()))){
-						alert("Error: Ha introducido una dirección de correo electrónico inválida");
-						$("#correo").parent('div').addClass('has-error')
-						$("#correo").val('');
-						$("#correo").focus();
-					} else if($("#username_reg").val() == ''){
-						alert("Error: Ingrese su nombre de usuario");
-						$("#username_reg").parent('div').addClass('has-error')
-						$("#username_reg").val('');
-						$("#username_reg").focus();
+					if($("#username_reg").val() == ''){
+						bootbox.alert('<h4>Error: Ingrese su nombre de usuario</h4>', function () {
+							$("#username_reg").parent('div').addClass('has-error');
+							$("#username_reg").val('');
+							$("#username_reg").focus();	
+						});
 					} else if($("#password_reg").val() == ''){
-						alert("Error: Ingrese su contraseña");
-						$("#password_reg").parent('div').addClass('has-error')
-						$("#password_reg").val('');
-						$("#password_reg").focus();
-					} else if ($("#pais_id").val() == 0) {
-						alert("Error: Seleccione el país");
-						$("#pais_id").parent('div').addClass('has-error')
-						$("#pais_id").val('');
-						$("#pais_id").focus();
-					} else if ($("#patrocinador_id").val() == 0) {
-						alert("Error: Seleccione su procedencia");
-						$("#patrocinador_id").parent('div').addClass('has-error')
-						$("#patrocinador_id").val('');
-						$("#patrocinador_id").focus();
+						bootbox.alert('<h4>Error: Ingrese su contraseña</h4>', function () {
+							$("#password_reg").parent('div').addClass('has-error');
+							$("#password_reg").val('');
+							$("#password_reg").focus();
+						});
+					} else if($("#correo").val() == ''){
+						bootbox.alert('<h4>Error: Ingrese su correo</h4>', function () {
+							$("#password_reg").parent('div').addClass('has-error');
+							$("#password_reg").val('');
+							$("#password_reg").focus();
+						});
+					}else if(!(regex.test($('#correo').val().trim()))){
+						bootbox.alert('<h4>Error: Ha introducido una dirección de correo electrónico inválida</h4>', function () {
+							$("#correo").parent('div').addClass('has-error');
+							$("#correo").val('');
+							$("#correo").focus();
+						});
 					} else {
 						// Registramos el nuevo usuario
 						$.post('<?php echo base_url(); ?>index.php/User_Authentication/registrar_referido/', $("#f_reg_usuario").serialize(), function(response) {
 							//~ alert(response.trim());
 							if (response.trim() == "1"){
 								alert("El usuario ya existe");
-								//~ location.reload();
+								location.reload();
 							}else{
 								// Generamos el perfil del nuevo usuario
 								$.post('<?php echo base_url(); ?>index.php/User_Authentication/registrar_perfil/', $("#f_reg_usuario").serialize(), function(response) {
 									console.log(response);
 								});
+								bootbox.alert('<h4>Su registro se ha llevado a cabo con éxito, espere un mensaje de confirmación en el correo electrónico proporcionado<h4>', function () {
+									url = '<?php echo base_url(); ?>index.php/'
+									window.location = url
+								});
 								
-								alert('Usuario registrado exitosamente');
-								url = '<?php echo base_url(); ?>index.php/'
-								window.location = url
 							}
 						});
 					}
@@ -253,7 +234,8 @@
 		
 		
 		<style type="text/css">
-			input.placOn::-moz-placeholder {
+
+/*			input.placOn::-moz-placeholder {
 				color: #22274b !important; 
 			}
 			input.placOff::-moz-placeholder {
@@ -266,7 +248,7 @@
 			}
 			.datepicker-dropdown {
 				background-color: #22274b !important;
-			}
+			}*/
 		</style>
 		
     </head>
@@ -334,8 +316,9 @@
 						<button style=" background: linear-gradient(#edd727 , #998809); width:25%; font-weight: bold; color: white"  type="submit"  id="submit" name="submit" >Entrar</button>
 						<!--<button type="button" id="rec_password" name="rec_password">Rec: Clave de Acceso</button>-->
 						</br></br>
-						<a class="text-center " id="registrarse" style="color: white;font-size:20px;font-weight:bold;cursor:pointer;text-decoration: underline" title="Usted será redirigido al área de registro">Solicitar link</a>
-	
+						<button type="button" id="registrar_referido" name="registrar_referido" style=" background: linear-gradient(#edd727 , #998809); width:25%; font-weight: bold; color: white">Registrar</button>
+						<a class="text-center " id="registrarse" style="color: white;font-size:20px;font-weight:bold;cursor:pointer;text-decoration: underline" title="Usted será redirigido al área de registro">Registrate</a>
+					
 	
 						</center>
 				   </div> 
@@ -366,7 +349,7 @@
 				 <div class="modal-header" style="background-color:#22274b">
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 					<h4 class="modal-title">
-					   <center><span class="glyphicon glyphicon-search"></span>
+					   <center style="color: white !important"><span class="glyphicon glyphicon-search" style="color: white !important"></span>
 					   &nbsp;Formulario de Registro</center>
 					</h4>
 				 </div>
@@ -404,9 +387,9 @@
 							</br></br></br>
 							<div class="col-md-6">
 								<div class="form-group">
-									<label style="font-weight:bold;color:#22274b;">País</label>
+									<label style="font-weight:bold">País</label>
 									<select class="form-control" id="pais_id" maxlength="7" name="pais_id">
-										<option value="">Seleccione</option>
+										<option value="0">Seleccione</option>
 										<?php foreach ($listar_paises as $pais) { ?>
 											<option value="<?php echo $pais->codigo;?>"><?php echo $pais->descripcion;?></option>
 										 <?php }?> 
@@ -415,9 +398,9 @@
 							</div><!-- /.form-group -->
 							<div class="col-md-6">
 								<div class="form-group">
-									<label style="font-weight:bold;color:#22274b;">Llegaste a nosotros por </label>
+									<label style="font-weight:bold">Llegaste a nosotros por </label>
 									<select class="form-control" id="patrocinador_id" maxlength="7" name="patrocinador_id">
-										<option value="">Seleccione</option>
+										<option value="0">Seleccione</option>
 										<option value="1">Facebook</option>
 										<option value="2">Twitter</option>
 										<option value="3">Instagram</option>
@@ -437,7 +420,7 @@
 							</br>
 							<div class="col-sm-12" align="right">
 								<span class="input-btn">
-									<button class="btn btn-primary" type="button" id="registrar">
+									<button class="btn" style=" background: linear-gradient(#edd727 , #998809); width:25%; font-weight: bold; color: white" type="button" id="registrar">
 										Registrar&nbsp;<span class="glyphicon glyphicon-share-alt"></span>
 									</button>
 								</span>

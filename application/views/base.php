@@ -551,6 +551,7 @@ if (isset($this->session->userdata['logged_in'])) {
         <script src="<?= base_url() ?>static/js/qrcode.js"></script>
 		
 		<script src="<?= base_url() ?>static/js/jquery.countdown.js"></script>
+		<script src="<?= base_url() ?>static/js/Chart.js"></script>
 <!--         // <script type="text/javascript" async="" src="http://www.google-analytics.com/ga.js"></script>
         // <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script> -->
  

@@ -392,7 +392,7 @@ class MMails extends CI_Model {
 		$this->email->message($mensaje);
 		$this->email->send();
 		// con esto podemos ver el resultado
-		//~ var_dump($this->email->print_debugger());
+		var_dump($this->email->print_debugger());
 	}
 
 }

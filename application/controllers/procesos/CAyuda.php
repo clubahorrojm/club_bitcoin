@@ -37,7 +37,6 @@ class CAyuda extends CI_Controller
 // Load database
 		$this->load->model('procesos/MAyuda');
         $this->load->model('configuracion/usuarios/Usuarios_model');
-        // $this->load->model('configuracion/MCuentas');
         $this->load->model('busquedas_ajax/ModelsBusqueda');
         $this->load->model('administracion/MAuditoria');
         $this->load->model('referidos/MRelPagos');
@@ -84,8 +83,6 @@ class CAyuda extends CI_Controller
 			'estatus' => 1,
 		);
 		$this->MAuditoria->insertarNotificacion($param2);
-		
-		
 		
         // Registramos los cambios en la Bitacora
         if ($result) {

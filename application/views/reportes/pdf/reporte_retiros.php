@@ -20,17 +20,11 @@ $this->pdf->SetMargins(15,15,10); # MARGEN DEL DOCUMENTO
 
 $this->pdf->SetFillColor(255,255,255);
 $this->pdf->SetFont('Arial','B',14);
-$this->pdf->Ln(1);
+$this->pdf->Ln(10);
 $this->pdf->Image(base_url().'static/img/logo4.png',15,15,45);
-$this->pdf->Cell(190,5,"",'',1,'C',1);
-$this->pdf->Cell(30,5,utf8_decode(''),'',0,'C',0);
-$this->pdf->Cell(140,5,utf8_decode("$empresa->nombre_empresa"),'',1,'C',0);
-$this->pdf->SetFont('Arial','',10);
-$this->pdf->Cell(30,5,utf8_decode(''),'',0,'C',0);
-$this->pdf->Cell(140,5,utf8_decode("Teléfonos: $empresa->telefono1 / $empresa->telefono2"),'',1,'C',0);
-$this->pdf->Cell(30,5,utf8_decode(''),'',0,'C',0);
-$this->pdf->Cell(140,4,utf8_decode("Correo: $empresa->correo"),'',1,'C',0);
-$this->pdf->Ln(5);
+$this->pdf->Cell(190,5,"",'',1,'C',0);
+$this->pdf->Cell(190,5,utf8_decode("RESUMEN DE RETIROS"),'',1,'C',0);
+$this->pdf->Ln(15);
 
 $fecha = date('d/m/Y');
 $hora = date("h:i:s a");
@@ -71,17 +65,11 @@ foreach ($retiros as $retiro){
 		$this->pdf->AddPage();
 		$this->pdf->SetFillColor(255,255,255);
 		$this->pdf->SetFont('Arial','B',14);
-		$this->pdf->Ln(1);
+		$this->pdf->Ln(10);
 		$this->pdf->Image(base_url().'static/img/logo4.png',15,15,45);
-		$this->pdf->Cell(190,5,"",'',1,'C',1);
-		$this->pdf->Cell(30,5,utf8_decode(''),'',0,'C',0);
-		$this->pdf->Cell(140,5,utf8_decode("$empresa->nombre_empresa"),'',1,'C',0);
-		$this->pdf->SetFont('Arial','',10);
-		$this->pdf->Cell(30,5,utf8_decode(''),'',0,'C',0);
-		$this->pdf->Cell(140,5,utf8_decode("Teléfonos: $empresa->telefono1 / $empresa->telefono2"),'',1,'C',0);
-		$this->pdf->Cell(30,5,utf8_decode(''),'',0,'C',0);
-		$this->pdf->Cell(140,4,utf8_decode("Correo: $empresa->correo"),'',1,'C',0);
-		$this->pdf->Ln(5);
+		$this->pdf->Cell(190,5,"",'',1,'C',0);
+		$this->pdf->Cell(190,5,utf8_decode("RESUMEN DE RETIROS"),'',1,'C',0);
+		$this->pdf->Ln(15);
 
 		$fecha = date('d/m/Y');
 		$hora = date("h:i:s a");

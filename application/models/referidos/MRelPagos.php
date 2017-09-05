@@ -20,24 +20,7 @@ class MRelPagos extends CI_Model {
         parent::__construct();
         $this->load->database();
     }
-
-    //Metodo publico para obterner la unidad de medida
-    public function obtenerBanco() {
-        $query = $this->db->get('ref_rel_pagos');
-        
-        if($query->num_rows()>0) return $query->result();
-         else return $query->result();
-    }
-    // //Metodo publico para obterner la unidad de medida
-    // public function obtenerRelPagosOcupados() {
-    //     $result = $this->db->select('banco_id');
-    //     $result = $this->db->group_by('banco_id'); 
-    //     $result = $this->db->get('conf_rel_RelPagos');
-        
-    //     if($result->num_rows()>0) return $result->result();
-    //      else return $result->result();
-    // }
-    
+   
     // Metodo publico, forma de insertar los datos
     public function insertarRelPagos($datos){
         $result = $this->db->where('codigo =', $datos['codigo']);

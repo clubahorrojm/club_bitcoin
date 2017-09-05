@@ -26,7 +26,7 @@ if ($tipouser == 'Administrador') {
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1 style="color:#3C8DBC">
-                Links de invitación
+                Invitados
             </h1>
             <ol class="breadcrumb">
                 <li><a href="<?php echo base_url(); ?>index.php"  style="color:#3C8DBC"><i class="fa fa-home"></i> Inicio</a></li>
@@ -36,75 +36,55 @@ if ($tipouser == 'Administrador') {
 
         <!-- Main content -->
         <section class="content">
-
             <div class="row">
                 <div class="col-xs-12">
-
                     <!-- SELECT2 EXAMPLE -->
                     <div class="box box-primary">
                         <div class="box-body">
-                            <div class="text-left">
-                                <legend><H4  style="color:#3C8DBC">Links para referir tu cuenta</H4></legend>
+                            <div class="col-md-3 text-left">
+                                <img style="width: 80%" src="<?= base_url() ?>static/img/logo4.png"/>
                             </div>
-                            <table id="tab_rel_links" class="table table-bordered table-striped table-hover table-condensed dt-responsive table-responsive">
-                                <thead>
-                                    <tr class="info">
-                                        <th style='text-align: center'>#</th>
-                                        <th style='text-align: center'>Links</th>
-                                        <th style='text-align: center'>Estatus</th>
-                                        <th style='text-align: center'>Referido</th>
-                                        <th style='text-align: center'>Cant. Sub-Referidos</th>
-                                        <th style='text-align: center'>¿Pagó?</th>
-                                    </tr>
-                                </thead>
-                                <tbody >       
-                                    <?php $i = 1; ?>
-                                    <?php foreach ($listar_links as $links) { ?>
-                                    <tr style="font-size: 16px;text-align: center" class="{% cycle 'impar' 'par' %}" >
-                                        <td><?php echo $links->num_link; ?></td>
-                                        <td><?php echo $links->links; ?></td>
-                                        <td><?php if ($links->estatus == 1) {?>
-                                                <label style="font-weight:bold; color: blue">Disponible</label>
-                                            <?php }else if ($links->estatus == 2){ ?>
-                                                <label style="font-weight:bold; color: green">Ocupado</label>
-                                            <?php }else if ($links->estatus == 3){ ?>
-                                                <label style="font-weight:bold; color: red">Caduco</label>
-                                            <?php }else if ($links->estatus == 4){ ?>
-                                                <label style="font-weight:bold; color: green">Ocupado <span style="color:red">(*)</span></label>
+                            <div class="col-md-9 text-right">
+                                <label style="color:#001A5A" >nro. de usuario: <?php echo str_pad($editar[0]->codigo, 5, '0',STR_PAD_LEFT) ?></label>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="col-md-6 text-center">
+                                    <table id="tab_rel_links" class="table table-bordered table-striped table-hover table-condensed dt-responsive table-responsive">
+                                        <thead>
+                                            <tr style="background-color: #001a5a">
+                                                <th style='text-align: center; color: white'>Acción</th>
+                                                <th style='text-align: center; color: white'>Links</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody >       
+                                            <?php $i = 1; ?>
+                                            <?php foreach ($listar_links as $links) { ?>
+                                            <tr style="font-size: 16px;text-align: center" class="{% cycle 'impar' 'par' %}" >
+                                                <td><a title="Copiar" class="pdf_retiro" id="<?php echo $links->links; ?>" ><img style="width: 40%" src="<?= base_url() ?>static/img/copiar.png"/></a></td>
+                                                <td><span id="textarea" ><?php echo $links->links; ?></span></td>
+                                            </tr>
+                                            <?php $i++ ?>
                                             <?php } ?>
-                                        </td>
-                                        <td><?php foreach($listar_usuarios as $usuario){
-                                                if($usuario->codigo == $links->referido_id){
-                                                    echo $usuario->first_name;
-                                                    echo ' ';
-                                                    echo $usuario->last_name;
-                                                }
-                                            }?> 
-                                        </td>
-                                        <td><?php foreach($listar_cant_links as $usuario_link){
-                                                if($usuario_link->usuario_id == $links->referido_id){
-                                                    echo $usuario_link->cantidad;
-                                                    echo ' /5';
-                                                }
-                                            }?> 
-                                        </td>
-                                        <td><?php if ($links->verif_pago == 1) {?>
-                                                <label style="font-weight:bold; color: blue">SI</label>
-                                            <?php }else{ ?>
-                                                <label style="font-weight:bold; color: red">No</label>
-                                            <?php } ?>
-                                        </td>
-                                    </tr>
-                                    <?php $i++ ?>
-                                    <?php } ?>
-                                </tbody>
-                            </table>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="col-md-6 text-center">
+                                    <div style="width: 100%">
+                                        <canvas id="canvas" height="800" width="1000"></canvas>
+                                    </div>
+                                </div>
+                            </div>
 
                         </div><!-- /.box-body -->
                     </div><!-- /.box-body-primary -->
-                    </div><!-- /.box-body -->
-                </div><!-- /.col -->
-
+                </div><!-- /.box-body -->
+            </div><!-- /.col -->
+            
+        
+                
+                
+                
+                
         </section><!-- /.content -->
     </div><!-- /.content-wrapper -->
 
@@ -118,6 +98,16 @@ if ($tipouser == 'Administrador') {
 
 
 <script>
+    
+    $(".pdf_retiro").click(function (e) {
+    //    e.preventDefault();  // Para evitar que se envíe por defecto
+    //    // Establecemos las variables
+        var id = this.getAttribute('id');
+        //alert (id);
+        //id.value().clone();
+
+    });
+
 
     var Tusuarios = $('#tab_rel_links').dataTable({
         "paging": true,
@@ -126,7 +116,7 @@ if ($tipouser == 'Administrador') {
         "searching": false,
         "ordering": true,
         "info": true,
-        "iDisplayLength": 5,
+        "iDisplayLength": 10,
         "iDisplayStart": 0,
         "sPaginationType": "full_numbers",
         "aLengthMenu": [5,10,15],
@@ -136,14 +126,55 @@ if ($tipouser == 'Administrador') {
         "aoColumns": [
             {"sClass": "registro center", "sWidth": "1%"},
             {"sClass": "registro center", "sWidth": "15%"},
-            {"sClass": "registro center", "sWidth": "1%"},
-            {"sClass": "registro center", "sWidth": "5%"},
-            {"sClass": "registro center", "sWidth": "5%"},
-            {"sClass": "registro center", "sWidth": "1%"},
         ],        
     });
-     
+    var barChartData = {
+        labels : ["Nivel 1","Nivel 2","Nivel 3","Nivel 4","Nivel 5","Nivel 6","Nivel 7"],
+        datasets : [
+            {// numero de referidos
+                fillColor : "#c3b01c",
+                strokeColor : "#c3b01c",
+                highlightFill : "#e0d36d",
+                highlightStroke : "#e0d36d",
+                data : [8,22,53],
+            }
+        ]
 
+    };
+    window.onload = function(){
+        var ctx = document.getElementById("canvas").getContext("2d");
+        window.myBar = new Chart(ctx).Bar(barChartData, {
+            responsive : true
+        });
+    };
+     
+    $.post('<?php echo base_url(); ?>index.php/User_Authentication/cargar_grafica_referidos/', function(response) {
+        //var lista = response;
+        //alert(lista);
+    //	var barChartData = {
+    //        labels : ["Nivel 1","Nivel 2","Nivel 3","Nivel 4","Nivel 5","Nivel 6","Nivel 7"],
+    //        datasets : [
+    //            {// numero de referidos
+    //                fillColor : "#c3b01c",
+    //                strokeColor : "#c3b01c",
+    //                highlightFill : "#e0d36d",
+    //                highlightStroke : "#e0d36d",
+    //                data : lista,
+    //            }
+    //        ]
+    //
+    //    };
+    //    window.onload = function(){
+    //        var ctx = document.getElementById("canvas").getContext("2d");
+    //        window.myBar = new Chart(ctx).Bar(barChartData, {
+    //            responsive : true
+    //        });
+    //    };
+    });
+
+
+    
+    
     $('input').on({
         keypress: function () {
             $(this).parent('div').removeClass('has-error');

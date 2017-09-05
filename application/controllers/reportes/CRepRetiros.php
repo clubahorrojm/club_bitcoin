@@ -36,7 +36,6 @@ class CRepRetiros extends CI_Controller
 
 // Load database
         $this->load->model('procesos/MLRetiros');
-        $this->load->model('administracion/MEmpresa');
         $this->load->model('busquedas_ajax/ModelsBusqueda');
         $this->load->model('usuarios/Usuarios_model');
         
@@ -60,7 +59,6 @@ class CRepRetiros extends CI_Controller
     function pdf_retiros($estatus,$desde,$hasta)
     {
         $data['retiros'] = $this->MLRetiros->obtenerRetirosEsp($estatus,$desde,$hasta);  // Datos generales de los retiros
-        $data['empresa'] = $this->MEmpresa->obtenerEmpresa(1);
         $data['usuarios'] = $this->Usuarios_model->obtenerUsuarios();  // Usuarios
         $data['usuario'] = $this->ModelsBusqueda->obtenerRegistro('usuarios', 'id', $this->session->userdata['logged_in']['id']); // Usuario en sesión
         $data['desde'] = $desde;  // Fecha de inicio

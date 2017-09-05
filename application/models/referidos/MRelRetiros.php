@@ -20,23 +20,6 @@ class MRelRetiros extends CI_Model {
         parent::__construct();
         $this->load->database();
     }
-
-    //Metodo publico para obterner la unidad de medida
-    public function obtenerBanco() {
-        $query = $this->db->get('ref_rel_retiros');
-        
-        if($query->num_rows()>0) return $query->result();
-         else return $query->result();
-    }
-    // //Metodo publico para obterner la unidad de medida
-    // public function obtenerRelRetirosOcupados() {
-    //     $result = $this->db->select('banco_id');
-    //     $result = $this->db->group_by('banco_id'); 
-    //     $result = $this->db->get('conf_rel_RelRetiros');
-        
-    //     if($result->num_rows()>0) return $result->result();
-    //      else return $result->result();
-    // }
     
     // Metodo publico, forma de insertar los datos
     public function insertarRelRetiros($datos){
@@ -48,9 +31,6 @@ class MRelRetiros extends CI_Model {
         $result2 = $this->db->where('usuario_id =', $datos['usuario_id']);
         $result2 = $this->db->where('disponible <', $datos['monto']);
         $result2 = $this->db->get('ref_perfil');
-
-        // $result3 = $this->db->where('id',1);    
-        // $result3 = $this->db->get('conf_retiro_minimo');
 
         if ($result2->num_rows() > 0) {
             echo '1';

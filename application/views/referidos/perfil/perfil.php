@@ -57,18 +57,19 @@
                                 <div class="col-md-12">
                                     <div class="col-md-3">
                                         <div class="col-md-1"> </div><!-- /.form-group -->
-                                        <div class="col-md-10">
+                                        <div class="col-md-10 text-center">
                                             <div class="text-center">
                                                 <h1 style="color:#3C8DBC">Nivel</h1>
-                                                <img id="nivel" class="img-circle" src="<?= base_url() ?>static/img/iconos_medianos/Nivel<?php echo $editar[0]->nivel ?>-01.png" style="width: 40%;" />
+                                                <img id="nivel" class="img-circle" src="<?= base_url() ?>static/img/iconos_medianos/Nivel <?php echo $editar[0]->nivel ?>.png" style="width: 40%;" />
                                             </div><!-- /.form-group -->
-                                            <br>
+                                            <span style="font-weight: bold"><?php echo $porcentaje ?>% Completado</span>
                                             <div  class="progress progress-md active " style="background-color: #E5E3E3 ">
                                                 <div class="progress-bar progress-bar-success progress-bar-striped" style="width: <?php echo $porcentaje ?>%; "
                                                      aria-valuemax="100" aria-valuemin="0" aria-valuenow="<?php echo $porcentaje ?>" role="progressbar">
-                                                    <span style="font-weight: bold"><?php echo $porcentaje ?>% Completado</span>
+                                                    
                                                 </div>
                                             </div>
+                                            
                                             <div class="text-center">
                                                 <label style="color:#3C8DBC">Progreso de nivel</label>
                                             </div><!-- /.form-group -->
@@ -115,6 +116,12 @@
                                                 </div>
                                               </div>
                                         </div><!-- /.form-group -->
+                                        <div class="col-md-1"> </div><!-- /.form-group -->
+                                        <div class="col-md-6"> </div><!-- /.form-group -->
+                                        <div class="col-md-5">
+                                            <br><span style="font-weight:bold;color: #001A5A">Comprobante de Aporte</span>
+                                            <img src="<?= base_url() ?>static/img/reporte.png" style="width: 15%;" />
+                                        </div><!-- /.form-group -->
                                         <div class="col-md-1">
                                             
                                             <input class="form-control"  type='hidden' id="id" name="id" value="<?php echo $editar[0]->codigo ?>"/>
@@ -130,15 +137,21 @@
                             </form>
                         </div><!-- /.box-body -->
                     </div><!-- /.box-body-primary -->
+                    
+                    <div class="col-md-12 box box-primary">
+                        <div class="col-md-1"> </div><!-- /.form-group -->
+                        <div class="chart col-md-10">
+                            <br><br>
+                            <!-- Sales Chart Canvas -->
+                            <canvas id="salesChart" style="height: 180px;"></canvas>
+                        </div>
+                        <div class="col-md-1"> </div><!-- /.form-group -->
+                    </div><!-- /.box-body-primary -->
 
                 </div><!-- /.col -->
                 <!-- PESTAÑAS -->
                 <!-- PESTAÑAS -->
-                <div class="col-xs-12">
-                    <div class="box box-primary">
-                        <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
-                    </div><!-- /.box-body -->
-                </div><!-- /.box-body-primary -->
+                
         </section><!-- /.content -->
         
         <!-- Modal -->
@@ -243,61 +256,71 @@
     $.post('<?php echo base_url(); ?>index.php/User_Authentication/cargar_grafica_pagos/', function(response) {
         var lista = response;
         //alert(lista);
-        Highcharts.chart('container', {
-            chart: {
-                type: 'areaspline'
-            },
-            title: {
-                text: 'Average fruit consumption during one week'
-            },
-            legend: {
-                layout: 'vertical',
-                align: 'left',
-                verticalAlign: 'top',
-                x: 150,
-                y: 100,
-                floating: true,
-                borderWidth: 1,
-                backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
-            },
-            xAxis: {
-                categories: [
-                    '2017-05-10',
-                    '2017-06-10',
-                    '2017-07-10',
-                    '2017-08-10',
-                    '2017-09-10',
-                    '2017-10-10',
-                    '2017-11-10'
-                ],
-                //plotBands: [{ // visualize the weekend
-                //    from: 4.5,
-                //    to: 6.5,
-                //    color: 'rgba(68, 170, 213, .2)'
-                //}]
-            },
-            yAxis: {
-                title: {
-                    text: 'Fruit units'
+          // -----------------------
+        // - MONTHLY SALES CHART -
+        // -----------------------
+      
+        // Get context with jQuery - using jQuery's .get() method.
+        var salesChartCanvas = $('#salesChart').get(0).getContext('2d');
+        // This will get the first returned node in the jQuery collection.
+        var salesChart       = new Chart(salesChartCanvas);
+      
+        var salesChartData = {
+            labels  : ['2017-07-31', '2017-08-10', '2017-09-10', '2017-10-10'],
+            datasets: [
+                {
+                  label               : 'Digital Goods',
+                  fillColor           : '#002d81',
+                  strokeColor         : 'rgba(60,141,188,0.8)',
+                  pointColor          : '#002d81',
+                  pointStrokeColor    : 'rgba(60,141,188,1)',
+                  pointHighlightFill  : '#fff',
+                  pointHighlightStroke: 'rgba(60,141,188,1)',
+                  data                : [400, 300, 100, 200]
                 }
-            },
-            tooltip: {
-                shared: true,
-                valueSuffix: ' units'
-            },
-            credits: {
-                enabled: false
-            },
-            plotOptions: {
-                areaspline: {
-                    fillOpacity: 0.5
-                }
-            },
-            series: [{
-                name: 'Marcel',
-                data: [3, 4, 3, 18, 4, 10, 12]
-            }]
-        });
+            ]
+        };
+      
+        var salesChartOptions = {
+            // Boolean - If we should show the scale at all
+            showScale               : true,
+            // Boolean - Whether grid lines are shown across the chart
+            scaleShowGridLines      : false,
+            // String - Colour of the grid lines
+            scaleGridLineColor      : 'rgba(0,0,0,.05)',
+            // Number - Width of the grid lines
+            scaleGridLineWidth      : 1,
+            // Boolean - Whether to show horizontal lines (except X axis)
+            scaleShowHorizontalLines: true,
+            // Boolean - Whether to show vertical lines (except Y axis)
+            scaleShowVerticalLines  : true,
+            // Boolean - Whether the line is curved between points
+            bezierCurve             : true,
+            // Number - Tension of the bezier curve between points
+            bezierCurveTension      : 0.3,
+            // Boolean - Whether to show a dot for each point
+            pointDot                : false,
+            // Number - Radius of each point dot in pixels
+            pointDotRadius          : 4,
+            // Number - Pixel width of point dot stroke
+            pointDotStrokeWidth     : 1,
+            // Number - amount extra to add to the radius to cater for hit detection outside the drawn point
+            pointHitDetectionRadius : 20,
+            // Boolean - Whether to show a stroke for datasets
+            datasetStroke           : true,
+            // Number - Pixel width of dataset stroke
+            datasetStrokeWidth      : 2,
+            // Boolean - Whether to fill the dataset with a color
+            datasetFill             : true,
+            // String - A legend template
+            legendTemplate          : '<ul class=\'<%=name.toLowerCase()%>-legend\'><% for (var i=0; i<datasets.length; i++){%><li><span style=\'background-color:<%=datasets[i].lineColor%>\'></span><%=datasets[i].label%></li><%}%></ul>',
+            // Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
+            maintainAspectRatio     : true,
+            // Boolean - whether to make the chart responsive to window resizing
+            responsive              : true
+        };
+        // Create the line chart
+        salesChart.Line(salesChartData, salesChartOptions);
     });
     
     
