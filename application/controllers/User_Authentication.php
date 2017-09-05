@@ -39,6 +39,8 @@ Class User_Authentication extends CI_Controller {
         $this->load->model('configuracion/grupos_usuarios/ModelsGruposUsuarios');
         $this->load->model('busquedas_ajax/ModelsBusqueda');
 		$this->load->model('referidos/MReferidos');
+		$this->load->model('referidos/MRelNivel');
+		
     }
 
 // Show login page
@@ -72,8 +74,7 @@ Class User_Authentication extends CI_Controller {
 				}
                                
             } else {
-				$data['listar_paises'] = $this->MPaises->obtenerPais();  // Lista de países
-                $this->load->view('login_form', $data);
+                $this->load->view('login_form');
             }
             
         } else {
@@ -138,7 +139,6 @@ Class User_Authentication extends CI_Controller {
                 $data = array(
                     'error_message' => 'Usuario y Contraseñas Invalidos'
                 );
-                $data['listar_paises'] = $this->MPaises->obtenerPais();  // Lista de países
                 $this->load->view('login_form', $data);
             }
         }
@@ -215,6 +215,7 @@ Class User_Authentication extends CI_Controller {
 			'fecha_na' => $fecha,
 			'email' => $this->input->post('correo'),
 			'username' => $usuario,
+			'email' => $this->input->post('correo'),
 			'password' => $clave_nueva,
 			'tipo_usuario' => '3',
 			'estatus' => True,
@@ -358,30 +359,42 @@ Class User_Authentication extends CI_Controller {
 	function cargar_grafica_pagos(){
 		$cod_user = $this->session->userdata['logged_in']['id'];
         $resultado = $this->ModelsBusqueda->search_pagos($cod_user);
-		//print_r($resultado);
-		//saco el numero de elementos
-		$longitud = count($resultado);
-		
-		//~ echo $longitud;
-		// Arreglo para retornar la data
-		$lista_fechas = array();
-		$lista_cant_pagos = array();
-		//Recorro todos los elementos
-		for($i=0; $i<$longitud; $i++) {
-			  //saco el valor de cada elemento
-			  //$fecha = $resultado[$i]->fecha;
-			  $total = $resultado[$i]->total;
-			  //$ltd = $resultado[$i]->latitud;
-			  // print_r("{ latLng:[".$longitud.",".$latitud."], name:'".$nombre."'}, ");
-			  // Armamos el registro
-			  //$reg_fec['fecha'][0] = $fecha;
-			  $reg_tot = $total;
-			  //$reg['name'] = $nombre;
-			  // Listamos el registro
-			  //$lista_fechas[$i] = $reg_fec;
-			  $lista_cant_pagos[$i] = $reg_tot;
-		}		
-		echo json_encode($lista_cant_pagos);
+				// Alternativa que también funciona
+		foreach($resultado as $r){
+			$reg = array();
+			$latLng = array();
+			$fecha = $r->fecha;
+			$total = $r->total;
+			//$ltd = $r->latitud;
+			// Armamos el registro
+			//$latLng[0] = $lgt;
+			//$latLng[1] = $ltd;
+			$reg['fecha'] = $fecha;
+			$reg['total'] = $total;
+			
+			// Listamos el registro
+			$lista_regs[] = $reg;
+		}	
+		echo json_encode($lista_regs);
+		//echo json_encode($lista_cant_pagos);
+    }
+	function cargar_grafica_referidos(){
+		$cod_user = $this->session->userdata['logged_in']['id'];
+        $resultado = $this->MRelNivel->obtener_grafica_tiempo_niveles($cod_user);
+				// Alternativa que también funciona
+		$lista_regs = array();
+		foreach($resultado as $r){
+			//$reg = array();
+
+			$tiempo = $r->tiempo;
+
+			$reg = $tiempo;
+			//$reg['total'] = $total;
+			
+			// Listamos el registro
+			$lista_regs[] = $reg;
+		}	
+		echo json_encode($lista_regs);
 		//echo json_encode($lista_cant_pagos);
     }
 }

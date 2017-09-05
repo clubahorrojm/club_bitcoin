@@ -63,7 +63,7 @@
 }
 body {
   font-family: 'Source Sans Pro', sans-serif;
-  color: white;
+  color: #001a5a;
   font-weight: 300;
 }
 body ::-webkit-input-placeholder {

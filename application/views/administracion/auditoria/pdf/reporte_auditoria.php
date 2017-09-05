@@ -20,17 +20,11 @@ $this->pdf->SetMargins(15,15,10); # MARGEN DEL DOCUMENTO
 
 $this->pdf->SetFillColor(255,255,255);
 $this->pdf->SetFont('Arial','B',14);
-$this->pdf->Ln(1);
+$this->pdf->Ln(10);
 $this->pdf->Image(base_url().'static/img/logo4.png',15,15,45);
-$this->pdf->Cell(190,5,"",'',1,'C',1);
-$this->pdf->Cell(30,5,utf8_decode(''),'',0,'C',0);
-$this->pdf->Cell(140,5,utf8_decode("$empresa->nombre_empresa"),'',1,'C',0);
-$this->pdf->SetFont('Arial','',10);
-$this->pdf->Cell(30,5,utf8_decode(''),'',0,'C',0);
-$this->pdf->Cell(140,5,utf8_decode("Teléfonos: $empresa->telefono1 / $empresa->telefono2"),'',1,'C',0);
-$this->pdf->Cell(30,5,utf8_decode(''),'',0,'C',0);
-$this->pdf->Cell(140,4,utf8_decode("Correo: $empresa->correo"),'',1,'C',0);
-$this->pdf->Ln(5);
+$this->pdf->Cell(190,5,"",'',1,'C',0);
+$this->pdf->Cell(190,5,utf8_decode("BITACORA"),'',1,'C',0);
+$this->pdf->Ln(15);
 
 $fecha = date('d/m/Y');
 $hora = date("h:i:s a");
@@ -54,9 +48,8 @@ $this->pdf->SetFillColor(0,26,90); # COLOR DE BORDE DE LA CELDA
 $this->pdf->SetDrawColor(0,26,120); 
 $this->pdf->SetTextColor(255,255,255); # COLOR DEL TEXTO
 $this->pdf->SetFont('Arial','B',10);
-$this->pdf->Cell(30,5,"DATOS DEL REPORTE",'T',1,'L',1);
-//~ $this->pdf->Cell(35,5,"RIF/CI: ".$cliente->tipocliente."-".$cliente->cirif,'',0,'L',1);
-$this->pdf->Cell(35,5,utf8_decode("USUARIO: $usuario"),'',0,'L',1);
+$this->pdf->Cell(185,5,"DATOS DEL REPORTE",'T',1,'L',1);
+$this->pdf->Cell(65,5,utf8_decode("USUARIO: $usuario"),'',0,'L',1);
 $this->pdf->Cell(60,5,utf8_decode("FECHA INICIAL: $desde"),'',0,'L',1);
 $this->pdf->Cell(60,5,utf8_decode("FECHA FINAL: $hasta"),'',1,'L',1);
 $this->pdf->SetFillColor(255,255,255); # COLOR DE BOLDE DE LA CELDA
@@ -79,17 +72,11 @@ foreach ($auditoria as $auditoria){
 		$this->pdf->AddPage();
 		$this->pdf->SetFillColor(255,255,255);
 		$this->pdf->SetFont('Arial','B',14);
-		$this->pdf->Ln(1);
+		$this->pdf->Ln(10);
 		$this->pdf->Image(base_url().'static/img/logo4.png',15,15,45);
-		$this->pdf->Cell(190,5,"",'',1,'C',1);
-		$this->pdf->Cell(30,5,utf8_decode(''),'',0,'C',0);
-		$this->pdf->Cell(140,5,utf8_decode("$empresa->nombre_empresa"),'',1,'C',0);
-		$this->pdf->SetFont('Arial','',10);
-		$this->pdf->Cell(30,5,utf8_decode(''),'',0,'C',0);
-		$this->pdf->Cell(140,5,utf8_decode("Teléfonos: $empresa->telefono1 / $empresa->telefono2"),'',1,'C',0);
-		$this->pdf->Cell(30,5,utf8_decode(''),'',0,'C',0);
-		$this->pdf->Cell(140,4,utf8_decode("Correo: $empresa->correo"),'',1,'C',0);
-		$this->pdf->Ln(5);
+		$this->pdf->Cell(190,5,"",'',1,'C',0);
+		$this->pdf->Cell(190,5,utf8_decode("BITACORA"),'',1,'C',0);
+		$this->pdf->Ln(15);
 
 		$fecha = date('d/m/Y');
 		$hora = date("h:i:s a");
@@ -100,9 +87,8 @@ foreach ($auditoria as $auditoria){
 		$this->pdf->SetDrawColor(0,26,120); 
 		$this->pdf->SetTextColor(255,255,255); # COLOR DEL TEXTO
 		$this->pdf->SetFont('Arial','B',10);
-		$this->pdf->Cell(30,5,"DATOS DEL REPORTE",'T',1,'L',1);
-		//~ $this->pdf->Cell(35,5,"RIF/CI: ".$cliente->tipocliente."-".$cliente->cirif,'',0,'L',1);
-		$this->pdf->Cell(35,5,utf8_decode("USUARIO: $usuario"),'',0,'L',1);
+		$this->pdf->Cell(185,5,"DATOS DEL REPORTE",'T',1,'L',1);
+		$this->pdf->Cell(65,5,utf8_decode("USUARIO: $usuario"),'',0,'L',1);
 		$this->pdf->Cell(60,5,utf8_decode("FECHA INICIAL: $desde"),'',0,'L',1);
 		$this->pdf->Cell(60,5,utf8_decode("FECHA FINAL: $hasta"),'',1,'L',1);
 		$this->pdf->SetFillColor(255,255,255); # COLOR DE BOLDE DE LA CELDA

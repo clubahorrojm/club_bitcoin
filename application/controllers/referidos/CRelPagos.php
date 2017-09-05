@@ -40,13 +40,9 @@ class CRelPagos extends CI_Controller
         $this->load->model('busquedas_ajax/ModelsBusqueda');
         $this->load->model('administracion/MAuditoria');
         $this->load->model('configuracion/usuarios/Usuarios_model');
-        $this->load->model('administracion/MEmpresa');
         $this->load->model('configuracion/MTiposMonedas');
 		$this->load->model('administracion/MPaises');
-        // $this->load->model('configuracion/MCuentas');
-        // $this->load->model('configuracion/MBancos');
-        // $this->load->model('configuracion/MTiposCuenta');
-        // $this->load->model('configuracion/MMontoPago');
+
         
     }
         // INDEX del modulo de perfil del referido
@@ -59,9 +55,6 @@ class CRelPagos extends CI_Controller
         $data['editar'] = $this->MReferidos->obtenerReferido($cod_user);
         $data['cod_perfil']  = $data['editar'][0]->codigo; // Codigo del Usuario
         
-        // $data['listar_cuentas'] = $this->MCuentas->obtenerCuentas(); // Listado de cuentas de la pagina
-        // $data['listar_bancos'] = $this->MBancos->obtenerBanco(); // Listado de Bancos
-        // $data['listar_t_cuentas'] = $this->MTiposCuenta->obtenerTiposCuenta(); // Listado de Tipo de cuentas
         $data['pago'] = $this->MRelPagos->obtenerRelPagosBit($cod_user); // Informacion del pago de ingreso al sistema
         $data['monto_pago'] = $data['editar'][0]->monto_pago; // Captura del monto del pago de ingreso al sistema
         $this->load->view('referidos/perfil/paneles/pagos',$data);
@@ -104,9 +97,6 @@ class CRelPagos extends CI_Controller
 		}
         $datos = array(
             'codigo' => $this->input->post('cod_pago'),
-            //~ 'cuenta_id' => $this->input->post('cuenta_id'),
-            //~ 'num_pago' => $this->input->post('num_pago'),
-            //~ 'tipo_pago'=> $this->input->post('tipo_pago'),
             'dir_monedero'=> $this->input->post('dir_monedero'),
             'fecha_pago'=> $fecha,
             'monto'=> $this->input->post('monto'),
@@ -131,7 +121,6 @@ class CRelPagos extends CI_Controller
                 'usuario' => $this->session->userdata['logged_in']['id'],
             );
             $this->MAuditoria->add($param);
-            //redirect('configuracion/CRelPagos');
         }
     }
 
@@ -142,18 +131,13 @@ class CRelPagos extends CI_Controller
         $data['usuario'] = $this->Usuarios_model->obtenerUsuario($id_user);
         $cod_user = $data['usuario'][0]->codigo; // Codigo del Usuario
         $data['pago'] = $this->MRelPagos->obtenerRelPagosBit($cod_user); // Informacion del pago de ingreso al sistema
-        //~ $cuenta_id = $data['pago'][0]->cuenta_id;
         $perfil = $this->MReferidos->obtenerReferido($cod_user);
         
-        //$data['empresa'] = $this->MEmpresa->obtenerEmpresa(1);
         $data['editar'] = $this->MReferidos->obtenerReferido($cod_user);
         $id_moneda = $data['editar'][0]->t_moneda_id; // ID Tipo de moneda
         $data['monedas'] = $this->MTiposMonedas->obtenerTiposMonedas($id_moneda);
         $data['moneda'] = $data['monedas'][0]->abreviatura; // Abreviatura de moneda
 
-        //~ $data['listar_cuenta'] = $this->MCuentas->obtenerCuenta($cuenta_id); // Listado de cuentas de la pagina
-        //~ $data['listar_bancos'] = $this->MBancos->obtenerBanco(); // Listado de Bancos
-        //~ $data['listar_t_cuentas'] = $this->MTiposCuenta->obtenerTiposCuenta(); // Listado de Tipo de cuentas
         $data['listar_usuarios'] = $this->Usuarios_model->obtenerUsuarios(); // Listado de usuarios
         $data['listar_paises'] = $this->MPaises->obtenerPais(); // Listado de cuentas de la pagina
         $id_moneda = $perfil[0]->t_moneda_id; // ID Tipo de moneda

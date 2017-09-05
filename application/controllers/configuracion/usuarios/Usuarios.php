@@ -35,7 +35,6 @@ class Usuarios extends CI_Controller {
         $this->load->model('Login_database');
         $this->load->model('configuracion/usuarios/Usuarios_model');
         $this->load->model('administracion/MAuditoria');
-        //$this->load->model('configuracion/cargos/ModelsCargos');
         $this->load->model('busquedas_ajax/ModelsBusqueda');
         $this->load->model('configuracion/grupos_usuarios/ModelsGruposUsuarios');
     }

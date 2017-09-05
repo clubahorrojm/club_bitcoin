@@ -42,6 +42,8 @@ class CRelDistribucion extends CI_Controller
         $this->load->model('busquedas_ajax/ModelsBusqueda');
         $this->load->model('administracion/MAuditoria');
 		$this->load->model('referidos/MRelLinks');
+		$this->load->model('referidos/MRelNivel');
+		$this->load->model('administracion/MNotificaciones');
     }
 	        // INDEX del modulo de perfil del referido
     function index(){
@@ -93,6 +95,7 @@ class CRelDistribucion extends CI_Controller
         $id_user = ($this->session->userdata['logged_in']['id']); //ID del usuario logueado
 		$data['usuario'] = $this->Usuarios_model->obtenerUsuario($id_user); 
 		$cod_user = $data['usuario'][0]->codigo; //Codigo del Usuario Logueado
+		$username = $data['usuario'][0]->username; //Codigo del Usuario Logueado
         $ref_id = $this->input->post('id_ref'); //Codigo del referido a pagar
 		$perfil = $this->MReferidos->obtenerReferido($cod_user);
         ////////////////// Verificacion para saber si existe el pago a este referido /////////////
@@ -102,7 +105,7 @@ class CRelDistribucion extends CI_Controller
             ////////////////////////////////////////////////
             // PASO 1 (registrar distribucion de capital)
             // Diccionario con los datos del pago a referido
-
+			//////////////////////////////////////////////////////
             // Se arma una variable $por_lvl para identificar el % que se le pagara al referido
             $por_lvl = 'porcentaje'.$nivel_ref;
             $montos = $this->MAMontos->obtenerAMontos(1);
@@ -122,6 +125,7 @@ class CRelDistribucion extends CI_Controller
 			   'monto' => $pago,
             );
             $result = $this->MRelDistribucion->insertarDistribucion($datos_distribucion);
+			
             // Se Guarda en Bitacora el pago realizado
             if ($result) {
                $param = array(
@@ -161,8 +165,84 @@ class CRelDistribucion extends CI_Controller
     				'cant_ref'=> $cant_ref,
     			);
                 $result = $this->MReferidos->actualizarReferidos($datos_ref_perfil);
+				
+				/////////////////////////////////////////////////////////////////////////////
+                // PASO 4 SE GENERA LA NOTIFICACION AL USUARIO QUE UN SUB REFERIDO LE PAGO //
+				/////////////////////////////////////////////////////////////////////////////
+				$param5 = array(
+					'usuario_id' => $ref_id,
+					'tipo' => 1,
+					'accion' => 'El usuario '.$username.' realizo el pago',
+					'fecha' => date('Y-m-d'),
+					'hora' => date("h:i:s a"),
+					'estatus' => 1,
+				);
+				$this->MNotificaciones->insertarNotificacion($param5);
             }
-            // PASO 4 (Verificacion para cambios de estatus del usuario)
+			////////////////////////////////////////////////////////////////////////////////
+			///////////////////////  PASO OPCIONAL (Subir nivel) ///////////////////////////
+			// METODO PARA REGISTRAR EL NUEVO NIVEL ALCANZADO Y EL TIEMPO EN QUE LO LOGRO //
+			///////////////////////////////////////////////////////////////////////////////
+			$data['editar'] = $this->MReferidos->obtenerReferido($ref_id);
+			$cod_perfil = $data['editar'][0]->codigo;
+			$cant_ref = $data['editar'][0]->cant_ref; // Cantidad de sub referidos
+			// SI la cantidad de referidos es iigual a alguna de las de abajo quiere decir que con el ultimo pago
+		    // mensionado referido subio de nivel por ende, se hace el cambio de nivel en el perfil, asi como
+			// el envio de la notificacion y el calculo del tiempo que tardo en lograrlo 
+			if (($cant_ref == 5) || ($cant_ref == 25) || ($cant_ref == 125) || ($cant_ref == 625) || ($cant_ref == 3125) || ($cant_ref == 15625) || ($cant_ref == 78125)) {
+				// Si cumple!!
+				$fecha = date('Y-m-d'); // Captura de la fecha actual
+				//Se consulta el tiempo que tardo en base la fecha en la que inicio el juego con la fecha actual
+				$tiempo = $this->MRelNivel->obtener_dias_nivel($ref_id, $fecha);
+				if ($tiempo > 0){
+					$dias = $tiempo[0]->dias; // dias que tardo
+					// en base a la cantidad de referidos es el nivel que alcanzo
+					if ($cant_ref == 5){
+						$nivel = 1;
+					}else if ($cant_ref = 25){
+						$nivel = 2;
+					}else if ($cant_ref = 125){
+						$nivel = 3;
+					}else if ($cant_ref = 625){
+						$nivel = 4;
+					}else if ($cant_ref = 3125){
+						$nivel = 5;
+					}else if ($cant_ref = 15625){
+						$nivel = 6;
+					}else if ($cant_ref = 78125){
+						$nivel = 7;
+					}
+					// Se guarda el reistro del nuevo nivel alcanzado
+					if ($result) {
+						$param = array(
+							'usuario_id' => $ref_id,
+							'nivel' => $nivel,
+							'tiempo' => $dias,
+							'fecha' => date('Y-m-d'),                    
+						);
+						$this->MRelNivel->insertarRelNivel($param);
+					}
+					// Asi como se actualiza el nivel en el perfil del mismo usuario
+					$niveles = array(
+						'codigo' => $cod_perfil,
+						'nivel' => $nivel,
+					);
+					$result = $this->MReferidos->actualizarReferidos($niveles); // SE ACTUALIZA EL NIVEL DEL USUARIO		
+					//////////////  Metodo para Generar notificacion de cambi de nivel comparando el ultimo nivel con el calculado por los referidos ///////
+					// SE GENERA LA NOTIFICACION AL USUARIO QUE SUBIO DE NIVEL
+					$param2 = array(
+						'usuario_id' => $ref_id,
+						'tipo' => 4,
+						'accion' => '¡Felicitaciones ha alcanzado el nivel '.$nivel.'!.',
+						'fecha' => date('Y-m-d'),
+						'hora' => date("h:i:s a"),
+						'estatus' => 1,
+					);
+					$this->MNotificaciones->insertarNotificacion($param2);
+				}
+			};
+			
+            // PASO 5 (Verificacion para cambios de estatus del usuario)
             // Se consulta la cantidad de pagos/distribuciones realizadas
             $num_distri = $this->MRelDistribucion->obtenerDistribuciones($cod_user);
             // Si el numero de pagos por este usuario es igual a 8 (cantidad maxima)

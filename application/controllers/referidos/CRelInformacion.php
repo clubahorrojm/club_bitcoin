@@ -41,9 +41,6 @@ class CRelInformacion extends CI_Controller
         $this->load->model('administracion/MAuditoria');
 		$this->load->model('administracion/MPaises');
         $this->load->model('configuracion/usuarios/Usuarios_model');
-        // $this->load->model('configuracion/MCuentas');
-        // $this->load->model('configuracion/MBancos');
-        // $this->load->model('configuracion/MTiposCuenta');
         
     }
     // INDEX del modulo de perfil del referido
@@ -56,8 +53,6 @@ class CRelInformacion extends CI_Controller
         $data['editar'] = $this->MReferidos->obtenerReferido($cod_user);
         $data['cod_perfil']  = $data['editar'][0]->codigo; // Codigo del Usuario
         $data['listar_paises'] = $this->MPaises->obtenerPais(); // Listado de cuentas de la pagina
-        // $data['listar_bancos'] = $this->MBancos->obtenerBanco(); // Listado de Bancos
-        // $data['listar_t_cuentas'] = $this->MTiposCuenta->obtenerTiposCuenta(); // Listado de Tipo de cuentas
 		$data['estatus_perfil']  = $data['editar'][0]->estatus; // Estatus del perfil del Usuario
         $this->load->view('referidos/perfil/paneles/informacion_personal',$data);
     }
@@ -74,7 +69,6 @@ class CRelInformacion extends CI_Controller
 			'fecha_na' => $fecha,
             'pais_id' => $this->input->post('pais_id'),
             'patrocinador_id'=> $this->input->post('patrocinador_id'),
-            //'telefono'=> $this->input->post('telefono'),
         );
         $id = $this->input->post('usuario_id');
 		$result = $this->Usuarios_model->actualizar($id, $datos);
@@ -88,18 +82,12 @@ class CRelInformacion extends CI_Controller
 		//Si es primera actualizacion (cambia estatus)
 		if ($estatus == 2){
             $datos2 = array(
-				//~ 'tipo_cuenta_id' => $this->input->post('tipo_cuenta_id'),
-				//~ 'num_cuenta_usu' => $this->input->post('num_cuenta_usu'),
-				//~ 'banco_usu_id' => $this->input->post('banco_usu_id'),
 				'dir_monedero' => $this->input->post('dir_monedero_per'),
 				'codigo'=> $this->input->post('pk_perfil'),
 				'estatus'=> 3,
             );
 		}else{ //Si es una actualizacion secundaria
             $datos2 = array(
-				//~ 'tipo_cuenta_id' => $this->input->post('tipo_cuenta_id'),
-				//~ 'num_cuenta_usu' => $this->input->post('num_cuenta_usu'),
-				//~ 'banco_usu_id' => $this->input->post('banco_usu_id'),
 				'dir_monedero' => $this->input->post('dir_monedero_per'),
 				'codigo'=> $this->input->post('pk_perfil'),
             );

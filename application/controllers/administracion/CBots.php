@@ -58,7 +58,6 @@ class CBots extends CI_Controller
     // Método para guardar un nuevo registro
     public function guardar()
     {
-		//~ echo "Hola mundo";
 		// Proceso de registro de nueva cuenta
 		$ultimo_id  = $this->ModelsBusqueda->count_all_table('adm_cuentas_bot');
 		

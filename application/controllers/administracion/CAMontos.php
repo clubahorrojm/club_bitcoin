@@ -36,17 +36,10 @@ class CAMontos extends CI_Controller
 
 // Load database
         $this->load->model('administracion/MAMontos');
-        // $this->load->model('configuracion/MInmuebles');
         $this->load->model('busquedas_ajax/ModelsBusqueda');
         $this->load->model('administracion/MAuditoria');
         
     }
-//	function index(){
-//        $this->load->view('base');
-//        $data['listar'] = $this->MAMontos->obtenerAMontos();
-//        //$data['listar_t_inmueble'] = $this->MTiposInmueble->obtenerTiposInmuebles();
-//        $this->load->view('administracion/asignacion_montos/lista', $data);
-//    }
 
     function index(){
         $data['editar'] = '';

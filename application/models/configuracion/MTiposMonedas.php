@@ -28,15 +28,6 @@ class MTiposMonedas extends CI_Model {
         if($query->num_rows()>0) return $query->result();
          else return $query->result();
     }
-    //Metodo publico para obterner la unidad de medida
-    public function obtenerTiposMonedasOcupados() {
-        $result = $this->db->select('banco_id');
-        $result = $this->db->group_by('banco_id'); 
-        $result = $this->db->get('conf_rel_tipos_monedas');
-        
-        if($result->num_rows()>0) return $result->result();
-         else return $result->result();
-    }
     
     // Metodo publico, forma de insertar los datos
     public function insertarTiposMonedas($datos){

@@ -36,15 +36,8 @@ class CAuditoria extends CI_Controller
 
 // Load database
         $this->load->model('administracion/MAuditoria');
-        //$this->load->model('clientes/ModelsClientes');
-        //$this->load->model('topologia/ModelsEstado');
-        //$this->load->model('topologia/ModelsMunicipio');
-        //$this->load->model('topologia/ModelsParroquia');
         $this->load->model('busquedas_ajax/ModelsBusqueda');
-        //$this->load->model('tipo_cliente/ModelsTipoCliente');
         $this->load->model('usuarios/Usuarios_model');
-        
-        $this->load->model('administracion/MEmpresa');
         
     }
 
@@ -74,11 +67,6 @@ class CAuditoria extends CI_Controller
 		}
         $data['desde'] = $desde;  // Fecha de inicio
         $data['hasta'] = $hasta;  // Fecha final
-        
-		$data['empresa'] = $this->MEmpresa->obtenerEmpresa(1);
-        
-        //~ 
-        //~ $data['productos_servicios'] = $this->ModelsFacturar->obtenerProductosServicios($data['factura']->codfactura);  // Productos/Servicios asociados a la factura
         
         $this->load->view('administracion/auditoria/pdf/reporte_auditoria', $data);
     }    
