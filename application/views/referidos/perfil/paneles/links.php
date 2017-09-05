@@ -40,44 +40,73 @@ if ($tipouser == 'Administrador') {
                 <div class="col-xs-12">
                     <!-- SELECT2 EXAMPLE -->
                     <div class="box box-primary">
-                        <div class="box-body">
-                            <div class="col-md-3 text-left">
-                                <img style="width: 80%" src="<?= base_url() ?>static/img/logo4.png"/>
-                            </div>
-                            <div class="col-md-9 text-right">
-                                <label style="color:#001A5A" >nro. de usuario: <?php echo str_pad($editar[0]->codigo, 5, '0',STR_PAD_LEFT) ?></label>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="col-md-6 text-center">
-                                    <table id="tab_rel_links" class="table table-bordered table-striped table-hover table-condensed dt-responsive table-responsive">
-                                        <thead>
-                                            <tr style="background-color: #001a5a">
-                                                <th style='text-align: center; color: white'>Acción</th>
-                                                <th style='text-align: center; color: white'>Links</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody >       
-                                            <?php $i = 1; ?>
-                                            <?php foreach ($listar_links as $links) { ?>
-                                            <tr style="font-size: 16px;text-align: center" class="{% cycle 'impar' 'par' %}" >
-                                                <td><a title="Copiar" class="pdf_retiro" id="<?php echo $links->links; ?>" ><img style="width: 40%" src="<?= base_url() ?>static/img/copiar.png"/></a></td>
-                                                <td><span id="textarea" ><?php echo $links->links; ?></span></td>
-                                            </tr>
-                                            <?php $i++ ?>
-                                            <?php } ?>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div class="col-md-6 text-center">
-                                    <div style="width: 100%">
-                                        <canvas id="canvas" height="800" width="1000"></canvas>
-                                    </div>
-                                </div>
-                            </div>
 
+                        <div class="box-body">
+                            <div class="col-md-3 text-center">
+                                <img style="width: 80%" src="<?= base_url() ?>static/img/logo4.png"/>
+                                <label style="color:#001A5A" >nro. de usuario: <?php echo str_pad($editar[0]->codigo, 5, '0',STR_PAD_LEFT) ?></label>
+                            </div><!-- /.form-group -->
+                            <div class="col-md-8" style="width: 50%">
+                                <br><br>
+                                <canvas id="canvas" height="100" width="250"></canvas>
+                            </div>
+                            <div class="col-md-1"> </div><!-- /.form-group -->
                         </div><!-- /.box-body -->
                     </div><!-- /.box-body-primary -->
-                </div><!-- /.box-body -->
+
+                     <!-- PESTAÑAS -->
+                    <div class="col-xs-8">
+                        <div class="box box-primary">
+                            <table id="tab_rel_links" class="table table-bordered table-striped table-hover table-condensed dt-responsive table-responsive">
+                                <thead>
+                                    <tr style="background-color: #001a5a">
+                                        <th style='text-align: center; color: white'>Acción</th>
+                                        <th style='text-align: center; color: white'>Links</th>
+                                    </tr>
+                                </thead>
+                                <tbody >       
+                                    <?php $i = 1; ?>
+                                    <?php foreach ($listar_links as $links) { ?>
+                                    <tr style="font-size: 16px;text-align: center" class="{% cycle 'impar' 'par' %}" >
+                                        <td><a title="Copiar" class="pdf_retiro" id="<?php echo $links->links; ?>" ><img style="width: 40%" src="<?= base_url() ?>static/img/copiar.png"/></a></td>
+                                        <td><span id="textarea" ><?php echo $links->links; ?></span></td>
+                                    </tr>
+                                    <?php $i++ ?>
+                                    <?php } ?>
+                                </tbody>
+                            </table>    
+                        </div><!-- /.box-body -->
+                    </div><!-- /.box-body-primary -->
+                    <div class="col-xs-4">
+                        <div class="box box-primary">
+                            <table id="tab_rel_distribucion" class="table table-bordered table-striped table-hover table-condensed dt-responsive table-responsive">
+								<thead>
+                                    <tr style="background-color: #001a5a">
+										<th style='text-align: center; color: white'>Nivel</th>
+										<th style='text-align: center; color: white'>Número de invitados</th>
+									</tr>
+								</thead>
+								<tbody >       
+									<?php $i = 1; ?>
+									<?php foreach (range(0, 6) as $padres) { ?>
+									<tr style="font-size: 16px;text-align: center" class="{% cycle 'impar' 'par' %}" >
+										<td><img id="nivel" class="img-circle" src="<?= base_url() ?>static/img/iconos_medianos/Nivel <?php echo $i; ?>.png" style="width: 75%;"  /></td>
+										<td><?php echo pow(5, $i) ?></td>
+									</tr>
+									<?php $i++ ?>
+									<?php } ?>
+								</tbody>
+							</table>
+                        </div><!-- /.box-body -->
+                    </div><!-- /.box-body-primary -->
+
+
+                </div><!-- /.col -->
+                    
+                    
+                   
+                    
+
             </div><!-- /.col -->
             
         
@@ -109,7 +138,7 @@ if ($tipouser == 'Administrador') {
     });
 
 
-    var Tusuarios = $('#tab_rel_links').dataTable({
+    var Tusuarios = $('#tab_rel_distribucion').dataTable({
         "paging": true,
         "lengthChange": false,
         "autoWidth": false,
@@ -117,6 +146,26 @@ if ($tipouser == 'Administrador') {
         "ordering": true,
         "info": true,
         "iDisplayLength": 10,
+        "iDisplayStart": 0,
+        "sPaginationType": "full_numbers",
+        "aLengthMenu": [5,10,15],
+        "oLanguage": {"sUrl": "<?= base_url() ?>/static/js/es.txt"},
+        "decimal": ",",
+        "thousands": ".",
+        "aoColumns": [
+            {"sClass": "registro center", "sWidth": "1%"},
+            {"sClass": "registro center", "sWidth": "15%"},
+        ],        
+    });
+    
+    var Tusuarios = $('#tab_rel_links').dataTable({
+        "paging": true,
+        "lengthChange": false,
+        "autoWidth": false,
+        "searching": false,
+        "ordering": true,
+        "info": true,
+        "iDisplayLength": 8,
         "iDisplayStart": 0,
         "sPaginationType": "full_numbers",
         "aLengthMenu": [5,10,15],
