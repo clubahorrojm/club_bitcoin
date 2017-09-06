@@ -68,8 +68,12 @@ if ($tipouser == 'Administrador') {
                                     <?php $i = 1; ?>
                                     <?php foreach ($listar_links as $links) { ?>
                                     <tr style="font-size: 16px;text-align: center" class="{% cycle 'impar' 'par' %}" >
-                                        <td><a title="Copiar" class="pdf_retiro" id="<?php echo $links->links; ?>" ><img style="width: 40%" src="<?= base_url() ?>static/img/copiar.png"/></a></td>
-                                        <td><span id="textarea" ><?php echo $links->links; ?></span></td>
+                                        <td>
+											<a title="Copiar" onclick="copiarAlPortapapeles('<?php echo 'input'.$i; ?>')"><img src="<?= base_url() ?>static/img/copiar.png" style="width: 40%;" /></a>
+										</td>
+                                        <td>
+											<p id="input<?php echo $i; ?>"><?php echo $links->links; ?></p>
+										</td>
                                     </tr>
                                     <?php $i++ ?>
                                     <?php } ?>
@@ -129,14 +133,26 @@ if ($tipouser == 'Administrador') {
 
 <script>
     
-    $(".pdf_retiro").click(function (e) {
-    //    e.preventDefault();  // Para evitar que se envíe por defecto
-    //    // Establecemos las variables
-        var id = this.getAttribute('id');
-        //alert (id);
-        //id.value().clone();
-
-    });
+	function copiarAlPortapapeles(id_elemento) {
+		// Crea un campo de texto "oculto"
+		var aux = document.createElement("input");
+	  
+		// Asigna el contenido del elemento especificado al valor del campo
+		aux.setAttribute("value", document.getElementById(id_elemento).innerHTML);
+	  
+		// Añade el campo a la página
+		document.body.appendChild(aux);
+	  
+		// Selecciona el contenido del campo
+		aux.select();
+	  
+		// Copia el texto seleccionado
+		document.execCommand("copy");
+	  
+		// Elimina el campo de la página
+		document.body.removeChild(aux);
+	}
+	
 
 
     var Tusuarios = $('#tab_rel_distribucion').dataTable({
