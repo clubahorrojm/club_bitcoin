@@ -97,6 +97,7 @@ if ($tipouser == 'Administrador') {
 									<?php } ?>
 								</tbody>
 							</table>
+                            <br>
                         </div><!-- /.box-body -->
                     </div><!-- /.box-body-primary -->
 
@@ -139,12 +140,12 @@ if ($tipouser == 'Administrador') {
 
 
     var Tusuarios = $('#tab_rel_distribucion').dataTable({
-        "paging": true,
+        "paging": false,
         "lengthChange": false,
         "autoWidth": false,
         "searching": false,
         "ordering": true,
-        "info": true,
+        "info": false,
         "iDisplayLength": 10,
         "iDisplayStart": 0,
         "sPaginationType": "full_numbers",

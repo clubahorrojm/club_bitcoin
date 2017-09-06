@@ -36,109 +36,125 @@ if ($tipouser == 'Administrador') {
 
         <!-- Main content -->
         <section class="content">
-
             <div class="row">
                 <div class="col-xs-12">
-
                     <!-- SELECT2 EXAMPLE -->
-                    <div class="box box-primary">
-                        <div class="box-body">
-                            <div class="text-left">
-                                <legend><H4  style="color:#3C8DBC">Solicitud de retiro</H4></legend>
-                            </div>
-                        <?php if ($editar[0]->estatus < 4) {?>
-                        <br>
-                        <div class="text-center">
-                            <span  style="font-weight: bold; color:red">**Disculpe, su perfil debe estar al 100% completado para poder realizar retiros **</span>
-                        </div>
-                        <br>
-                        <?php } ?>
-
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label style="font-weight:bold">Cantidad a retirar</label>
-                                <input type="text" placeholder="Ej: 50" maxlength="10" id="monto_retiro" class="form-control" >
-                            </div><!-- /.form-group -->
-                        </div><!-- /.form-group -->
-                        <div class="col-md-2">
-                            <div class="form-group">
+                    <div class="col-xs-7">
+                        <div class="box box-primary">
+                            <div class="box-body">
+                                <div class="text-left">
+                                    <legend><H4  style="color:#3C8DBC">Solicitud de retiro</H4></legend>
+                                </div>
+                                <?php if ($editar[0]->estatus < 4) {?>
                                 <br>
-                                <button type="button" id="agregar_r" style="font-weight: bold;font-size: 13px" class="btn btn-info " >
-                                    &nbsp;<span class="glyphicon glyphicon-floppy-disk"></span>&nbsp;Solicitar
-                                </button>
-                            </div><!-- /.form-group -->
-                        </div><!-- /.form-group -->
-                        <div class="col-md-2">
-                            <div class="form-group">
+                                <div class="text-center">
+                                    <span  style="font-weight: bold; color:red">**Disculpe, su perfil debe estar al 100% completado para poder realizar retiros **</span>
+                                </div>
                                 <br>
-                                <span class="text-danger"  >Monto Mínimo para solicitar retiros <?php echo $monto_minimo ?> <?php echo $moneda ?></span>
-                                <input type="hidden" placeholder="Ej: 011494191" maxlength="10" id="monto_minimo" value="<?php echo $monto_minimo ?>" class="form-control" >
-                                <input type="hidden" placeholder="Ej: 011494191" maxlength="10" id="estatus_perfil" value="<?php echo $editar[0]->estatus ?>" class="form-control" >
-                                <input id="cod_perfil"  type='hidden' value="<?php echo $cod_perfil ?>" class="form-control" >
-                                <input class="form-control"  type='hidden' id="usuario_id" name="usuario_id" value="<?php echo $usuario[0]->codigo ?>"/>
-                            </div><!-- /.form-group -->
-                        </div><!-- /.form-group -->
-
-                        <table id="tab_rel_retiros" class="table table-bordered table-striped table-hover table-condensed dt-responsive table-responsive">
-                            <thead>
-                                <tr class="info">
-                                    <th style='text-align: center'>#</th>
-                                    <th style='text-align: center'>Código</th>
-                                    <th style='text-align: center'>Monto</th>
-                                    <th style='text-align: center'>Fecha Solicitado</th>
-                                    <th style='text-align: center'>Fecha Cancelado</th>
-                                    <th style='text-align: center'>Estatus</th>
-                                    <th style='text-align: center'>Recibo</th>
-                                </tr>
-                            </thead>
-                            <tfoot>
-                                <tr>
-                                    <th colspan="2" style="text-align:right; font-size: 16px">Total retirado:</th>
-                                    <th colspan="2"></th>
-                                </tr>
-                            </tfoot>
-                            <tbody >       
-                                <?php $i = 1; ?>
-                                <?php foreach ($listar_retiros as $retiros) { ?>
-                                <tr style="font-size: 16px;text-align: center" class="{% cycle 'impar' 'par' %}" >
-                                    <td><?php echo $i; ?></td>
-                                    <td><?php echo $retiros->codigo; ?></td>
-                                    <td><?php echo number_format($retiros->monto, 2, ',', '.') ; ?><i class="fa fa-btc"></i></td>
-                                    <td><?php
-                                        $fe = explode('-',$retiros->fecha_solicitud);
-                                        $fecha = $fe[2].'-'.$fe[1].'-'.$fe[0];
-                                        echo $fecha;
-                                    ?></td>
-                                    <td><?php if ($retiros->fecha_verificacion != '') {?>
-                                            <?php $fe = explode('-',$retiros->fecha_verificacion);
-                                            $fecha2 = $fe[2].'-'.$fe[1].'-'.$fe[0];
-                                            echo $fecha2;?>
-                                        <?php }
-                                        
-                                    ?></td>
-                                    <td><?php if ($retiros->estatus == 1) {?>
-                                            <label style="font-weight:bold; color: blue">Solicitado</label>
-                                        <?php }else if ($retiros->estatus == 2){ ?>
-                                            <label style="font-weight:bold; color: green">Procesado</label>
-                                        <?php } ?>
-                                    </td>
-                                    <td style='text-align: center' >
-                                        <?php if ($retiros->estatus == 2) {?>
-                                            <a title="Recibo Retiro" class="pdf_retiro" id="<?php echo $retiros->id; ?>" ><i class="fa fa-file-pdf-o text-red"></i></a>
-                                        <?php } ?>
-                                        
-                                    </td>
-                                </tr>
-                                <?php $i++ ?>
                                 <?php } ?>
-                            </tbody>
-                        </table>
+                                <div class="col-md-12 text-center">
+                                    <div class="form-group">
+                                        <label style="font-size: 20px">Monto disponible: </label>
+                                        <span style="font-size: 16px">&nbsp;&nbsp;<?php echo number_format($editar[0]->disponible, 2, ',', '.')?> $</span>
+                                        <span style="font-size: 16px">&nbsp;&nbsp;<?php echo number_format($editar[0]->disponible, 2, ',', '.')?> BTC</span>
+                                        <br>
+                                        <button type="button" id="agregar_r" style="font-weight: bold;font-size: 13px" class="btn btn-info " >
+                                            &nbsp;<span class="glyphicon glyphicon-floppy-disk"></span>&nbsp;Solicitud de retiro
+                                        </button>
+                                        <br>
+                                        <span class="text-danger"  >*El monto mínimo para retirar es de <?php echo $monto_minimo ?> <?php echo $moneda ?></span>
+                                    </div><!-- /.form-group -->
+                                </div><!-- /.form-group -->
+                            
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        
+                                        <input type="hidden" placeholder="Ej: 011494191" maxlength="10" id="monto_minimo" value="<?php echo $monto_minimo ?>" class="form-control" >
+                                        <input type="hidden" placeholder="Ej: 011494191" maxlength="10" id="estatus_perfil" value="<?php echo $editar[0]->estatus ?>" class="form-control" >
+                                        <input id="cod_perfil"  type='hidden' value="<?php echo $cod_perfil ?>" class="form-control" >
+                                        <input class="form-control"  type='hidden' id="usuario_id" name="usuario_id" value="<?php echo $usuario[0]->codigo ?>"/>
+                                    </div><!-- /.form-group -->
+                                </div><!-- /.form-group -->
 
+                                <table id="tab_rel_retiros" class="table table-bordered table-striped table-hover table-condensed dt-responsive table-responsive">
+                                    <thead>
+                                        <tr style="background-color: #001a5a">
+                                            <th style='text-align: center; color: white'>#</th>
+                                            <th style='text-align: center; color: white'>Código</th>
+                                            <th style='text-align: center; color: white'>Monto</th>
+                                            <th style='text-align: center; color: white'>Fecha Solicitado</th>
+                                            <th style='text-align: center; color: white'>Fecha Cancelado</th>
+                                            <th style='text-align: center; color: white'>Estatus</th>
+                                            <th style='text-align: center; color: white'>Recibo</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th colspan="2" style="text-align:right; font-size: 16px">Total retirado:</th>
+                                            <th colspan="2"></th>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody >       
+                                        <?php $i = 1; ?>
+                                        <?php foreach ($listar_retiros as $retiros) { ?>
+                                        <tr style="font-size: 16px;text-align: center" class="{% cycle 'impar' 'par' %}" >
+                                            <td><?php echo $i; ?></td>
+                                            <td><?php echo $retiros->codigo; ?></td>
+                                            <td><?php echo number_format($retiros->monto, 2, ',', '.') ; ?><i class="fa fa-btc"></i></td>
+                                            <td><?php
+                                                $fe = explode('-',$retiros->fecha_solicitud);
+                                                $fecha = $fe[2].'-'.$fe[1].'-'.$fe[0];
+                                                echo $fecha;
+                                            ?></td>
+                                            <td><?php if ($retiros->fecha_verificacion != '') {?>
+                                                    <?php $fe = explode('-',$retiros->fecha_verificacion);
+                                                    $fecha2 = $fe[2].'-'.$fe[1].'-'.$fe[0];
+                                                    echo $fecha2;?>
+                                                <?php }
+                                                
+                                            ?></td>
+                                            <td><?php if ($retiros->estatus == 1) {?>
+                                                    <label style="font-weight:bold; color: blue">Solicitado</label>
+                                                <?php }else if ($retiros->estatus == 2){ ?>
+                                                    <label style="font-weight:bold; color: green">Procesado</label>
+                                                <?php } ?>
+                                            </td>
+                                            <td style='text-align: center' >
+                                                <?php if ($retiros->estatus == 2) {?>
+                                                    <a title="Recibo Retiro" class="pdf_retiro" id="<?php echo $retiros->id; ?>" ><i class="fa fa-file-pdf-o text-red"></i></a>
+                                                <?php } ?>
+                                                
+                                            </td>
+                                        </tr>
+                                        <?php $i++ ?>
+                                        <?php } ?>
+                                    </tbody>
+                                </table>
+                                <br>
+                                <span class="text-default"  >Su solicitud sera procesada en un máximo de 72 horas</span>
+                            </div><!-- /.box-body -->
                         </div><!-- /.box-body -->
                     </div><!-- /.box-body-primary -->
-                    </div><!-- /.box-body -->
-                </div><!-- /.col -->
-
+                    
+                    <div class="col-xs-5 text-center">
+                        <div class="box box-primary">
+                            <div class="box-body">
+                                <div class="text-left">
+                                    <legend><H4  style="color:#3C8DBC">% Retirado</H4></legend>
+                                </div>
+                                <input type=hidden id="max_disp_retiro" value="<?php echo $editar[0]->maximo?>">
+                                <input type=hidden id="sum_retiros" value="<?php echo $sum_retiros?>">
+                                <div id="canvas-holder">
+                                    <canvas id="chart-area" width="300" height="300"/>
+                                </div>
+                                <i class="fa fa-square" style="color: #c3b01c" ></i>&nbsp;Retirado
+                                <i class="fa fa-square" style="color: #001A5A" ></i>&nbsp;Disponible
+                            </div>
+                        </div><!-- /.box-body -->
+                    </div><!-- /.box-body-primary -->
+                    
+                </div><!-- /.box-body -->
+            </div><!-- /.col -->
         </section><!-- /.content -->
     </div><!-- /.content-wrapper -->
 
@@ -220,6 +236,29 @@ if ($tipouser == 'Administrador') {
         
         
     });
+
+    var sum_retiros = $("#sum_retiros").val();
+    var max_disp_retiro =  $("#max_disp_retiro").val();
+    var resto = parseFloat(max_disp_retiro) - parseFloat(sum_retiros);
+    var pieData = [
+        {
+            value: sum_retiros,
+            color:"#c3b01c",
+            highlight: "#C9BC5E",
+            label: "Retirado"
+        },
+        {
+            value: resto,
+            color: "#001A5A",
+            highlight: "#264489",
+            label: "Disponible"
+        },
+    ];
+
+    window.onload = function(){
+        var ctx = document.getElementById("chart-area").getContext("2d");
+        window.myPie = new Chart(ctx).Pie(pieData);
+    };
      
     $('#fecha_pago').numeric({allow: "/"});
     $('#num_pago').numeric();
