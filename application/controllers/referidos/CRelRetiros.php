@@ -40,9 +40,13 @@ class CRelRetiros extends CI_Controller
         $this->load->model('busquedas_ajax/ModelsBusqueda');
         $this->load->model('administracion/MAuditoria');
         $this->load->model('configuracion/usuarios/Usuarios_model');
+        // $this->load->model('administracion/MEmpresa');
         $this->load->model('configuracion/MTiposMonedas');
         $this->load->model('administracion/MPaises');
-
+        // $this->load->model('configuracion/MCuentas');
+        // $this->load->model('configuracion/MBancos');
+        // $this->load->model('configuracion/MTiposCuenta');
+        // $this->load->model('configuracion/MRetiroMinimo');
         
     }
     // INDEX del modulo de perfil del referido
@@ -60,6 +64,13 @@ class CRelRetiros extends CI_Controller
         $data['monedas'] = $this->MTiposMonedas->obtenerTiposMonedas($id_moneda);
         $data['moneda'] = $data['monedas'][0]->abreviatura; // Abreviatura de moneda
         $data['monto_minimo'] = $data['editar'][0]->monto_retiro_minimo; // Listado de links de invitacion 
+        ////////////// GRAFICA /////////////////////////////////
+        $resultado = $this->MRelRetiros->obtener_grafica_retiros($cod_user);
+		foreach($resultado as $r){
+			$sum_retiros= $r->sum_retiros;
+		}	
+		$data['sum_retiros'] = $sum_retiros;
+       
        
         $this->load->view('referidos/perfil/paneles/solicitud_retiro',$data);
     }
@@ -83,14 +94,18 @@ class CRelRetiros extends CI_Controller
                 'usuario' => $this->session->userdata['logged_in']['id'],
             );
             $this->MAuditoria->add($param);
+            //redirect('configuracion/CRelPagos');
         }
     }
     function editar()
     {
         
         $datos = $this->input->post('id');
+        //print_r($id);
         $result = $this->MRelRetiros->obtenerCuenta($datos);
+        //print_r($result);
         echo json_encode($result);
+        // exit();
     }
     function pdf_recibo_retiro($cod_retiro){
         $id_user = ($this->session->userdata['logged_in']['id']); // ID usuario
@@ -98,7 +113,13 @@ class CRelRetiros extends CI_Controller
         $cod_user = $data['usuario'][0]->codigo; // Codigo del Usuario
         $perfil = $this->MReferidos->obtenerReferido($cod_user);
         $data['retiro'] = $this->MRelRetiros->obtenerPdfRetiro($cod_retiro); // Informacion del pago de ingreso al sistema
-
+        //$cuenta_id = $data['retiro'][0]->cuenta_id;
+        //$data['id'] = $this->MInmuebles->obtenerResumenInmueble($id);  // Datos generales de la factura
+        // $data['empresa'] = $this->MEmpresa->obtenerEmpresa(1);
+        
+        //$data['listar_cuenta'] = $this->MCuentas->obtenerCuenta($cuenta_id); // Listado de cuentas de la pagina
+/*        $data['listar_bancos'] = $this->MBancos->obtenerBanco(); // Listado de Bancos
+        $data['listar_t_cuentas'] = $this->MTiposCuenta->obtenerTiposCuenta(); // Listado de Tipo de cuentas*/
         $data['listar_usuarios'] = $this->Usuarios_model->obtenerUsuarios(); // Listado de usuarios
         $data['listar_paises'] = $this->MPaises->obtenerPais(); // Listado de cuentas de la pagina
         $id_moneda = $perfil[0]->t_moneda_id; // ID Tipo de moneda
