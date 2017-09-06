@@ -58,8 +58,8 @@ if ($tipouser == 'Administrador') {
                                         <span style="font-size: 16px">&nbsp;&nbsp;<?php echo number_format($editar[0]->disponible, 2, ',', '.')?> $</span>
                                         <span style="font-size: 16px">&nbsp;&nbsp;<?php echo number_format($editar[0]->disponible, 2, ',', '.')?> BTC</span>
                                         <br>
-                                        <button type="button" id="agregar_r" style="font-weight: bold;font-size: 13px" class="btn btn-info " >
-                                            &nbsp;<span class="glyphicon glyphicon-floppy-disk"></span>&nbsp;Solicitud de retiro
+                                        <button type="button" id="levantar" style="font-weight: bold;font-size: 13px; color: white; background-color: #c3b01c" class="btn " >
+                                            &nbsp;&nbsp;Solicitud de retiro
                                         </button>
                                         <br>
                                         <span class="text-danger"  >*El monto mínimo para retirar es de <?php echo $monto_minimo ?> <?php echo $moneda ?></span>
@@ -121,7 +121,7 @@ if ($tipouser == 'Administrador') {
                                             </td>
                                             <td style='text-align: center' >
                                                 <?php if ($retiros->estatus == 2) {?>
-                                                    <a title="Recibo Retiro" class="pdf_retiro" id="<?php echo $retiros->id; ?>" ><i class="fa fa-file-pdf-o text-red"></i></a>
+                                                    <a title="Recibo Retiro" class="pdf_retiro" id="<?php echo $retiros->id; ?>" ><img src="<?= base_url() ?>static/img/reporte.png" style="width: 50%;" /></a>
                                                 <?php } ?>
                                                 
                                             </td>
@@ -157,6 +157,40 @@ if ($tipouser == 'Administrador') {
             </div><!-- /.col -->
         </section><!-- /.content -->
     </div><!-- /.content-wrapper -->
+
+    <!-- Modal -->
+    <div class="modal fade " id="modal_felictaciones" role="dialog" >
+      <div class="modal-dialog" style="width: 25%">
+      
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header " style="background-color: #001a5a">
+            <strong style="color: white">&nbsp;Indique el monto a retirar&nbsp;</strong>
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="color: white">&times;</button>
+          </div>
+          <div class="modal-body text-center" style="background-color: #FFFFFF; text-align: center">
+            <div class="col-md-12"><label style="font-weight:bold">Monto&nbsp;</label></div>
+            <div class="col-md-3">&nbsp;</div>
+            <div class="col-md-6"><input type="text" style="background-color: #3e1c74; color: white; width: 100%" placeholder="Ej: 1850.33" maxlength="10" id="monto_retiro" onkeyup="validaFloat(this.value), suma()"  class="form-control" ></div>
+            <div class="col-md-3">&nbsp;</div>
+            <br>
+            <div class="col-md-12"><label style="font-weight:bold">&nbsp;</label></div>
+            <button type="button" class="btn " data-dismiss="modal" id="agregar_r" style="color: white; background-color: #c3b01c">&nbsp; Aceptar</button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button type="button" class="btn " data-dismiss="modal" id="cerrar_modal" style="color: white; background-color: #c3b01c">Cancelar</button>
+          </div>
+          <div class="modal-footer text-center" style="background-color: #001A5A; text-align: center" >
+                <span style="color: #FFFFFF">El monto debe ser expresado en $ y será cancelado en su equivalente a BTC</span>
+          </div>
+          
+        </div>
+        
+      </div>
+    </div>
+
+
+
+
 
     <footer class="main-footer">
         <div class="pull-right hidden-xs">
@@ -287,7 +321,20 @@ if ($tipouser == 'Administrador') {
     }else{
         $("#monto_retiro,#agregar_r").prop('disabled',true)
     }
+    $('#levantar').click(function(e){
+        $("#modal_felictaciones").modal("show");
+    });
     
+    
+    function validaFloat(numero) {
+
+    if (!/^([0-9])*[.]?[0-9]*$/.test(numero))
+        bootbox.alert('Disculpe, El valor '+ numero +' no es un número, recuerde solo utilizar punto (.) como separador decimal', function () {
+            $("#monto_retiro").val('');
+            $("#monto_retiro").focus();
+        });
+        
+    }
     $('#agregar_r').click(function(e){
         e.preventDefault();
         //Para validar campos vacios
