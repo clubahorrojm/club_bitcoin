@@ -82,7 +82,7 @@ class CAyuda extends CI_Controller
 			'hora' => date("h:i:s a"),
 			'estatus' => 1,
 		);
-		$this->MAuditoria->insertarNotificacion($param2);
+		$this->MNotificaciones->insertarNotificacion($param2);
 		
         // Registramos los cambios en la Bitacora
         if ($result) {

@@ -98,6 +98,7 @@ if (isset($this->session->userdata['logged_in'])) {
         <link rel="stylesheet" type="text/css" href="<?= base_url() ?>static/css/fancybox/jquery.fancybox.css">
         <link rel="stylesheet" type="text/css" href="<?= base_url() ?>static/css/bootstrap-datepicker.css"/>
 
+		<link rel="stylesheet" href="<?= base_url() ?>static/inc/TimeCircles.css" />
 
 
 
@@ -552,6 +553,9 @@ if (isset($this->session->userdata['logged_in'])) {
 		
 		<script src="<?= base_url() ?>static/js/jquery.countdown.js"></script>
 		<script src="<?= base_url() ?>static/js/Chart.js"></script>
+		
+		<script type="text/javascript" src="<?= base_url() ?>static/inc/TimeCircles.js"></script>
+
 <!--         // <script type="text/javascript" async="" src="http://www.google-analytics.com/ga.js"></script>
         // <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script> -->
  

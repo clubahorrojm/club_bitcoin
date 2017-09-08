@@ -15,7 +15,8 @@ if ($tipouser == 'Administrador') {
 } else {
     redirect(base_url());
 }
-?>  
+?>
+
 <div class="wrapper">
 
     <!-- Content Wrapper. Contains page content -->
@@ -42,6 +43,8 @@ if ($tipouser == 'Administrador') {
                     <div class="col-xs-7">
                         <div class="box box-primary">
                             <div class="box-body">
+                                <h2>Recuerde tiene 90 segundos para registrar su pago</h2>
+                                <div id="CountDownTimer" data-timer="90" style="width: 500px; height: 125px;"></div>
                                 <div class="text-left">
                                     <legend><H4  style="color:#3C8DBC">Solicitud de retiro</H4></legend>
                                 </div>
@@ -55,8 +58,9 @@ if ($tipouser == 'Administrador') {
                                 <div class="col-md-12 text-center">
                                     <div class="form-group">
                                         <label style="font-size: 20px">Monto disponible: </label>
-                                        <span style="font-size: 16px">&nbsp;&nbsp;<?php echo number_format($editar[0]->disponible, 2, ',', '.')?> $</span>
-                                        <span style="font-size: 16px">&nbsp;&nbsp;<?php echo number_format($editar[0]->disponible, 2, ',', '.')?> BTC</span>
+                                        <span style="font-size: 16px" >&nbsp;&nbsp;<?php echo number_format($editar[0]->disponible, 2, ',', '.')?> $</span>
+                                        &nbsp&nbsp&nbsp&nbsp&nbsp
+                                        <span style="font-size: 16px" id="precio_bitcoin"></span>
                                         <br>
                                         <button type="button" id="levantar" style="font-weight: bold;font-size: 13px; color: white; background-color: #c3b01c" class="btn " >
                                             &nbsp;&nbsp;Solicitud de retiro
@@ -68,7 +72,7 @@ if ($tipouser == 'Administrador') {
                             
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        
+                                        <input type="hidden" placeholder="Ej: 011494191" maxlength="10" id="disponible" value="<?php echo $editar[0]->disponible ?>" class="form-control" >
                                         <input type="hidden" placeholder="Ej: 011494191" maxlength="10" id="monto_minimo" value="<?php echo $monto_minimo ?>" class="form-control" >
                                         <input type="hidden" placeholder="Ej: 011494191" maxlength="10" id="estatus_perfil" value="<?php echo $editar[0]->estatus ?>" class="form-control" >
                                         <input id="cod_perfil"  type='hidden' value="<?php echo $cod_perfil ?>" class="form-control" >
@@ -203,7 +207,7 @@ if ($tipouser == 'Administrador') {
 
 
 <script>
-
+    $("#CountDownTimer").TimeCircles({ time: { Days: { show: false }, Hours: { show: false },  }});
     var Tusuarios = $('#tab_rel_retiros').dataTable({
         "paging": true,
         "lengthChange": false,
@@ -270,6 +274,16 @@ if ($tipouser == 'Administrador') {
         
         
     });
+    // Soporte para tipos de cambio sobre bitcoins (dólares en este caso) usando la api de blockchain Exchange Rates API
+	$.post('https://blockchain.info/ticker', function (response) {
+		var convert3;
+        var disponible = $("#disponible").val();
+		//alert(disponible);
+		// Colocamos los valores actuales de conversión entre dólares y bitcoins y viceversa en la modal de pago
+		convert3 = parseFloat(disponible) / parseFloat(response['USD']['last']);
+        //aler(convert3);
+		$('#precio_bitcoin').text(convert3.toFixed(6)+' BTC');
+	}, 'json');
 
     var sum_retiros = $("#sum_retiros").val();
     var max_disp_retiro =  $("#max_disp_retiro").val();
