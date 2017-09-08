@@ -332,3 +332,27 @@ CAMBIOS AL 08-09-2017 (José):
 			+ config/database.php
 		-Archivo js de validaciones:
 			+ static/js/progress.js
+
+CAMBIOS AL 05-09-2017 (MARCEL):
+	+ Cambios en los views:
+			-views/referidos/perfil/paneles/solicitud_retiro.php
+			-views/referidos/perfil/paneles/links.php
+	+	Cambios en los Modelos:
+			-Modes/referidos/MRelRetiros.php
+	+	Cambios en los Controladors:
+			-Modes/referidos/CRelRetiros.php
+
+CAMBIOS AL 07-09-2017 (MARCEL):
+	+ Cambios en los views:
+			-views/referidos/perfil/paneles/solicitud_retiro.php
+			-views/referidos/perfil/perfil.php
+			-views/base.php
+	+ Carpeta en static:
+			+ inc
+	+	Cambios en los Controladors:
+			-Modes/procesos/CAyuda.php
+	html:	
+	<h2>Recuerde tiene 90 segundos para registrar su pago</h2>
+        <div id="CountDownTimer" data-timer="90" style="width: 500px; height: 125px;"></div>
+	js:
+	$("#CountDownTimer").TimeCircles({ time: { Days: { show: false }, Hours: { show: false },  }});
