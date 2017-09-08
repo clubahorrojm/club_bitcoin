@@ -236,27 +236,101 @@ function valida_pago(){
 		pk_perfil = $('#cod_perfil').val()
 		cod_pago = $('#cod_pago').val()
 		
-		$.post(base_url+'index.php/referidos/CRelPagos/actualizar',
-		   $.param({'pk_perfil': pk_perfil})+'&'+$.param({'dir_monedero': dir_monedero})+'&'+$.param({'monto': monto})+'&'+
-		   $.param({'fecha_pago': fecha_pago})+'&'+$.param({'cod_pago': cod_pago}), 
-		   function (response){
-			if (response[0] == 1) {
-				bootbox.alert("Disculpe, esta dirección ya fue registrada con este usuario", function () {
-				}).on('hidden.bs.modal', function (event) {
-					$("#dir_monedero").parent('div').addClass('has-error')
-					$("#dir_monedero").focus();
-				});
-			} else {
-				bootbox.alert("Se registró su pago con Exito", function (){
-				}).on('hidden.bs.modal', function (event) {
-					//~ window.location = '<?php echo base_url(); ?>index.php/referidos/CRelPagos/';
-					window.location = base_url+'index.php/referidos/CReferidos/';
-					$("#reg_data_pago").val(1);
-				});
+		// Inspeccionamos la dirección de la empresa para comprobar pago desde la dirección indicada por el usuario
+		var blockrAPI = "https://blockexplorer.com/api/addr/1JGQko7DZfuNqgyPkiSM6TKJBmAMCHhZL7";
+		var status, address, num_trans, search_address_paid, search_amount, search_date;
+		// Definimos dinámicamente los valores que serán indicados por parte del usuario
+		search_address_paid = dir_monedero;
+		search_amount = monto;
+		search_date = fecha_pago;
+		$.ajax({
+			url : blockrAPI,
+			type : 'GET',
+			async: false,  // Para que no proceda con las siguientes instrucciones hasta terminar la petición
+			dataType : 'json',
+			beforeSend:function(objeto){ 
+				$('#resultado').css({display:'block'});
+				$('#info_pago').prop('disabled',true);
+			},
+			success : function(data) {
+				address = data['addrStr'];
+				num_trans = data['txApperances'];
+				//~ alert("Dirección: " + address + ", Número de transacciones: " + num_trans);
+				var check_payment = 0;
+				var contador_trans = 0;
+				$.each(data['transactions'], function (i){
+					var hash_tx = data['transactions'][i];  // Código hash de la transacción
+					
+					// Filtramos sólo los pagos recibidos y descartamos los pagos hechos
+					// if(!(monto < 0)){
+						var blockrAPIDetails = "https://blockexplorer.com/api/tx/"+hash_tx;  // (Detalles de la transacción con http://blockexplorer.com)
+						// Consultamos los detalles de la transacción para verificar las direcciones y ver si alguna coincide con la del usuario
+						$.ajax({
+							url : blockrAPIDetails,
+							type : 'GET',
+							async: false,  // Para que no proceda con las siguientes instrucciones hasta terminar la petición
+							dataType : 'json',
+							success : function(data2) {
+								var fecha = data2['time'];
+								var format_fecha = new Date(fecha*1000);
+								var day = (format_fecha.getDate() < 10 ? '0' : '') + format_fecha.getDate();
+								var month = (format_fecha.getMonth() < 9 ? '0' : '') + (format_fecha.getMonth() + 1);
+								var year = format_fecha.getFullYear();
+								format_fecha = day + '/' + month + '/' + year;
+								//~ alert(format_fecha);
+								var monto = data2['valueIn'];
+								var address_paid = data2['vin'][0]['addr'];
+								
+								//~ alert("Dirección: " + address_paid + "Fecha: " + fecha + ", Monto: " + monto);
+						
+								// Si los detalles del pago coinciden con los indicados por el usuario, entonces lo validamos
+								if(search_address_paid == address_paid && search_amount == monto && search_date == format_fecha){
+									check_payment += 1;
+									//~ $("#input_resultado").val(check_payment);
+								}
+								contador_trans += 1;  // Una transacción más verificada
+								//~ alert(check_payment);
+							}
+						});
+					// }					
+					
+				})
 				
-			}
-			
+				$('#resultado').css({display:'none'});
+				$('#info_pago').prop('disabled',false);
+				
+				// Si el pago fue validado
+				//~ alert(check_payment);
+				//~ alert(contador_trans);
+				if(check_payment > 0){
+					//~ alert("Su pago fue validado");
+					$.post(base_url+'index.php/referidos/CRelPagos/actualizar',
+					   $.param({'pk_perfil': pk_perfil})+'&'+$.param({'dir_monedero': dir_monedero})+'&'+$.param({'monto': monto})+'&'+
+					   $.param({'fecha_pago': fecha_pago})+'&'+$.param({'cod_pago': cod_pago}), 
+					   function (response){
+						if (response[0] == 1) {
+							bootbox.alert("Disculpe, esta dirección ya fue registrada con este usuario", function () {
+							}).on('hidden.bs.modal', function (event) {
+								$("#dir_monedero").parent('div').addClass('has-error')
+								$("#dir_monedero").focus();
+							});
+						} else {
+							bootbox.alert("Se validó y registró su pago con Éxito", function (){
+							}).on('hidden.bs.modal', function (event) {
+								//~ //window.location = '<?php echo base_url(); ?>index.php/referidos/CRelPagos/';
+								window.location = base_url+'index.php/referidos/CReferidos/';
+								$("#reg_data_pago").val(1);
+							});
+							
+						}
+						
+					});
+				}else{
+					alert("Su pago no ha sido comprobado, por favor intente el registro más tarde");
+				}
+			},
 		});
+		
 	}
 }
 

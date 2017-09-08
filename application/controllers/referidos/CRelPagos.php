@@ -106,11 +106,12 @@ class CRelPagos extends CI_Controller
         );
         //print_r($datos);
         $result = $this->MRelPagos->actualizarRelPagosBit($datos);
-        $datos2 = array(
-            'id'=> $this->input->post('pk_perfil'),
-            'estatus'=> 2,
-        );
-        $result = $this->MReferidos->actualizarReferidos($datos2);
+        //~ $datos2 = array(
+            //~ 'id'=> $this->input->post('pk_perfil'),
+            //~ 'codigo'=> $this->input->post('pk_perfil'),
+            //~ 'estatus'=> 2,
+        //~ );
+        //~ $result = $this->MReferidos->actualizarReferidos($datos2);
         if ($result) {
             $param = array(
                 'tabla' => 'RelPagos',
