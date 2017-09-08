@@ -320,3 +320,15 @@ CAMBIOS AL 02-09-2017 (MARCEL)
 		  CONSTRAINT nivel_key PRIMARY KEY (id)
 		)
 		perfil.php (mejora de la interfaz y incorporaciond e la grafica pendiente Json (JOSE))
+
+CAMBIOS AL 08-09-2017 (José):
+		- Actualización de View: 
+			+ views/referidos/perfil/paneles_modal/pagos.php
+		- Actualizacion de Controlador
+			+ CRelPagos.php,
+		- Actualización de Modelo:
+			+ MMails.php (Se configuró el sistema para usar los servidores de correo de gmail con la cuenta clubahorrojm@gmail.com)
+		-Archivo de configuración:
+			+ config/database.php
+		-Archivo js de validaciones:
+			+ static/js/progress.js
