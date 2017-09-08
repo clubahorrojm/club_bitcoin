@@ -198,8 +198,10 @@
 						$.post('<?php echo base_url(); ?>index.php/User_Authentication/registrar_referido/', $("#f_reg_usuario").serialize(), function(response) {
 							//~ alert(response.trim());
 							if (response.trim() == "1"){
-								alert("El usuario ya existe");
-								location.reload();
+								bootbox.alert('<h4>Disculpe, el usuario ya está registrado...<h4>', function () {
+									
+								});
+								//~ location.reload();
 							}else{
 								// Generamos el perfil del nuevo usuario
 								$.post('<?php echo base_url(); ?>index.php/User_Authentication/registrar_perfil/', $("#f_reg_usuario").serialize(), function(response) {
