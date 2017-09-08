@@ -228,34 +228,37 @@ Class User_Authentication extends CI_Controller {
 		// Registramos los datos del usuario y su perfil
 		$reg_usuario = $this->Usuarios_model->insertar($data_usuario);
 		
-		// Actualizamos el estatus y el id(código) del usuario referido registrado
-		$estatus_link = $this->ModelsBusqueda->obtenerRegistro('ref_rel_links', 'links', $enlace);
-		$estatus_link = $estatus_link->estatus;
+		if($reg_usuario){
 		
-		if($estatus_link == 1){
-			$estatus_link = 2;
-		}else if($estatus_link == 3){
-			$estatus_link = 4;
+			// Actualizamos el estatus y el id(código) del usuario referido registrado
+			$estatus_link = $this->ModelsBusqueda->obtenerRegistro('ref_rel_links', 'links', $enlace);
+			$estatus_link = $estatus_link->estatus;
+			
+			if($estatus_link == 1){
+				$estatus_link = 2;
+			}else if($estatus_link == 3){
+				$estatus_link = 4;
+			}
+			
+			$data_link = array(
+				'links' => $enlace,
+				'estatus' => $estatus_link,
+				'referido_id' => $codigo_usuario,
+			);
+			
+			$update_link = $this->MRelLinks->actualizarRelLinks2($data_link);
+			
+			// Enviamos un correo con la información del monedero de la empresa al correo proporcionado por el usuario
+			// Datos del monedero bitcoin de la empresa
+			$monedero_emp = $this->ModelsBusqueda->obtenerRegistro('adm_monedero', 'id', 1);
+			$datos_reg = array(
+				'username' => $usuario,
+				'email' => $this->input->post('correo'),
+				'password' => $this->input->post('password_reg'),
+				'monedero_emp' => $monedero_emp->monedero
+			);
+			$this->MMails->enviarMailConfirm($datos_reg);
 		}
-		
-		$data_link = array(
-			'links' => $enlace,
-			'estatus' => $estatus_link,
-			'referido_id' => $codigo_usuario,
-		);
-		
-		$update_link = $this->MRelLinks->actualizarRelLinks2($data_link);
-		
-		// Enviamos un correo con la información del monedero de la empresa al correo proporcionado por el usuario
-		// Datos del monedero bitcoin de la empresa
-        $monedero_emp = $this->ModelsBusqueda->obtenerRegistro('adm_monedero', 'id', 1);
-		$datos_reg = array(
-			'username' => $usuario,
-			'email' => $this->input->post('correo'),
-			'password' => $this->input->post('password_reg'),
-			'monedero_emp' => $monedero_emp->monedero
-		);
-		$this->MMails->enviarMailConfirm($datos_reg);
 	}
 	
 	// Método para registro de perfil nuevo con la identificación (código) del usuario padre
