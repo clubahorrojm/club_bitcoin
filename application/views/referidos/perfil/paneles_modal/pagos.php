@@ -51,7 +51,7 @@
 						</div>-->
 						<div class="col-md-12">
 							<div class="form-group">
-								<label style="font-weight:bold">Dir. Monedero (desde la que realizó el pago)</label><br>
+								<label style="font-weight:bold">Dir. Monedero (desde el cual realizó el pago)</label><br>
 								<input type="text" placeholder="Ej: AxYz125cdJklmn14PqRs87Vwxy54Q7YcV4" maxlength="34" id="dir_monedero" value="<?php echo $pago[0]->dir_monedero ?>" class="form-control" >
 							</div>
 						</div>
@@ -95,6 +95,16 @@
 							</div><!-- /.form-group -->
 						</div><!-- /.form-group -->
 						<?php } ?>
+						<!-- Imagen de carga -->
+						<div class="col-md-12" style="display:none;" id="resultado">
+							<div>
+								<i class="fa fa-refresh fa-spin">
+									
+								</i>
+								<span>Validando...</span>
+							</div>
+						</div>
+						<!-- Imagen de carga -->
 						<div class="col-md-12">
 							<div class="form-group text-center">
 								<br>
