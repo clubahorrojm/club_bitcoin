@@ -1,3 +1,6 @@
+<h3>Recuerde tiene 90 segundos para registrar su pago</h3>
+<center><div id="CountDownTimer" class="text-center" data-timer="90" style="width: 300px; height: 100px;align:center;"></div></center>
+
 <fieldset id="fieldset_pago" style="display:block">
 	<h2 class="fs-title">Información del pago</h2>
 	<!--<h3 class="fs-subtitle">Indica los datos de tu pago</h3>-->
@@ -114,9 +117,9 @@
 								<input id="cod_perfil"  type='hidden' value="<?php echo $cod_perfil ?>" class="form-control" >
 								<input id="cod_pago"  type='hidden' value="<?php echo $pago[0]->codigo ?>" class="form-control" >
 								<input id="estatus"  type='hidden' value="<?php echo $pago[0]->estatus ?>" class="form-control" >
-								<!--<input id="tipo_pago_id" type='hidden' value="<?php echo $pago[0]->tipo_pago ?>" class="form-control" >
-								<input id="cuenta_pago_id" type='hidden' value="<?php echo $pago[0]->cuenta_id ?>" class="form-control" >-->
 								<input id="base_url" type='hidden' value="<?php echo base_url(); ?>">
+								<input id="user_id" type='hidden' value="<?php echo $this->session->userdata['logged_in']['id']; ?>">
+								<input id="tiempo_limite" type='hidden'>
 								<input id="reg_data_pago" type='hidden' value="0">
 							</div><!-- /.form-group -->
 						</div><!-- /.form-group -->

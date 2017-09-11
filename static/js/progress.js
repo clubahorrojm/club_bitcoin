@@ -1,6 +1,7 @@
 $(document).ready(function () {
 	
 	base_url = $("#base_url").val();  // url base del sistema
+	user_id = $("#user_id").val();  // url base del sistema
 	
 	// Soporte para tipos de cambio sobre bitcoins (dólares en este caso) usando la api de blockchain Exchange Rates API
 	$.post('https://blockchain.info/ticker', function (response) {
@@ -43,6 +44,28 @@ $(document).ready(function () {
         language: "es",
         autoclose: true,
     })
+    
+    // Carga del cronómetro de registro y validación de cuando éste llegue a cero
+    $("#CountDownTimer").TimeCircles({ time: { Days: { show: false }, Hours: { show: false },  }});
+    var v_t = setInterval(function(){
+		var get_minutes = $("#CountDownTimer").find(".time_circles").find(".textDiv_Minutes").find("span").text();
+		var get_seconds = $("#CountDownTimer").find(".time_circles").find(".textDiv_Seconds").find("span").text();
+		
+		if(get_minutes == "0" && get_seconds == "0"){
+			$("#tiempo_limite").val("alcanzado");  // Indicamos que se alcanzó el límite
+		}
+	},1000);  // Validamos el tiempo cada segundo
+	
+	var v_t2 = setInterval(function(){
+		if($("#tiempo_limite").val() == "alcanzado"){
+			clearInterval(v_t);
+			clearInterval(v_t2);
+			bootbox.alert("Se a agotado el tiempo de registro, por favor inicie sesión e intentelo nuevamente", function (){
+			}).on('hidden.bs.modal', function (event) {
+				window.location = base_url+'index.php/User_Authentication/logout/'+user_id;
+			});
+		}
+	},90000);  // Checqueamos el campo de límite de tiempo cada minuto con 30 segundos
     
     // Carga de datos
     var tipo = $("#tipo_pago_id").val();
