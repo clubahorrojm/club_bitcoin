@@ -400,4 +400,18 @@ Class User_Authentication extends CI_Controller {
 		echo json_encode($lista_regs);
 		//echo json_encode($lista_cant_pagos);
     }
+    
+    // Método para registro de coordenadas de acceso de los usuarios al loguearse
+	public function registrar_coord(){
+		$latitud = $this->input->post('latitud');
+		$longitud = $this->input->post('longitud');
+		
+		$data_coord = array(
+			'usuario_id' => $this->session->userdata['logged_in']['id'],
+			'longitud' => $longitud,
+			'latitud' => $latitud
+		);
+		
+		$reg_coord = $this->Usuarios_model->insertarCoord($data_coord);
+	}
 }

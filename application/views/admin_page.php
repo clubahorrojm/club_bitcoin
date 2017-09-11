@@ -24,10 +24,13 @@
 					</div>
 				</div>
 
-				<!--<p>Click the button to get your coordinates.</p>-->
-				<!--<button onclick="getLocation()">Try It</button>-->
-				<!--<p><strong>Note:</strong> The geolocation property is not supported in IE8 and earlier versions.</p>-->
-				<!--<p id="demo"></p>-->
+				<!--<p>Click the button to get your coordinates.</p>
+				<button onclick="getLocation()">Try It</button>
+				<p><strong>Note:</strong> The geolocation property is not supported in IE8 and earlier versions.</p>
+				<p id="demo"></p>-->
+				<input id="latitud" type="hidden"/>
+				<input id="longitud" type="hidden"/>
+				<input id="id_user" type="hidden" value="<?php echo $this->session->userdata['logged_in']['tipo_usuario'];?>"/>
         </div>
 
 <!--        <div  style="text-align:center;">
@@ -48,46 +51,62 @@
 </div><!-- ./wrapper -->
 
 <script>
-	$.post('<?php echo base_url(); ?>index.php/User_Authentication/cargar_punteros/', function(response) {
-		var lista = response;
-		//$('#lista').val(response);
-		//~ alert(lista);
-		//var obj = jQuery.parseJSON(lista); 
-		$('#world-map-markers').vectorMap({
-				map              : 'world_mill_en',
-				normalizeFunction: 'polynomial',
-				hoverOpacity     : 0.9,
-				hoverColor       : false,
-				backgroundColor  : '#001A5A',
-				regionStyle      : {
-				  initial      : {
-					fill            : '#A3A3A5',
-					'fill-opacity'  : 10,
-					stroke          : 'none',
-					'stroke-width'  : 0,
-					'stroke-opacity': 1
-				  },
-				  hover        : {
-					'fill-opacity': 0.7,
-					cursor        : 'pointer'
-				  },
-				  selected     : {
-					fill: 'blu'
-				  },
-				  selectedHover: {}
-				},
-				markerStyle      : {
-				  initial: {
-					fill  : 'red',
-					stroke: '#111'
-				  }
-				},
-				markers          : response
-		});
+	$(document).ready(function () {
 		
-	}, 'json');
-	//var lista = $("#lista").val();
-	//alert(lista);
+		// Ejecutamos la captura de la localización
+		getLocation();
+		
+		// Registramos las coordenadas capturadas si el usuario logueado es de tipo BÁSICO
+		if($('#id_user').val().trim() == "BÁSICO"){
+			//~ alert("Usuario básico");
+			$.post('<?php echo base_url(); ?>index.php/User_Authentication/registrar_coord/', {'latitud':$('#latitud').val(), 'longitud':$('#longitud').val()}, function(response) {
+				
+			});
+		}
+		
+		// Generamos los punteros
+		$.post('<?php echo base_url(); ?>index.php/User_Authentication/cargar_punteros/', function(response) {
+			var lista = response;
+			//$('#lista').val(response);
+			//~ alert(lista);
+			//var obj = jQuery.parseJSON(lista); 
+			$('#world-map-markers').vectorMap({
+					map              : 'world_mill_en',
+					normalizeFunction: 'polynomial',
+					hoverOpacity     : 0.9,
+					hoverColor       : false,
+					backgroundColor  : '#001A5A',
+					regionStyle      : {
+					  initial      : {
+						fill            : '#A3A3A5',
+						'fill-opacity'  : 10,
+						stroke          : 'none',
+						'stroke-width'  : 0,
+						'stroke-opacity': 1
+					  },
+					  hover        : {
+						'fill-opacity': 0.7,
+						cursor        : 'pointer'
+					  },
+					  selected     : {
+						fill: 'blu'
+					  },
+					  selectedHover: {}
+					},
+					markerStyle      : {
+					  initial: {
+						fill  : 'red',
+						stroke: '#111'
+					  }
+					},
+					markers          : response
+			});
+			
+		}, 'json');
+		//var lista = $("#lista").val();
+		//alert(lista);
+		
+	});
 	
 	var x = document.getElementById("demo");
 	
@@ -100,13 +119,13 @@
 	}
 	
 	function showPosition(position) {
-		latitud = (position.coords.latitude);
-		longitud = (position.coords.longitude);
-
-		x.innerHTML = "Latitude: " + latitud + 
-		"<br>Longitude: " + longitud;
+		//~ latitud = (position.coords.latitude);
+		//~ longitud = (position.coords.longitude);
+//~ 
+		//~ x.innerHTML = "Latitude: " + latitud + 
+		//~ "<br>Longitude: " + longitud;
 		$('#latitud').val(position.coords.latitude);
 		$('#longitud').val(position.coords.longitude);
 	}
-  
+	  
   </script>

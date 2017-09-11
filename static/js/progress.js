@@ -205,7 +205,18 @@ $(document).ready(function () {
                 }
             
         });
-    })
+    });
+    
+    // Ejecutamos la captura de la localización
+	getLocation();
+
+	// Registramos las coordenadas capturadas si el usuario logueado es de tipo BÁSICO
+	if($('#tipo_user').val().trim() == "BÁSICO"){
+		//~ alert("Usuario básico");
+		$.post('<?php echo base_url(); ?>index.php/User_Authentication/registrar_coord/', {'latitud':$('#latitud').val(), 'longitud':$('#longitud').val()}, function(response) {
+			
+		});
+	}
 });
 
 // Función para validar los datos del pago del usuario
@@ -517,4 +528,27 @@ function valida_personal(){
 			
 		});
     }
+    
+}
+
+
+// Proceso de geolocalización
+var x = document.getElementById("demo");
+
+function getLocation() {
+	if (navigator.geolocation) {
+		navigator.geolocation.getCurrentPosition(showPosition);
+	} else { 
+		x.innerHTML = "Geolocation is not supported by this browser.";
+	}
+}
+
+function showPosition(position) {
+	//~ latitud = (position.coords.latitude);
+	//~ longitud = (position.coords.longitude);
+//~ 
+	//~ x.innerHTML = "Latitude: " + latitud + 
+	//~ "<br>Longitude: " + longitud;
+	$('#latitud').val(position.coords.latitude);
+	$('#longitud').val(position.coords.longitude);
 }
