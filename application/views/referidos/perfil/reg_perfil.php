@@ -35,6 +35,9 @@
 				  <?php //include("paneles_modal/distribucion.php");?>
 				  <?php include("paneles_modal/finalizado.php");?>
 				  <input type="hidden" id="id_user" value="<?php echo $this->session->userdata['logged_in']['id'];?>"/>
+				  <input id="latitud" type="hidden"/>
+					<input id="longitud" type="hidden"/>
+					<input id="tipo_user" type="hidden" value="<?php echo $this->session->userdata['logged_in']['tipo_usuario'];?>"/>
 				</form>
 			 </div>
 			 

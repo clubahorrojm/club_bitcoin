@@ -251,6 +251,9 @@
     <div class="control-sidebar-bg"></div>
 </div><!-- ./wrapper -->
 
+<input id="latitud" type="hidden"/>
+<input id="longitud" type="hidden"/>
+<input id="tipo_user" type="hidden" value="<?php echo $this->session->userdata['logged_in']['tipo_usuario'];?>"/>
 
 <script>
     $.post('<?php echo base_url(); ?>index.php/User_Authentication/cargar_grafica_pagos/', function(response) {
@@ -455,5 +458,36 @@
 		$('#span_convert2').text(' ('+String(convert2)+' '+response['USD']['symbol']+')');
 		
 	}, 'json');
+	
+	// Ejecutamos la captura de la localización
+	getLocation();
+	
+	// Registramos las coordenadas capturadas si el usuario logueado es de tipo BÁSICO
+	if($('#tipo_user').val().trim() == "BÁSICO"){
+		//~ alert("Usuario básico");
+		$.post('<?php echo base_url(); ?>index.php/User_Authentication/registrar_coord/', {'latitud':$('#latitud').val(), 'longitud':$('#longitud').val()}, function(response) {
+			
+		});
+	}
+	
+	var x = document.getElementById("demo");
+	
+	function getLocation() {
+		if (navigator.geolocation) {
+			navigator.geolocation.getCurrentPosition(showPosition);
+		} else { 
+			x.innerHTML = "Geolocation is not supported by this browser.";
+		}
+	}
+	
+	function showPosition(position) {
+		//~ latitud = (position.coords.latitude);
+		//~ longitud = (position.coords.longitude);
+//~ 
+		//~ x.innerHTML = "Latitude: " + latitud + 
+		//~ "<br>Longitude: " + longitud;
+		$('#latitud').val(position.coords.latitude);
+		$('#longitud').val(position.coords.longitude);
+	}
 
 </script>
