@@ -364,3 +364,13 @@ CAMBIOS AL 08-09-2017 2(José):
 			+ User_Authentication.php, (Se corrigió el método de registrar_referido())
 		- Actualización de Modelo:
 			+ MMails.php (Se comentó un print de debugger innecesario)
+
+CAMBIOS AL 11-09-2017 (José):
+		- Actualización de View: 
+			+ views/admin_page.php, views/referidos/perfil/perfil.php, views/referidos/perfil/reg_perfil.php
+		- Actualizacion de Controlador
+			+ User_Authentication.php, 
+		- Actualización de Modelo:
+			+ models/usuarios/Usuarios_model.php
+		- Actualización de archivo de validaciones:
+			+ static/js/progress.js
