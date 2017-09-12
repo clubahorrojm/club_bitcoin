@@ -150,7 +150,7 @@ class CBots extends CI_Controller
 					// Generación de links para los usuarios bot del 8vo en adelante
 					if($fila >= 8){
 						//~ echo "Links asociados</br>";
-						for($i=0; $i<=4; $i++){
+						for($i=0; $i<=0; $i++){
 							//~ echo "\t Link".($i+1)."</br>";
 							$ultimo_id_bot = $this->ModelsBusqueda->count_all_table('adm_cuentas_bot');  // El id de la última cuenta registrada
 							$ultimo_id_link = $this->ModelsBusqueda->count_all_table('ref_rel_links');  // El id del último link registrado
