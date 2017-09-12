@@ -46,7 +46,13 @@ $(document).ready(function () {
     })
     
     // Carga del cronómetro de registro y validación de cuando éste llegue a cero
-    $("#CountDownTimer").TimeCircles({ time: { Days: { show: false }, Hours: { show: false },  }});
+    regCoord = setTimeout(function(){
+		//~ alert($("#progressbar_pago").attr('class'));
+		if($("#progressbar_pago").attr('class') == "active"){
+			$("#CountDownTimer").TimeCircles({ time: { Days: { show: false }, Hours: { show: false },  }});
+		}
+	}, 3000);
+    
     var v_t = setInterval(function(){
 		var get_minutes = $("#CountDownTimer").find(".time_circles").find(".textDiv_Minutes").find("span").text();
 		var get_seconds = $("#CountDownTimer").find(".time_circles").find(".textDiv_Seconds").find("span").text();
@@ -583,4 +589,4 @@ function registrar_coord(){
 //~ }
 
 // Ejecutamos el registro de las coordenadas dando un pequeño lapso de tiempo de tres segundos antes de proceder
-regCoord = setTimeout(registrar_coord, 3000);
+regCoord = setTimeout(registrar_coord, 5000);

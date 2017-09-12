@@ -1,7 +1,6 @@
-<h3>Recuerde tiene 90 segundos para registrar su pago</h3>
-<center><div id="CountDownTimer" class="text-center" data-timer="90" style="width: 300px; height: 100px;align:center;"></div></center>
-
 <fieldset id="fieldset_pago" style="display:block">
+	<h3>Recuerde tiene 90 segundos para registrar su pago</h3>
+	<center><div id="CountDownTimer" data-timer="90" style="width: 300px; height: 100px;"></div></center>
 	<h2 class="fs-title">Información del pago</h2>
 	<!--<h3 class="fs-subtitle">Indica los datos de tu pago</h3>-->
 	<h3 class="fs-subtitle">( Usted debe realizar el pago a la dirección de nuestra empresa: <span style="color:#296293;"><?php $direccion = $monedero_emp->monedero; echo $direccion; ?></span> )</h3>
