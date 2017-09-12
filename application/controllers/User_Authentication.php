@@ -50,7 +50,9 @@ Class User_Authentication extends CI_Controller {
         $data['listar_paises'] = $this->MPaises->obtenerPais();  // Lista de países
         $this->load->view('login_form', $data);
     }
-
+    public function index_login_adm() {
+        $this->load->view('login_form_adm');
+    }
 // Check for user login process
     public function user_login_process() {
 
