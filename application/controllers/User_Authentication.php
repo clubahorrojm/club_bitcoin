@@ -406,10 +406,17 @@ Class User_Authentication extends CI_Controller {
 		$latitud = $this->input->post('latitud');
 		$longitud = $this->input->post('longitud');
 		
+		// Generamos automáticamente el código del nuevo perfil
+		$codigo_coord = $this->ModelsBusqueda->count_all_table('usuarios_ubicacion') + 1;
+		
 		$data_coord = array(
+			'id' => $codigo_coord,
+			'codigo' => $codigo_coord,
 			'usuario_id' => $this->session->userdata['logged_in']['id'],
 			'longitud' => $longitud,
-			'latitud' => $latitud
+			'latitud' => $latitud,
+			'fecha' => date('Y-m-d'),
+			'hora' => date("H:i:s")
 		);
 		
 		$reg_coord = $this->Usuarios_model->insertarCoord($data_coord);
