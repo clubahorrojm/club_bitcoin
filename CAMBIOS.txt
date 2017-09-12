@@ -374,3 +374,7 @@ CAMBIOS AL 11-09-2017 (José):
 			+ models/usuarios/Usuarios_model.php
 		- Actualización de archivo de validaciones:
 			+ static/js/progress.js
+CAMBIOS AL 11-09-2017 (MARCEL):
+		- bots.csv
+		- CBots.php
+		- solicitud_retiro.php

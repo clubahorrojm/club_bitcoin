@@ -43,8 +43,6 @@ if ($tipouser == 'Administrador') {
                     <div class="col-xs-7">
                         <div class="box box-primary">
                             <div class="box-body">
-                                <h2>Recuerde tiene 90 segundos para registrar su pago</h2>
-                                <div id="CountDownTimer" data-timer="90" style="width: 500px; height: 125px;"></div>
                                 <div class="text-left">
                                     <legend><H4  style="color:#3C8DBC">Solicitud de retiro</H4></legend>
                                 </div>
@@ -207,7 +205,7 @@ if ($tipouser == 'Administrador') {
 
 
 <script>
-    $("#CountDownTimer").TimeCircles({ time: { Days: { show: false }, Hours: { show: false },  }});
+
     var Tusuarios = $('#tab_rel_retiros').dataTable({
         "paging": true,
         "lengthChange": false,
@@ -285,9 +283,14 @@ if ($tipouser == 'Administrador') {
 		$('#precio_bitcoin').text(convert3.toFixed(6)+' BTC');
 	}, 'json');
 
-    var sum_retiros = $("#sum_retiros").val();
+    if($("#sum_retiros").val() == ''){
+        sum_retiros = 0;
+    }else{
+        sum_retiros = $("#sum_retiros").val();
+    }
     var max_disp_retiro =  $("#max_disp_retiro").val();
     var resto = parseFloat(max_disp_retiro) - parseFloat(sum_retiros);
+    alert (sum_retiros);
     var pieData = [
         {
             value: sum_retiros,
