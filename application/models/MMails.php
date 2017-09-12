@@ -322,7 +322,7 @@ class MMails extends CI_Model {
 						  <table border="0" cellpadding="0" cellspacing="0" style="border-collapse:separate;mso-table-lspace:0pt;mso-table-rspace:0pt;width:100%;">
 							<tr>
 							  <td>
-								<img src="'.static_url().'img/logo2.jpg" alt="No se pudo mostrar" width="80px;" height="50px;">
+								<img src="'.static_url().'static/img/circulo-01.png" alt="No se pudo mostrar" width="80px;" height="50px;">
 							  </td>
 							</tr>
 							<tr>
