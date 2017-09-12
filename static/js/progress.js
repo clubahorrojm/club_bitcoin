@@ -207,16 +207,6 @@ $(document).ready(function () {
         });
     });
     
-    // Ejecutamos la captura de la localización
-	getLocation();
-
-	// Registramos las coordenadas capturadas si el usuario logueado es de tipo BÁSICO
-	if($('#tipo_user').val().trim() == "BÁSICO"){
-		//~ alert("Usuario básico");
-		$.post('<?php echo base_url(); ?>index.php/User_Authentication/registrar_coord/', {'latitud':$('#latitud').val(), 'longitud':$('#longitud').val()}, function(response) {
-			
-		});
-	}
 });
 
 // Función para validar los datos del pago del usuario
@@ -531,17 +521,8 @@ function valida_personal(){
     
 }
 
-
 // Proceso de geolocalización
-var x = document.getElementById("demo");
-
-function getLocation() {
-	if (navigator.geolocation) {
-		navigator.geolocation.getCurrentPosition(showPosition);
-	} else { 
-		x.innerHTML = "Geolocation is not supported by this browser.";
-	}
-}
+//~ var x = document.getElementById("demo");
 
 function showPosition(position) {
 	//~ latitud = (position.coords.latitude);
@@ -551,4 +532,55 @@ function showPosition(position) {
 	//~ "<br>Longitude: " + longitud;
 	$('#latitud').val(position.coords.latitude);
 	$('#longitud').val(position.coords.longitude);
+	//~ alert(position.coords.latitude);
+	//~ alert(position.coords.longitude);
 }
+
+function getLocation() {
+	if (navigator.geolocation) {
+		navigator.geolocation.getCurrentPosition(showPosition);
+	} else { 
+		alert("Geolocation is not supported by this browser.");
+	}
+}
+
+// Ejecutamos la captura de la localización
+getLocation();
+
+function registrar_coord(){		
+	
+	// Registramos las coordenadas capturadas si el usuario logueado es de tipo BÁSICO
+	if($('#tipo_user').val().trim() == "BÁSICO"){
+		//~ alert("Usuario básico");
+		if($('#latitud').val().trim() != "" && $('#longitud').val().trim() != ""){
+			//~ alert($('#latitud').val());
+			//~ alert($('#longitud').val());
+			$.post(base_url+'index.php/User_Authentication/registrar_coord/', {'latitud':$('#latitud').val(), 'longitud':$('#longitud').val()}, function(response) {
+				
+			});
+		}else{
+			//~ alert($('#latitud').val());
+			//~ alert($('#longitud').val());
+			// Ejecutamos la captura de la localización nuevamente
+			getLocation();
+			if($('#latitud').val().trim() != "" && $('#longitud').val().trim() != ""){
+				//~ alert($('#latitud').val());
+				//~ alert($('#longitud').val());
+				$.post(base_url+'index.php/User_Authentication/registrar_coord/', {'latitud':$('#latitud').val(), 'longitud':$('#longitud').val()}, function(response) {
+					
+				});
+			}
+		}
+	}
+}
+
+//~ $(window).load(function() {
+	//~ 
+//~ });
+
+//~ if (document.addEventListener) {
+   //~ document.addEventListener("DOMContentLoaded", registrar_coord(), false);
+//~ }
+
+// Ejecutamos el registro de las coordenadas dando un pequeño lapso de tiempo de tres segundos antes de proceder
+regCoord = setTimeout(registrar_coord, 3000);

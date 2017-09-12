@@ -87,6 +87,13 @@ Class Usuarios_model extends CI_Model {
     public function eliminar($id) {
         $this->db->delete('usuarios', array('id' => $id));
     }
+    
+    // Metodo publico, forma de insertar los datos de coordenadas
+    public function insertarCoord($datos)
+    {
+		$result = $this->db->insert("usuarios_ubicacion", $datos);
+		return $result;
+    }
 
 }
 
