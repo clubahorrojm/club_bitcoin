@@ -340,7 +340,7 @@
         };
         // Create the line chart
         salesChart.Line(salesChartData, salesChartOptions);
-    });
+    }, 'json');
     
     
     // Show the Modal on load
