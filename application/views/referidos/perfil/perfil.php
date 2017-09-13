@@ -80,16 +80,16 @@
                                         <div class="col-md-1"> </div><!-- /.form-group -->
                                         <div class="col-md-5">
                                             <br><br>
-                                            <div class="small-box" style="background-color: #C9B72E">
+                                            <div class="small-box" style="background-color: #C3B01C">
                                                 <div >
                                                   <span style="color: white; font-size: 150%">MÁXIMO A COBRAR</span>
                                                 </div>
                                                 <div class="text-right" >
-                                                    <img class="img-circle" src="<?= base_url() ?>static/img/maximo-01.png" style="width: 25%;" />
+                                                    <img  src="<?= base_url() ?>static/img/perfil/maximo.png" style="width: 25%;" />
                                                 </div>
                                                 <div >
                                                     <div class="col-md-6 text-left" style="background-color: #47411D; ">
-                                                        <span style="font-weight:bold;color: white">BIT <?php echo number_format($editar[0]->maximo, 2, ',', '.')?></span>
+                                                        <span style="font-weight:bold;color: white" id="span_convert1">&nbsp</span>
                                                     </div><!-- /.form-group -->
                                                     <div class="col-md-6 text-right" style="background-color: #47411D; ">
                                                         <span style="font-weight:bold;color: white"><?php echo number_format($editar[0]->maximo, 2, ',', '.')?> $</span>
@@ -99,16 +99,16 @@
                                         </div><!-- /.form-group -->
                                         <div class="col-md-5">
                                             <br><br>
-                                            <div class="small-box" style="background-color: #22274b">
+                                            <div class="small-box" style="background-color: #001A5A">
                                                 <div >
                                                   <span style="color: white; font-size: 150%">DISPONIBLE</span>
                                                 </div>
                                                 <div class="text-right" >
-                                                    <img class="img-circle" src="<?= base_url() ?>static/img/disponible-01.png" style="width: 25%;" />
+                                                    <img  src="<?= base_url() ?>static/img/perfil/disponible.png" style="width: 25%;" />
                                                 </div>
                                                 <div >
                                                     <div class="col-md-6 text-left" style="background-color: #000000; ">
-                                                        <span style="font-weight:bold;color: white">BIT <?php echo number_format($editar[0]->disponible, 2, ',', '.')?></span>
+                                                        <span style="font-weight:bold;color: white" id="span_convert2" >&nbsp</span>
                                                     </div><!-- /.form-group -->
                                                     <div class="col-md-6 text-right" style="background-color: #000000; ">
                                                         <span style="font-weight:bold;color: white"><?php echo number_format($editar[0]->disponible, 2, ',', '.')?> $</span>
@@ -443,19 +443,16 @@
 	
 	// Soporte para tipos de cambio sobre bitcoins (dólares en este caso) usando la api de blockchain Exchange Rates API
 	$.post('https://blockchain.info/ticker', function (response) {
-		//~ alert(response['USD']['last']);
-		//~ alert(response['USD']['symbol']);
-		//~ $.each(response, function (i) {
-			//~ $('#span_phone').text(response[i]['phone']);
-			//~ $('#span_cellphone').text(response[i]['cell_phone']);
-			//~ alert(response[i]);
-		//~ });
-		var convert1, conver2;
+        convert3 = parseFloat(disponible) / parseFloat(response['USD']['last']);
+        //aler(convert3);
+		$('#precio_bitcoin').text(convert3.toFixed(6)+' BTC');
+		//var convert1, conver2;
 		
-		convert1 = parseFloat($('#convert1').val())*parseFloat(response['USD']['last']);
-		convert2 = parseFloat($('#convert2').val())*parseFloat(response['USD']['last']);
-		$('#span_convert1').text(' ('+String(convert1)+' '+response['USD']['symbol']+')');
-		$('#span_convert2').text(' ('+String(convert2)+' '+response['USD']['symbol']+')');
+		convert1 = parseFloat($('#convert1').val())/parseFloat(response['USD']['last']);
+		convert2 = parseFloat($('#convert2').val())/parseFloat(response['USD']['last']);
+		$('#span_convert1').text(convert1.toFixed(6)+' BTC');
+        $('#span_convert2').text(convert2.toFixed(6)+' BTC');
+
 		
 	}, 'json');
 	

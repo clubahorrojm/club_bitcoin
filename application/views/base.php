@@ -158,7 +158,7 @@ if (isset($this->session->userdata['logged_in'])) {
 														<li ><!-- ###############  NOTIFICACION DE PAGO #############-->
 															<a href="#" >
 																<div class="pull-left">
-																	<img src="<?php echo base_url(); ?>static/img/bolsa-de-dinero-01.png" style="background-color: #22274b" class="img-circle" alt="User Image">
+																	<img src="<?php echo base_url(); ?>static/img/menu_usuario/pago.png" style="background-color: #22274b" class="img-circle" alt="User Image">
 																</div>
 																<h4>
 																	Pago de referido
@@ -171,7 +171,7 @@ if (isset($this->session->userdata['logged_in'])) {
 														<li><!-- ###############  NOTIFICACION DE RETIRO ############# -->
 															<a href="<?php echo base_url(); ?>index.php/referidos/CRelRetiros/" >
 																<div class="pull-left">
-																	<img src="<?php echo base_url(); ?>static/img/retiro-01.png" style="background-color: #FF5C00" class="img-circle" alt="User Image">
+																	<img src="<?php echo base_url(); ?>static/img/menu_usuario/retiros.png" style="background-color: #FF5C00" class="img-circle" alt="User Image">
 																</div>
 																<h4>
 																	Retiro canalizado
@@ -184,7 +184,7 @@ if (isset($this->session->userdata['logged_in'])) {
 														<li><!-- ###############  NOTIFICACION DE Soporte a usuario ############# -->
 															<a href="<?php echo base_url(); ?>index.php/referidos/CRelAyudas/" >
 																<div class="pull-left">
-																	<img src="<?php echo base_url(); ?>static/img/link-de-invitados-01.png" style="background-color: #edd727" class="img-circle" alt="User Image">
+																	<img src="<?php echo base_url(); ?>static/img/menu_usuario/invitados.png" style="background-color: #edd727" class="img-circle" alt="User Image">
 																</div>
 																<h4>
 																	Soporte a usuario
@@ -197,7 +197,7 @@ if (isset($this->session->userdata['logged_in'])) {
 														<li><!-- ###############  NOTIFICACION DE NUEVO NIVEL ############# -->
 															<a href="#" >
 																<div class="pull-left">
-																	<img src="<?php echo base_url(); ?>static/img/ranking-01.png" style="background-color: #37BA16" class="img-circle" alt="User Image">
+																	<img src="<?php echo base_url(); ?>static/img/menu_usuario/ranking.png" style="background-color: #37BA16" class="img-circle" alt="User Image">
 																</div>
 																<h4>
 																	Nuevo nivel alcanzado
