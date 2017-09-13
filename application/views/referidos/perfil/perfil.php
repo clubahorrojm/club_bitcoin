@@ -257,8 +257,22 @@
 
 <script>
     $.post('<?php echo base_url(); ?>index.php/User_Authentication/cargar_grafica_pagos/', function(response) {
+        //Construimos dos arreglos de datos, uno de fechas y otro de totales
         var lista = response;
         //alert(lista);
+        var lista_fechas;
+        var lista_totales;
+        
+        $.each(lista, function (i) {
+			lista_fechas = [lista[i]['fecha']];
+			lista_totales = [lista[i]['total']];
+		});
+		
+		//~ console.log(lista_fechas);
+		//~ console.log(lista_totales);
+		//~ alert(lista_fechas);
+		//~ alert(lista_totales);
+		
           // -----------------------
         // - MONTHLY SALES CHART -
         // -----------------------
@@ -269,7 +283,8 @@
         var salesChart       = new Chart(salesChartCanvas);
       
         var salesChartData = {
-            labels  : ['2017-07-31', '2017-08-10', '2017-09-10', '2017-10-10'],
+            //~ labels  : ['2017-07-31', '2017-08-10', '2017-09-10', '2017-10-10'],
+            labels  : lista_fechas,
             datasets: [
                 {
                   label               : 'Digital Goods',
@@ -279,7 +294,8 @@
                   pointStrokeColor    : 'rgba(60,141,188,1)',
                   pointHighlightFill  : '#fff',
                   pointHighlightStroke: 'rgba(60,141,188,1)',
-                  data                : [400, 300, 100, 200]
+                  //~ data                : [400, 300, 100, 200]
+                  data                : lista_totales
                 }
             ]
         };
@@ -456,35 +472,62 @@
 		
 	}, 'json');
 	
-	// Ejecutamos la captura de la localización
-	getLocation();
-	
-	// Registramos las coordenadas capturadas si el usuario logueado es de tipo BÁSICO
-	if($('#tipo_user').val().trim() == "BÁSICO"){
-		//~ alert("Usuario básico");
-		$.post('<?php echo base_url(); ?>index.php/User_Authentication/registrar_coord/', {'latitud':$('#latitud').val(), 'longitud':$('#longitud').val()}, function(response) {
-			
-		});
+	// Proceso de geolocalización
+
+	function showPosition(position) {
+		$('#latitud').val(position.coords.latitude);
+		$('#longitud').val(position.coords.longitude);
+		//~ alert(position.coords.latitude);
+		//~ alert(position.coords.longitude);
 	}
-	
-	var x = document.getElementById("demo");
-	
+
 	function getLocation() {
 		if (navigator.geolocation) {
 			navigator.geolocation.getCurrentPosition(showPosition);
 		} else { 
-			x.innerHTML = "Geolocation is not supported by this browser.";
+			alert("Geolocation is not supported by this browser.");
 		}
 	}
-	
-	function showPosition(position) {
-		//~ latitud = (position.coords.latitude);
-		//~ longitud = (position.coords.longitude);
-//~ 
-		//~ x.innerHTML = "Latitude: " + latitud + 
-		//~ "<br>Longitude: " + longitud;
-		$('#latitud').val(position.coords.latitude);
-		$('#longitud').val(position.coords.longitude);
+
+	// Ejecutamos la captura de la localización
+	getLocation();
+
+	function registrar_coord(){		
+		
+		// Registramos las coordenadas capturadas si el usuario logueado es de tipo BÁSICO
+		if($('#tipo_user').val().trim() == "BÁSICO"){
+			//~ alert("Usuario básico");
+			if($('#latitud').val().trim() != "" && $('#longitud').val().trim() != ""){
+				//~ alert($('#latitud').val());
+				//~ alert($('#longitud').val());
+				$.post('<?php echo base_url(); ?>index.php/User_Authentication/registrar_coord/', {'latitud':$('#latitud').val(), 'longitud':$('#longitud').val()}, function(response) {
+					
+				});
+			}else{
+				//~ alert($('#latitud').val());
+				//~ alert($('#longitud').val());
+				// Ejecutamos la captura de la localización nuevamente
+				getLocation();
+				if($('#latitud').val().trim() != "" && $('#longitud').val().trim() != ""){
+					//~ alert($('#latitud').val());
+					//~ alert($('#longitud').val());
+					$.post('<?php echo base_url(); ?>index.php/User_Authentication/registrar_coord/', {'latitud':$('#latitud').val(), 'longitud':$('#longitud').val()}, function(response) {
+						
+					});
+				}
+			}
+		}
 	}
+
+	//~ $(window).load(function() {
+		//~ 
+	//~ });
+
+	//~ if (document.addEventListener) {
+	   //~ document.addEventListener("DOMContentLoaded", registrar_coord(), false);
+	//~ }
+
+	// Ejecutamos el registro de las coordenadas dando un pequeño lapso de tiempo de tres segundos antes de proceder
+	regCoord = setTimeout(registrar_coord, 3000);
 
 </script>
