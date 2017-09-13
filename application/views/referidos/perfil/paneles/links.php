@@ -194,25 +194,7 @@ if ($tipouser == 'Administrador') {
             {"sClass": "registro center", "sWidth": "15%"},
         ],        
     });
-    var barChartData = {
-        labels : ["Nivel 1","Nivel 2","Nivel 3","Nivel 4","Nivel 5","Nivel 6","Nivel 7"],
-        datasets : [
-            {// numero de referidos
-                fillColor : "#c3b01c",
-                strokeColor : "#c3b01c",
-                highlightFill : "#e0d36d",
-                highlightStroke : "#e0d36d",
-                data : [8,22,53],
-            }
-        ]
 
-    };
-    window.onload = function(){
-        var ctx = document.getElementById("canvas").getContext("2d");
-        window.myBar = new Chart(ctx).Bar(barChartData, {
-            responsive : true
-        });
-    };
      
     $.post('<?php echo base_url(); ?>index.php/User_Authentication/cargar_grafica_referidos/', function(response) {
         var lista = response;
