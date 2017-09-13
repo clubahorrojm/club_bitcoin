@@ -290,7 +290,7 @@ if ($tipouser == 'Administrador') {
     }
     var max_disp_retiro =  $("#max_disp_retiro").val();
     var resto = parseFloat(max_disp_retiro) - parseFloat(sum_retiros);
-    alert (sum_retiros);
+    //alert (sum_retiros);
     var pieData = [
         {
             value: sum_retiros,
