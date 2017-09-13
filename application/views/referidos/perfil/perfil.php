@@ -119,8 +119,8 @@
                                         <div class="col-md-1"> </div><!-- /.form-group -->
                                         <div class="col-md-6"> </div><!-- /.form-group -->
                                         <div class="col-md-5">
-                                            <br><span style="font-weight:bold;color: #001A5A">Comprobante de Aporte</span>
-                                            <img src="<?= base_url() ?>static/img/reporte.png" style="width: 15%;" />
+                                            <br><a id="recibo_pago" ><span style="font-weight:bold;color: #001A5A">Comprobante de Aporte</span>
+                                            <img src="<?= base_url() ?>static/img/reporte.png" style="width: 15%;" /></a>
                                         </div><!-- /.form-group -->
                                         <div class="col-md-1">
                                             
@@ -439,7 +439,13 @@
             $(this).parent('div').removeClass('has-error');
         }
     });
-
+	$("#recibo_pago").click(function (e) {
+        e.preventDefault();  // Para evitar que se envíe por defecto
+        // pk_perfil = $('#id').val()
+        // alert(pk_perfil)
+        URL = '<?php echo base_url(); ?>index.php/referidos/CRelPagos/pdf_recibo_pago/';
+            $.fancybox.open({ padding : 0, href: URL, type: 'iframe',width: 1024, height: 520});
+    });
     
     $("#res_pagos").click(function (e) {
         e.preventDefault();  // Para evitar que se envíe por defecto
