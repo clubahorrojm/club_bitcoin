@@ -374,7 +374,7 @@ Class User_Authentication extends CI_Controller {
 			// Armamos el registro
 			//$latLng[0] = $lgt;
 			//$latLng[1] = $ltd;
-			$reg['fecha'] = $fecha;
+			$reg['fecha'] = trim($fecha);
 			$reg['total'] = $total;
 			
 			// Listamos el registro
@@ -383,6 +383,7 @@ Class User_Authentication extends CI_Controller {
 		echo json_encode($lista_regs);
 		//echo json_encode($lista_cant_pagos);
     }
+    
 	function cargar_grafica_referidos(){
 		$cod_user = $this->session->userdata['logged_in']['id'];
         $resultado = $this->MRelNivel->obtener_grafica_tiempo_niveles($cod_user);
