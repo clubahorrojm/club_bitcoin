@@ -50,13 +50,17 @@
         <link rel="stylesheet" type="text/css" href="<?= base_url() ?>static/css/apprise.css"/>
         <link rel="stylesheet" type="text/css" href="<?= base_url() ?>static/css/estilo.css"/>
 
+		<link rel="stylesheet" type="text/css" href="<?= base_url() ?>static/css/AdminLTE.min.css"/>
+		
 
         <link rel="stylesheet" type="text/css" href="<?php echo base_url('static/css/style.css'); ?>">
 		<!-- Jquery numeric -->
         <script src="<?= base_url() ?>static/js/jquery.numeric.js"></script>  
         <!-- Jquery alphanumeric -->
         <script src="<?= base_url() ?>static/js/jquery.alphanumeric.js"></script>
-		<script src="<?= base_url() ?>static/js/bootbox.js"></script>  
+		<script src="<?= base_url() ?>static/js/bootbox.js"></script>
+		
+		
 		<script>
 			$(document).ready(function () {
 
@@ -254,7 +258,7 @@
 		</style>
 		
     </head>
-    <body>
+    <body >
 
 		<!--<div align="center">
             <img src="<?= base_url() ?>static/img/TOPE-SISTEM-ADMIN-003.jpg" style="width: 100%;"/>
@@ -292,38 +296,66 @@
         ?>
                  
 
-		<div class="wrapper">
+		<div class="wrapper" >
 							 
 			
-			<div class="container">
+			<div class="container" style="margin-top: -3%">
 				<?php echo form_open(''); ?>
 				</form>
-
-				<h2 style="color: #edd727; font-weight: bold" >DONDE TÚ PARTICIPACIÓN ES LA MEJOR OPCIÓN</h2>
 				
 				<?php echo form_open('User_Authentication/user_login_process'); ?>
 				<form id="frmlogin" class="form-horizontal"  method="POST" enctype="multipart/form-data" autocomplete="off" role="form">
+					<div class="login-box">
+						<!-- /.login-logo -->
+						<div  style=" background-image: url('../../static/img/login_adm/contenido.png'); background-size: 100%">
+							<br>
+							<div class="col-xs-12 text-left" ><img  src="<?= base_url() ?>static/img/login_adm/logo-01.png" style="width: 35%"/></div>
+							<center>
+								
+							</center>
+					  
+							<form action="../../index2.html" method="post" class="text-center">
+							  <div class="col-xs-1">&nbsp;</div>
+							  <div class="col-xs-10">
+								  <div class="input-group"  style="border-bottom: solid  2px ;  border-bottom-color: #513085; ">
+									  
+									  <span class="input-group-addon" style="background-color: transparent; border: none; background-image: url('../../static/img/login_adm/clave.png'); background-size: 100%; background-repeat: no-repeat"></span>
+									  <input style="background-color: transparent; border: none;" class="form-control" type="text" id="username" name="username" >
+									  
+								  </div>
+								  <br>
+								  <div class="input-group" style="border-bottom: solid  2px ;  border-bottom-color: #513085; ">
+									  <span class="input-group-addon" style="background-color: transparent; border: none; background-image: url('../../static/img/login_adm/nombre.png'); background-size: 100%; background-repeat: no-repeat"></span>
+									  <input style="background-color: transparent; border: none;" class="form-control" type="password" id="password" name="password" placeholder="">
+								  </div>
+								  <br>
+								  <button type="submit" class="btn-sm  btn-block btn-flat" id="submit" name="submit" style="width: 45%; background-color: #001a5a; color: white; font-weight: bold  ">INICIAR SESIÓN</button>
+								  <br>
+								  <a href="#" style="color: white">¿SE TE OLVIDÓ TU CONTRASEÑA?</a><br>
+								  
+							  </div>
+							  <div class="col-xs-1">&nbsp;</div>
+							  <div class="row">
+								  <div class="col-xs-8"></div>
+							  </div>
+							</form>
+							  <br>		  
+						 
+						  
+						</div>
 						
-					<div class="col-lg-12">
-						<center>
-							<img style="background-color: #c0c0c0; width: 50%"  id="logo_info" class="img-circle" src="<?= base_url() ?>static/img/circulo-01.png"/>
-						</center>
-				   </div>
-					
-				   <div class="col-lg-12">
-						<br><br>
-						<center>
-						<input style="background-color: #22274b; width: 50%; color: #edd727; font-weight: bold "  type="text" id="username" name="username" placeholder="Usuario" >
-						<input style="background-color: #22274b; width: 50%; color: #edd727; font-weight: bold "  type="password" id="password" name="password" placeholder="Contraseña">
-						<button style=" background: linear-gradient(#edd727 , #998809); width:25%; font-weight: bold; color: white"  type="submit"  id="submit" name="submit" >Entrar</button>
-						<!--<button type="button" id="rec_password" name="rec_password">Rec: Clave de Acceso</button>-->
-						</br></br>
-						<button type="button" id="registrar_referido" name="registrar_referido" style=" background: linear-gradient(#edd727 , #998809); width:25%; font-weight: bold; color: white">Registrar</button>
-						<a class="text-center " id="registrarse" style="color: white;font-size:20px;font-weight:bold;cursor:pointer;text-decoration: underline" title="Usted será redirigido al área de registro">Registrate</a>
-					
-	
-						</center>
-				   </div> 
+						<div  style=" background-image: url('../../static/img/login_adm/registrar.png'); background-size: 102%; background-repeat: no-repeat">
+							<br>
+							<div class="row">
+								<a href="#" style="color: #513085; "><h3 style="font-weight: bold">REGISTRATE</h3></a><br>
+							</div>
+							<br><br>
+							
+							
+						</div>
+						<!-- /.login-box-body -->
+					  </div>
+					  <!-- /.login-box -->
 				</form>
 						
 			</div>
@@ -373,7 +405,7 @@
 							<div class="col-sm-6">
 								<input type="text" class="form-control" style="background-color: #22274b; width: 100%; color: #edd727 " id="fecha_na" name="fecha_na" placeholder="00/00/0000" autofocus="true">
 							</div>
-							</br></br></br>
+							</br></br></>
 							<div class="col-sm-6">
 								<input style="background-color: #22274b; width: 100%; color: #edd727 "  type="text" class="form-control" id="correo" name="correo" placeholder="Coreo Electrónico (*)"/>
 							</div>
@@ -382,7 +414,7 @@
 								<input type="hidden" id="link" name="link" value="<?php echo $link;?>">
 								<input type="text" class="form-control" style="background-color: #22274b; width: 100%; color: #edd727 " id="username_reg" name="username_reg" placeholder="Usuario (*)" autofocus="true">
 							</div>
-							</br></br></br>
+							</br></></br>
 							<div class="col-sm-6">
 								<input style="background-color: #22274b; width: 100%; color: #edd727 "  type="password" class="form-control" id="password_reg" name="password_reg" placeholder="Contraseña (*)"/>
 							</div>

@@ -40,14 +40,13 @@ class MRelLinks extends CI_Model {
     
     // Metodo publico, para obterner la unidad de medida por id
     public function obtenerRelLinks($id){
-        $this->db->where('usuario_id',$id);    
-        $query = $this->db->get('ref_rel_links');        
-        if($query->num_rows()>0) return $query->result();
-        else return $query->result();
+		$sql_select = "SELECT count(links) as total FROM ref_rel_links WHERE usuario_id=".$id." AND estatus = 1";
+        $query3 = $this->db->query($sql_select);
+		return $query3->result(); 
     }
 	    // Metodo publico, para obterner la unidad de medida por id
-    public function obtenerRelLink($id){
-        $this->db->where('referido_id',$id);    
+    public function obtenerDisRelLink($id){
+        $this->db->where('usuario_id',$id);    
         $query = $this->db->get('ref_rel_links');        
         if($query->num_rows()>0) return $query->result();
         else return $query->result();
