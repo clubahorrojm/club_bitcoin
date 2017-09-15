@@ -53,7 +53,14 @@ class CRelLinks extends CI_Controller
 
         $data['listar_usuarios'] = $this->Usuarios_model->obtenerUsuarios(); // Listado de usuarios
         //$data['pago'] = $this->MRelPagos->obtenerRelPagos($cod_user); // Informacion del pago de ingreso al sistema
-        $data['listar_links'] = $this->MRelLinks->obtenerLinksDisp(); // Listado de links de invitacion 
+		$disp_link = $this->MRelLinks->obtenerRelLinks($id_user); // Listado de links de invitacion
+		$val_link = $disp_link[0]->total;
+		if ($val_link > 0){
+			$data['listar_links'] = $this->MRelLinks->obtenerDisRelLink($id_user); // Listado de links de invitacion 
+		}else{
+			$data['listar_links'] = $this->MRelLinks->obtenerLinksDisp(); // Listado de links de invitacion 
+		}
+        
         $data['val_links'] = count($data['listar_links']); //Captura de numero de links generados
         $data['listar_cant_links'] = $this->MRelLinks->obtenerCantRelLinks($cod_user); // Cantidad de links ocupados por referido hijo
 
