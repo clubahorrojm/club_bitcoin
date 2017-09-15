@@ -19,7 +19,24 @@ Class Login_Database extends CI_Model {
 // Read data using username and password
     public function login($data) {
 
-        $condition = "username =" . "'" . $data['username'] . "' AND " . "password =" . "'" . $data['password'] . "' AND " . "estatus = 't'";
+        $condition = "username =" . "'" . $data['username'] . "' AND " . "password =" . "'" . $data['password'] . "' AND estatus = 't' AND tipo_usuario = '3'";
+        $this->db->select('*');
+        $this->db->from('usuarios');
+        $this->db->where($condition);
+        $this->db->limit(1);
+        $query = $this->db->get();
+
+        if ($query->num_rows() == 1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+// Read data using username and password
+    public function login_admin($data) {
+
+        $condition = "username = '".$data['username']."' AND password ='".$data['password']."' AND estatus = 't' AND tipo_usuario IN ('1','2')";
         $this->db->select('*');
         $this->db->from('usuarios');
         $this->db->where($condition);

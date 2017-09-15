@@ -327,6 +327,7 @@
 								  <div class="input-group" style="border-bottom: solid  2px ;  border-bottom-color: #513085; ">
 									  <span class="input-group-addon" style="background-color: transparent; border: none; background-image: url('../../static/img/login_adm/nombre.png'); background-size: 100%; background-repeat: no-repeat"></span>
 									  <input style="background-color: transparent; border: none;" class="form-control" type="password" id="password" name="password" placeholder="">
+									  <input style="background-color: #22274b; width: 50%; color: #edd727; font-weight: bold "  type="hidden" id="type_user" name="type_user" value="BÁSICO">
 								  </div>
 								  <br>
 								  <button type="submit" class="btn-sm  btn-block btn-flat" id="submit" name="submit" style="width: 45%; background-color: #001a5a; color: white; font-weight: bold  ">INICIAR SESIÓN</button>

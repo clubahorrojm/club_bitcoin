@@ -245,7 +245,7 @@ if (isset($this->session->userdata['logged_in'])) {
 <!--
                             <a href="<?php echo base_url(); ?>index.php/User_Authentication/logout/<?php echo $id ?>"><i class="glyphicon glyphicon-log-out"></i> Cerrar Sesión</a>
 -->
-                            <a href="<?php echo base_url(); ?>index.php/User_Authentication/logout/<?php echo $id ?>"><img src="<?php echo base_url(); ?>static/img/cerrar-sesion-01.png" style="width:20px;"> Cerrar Sesión</a>
+                            <a href="<?php echo base_url(); ?>index.php/User_Authentication/logout/<?php echo $id."?t_u=".$tipo_usuario; ?>"><img src="<?php echo base_url(); ?>static/img/cerrar-sesion-01.png" style="width:20px;"> Cerrar Sesión</a>
                         </div>
                     </div>
                     <!-- search form -->
