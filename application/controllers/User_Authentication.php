@@ -80,13 +80,20 @@ Class User_Authentication extends CI_Controller {
             }
             
         } else {
+			
+			$data = array(
+				'username' => $this->input->post('username'),
+				'password' => 'pbkdf2_sha256$12000$'.hash( "sha256", $this->input->post('password') )
+			);
+			
+			// Si los datos provienen del login básico usamos la validación que verifica si es usuario 'BÁSICO'
+			// si no, usamos la validación que verifica si es usuario 'Administrador' u 'OPERADOR'.
+            if(isset($_POST['type_user'])){
+				$result = $this->Login_database->login($data);
+			}else{
+				$result = $this->Login_database->login_admin($data);
+			}
             
-            
-            $data = array(
-                'username' => $this->input->post('username'),
-                'password' => 'pbkdf2_sha256$12000$'.hash( "sha256", $this->input->post('password') )
-            );
-            $result = $this->Login_database->login($data);
             if ($result == true) {
 
                 $username = $this->input->post('username');
@@ -141,7 +148,12 @@ Class User_Authentication extends CI_Controller {
                 $data = array(
                     'error_message' => 'Usuario y Contraseñas Invalidos'
                 );
-                $this->load->view('login_form', $data);
+                if(isset($_POST['type_user'])){
+					$this->load->view('login_form', $data);
+				}else{
+					$this->load->view('login_form_adm', $data);
+				}
+                
             }
         }
     }
@@ -156,7 +168,12 @@ Class User_Authentication extends CI_Controller {
         $this->session->unset_userdata('logged_in', $sess_array);
         $data['message_display'] = 'Sesión Cerrada con exito';
         $data['listar_paises'] = $this->MPaises->obtenerPais();  // Lista de países
-        $this->load->view('login_form', $data);
+        if($_GET['t_u'] == '3'){
+			$this->load->view('login_form', $data);
+		}else{
+			$this->load->view('login_form_adm', $data);
+		}
+        
         $param   = array(
             
                     'tabla' => '',

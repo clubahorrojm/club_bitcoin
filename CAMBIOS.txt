@@ -421,3 +421,13 @@ CAMBIOS AL 14-09-2017 (MARCEL):
 		dirección: 3ECJwvx9VgfotcUuEJMVNvmWnTGVMk179L
 		fecha: 09/07/2015
 		monto: 0.07775015
+		
+CAMBIOS AL 14-09-2017 (José):
+		- Actualización de View: 
+			+ views/base.php, views/login_form.php (Añadidos campos de tipo de usuario tanto en el formulario como en el enlace de cierre)
+		- Actualizacion de Controlador
+			+ User_Authentication.php, 
+		- Actualización de Modelo:
+			+ models/usuarios/Usuarios_model.php
+		- Actualización de archivo de configuración:
+			+ config/routes.php
