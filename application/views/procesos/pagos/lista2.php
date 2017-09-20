@@ -58,6 +58,7 @@ redirect(base_url());
                         <th style='text-align: center'>Fecha</th>
                         <th style='text-align: center'>Estatus</th>
                         <th style='text-align: center'>Validar</th>
+                        <th style='text-align: center'>Negar</th>
                       </tr>
                     </thead>
                       <tbody >    
@@ -80,6 +81,8 @@ redirect(base_url());
 											echo "<span style='color:red'>Pendiente</span>";
 										}else if($pago->estatus == 2){
 											echo "<span style='color:green'>Validado</span>";
+										}else if($pago->estatus == 3){
+											echo "<span style='color:grey'>Negado</span>";
 										}else if($pago->estatus == 0){
 											echo "<span style='color:grey'>Inhabilitado</span>";
 										}else{
@@ -92,6 +95,15 @@ redirect(base_url());
 										<input class='validar' type="checkbox" checked="checked" disabled="disabled"/>
 										<?php }else if ($pago->estatus == 1){ ?>
 										<input class='validar' id='<?php echo $pago->codigo; ?>' type="checkbox" title='Validar el pago <?php echo $pago->codigo;?>'/>
+										<?php }else if ($pago->estatus == 3){ ?>
+										<input class='validar' type="checkbox" checked="checked" disabled="disabled"/>
+										<?php } ?>
+									</td>
+									<td style='text-align: center'>
+										<?php if ($pago->estatus == 2) {?>
+										<input class='negar' type="checkbox" checked="checked" disabled="disabled"/>
+										<?php }else if ($pago->estatus == 1 || $pago->estatus == 3){ ?>
+										<input class='negar' id='<?php echo $pago->codigo; ?>' type="checkbox" title='Negar el pago <?php echo $pago->codigo;?>'/>
 										<?php } ?>
 									</td>
                                 </tr>
@@ -139,6 +151,7 @@ redirect(base_url());
             {"sClass": "registro center", "sWidth": "20%"},
             {"sClass": "registro center", "sWidth": "30%"},
             {"sClass": "registro center", "sWidth": "3%"},
+            {"sWidth": "3%", "bSortable": false, "sClass": "center sorting_false", "bSearchable": false},
             {"sWidth": "3%", "bSortable": false, "sClass": "center sorting_false", "bSearchable": false}
         ]
     });
@@ -149,18 +162,24 @@ redirect(base_url());
 	  radioClass: 'iradio_minimal-blue'
 	});
 	
+	//iCheck for checkbox and radio inputs
+	$('input[type="checkbox"].negar, input[type="radio"].negar').iCheck({
+	  checkboxClass: 'icheckbox_minimal-blue',
+	  radioClass: 'iradio_minimal-blue'
+	});
+	
 	// Función para activar/desactivar un tipo de cuenta
-	$("table#tab_pagos").on('ifChanged', 'input.validar', function (e) {
+	$("table#tab_pagos").on('ifChanged', 'input.negar', function (e) {
 	    e.preventDefault();
  
 	    var cod = this.getAttribute('id');
 	    //alert(cod)
 
-		bootbox.confirm("¿Desea validar este pago?", function(result) {
+		bootbox.confirm("¿Desea negar este pago?", function(result) {
 			if (result) {
 
-				$.post('<?php echo base_url(); ?>index.php/procesos/CLPagos/validar/' + cod, function(response) {
-					bootbox.alert("El pago fue validado exitosamente", function () {
+				$.post('<?php echo base_url(); ?>index.php/procesos/CLPagos/negar/' + cod, function(response) {
+					bootbox.alert("El pago fue negado exitosamente", function () {
 					}).on('hidden.bs.modal', function (event) {
 						location.reload();
 					});

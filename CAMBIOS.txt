@@ -422,12 +422,10 @@ CAMBIOS AL 14-09-2017 (MARCEL):
 		fecha: 09/07/2015
 		monto: 0.07775015
 		
-CAMBIOS AL 14-09-2017 (José):
+CAMBIOS AL 20-09-2017 (José):
 		- Actualización de View: 
-			+ views/base.php, views/login_form.php (Añadidos campos de tipo de usuario tanto en el formulario como en el enlace de cierre)
-		- Actualizacion de Controlador
-			+ User_Authentication.php, 
-		- Actualización de Modelo:
-			+ models/usuarios/Usuarios_model.php
-		- Actualización de archivo de configuración:
-			+ config/routes.php
+			+ procesos/pagos/lista2.php, login_form.php, referidos/perfil/paneles_modal/informacion_personal.php, referidos/perfil/paneles_modal/pagos.php, referidos/perfil/reg_perfil.php
+		- Actualizacion de Controladores
+			+ procesos/CLPagos.php, referidos/CRelInformacion.php, referidos/CRelPagos.php
+		- Actualización de archivo de validaciones js:
+			+ static/js/progress.js

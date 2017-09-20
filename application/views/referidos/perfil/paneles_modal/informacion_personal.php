@@ -18,30 +18,24 @@
 								<input type="text" placeholder="Cédula del usuario" value="<?php echo $usuario[0]->cedula ?>" maxlength="8" id="cedula" class="form-control">
 							</div><!-- /.form-group -->
 						</div><!-- /.form-group -->
-						<div class="col-md-4">
+						<!--<div class="col-md-4">
 							<div class="form-group">
 								<label style="font-weight:bold">Nombre</label>
 								<input type="text" placeholder="Nombre del usuario" value="<?php echo $usuario[0]->first_name ?>" maxlength="50" id="nombre" class="form-control" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();">
-							</div><!-- /.form-group -->
-						</div><!-- /.form-group -->
+							</div>
+						</div>
 						<div class="col-md-4">
 							<div class="form-group">
 								<label style="font-weight:bold">Apellido</label>
 								<input type="text" placeholder="Apellido del usuario" value="<?php echo $usuario[0]->last_name ?>" maxlength="50" id="apellido" class="form-control" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" >
-							</div><!-- /.form-group -->
-						</div><!-- /.form-group -->
+							</div>
+						</div>
 						<div class="col-md-8">
 							<div class="form-group">
 								<label style="font-weight:bold">Correo</label>
 								<input type="text" placeholder="Correo electrónico del usuario" value="<?php echo $usuario[0]->email ?>" maxlength="50" id="correo" class="form-control" >
-							</div><!-- /.form-group -->
-						</div><!-- /.form-group -->
-						<!--<div class="col-md-4">
-							<div class="form-group">
-								<label style="font-weight:bold">Telefono</label>
-								<input type="text" class="form-control" placeholder="(0243) 999-9999" value="<?php echo $usuario[0]->telefono ?>" id="telefono" data-inputmask='"mask": "(9999) 999-9999"' data-mask>
 							</div>
-						</div>-->
+						</div>
 						<div class="col-md-4">
 							<div class="form-group">
 								<label style="font-weight:bold">Fecha de Nacimiento</label>
@@ -51,8 +45,8 @@
 										echo $fecha;
 										}
 									?>">
-							</div><!-- /.form-group -->
-						</div><!-- /.form-group -->
+							</div>
+						</div>
 						<div class="col-md-8">
 							<div class="form-group">
 								<label style="font-weight:bold">País</label>
@@ -62,8 +56,8 @@
 										<option value="<?php echo $pais->codigo;?>"><?php echo $pais->descripcion;?></option>
 									 <?php }?> 
 								</select>
-							</div><!-- /.form-group -->
-						</div><!-- /.form-group -->
+							</div>
+						</div>
 						<div class="col-md-4">
 							<div class="form-group">
 								<label style="font-weight:bold">Llegaste a nosotros por </label>
@@ -78,8 +72,8 @@
 									<option value="7">Por Tv</option>
 									<option value="8">Youtube</option>
 								</select>
-							</div><!-- /.form-group -->
-						</div><!-- /.form-group -->
+							</div>
+						</div>-->
 						<div class="text-left col-md-12">
 							<legend><H4  style=" color:#3C8DBC">Datos de Monedero</H4></legend>
 						</div>
@@ -87,8 +81,8 @@
 							<div class="form-group">
 								<label style="font-weight:bold">Dir. Monedero Personal</label>
 								<input type="text" class="form-control" placeholder="Ej: AxYz125cdJklmn14PqRs87Vwxy54Q7YcV4" value="<?php echo $editar[0]->dir_monedero ?>" maxlength="34" id="dir_monedero_per" >
-							</div><!-- /.form-group -->
-						</div><!-- /.form-group -->
+							</div>
+						</div>
 
 						<!--<div class="col-md-4">
 							<div class="form-group">

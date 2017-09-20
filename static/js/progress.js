@@ -3,14 +3,14 @@ $(document).ready(function () {
 	base_url = $("#base_url").val();  // url base del sistema
 	user_id = $("#user_id").val();  // url base del sistema
 	
-	// Soporte para tipos de cambio sobre bitcoins (dólares en este caso) usando la api de blockchain Exchange Rates API
-	$.post('https://blockchain.info/ticker', function (response) {
-		var convert3;
-				
-		// Colocamos los valores actuales de conversión entre dólares y bitcoins y viceversa en la modal de pago
-		convert3 = 1 / parseFloat(response['USD']['last']);
-		$('#precio_bitcoin').text('1 $  =  '+convert3.toFixed(6)+' ฿    -    '+'1 ฿  =  '+parseFloat(response['USD']['last'])+' $');
-	}, 'json');
+	//~ // Soporte para tipos de cambio sobre bitcoins (dólares en este caso) usando la api de blockchain Exchange Rates API
+	//~ $.post('https://blockchain.info/ticker', function (response) {
+		//~ var convert3;
+				//~ 
+		//~ // Colocamos los valores actuales de conversión entre dólares y bitcoins y viceversa en la modal de pago
+		//~ convert3 = 1 / parseFloat(response['USD']['last']);
+		//~ $('#precio_bitcoin').text('1 $  =  '+convert3.toFixed(6)+' ฿    -    '+'1 ฿  =  '+parseFloat(response['USD']['last'])+' $');
+	//~ }, 'json');
 	
 	$("#modal_registrar").modal('show');
 	
@@ -45,33 +45,33 @@ $(document).ready(function () {
         autoclose: true,
     })
     
-    // Carga del cronómetro de registro y validación de cuando éste llegue a cero
-    regCoord = setTimeout(function(){
-		//~ alert($("#progressbar_pago").attr('class'));
-		if($("#progressbar_pago").attr('class') == "active"){
-			$("#CountDownTimer").TimeCircles({ time: { Days: { show: false }, Hours: { show: false },  }});
-		}
-	}, 3000);
-    
-    var v_t = setInterval(function(){
-		var get_minutes = $("#CountDownTimer").find(".time_circles").find(".textDiv_Minutes").find("span").text();
-		var get_seconds = $("#CountDownTimer").find(".time_circles").find(".textDiv_Seconds").find("span").text();
-		
-		if(get_minutes == "0" && get_seconds == "0"){
-			$("#tiempo_limite").val("alcanzado");  // Indicamos que se alcanzó el límite
-		}
-	},1000);  // Validamos el tiempo cada segundo
-	
-	var v_t2 = setInterval(function(){
-		if($("#tiempo_limite").val() == "alcanzado"){
-			clearInterval(v_t);
-			clearInterval(v_t2);
-			bootbox.alert("Se a agotado el tiempo de registro, por favor inicie sesión e intentelo nuevamente", function (){
-			}).on('hidden.bs.modal', function (event) {
-				window.location = base_url+'index.php/User_Authentication/logout/'+user_id;
-			});
-		}
-	},90000);  // Checqueamos el campo de límite de tiempo cada minuto con 30 segundos
+    //~ // Carga del cronómetro de registro y validación de cuando éste llegue a cero
+    //~ regCoord = setTimeout(function(){
+		//~ // alert($("#progressbar_pago").attr('class'));
+		//~ if($("#progressbar_pago").attr('class') == "active"){
+			//~ $("#CountDownTimer").TimeCircles({ time: { Days: { show: false }, Hours: { show: false },  }});
+		//~ }
+	//~ }, 3000);
+    //~ 
+    //~ var v_t = setInterval(function(){
+		//~ var get_minutes = $("#CountDownTimer").find(".time_circles").find(".textDiv_Minutes").find("span").text();
+		//~ var get_seconds = $("#CountDownTimer").find(".time_circles").find(".textDiv_Seconds").find("span").text();
+		//~ 
+		//~ if(get_minutes == "0" && get_seconds == "0"){
+			//~ $("#tiempo_limite").val("alcanzado");  // Indicamos que se alcanzó el límite
+		//~ }
+	//~ },1000);  // Validamos el tiempo cada segundo
+	//~ 
+	//~ var v_t2 = setInterval(function(){
+		//~ if($("#tiempo_limite").val() == "alcanzado"){
+			//~ clearInterval(v_t);
+			//~ clearInterval(v_t2);
+			//~ bootbox.alert("Se a agotado el tiempo de registro, por favor inicie sesión e intentelo nuevamente", function (){
+			//~ }).on('hidden.bs.modal', function (event) {
+				//~ window.location = base_url+'index.php/User_Authentication/logout/'+user_id;
+			//~ });
+		//~ }
+	//~ },90000);  // Checqueamos el campo de límite de tiempo cada minuto con 30 segundos
     
     // Carga de datos
     var tipo = $("#tipo_pago_id").val();
@@ -243,7 +243,7 @@ function valida_pago(){
 				$("#dir_monedero").parent('div').addClass('has-error')
 				$("#dir_monedero").focus();
 		});
-	}else if ($("#fecha_pago").val() == '') {
+	}/*else if ($("#fecha_pago").val() == '') {
 		bootbox.alert("Debe indicar la fecha de pago", function () {
 		}).on('hidden.bs.modal', function (event) {
 				$("#fecha_pago").parent('div').addClass('has-error')
@@ -255,89 +255,92 @@ function valida_pago(){
 				$("#monto").parent('div').addClass('has-error')
 				$("#monto").focus();
 		});
-	}else{
+	}*/else{
 		//~ cuenta_id = $('#cuenta_id').val()
 		//~ num_pago = $('#num_pago').val()
 		//~ tipo_pago = $('#tipo_pago').val()
 		dir_monedero = $('#dir_monedero').val()
-		fecha_pago = $('#fecha_pago').val()
-		$('#monto').prop('disabled',false);
-		monto = $('#monto').val()
+		//~ fecha_pago = $('#fecha_pago').val()
+		//~ $('#monto').prop('disabled',false);
+		//~ monto = $('#monto').val()
 		pk_perfil = $('#cod_perfil').val()
 		cod_pago = $('#cod_pago').val()
 		
-		// Inspeccionamos la dirección de la empresa para comprobar pago desde la dirección indicada por el usuario
-		var blockrAPI = "https://blockexplorer.com/api/addr/1JGQko7DZfuNqgyPkiSM6TKJBmAMCHhZL7";
-		var status, address, num_trans, search_address_paid, search_amount, search_date;
-		// Definimos dinámicamente los valores que serán indicados por parte del usuario
-		search_address_paid = dir_monedero;
-		search_amount = monto;
-		search_date = fecha_pago;
-		$.ajax({
-			url : blockrAPI,
-			type : 'GET',
-			async: false,  // Para que no proceda con las siguientes instrucciones hasta terminar la petición
-			dataType : 'json',
-			beforeSend:function(objeto){ 
-				$('#resultado').css({display:'block'});
-				$('#info_pago').prop('disabled',true);
-			},
-			success : function(data) {
-				address = data['addrStr'];
-				num_trans = data['txApperances'];
-				//~ alert("Dirección: " + address + ", Número de transacciones: " + num_trans);
-				var check_payment = 0;
-				var contador_trans = 0;
-				$.each(data['transactions'], function (i){
-					var hash_tx = data['transactions'][i];  // Código hash de la transacción
-					
-					// Filtramos sólo los pagos recibidos y descartamos los pagos hechos
-					// if(!(monto < 0)){
-						var blockrAPIDetails = "https://blockexplorer.com/api/tx/"+hash_tx;  // (Detalles de la transacción con http://blockexplorer.com)
-						// Consultamos los detalles de la transacción para verificar las direcciones y ver si alguna coincide con la del usuario
-						$.ajax({
-							url : blockrAPIDetails,
-							type : 'GET',
-							async: false,  // Para que no proceda con las siguientes instrucciones hasta terminar la petición
-							dataType : 'json',
-							success : function(data2) {
-								var fecha = data2['time'];
-								var format_fecha = new Date(fecha*1000);
-								var day = (format_fecha.getDate() < 10 ? '0' : '') + format_fecha.getDate();
-								var month = (format_fecha.getMonth() < 9 ? '0' : '') + (format_fecha.getMonth() + 1);
-								var year = format_fecha.getFullYear();
-								format_fecha = day + '/' + month + '/' + year;
-								//~ alert(format_fecha);
-								var monto = data2['valueIn'];
-								var address_paid = data2['vin'][0]['addr'];
-								
-								//~ alert("Dirección: " + address_paid + "Fecha: " + fecha + ", Monto: " + monto);
-						
-								// Si los detalles del pago coinciden con los indicados por el usuario, entonces lo validamos
-								if(search_address_paid == address_paid && search_amount == monto && search_date == format_fecha){
-									check_payment += 1;
-									//~ $("#input_resultado").val(check_payment);
-								}
-								contador_trans += 1;  // Una transacción más verificada
-								//~ alert(check_payment);
-							}
-						});
-					// }					
-					
-				})
-				
-				$('#resultado').css({display:'none'});
-				$('#info_pago').prop('disabled',false);
-				
-				// Si el pago fue validado
-				//~ alert(check_payment);
-				//~ alert(contador_trans);
-				if(check_payment > 0){
-					//~ alert("Su pago fue validado");
+		//~ // Inspeccionamos la dirección de la empresa para comprobar pago desde la dirección indicada por el usuario
+		//~ var blockrAPI = "https://blockexplorer.com/api/addr/1JGQko7DZfuNqgyPkiSM6TKJBmAMCHhZL7";
+		//~ var status, address, num_trans, search_address_paid, search_amount, search_date;
+		//~ // Definimos dinámicamente los valores que serán indicados por parte del usuario
+		//~ search_address_paid = dir_monedero;
+		//~ search_amount = monto;
+		//~ search_date = fecha_pago;
+		//~ $.ajax({
+			//~ url : blockrAPI,
+			//~ type : 'GET',
+			//~ async: false,  // Para que no proceda con las siguientes instrucciones hasta terminar la petición
+			//~ dataType : 'json',
+			//~ beforeSend:function(objeto){ 
+				//~ $('#resultado').css({display:'block'});
+				//~ $('#info_pago').prop('disabled',true);
+			//~ },
+			//~ success : function(data) {
+				//~ address = data['addrStr'];
+				//~ num_trans = data['txApperances'];
+				//~ // alert("Dirección: " + address + ", Número de transacciones: " + num_trans);
+				//~ var check_payment = 0;
+				//~ var contador_trans = 0;
+				//~ $.each(data['transactions'], function (i){
+					//~ var hash_tx = data['transactions'][i];  // Código hash de la transacción
+					//~ 
+					//~ // Filtramos sólo los pagos recibidos y descartamos los pagos hechos
+					//~ // if(!(monto < 0)){
+						//~ var blockrAPIDetails = "https://blockexplorer.com/api/tx/"+hash_tx;  // (Detalles de la transacción con http://blockexplorer.com)
+						//~ // Consultamos los detalles de la transacción para verificar las direcciones y ver si alguna coincide con la del usuario
+						//~ $.ajax({
+							//~ url : blockrAPIDetails,
+							//~ type : 'GET',
+							//~ async: false,  // Para que no proceda con las siguientes instrucciones hasta terminar la petición
+							//~ dataType : 'json',
+							//~ success : function(data2) {
+								//~ var fecha = data2['time'];
+								//~ var format_fecha = new Date(fecha*1000);
+								//~ var day = (format_fecha.getDate() < 10 ? '0' : '') + format_fecha.getDate();
+								//~ var month = (format_fecha.getMonth() < 9 ? '0' : '') + (format_fecha.getMonth() + 1);
+								//~ var year = format_fecha.getFullYear();
+								//~ format_fecha = day + '/' + month + '/' + year;
+								//~ // alert(format_fecha);
+								//~ var monto = data2['valueIn'];
+								//~ var address_paid = data2['vin'][0]['addr'];
+								//~ 
+								//~ // alert("Dirección: " + address_paid + "Fecha: " + fecha + ", Monto: " + monto);
+						//~ 
+								//~ // Si los detalles del pago coinciden con los indicados por el usuario, entonces lo validamos
+								//~ if(search_address_paid == address_paid && search_amount == monto && search_date == format_fecha){
+									//~ check_payment += 1;
+									//~ // $("#input_resultado").val(check_payment);
+								//~ }
+								//~ contador_trans += 1;  // Una transacción más verificada
+								//~ // alert(check_payment);
+							//~ }
+						//~ });
+					//~ // }					
+					//~ 
+				//~ })
+				//~ 
+				//~ $('#resultado').css({display:'none'});
+				//~ $('#info_pago').prop('disabled',false);
+				//~ 
+				//~ // Si el pago fue validado
+				//~ // alert(check_payment);
+				//~ // alert(contador_trans);
+				//~ if(check_payment > 0){
+					//~ // alert("Su pago fue validado");
+					//~ $.post(base_url+'index.php/referidos/CRelPagos/actualizar',
+					   //~ $.param({'pk_perfil': pk_perfil})+'&'+$.param({'dir_monedero': dir_monedero})+'&'+$.param({'monto': monto})+'&'+
+					   //~ $.param({'fecha_pago': fecha_pago})+'&'+$.param({'cod_pago': cod_pago}), 
+					   //~ function (response){
 					$.post(base_url+'index.php/referidos/CRelPagos/actualizar',
-					   $.param({'pk_perfil': pk_perfil})+'&'+$.param({'dir_monedero': dir_monedero})+'&'+$.param({'monto': monto})+'&'+
-					   $.param({'fecha_pago': fecha_pago})+'&'+$.param({'cod_pago': cod_pago}), 
-					   function (response){
+					$.param({'pk_perfil': pk_perfil})+'&'+$.param({'dir_monedero': dir_monedero})+'&'+$.param({'cod_pago': cod_pago}), 
+					function (response){
 						if (response[0] == 1) {
 							bootbox.alert("Disculpe, esta dirección ya fue registrada con este usuario", function () {
 							}).on('hidden.bs.modal', function (event) {
@@ -345,7 +348,8 @@ function valida_pago(){
 								$("#dir_monedero").focus();
 							});
 						} else {
-							bootbox.alert("Se validó y registró su pago con Éxito", function (){
+							//~ bootbox.alert("Se validó y registró su pago con Éxito", function (){
+							bootbox.alert("Se registró su pago con Éxito", function (){
 							}).on('hidden.bs.modal', function (event) {
 								//~ //window.location = '<?php echo base_url(); ?>index.php/referidos/CRelPagos/';
 								window.location = base_url+'index.php/referidos/CReferidos/';
@@ -355,11 +359,11 @@ function valida_pago(){
 						}
 						
 					});
-				}else{
-					alert("Su pago no ha sido comprobado, por favor intente el registro más tarde");
-				}
-			},
-		});
+				//~ }else{
+					//~ alert("Su pago no ha sido comprobado, por favor intente el registro más tarde");
+				//~ }
+			//~ },
+		//~ });
 		
 	}
 }
@@ -379,7 +383,7 @@ function valida_personal(){
 				$("#cedula").parent('div').addClass('has-error')
 				$("#cedula").focus();
 		});
-	}else if ($("#nombre").val() == '') {
+	}/*else if ($("#nombre").val() == '') {
 		bootbox.alert("Debe colocar su nombre", function () {
 		}).on('hidden.bs.modal', function (event) {
 				$("#nombre").parent('div').addClass('has-error')
@@ -397,7 +401,7 @@ function valida_personal(){
 				$("#correo").parent('div').addClass('has-error')
 				$("#correo").focus();
 		});
-	}/*else if ($("#telefono").val() == '') {
+	}else if ($("#telefono").val() == '') {
 		bootbox.alert("Debe colocar su teléfono", function () {
 		}).on('hidden.bs.modal', function (event) {
 				$("#telefono").parent('div').addClass('has-error')
@@ -421,7 +425,7 @@ function valida_personal(){
 				$("#banco_usu_id").parent('div').addClass('has-error')
 				$("#banco_usu_id").focus();
 		});
-	}*/else if ($("#fecha_na").val() == '') {
+	}else if ($("#fecha_na").val() == '') {
 		bootbox.alert("Debe seleccionar su fecha de nacimiento", function () {
 		}).on('hidden.bs.modal', function (event) {
 				$("#fecha_na").parent('div').addClass('has-error')
@@ -440,7 +444,7 @@ function valida_personal(){
 				$("#patrocinador_id").parent('div').addClass('has-error')
 				$("#patrocinador_id").focus();
 		});
-	}else if ($("#dir_monedero_per").val() == '' || $("#dir_monedero_per").val() == 0) {
+	}*/else if ($("#dir_monedero_per").val() == '' || $("#dir_monedero_per").val() == 0) {
 		bootbox.alert("Debe colocar su dirección de monedero personal", function () {
 		}).on('hidden.bs.modal', function (event) {
 				$("#dir_monedero_per").parent('div').addClass('has-error')
@@ -479,24 +483,28 @@ function valida_personal(){
 		
 		// Actualización de la información personal
 		cedula = $('#cedula').val()
-		nombre = $('#nombre').val()
-		apellido = $('#apellido').val()
-		correo = $('#correo').val()
-		//~ telefono = $('#telefono').val()
-		// tipo_cuenta_id = $('#tipo_cuenta_id').val()
-		fecha_na = $('#fecha_na').val()
+		//~ nombre = $('#nombre').val()
+		//~ apellido = $('#apellido').val()
+		//~ correo = $('#correo').val()
+		//~ // telefono = $('#telefono').val()
+		//~ // tipo_cuenta_id = $('#tipo_cuenta_id').val()
+		//~ fecha_na = $('#fecha_na').val()
 		usuario_id = $('#usuario_id').val()
-		pais_id = $('#pais_id').val()
-		patrocinador_id = $('#patrocinador_id').val()
+		//~ pais_id = $('#pais_id').val()
+		//~ patrocinador_id = $('#patrocinador_id').val()
 		// num_cuenta_usu = $('#num_cuenta_usu').val()
 		// banco_usu_id = $('#banco_usu_id').val()
 		dir_monedero_per = $('#dir_monedero_per').val()
 		pk_perfil = $('#cod_perfil').val()
 		
+		//~ $.post(base_url+'index.php/referidos/CRelInformacion/actualizar',
+		   //~ $.param({'cedula': cedula})+'&'+$.param({'nombre': nombre})+'&'+$.param({'apellido': apellido})+'&'+$.param({'pk_perfil': pk_perfil})+'&'+
+		   //~ $.param({'correo': correo})+'&'+$.param({'usuario_id': usuario_id})+'&'+$.param({'dir_monedero_per': dir_monedero_per})+'&'+
+		   //~ $.param({'pais_id': pais_id})+'&'+$.param({'patrocinador_id': patrocinador_id})+'&'+$.param({'fecha_na': fecha_na}), 
+		   //~ function (response){
 		$.post(base_url+'index.php/referidos/CRelInformacion/actualizar',
-		   $.param({'cedula': cedula})+'&'+$.param({'nombre': nombre})+'&'+$.param({'apellido': apellido})+'&'+$.param({'pk_perfil': pk_perfil})+'&'+
-		   $.param({'correo': correo})+'&'+$.param({'usuario_id': usuario_id})+'&'+$.param({'dir_monedero_per': dir_monedero_per})+'&'+
-		   $.param({'pais_id': pais_id})+'&'+$.param({'patrocinador_id': patrocinador_id})+'&'+$.param({'fecha_na': fecha_na}), 
+		   $.param({'cedula': cedula})+'&'+$.param({'pk_perfil': pk_perfil})+'&'+
+		   $.param({'usuario_id': usuario_id})+'&'+$.param({'dir_monedero_per': dir_monedero_per}), 
 		   function (response){
 			if (response[0] == 1) {
 				bootbox.alert("Disculpe, esta dirección ya fue registrada con este usuario", function () {
