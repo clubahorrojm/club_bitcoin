@@ -159,6 +159,13 @@ if ($tipouser == 'Administrador') {
                                         </div> <!--/.form-group -->
 
                                     </div><!-- /.col -->
+									
+									<div class="col-md-2">
+										<div class="input-group">
+											<label class="control-label" >Clave de Seguridad</label>
+											<input type="password" placeholder="********" maxlength="8" id="codigo_seg"  name="codigo_seg"  class="form-control" >
+										</div> 
+									</div>
                                 </div><!-- /.col -->
                                 <div class="form-group">
                                     <div class="col-md-12" style="text-align: center">
@@ -383,14 +390,33 @@ if ($tipouser == 'Administrador') {
 
 
 
-        } else {
+        } else if (($('#codigo_seg').val().length  < 8)) {
+            bootbox.alert('Disculpe, la cantidad de digitos no es valida', function () {
+                $('#codigo_seg').parent('div').addClass('has-error');
+            });
+        }else {
 
-            $('#form_usuarios').submit();
-            bootbox.alert("Se registro con exito", function () {
-            }).on('hidden.bs.modal', function (event) {
+            $.post('<?php echo base_url(); ?>index.php/configuracion/usuarios/usuarios/actualizar', $('#form_usuarios').serialize(), function (response) {
+                if (response[0] == '1') {
+                    bootbox.alert("Disculpe, código de seguridad invalido", function () {
+                    }).on('hidden.bs.modal', function (event) {
+                        $("#codigo").parent('div').addClass('has-error');
+                        $("#codigo").focus();
+                    });
+                }else if (response[0] == '2') {
+                    bootbox.alert("Disculpe, Este Grupo de usuario ya se encuentra registrado", function () {
+                    }).on('hidden.bs.modal', function (event) {
+                        $("#name").parent('div').addClass('has-error');
+                        $("#name").focus();
 
-                url = '<?php echo base_url(); ?>index.php/configuracion/usuarios/usuarios'
-                window.refresh = url
+                    });
+                }else {
+                    bootbox.alert("Se registro con exito", function () {
+                    }).on('hidden.bs.modal', function (event) {
+                        url = '<?php echo base_url(); ?>index.php/configuracion/usuarios/usuarios'
+                        window.location = url
+                    });
+                }
             });
 
 //                                $.post('<?php echo base_url(); ?>index.php/configuracion/usuarios/usuarios/add', $('#form_usuarios').serialize(), function (response) {

@@ -92,7 +92,11 @@ class ControllersGrupoUsuarios extends CI_Controller
     //metodo para eliminar
     function eliminar($id)
     {
-        $result = $this->ModelsGruposUsuarios->eliminar($id);
+		//echo $id;
+		$cadena = explode("-", $id);
+		$id_reg = $cadena[0];
+		$codigo_seg = 'pbkdf2_sha256$12000$'.hash( "sha256", $cadena[1]);;
+        $result = $this->ModelsGruposUsuarios->eliminar($id_reg, $codigo_seg);
         
         if ($result) {
             $param = array(
@@ -110,9 +114,14 @@ class ControllersGrupoUsuarios extends CI_Controller
     }
 
     //Metodo para actualizar
-    function actualizar()
-    {
-        $result = $this->ModelsGruposUsuarios->actualizar($this->input->post());
+    function actualizar(){
+		$data = array(
+			'id' => $this->input->post('id'),
+            'name' => $this->input->post('name'),
+        );
+		$codigo_seg = 'pbkdf2_sha256$12000$'.hash( "sha256", $this->input->post('codigo_seg'));
+		$result = $this->ModelsGruposUsuarios->actualizar($data, $codigo_seg);
+        //$result = $this->ModelsGruposUsuarios->actualizar($this->input->post());
         if ($result) {
             
             $param = array(

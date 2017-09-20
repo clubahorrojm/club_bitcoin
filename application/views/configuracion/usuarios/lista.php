@@ -63,6 +63,7 @@ redirect(base_url());
                      <tbody >    
                         <?php $i=1; ?>
                        <?php foreach ($listar as $usuario) { ?>
+																							<?php if ($usuario->tipo_usuario == 1 || $usuario->tipo_usuario == 2) {?>
                         <tr style="font-size: 16px;text-align: center">
                             <td>
                              <?php echo $i;?>
@@ -79,15 +80,15 @@ redirect(base_url());
                             <td>
                             <?php
                             if($usuario->tipo_usuario == 4){
-								echo "Bots";
-							}else{
-								foreach ($grupos_usuarios as $grupo) {
-									if ($usuario->tipo_usuario == $grupo->codigo)
-									{
-										echo $grupo->name;
-									}
-								}
-							}
+																													echo "Bots";
+																												}else{
+																													foreach ($grupos_usuarios as $grupo) {
+																														if ($usuario->tipo_usuario == $grupo->codigo)
+																														{
+																															echo $grupo->name;
+																														}
+																													}
+																												}
                             ?>
                             </td>
                          
@@ -105,6 +106,7 @@ redirect(base_url());
                             </td>
                             
                         </tr>
+																								<?php } ?>
                         <?php $i++ ?>
                         <?php }?>
                         
