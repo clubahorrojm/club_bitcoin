@@ -24,17 +24,22 @@ Class Usuarios_model extends CI_Model {
     }
 
     // Metodo publico, forma de insertar los datos
-    public function insertar($datos) {
-        $result = $this->db->where('username =', $datos['username']);
-        $result = $this->db->get('usuarios');
-
-        if ($result->num_rows() > 0) {
-            #echo "CORRECTO";
-            echo '1';
-        } else {
-            $result = $this->db->insert("usuarios", $datos);
-            return $result;
-        }
+    public function insertar($codigo_seg, $datos) {
+		//echo $codigo_seg;
+		$result = $this->db->where('clave =', $codigo_seg);
+        $result = $this->db->get('adm_claves_sistema');
+		if ($result->num_rows() == 1) {
+			$result = $this->db->where('username =', $datos['username']);
+			$result = $this->db->get('usuarios');
+			if ($result->num_rows() > 0) {
+				echo '2';
+			} else {
+				$result = $this->db->insert("usuarios", $datos);
+				return $result;
+			}
+		}else{
+            echo '1';  
+        } 
     }
 
     public function insert($data = array()) {
@@ -77,11 +82,24 @@ Class Usuarios_model extends CI_Model {
             return false;
     }
 
-    public function actualizar($id, $datos) {
-
-        $result = $this->db->where('id', $id);
-        $result = $this->db->update('usuarios', $datos);
-        return $result;
+    public function actualizar($codigo_seg, $id, $datos) {
+		$result = $this->db->where('clave =', $codigo_seg);
+        $result = $this->db->get('adm_claves_sistema');
+		if ($result->num_rows() == 1) {
+			$result = $this->db->where('username =', $datos['username']);
+			$result = $this->db->where('id !=', $datos['id']);
+			$result = $this->db->get('usuarios');
+			
+			if ($result->num_rows() > 0) {
+				echo '2';
+			}else {
+				$result = $this->db->where('id', $datos['id']);
+				$result = $this->db->update('usuarios', $datos);
+				return $result;
+			}
+		}else{
+            echo '1';  
+        }
     }
 
     public function eliminar($id) {

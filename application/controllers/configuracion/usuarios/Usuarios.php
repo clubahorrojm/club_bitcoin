@@ -126,18 +126,88 @@ class Usuarios extends CI_Controller {
     }
 
     function actualizar() {
-
+        echo "ACTUALIZAR";
 
         $u = $this->input->post('cedula');
         
-        $mi_archivo = 'picture';
-        $config['upload_path'] = "uploads";
-        $config['allowed_types'] = 'gif|jpg|png';
-        $config['allowed_types'] = "*";
-        print_r($_FILES['picture']['name']);
+        //$mi_archivo = 'picture';
+        //$config['upload_path'] = "uploads";
+        //$config['allowed_types'] = 'gif|jpg|png';
+        //$config['allowed_types'] = "*";
+        //print_r($_FILES['picture']['name']);
 
-        if (($_FILES['picture']['name']) == '') {
+        //if (($_FILES['picture']['name']) == '') {
             
+
+//            $data = array(
+//                'id' => $this->input->post('id'),
+//                'username' => $this->input->post('username'),
+//                'email' => $this->input->post('email'),
+//                'password' => 'pbkdf2_sha256$12000$' . hash("sha256", $this->input->post('password')),
+//                'cedula' => $this->input->post('cedula'),
+//                'first_name' => $this->input->post('first_name'),
+//                'last_name' => $this->input->post('last_name'),
+//                'tipo_usuario' => $this->input->post('tipo_usuario'),
+//                'cargo' => $this->input->post('cargo'),
+//                'telefono' => $this->input->post('telefono'),
+//                'estatus' => $this->input->post('estatus'),
+//                'fecha_create' => date('Y-m-d H:i:s'),
+//                'fecha_update' => date('Y-m-d H:i:s'),
+//                'user_create_id' => $this->input->post('user_create_id'),
+//      
+//            );
+//
+////            print_r($data);
+//         
+//            $codigo_seg = 'pbkdf2_sha256$12000$'.hash( "sha256", $this->input->post('codigo_seg'));
+//            $result = $this->Usuarios_model->actualizar($codigo_seg, $data['id'], $data);
+//            
+//            if ($result) {
+//                $param = array(
+//                    'tabla' => 'usuarios',
+//                    'codigo' => $this->input->post('id'),
+//                    'accion' => 'Edición de Usuario',
+//                    'fecha' => date('Y-m-d'),
+//                    'hora' => date("h:i:s a"),
+//                    'usuario' => $this->session->userdata['logged_in']['id'],
+//                );
+//                $this->MAuditoria->add($param);
+//                redirect('configuracion/usuarios/usuarios');
+//            }
+//        } else {
+//            $u = $this->input->post('cedula');
+//
+//            $mi_archivo = 'picture';
+//            $config['upload_path'] = "uploads";
+//            $config['allowed_types'] = 'gif|jpg|png';
+//            $config['allowed_types'] = "*";
+//            if (!empty($_FILES['picture']['name'])) {
+//                $config['upload_path'] = 'uploads/images/';
+//                $config['allowed_types'] = 'gif|jpg|png';
+//                $config['overwrite'] = TRUE;
+//                $config['max_size'] = '100';
+//                $config['max_width'] = '1024';
+//                $config['max_height'] = '768';
+//
+//                $config['file_name'] = $u . $_FILES['name'];
+//
+//                // Cargamos la configuración del Archivo 1
+//                $this->upload->initialize($config);
+//
+//                // Subimos archivo 1
+//                if ($this->upload->do_upload('picture')) {
+//                    $data = $this->upload->data();
+//                    $picture = $data['file_name'];
+//                } else {
+//                    $picture = '';
+//                    echo $this->upload->display_errors();
+//                    return;
+//                }
+//            } else {
+//                echo 'Exitoso';
+//                $picture = '';
+//            }
+
 
             $data = array(
                 'id' => $this->input->post('id'),
@@ -154,78 +224,11 @@ class Usuarios extends CI_Controller {
                 'fecha_create' => date('Y-m-d H:i:s'),
                 'fecha_update' => date('Y-m-d H:i:s'),
                 'user_create_id' => $this->input->post('user_create_id'),
-      
+                //'picture' => $picture,
             );
-
-//            print_r($data);
-         
-            $result = $this->Usuarios_model->actualizar($data['id'], $data);
             
-            if ($result) {
-                $param = array(
-                    'tabla' => 'usuarios',
-                    'codigo' => $this->input->post('id'),
-                    'accion' => 'Edición de Usuario',
-                    'fecha' => date('Y-m-d'),
-                    'hora' => date("h:i:s a"),
-                    'usuario' => $this->session->userdata['logged_in']['id'],
-                );
-                $this->MAuditoria->add($param);
-                redirect('configuracion/usuarios/usuarios');
-            }
-        } else {
-            $u = $this->input->post('cedula');
-
-            $mi_archivo = 'picture';
-            $config['upload_path'] = "uploads";
-            $config['allowed_types'] = 'gif|jpg|png';
-            $config['allowed_types'] = "*";
-            if (!empty($_FILES['picture']['name'])) {
-                $config['upload_path'] = 'uploads/images/';
-                $config['allowed_types'] = 'gif|jpg|png';
-                $config['overwrite'] = TRUE;
-                $config['max_size'] = '100';
-                $config['max_width'] = '1024';
-                $config['max_height'] = '768';
-
-                $config['file_name'] = $u . $_FILES['name'];
-
-                // Cargamos la configuración del Archivo 1
-                $this->upload->initialize($config);
-
-                // Subimos archivo 1
-                if ($this->upload->do_upload('picture')) {
-                    $data = $this->upload->data();
-                    $picture = $data['file_name'];
-                } else {
-                    $picture = '';
-                    echo $this->upload->display_errors();
-                    return;
-                }
-            } else {
-                echo 'Exitoso';
-                $picture = '';
-            }
-
-
-            $data = array(
-                'id' => $this->input->post('id'),
-                'username' => $this->input->post('username'),
-                'email' => $this->input->post('email'),
-                'password' => 'pbkdf2_sha256$12000$' . hash("sha256", $this->input->post('password')),
-                'cedula' => $this->input->post('cedula'),
-                'first_name' => $this->input->post('first_name'),
-                'last_name' => $this->input->post('last_name'),
-                'tipo_usuario' => $this->input->post('tipo_usuario'),
-                'cargo' => $this->input->post('cargo'),
-                'telefono' => $this->input->post('telefono'),
-                'estatus' => $this->input->post('estatus'),
-                'fecha_create' => date('Y-m-d H:i:s'),
-                'fecha_update' => date('Y-m-d H:i:s'),
-                'user_create_id' => $this->input->post('user_create_id'),
-                'picture' => $picture,
-            );
-            $result = $this->Usuarios_model->actualizar($data['id'], $data);
+            $codigo_seg = 'pbkdf2_sha256$12000$'.hash( "sha256", $this->input->post('codigo_seg'));
+            $result = $this->Usuarios_model->actualizar($codigo_seg, $data['id'], $data);
 
             if ($result) {
                 $param = array(
@@ -239,7 +242,7 @@ class Usuarios extends CI_Controller {
                 $this->MAuditoria->add($param);
                 redirect('configuracion/usuarios/usuarios');
             }
-        }
+        //}
     }
     
     function update() {
@@ -275,8 +278,8 @@ class Usuarios extends CI_Controller {
             );
 
 //            print_r($data);
-         
-            $result = $this->Usuarios_model->actualizar($data['id'], $data);
+            $codigo_seg = 'pbkdf2_sha256$12000$'.hash( "sha256", $this->input->post('codigo_seg'));
+            $result = $this->Usuarios_model->actualizar($codigo_seg, $data['id'], $data);
             
             if ($result) {
                 $param = array(
@@ -342,8 +345,9 @@ class Usuarios extends CI_Controller {
                 'user_create_id' => $this->input->post('user_create_id'),
                 'picture' => $picture,
             );
-            $result = $this->Usuarios_model->actualizar($data['id'], $data);
-
+            $codigo_seg = 'pbkdf2_sha256$12000$'.hash( "sha256", $this->input->post('codigo_seg'));
+            $result = $this->Usuarios_model->actualizar($codigo_seg, $data['id'], $data);
+            
             if ($result) {
                 $param = array(
                     'tabla' => 'usuarios',
@@ -394,7 +398,7 @@ class Usuarios extends CI_Controller {
         }
 
 		$ultimo_id = $this->ModelsBusqueda->count_all_table('usuarios');  // El id del último usuario registrado
-
+        
         $data = array(
 			'id' => $ultimo_id + 1,
 			'codigo' => $this->input->post('codigo'),
@@ -412,10 +416,11 @@ class Usuarios extends CI_Controller {
             'fecha_update' => date('Y-m-d H:i:s'),
             'user_create_id' => $this->input->post('user_create_id'),
             'picture' => $picture,
-        );
-
-        $result = $this->Usuarios_model->insertar($data);
+        );       
         
+        $codigo_seg = 'pbkdf2_sha256$12000$'.hash( "sha256", $this->input->post('codigo_seg'));
+
+        $result = $this->Usuarios_model->insertar($codigo_seg, $data);
         if ($result) {
 			$param = array(
 				'tabla' => 'Usuarios',

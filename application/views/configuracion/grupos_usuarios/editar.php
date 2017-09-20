@@ -57,7 +57,7 @@ if ($tipouser == 'Administrador') {
 								<div class="col-md-1">
                                     <div class="form-group">
                                         <label style="font-weight:bold">Código</label>
-                                        <input type="text" autofocus="" placeholder="Ej: 8" maxlength="2" id="codigo" readonly="true" value="<?php echo $editar[0]->codigo ?>" name="codigo"  class="form-control">
+                                        <input type="text" autofocus="" placeholder="Ej: 8" maxlength="2"  readonly="true" value="<?php echo $editar[0]->codigo ?>" name="codigo"  class="form-control">
                                     </div><!-- /.form-group -->
                                 </div><!-- /.form-group -->
                                 <div class="col-md-5">
@@ -65,7 +65,13 @@ if ($tipouser == 'Administrador') {
                                         <label style="font-weight:bold">Grupo de Usuario</label>
                                         <input type="text" placeholder="Introduzca Prioridad" maxlength="80" id="name" value="<?php echo $editar[0]->name ?>" name="name" style="text-transform:uppercase;" onkeyup="javascript:this.value = this.value.toUpperCase();" class="form-control">
                                     </div><!-- /.form-group -->
-                                </div><!-- /.form-group -->  
+                                </div><!-- /.form-group -->
+								<div class="col-md-2">
+										<div class="input-group">
+											<label class="control-label" >Clave de Seguridad</label>
+											<input type="password" placeholder="********" maxlength="8" id="codigo_seg"  name="codigo_seg"  class="form-control" >
+										</div> 
+									</div>
                                 <div class="form-group">
                                     <div class="col-md-12">
 
@@ -130,11 +136,20 @@ if ($tipouser == 'Administrador') {
             bootbox.alert('Disculpe, Debe Colocar la el grupo de Usuario', function () {
                 $('#name').parent('div').addClass('has-error');
             });
+        }else if (($('#codigo_seg').val().length  < 8)) {
+            bootbox.alert('Disculpe, la cantidad de digitos no es valida', function () {
+                $('#codigo_seg').parent('div').addClass('has-error');
+            });
         } else {
 
             $.post('<?php echo base_url(); ?>index.php/configuracion/grupos_usuarios/ControllersGrupoUsuarios/actualizar', $('#form_grupos').serialize(), function (response) {
-
-                if (response[0] == '1') {
+				if (response[0] == '1') {
+                    bootbox.alert("Disculpe, código de seguridad invalido", function () {
+                    }).on('hidden.bs.modal', function (event) {
+                        $("#codigo").parent('div').addClass('has-error')
+                        $("#codigo").focus();
+                    });
+                }else if (response[0] == '2') {
                     bootbox.alert("Disculpe, Este Grupo de usuario ya se encuentra registrado", function () {
                     }).on('hidden.bs.modal', function (event) {
                         $("#name").parent('div').addClass('has-error')

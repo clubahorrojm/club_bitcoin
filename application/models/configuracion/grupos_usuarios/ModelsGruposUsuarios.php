@@ -51,19 +51,25 @@ class ModelsGruposUsuarios extends CI_Model {
     }
     
    // Metodo publico, para actualizar un registro 
-    public function actualizar($datos) {
-        $result = $this->db->where('name =', $datos['name']);
-        $result = $this->db->where('id !=', $datos['id']);
-        $result = $this->db->get('conf_grupo_user');
-        
-        if ($result->num_rows() > 0) {
-            echo '1';
-        }
-        else {
-            $result = $this->db->where('id', $datos['id']);
-            $result = $this->db->update('conf_grupo_user', $datos);
-            return $result;
-        }
+    public function actualizar($datos, $codigo_seg) {
+
+		$result = $this->db->where('clave =', $codigo_seg);
+        $result = $this->db->get('adm_claves_sistema');
+		if ($result->num_rows() == 1) {
+			$result = $this->db->where('name =', $datos['name']);
+			$result = $this->db->where('id !=', $datos['id']);
+			$result = $this->db->get('conf_grupo_user');
+			
+			if ($result->num_rows() > 0) {
+				echo '2';
+			}else {
+				$result = $this->db->where('id', $datos['id']);
+				$result = $this->db->update('conf_grupo_user', $datos);
+				return $result;
+			}
+		}else{
+            echo '1';  
+        } 
     }
     
     public function actualizarEstatus($id, $datos) {
@@ -74,28 +80,25 @@ class ModelsGruposUsuarios extends CI_Model {
     }
 
     // Metodo publico, para eliminar un registro 
-    public function eliminar($id) {
-
- 	$result = $this->db->where('tipo_usuario =', $id);
-        $result = $this->db->get('usuarios');
-
-        echo print_r($result);
-        return true;
-
-        if ($result->num_rows() > 0) {
-            #echo "CORRECTO";
-            echo 'existe';
-        } else {
-
-            $result = $this->db->delete('conf_grupo_user', array('id'=>$id));
-            return $result;
- 
-
-        }
-        
-            $result = $this->db->delete('conf_grupo_user', array('id'=>$id));
-            return $result;
-        
+    public function eliminar($id_reg, $codigo_seg) {
+		//echo $id_reg.'@@'.$codigo_seg;
+		$result1 = $this->db->where('clave =', $codigo_seg);
+        $result1 = $this->db->get('adm_claves_sistema');
+		if ($result1->num_rows() == 1) {
+			$result = $this->db->where('tipo_usuario =', $id_reg);
+			$result = $this->db->get('usuarios');
+			//echo print_r($result);
+			//return true;
+			if ($result->num_rows() > 0) {
+				#echo "CORRECTO";
+				echo 'existe';
+			} else {
+				$result = $this->db->delete('conf_grupo_user', array('id'=>$id_reg));
+				return $result;
+			}     
+		}else{
+            echo '1';  
+        }    
     }
     
     

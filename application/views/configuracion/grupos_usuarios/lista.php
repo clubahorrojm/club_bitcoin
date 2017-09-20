@@ -41,10 +41,10 @@ redirect(base_url());
                 <div class="box-header">
                   <h3 class="box-title" style="color:#3C8DBC">Listado de Grupos de Usuarios</h3>
                 </div><!-- /.box-header -->
-                <button role="button" class="btn btn-primary" style="font-weight: bold;font-size: 13px; color: white " id="enviar"  >
+                <!--<button role="button" class="btn btn-primary" style="font-weight: bold;font-size: 13px; color: white " id="enviar"  >
                     
                     &nbsp;<span class="glyphicon glyphicon-plus"></span>&nbsp;Agregar Grupo de Usuario
-                </button>
+                </button>-->
                 <br/>
                 <div class="box-body">
                   <table id="tab_grupos" class="table table-bordered table-striped">
@@ -52,9 +52,9 @@ redirect(base_url());
                       <tr>
                         <th style='text-align: center'>Item</th>
                         <th style='text-align: center'>Grupo de Usuario</th>
-                        <th style='text-align: center'>Activar/Desactivar</th>
+<!--                        <th style='text-align: center'>Activar/Desactivar</th>
                         <th style='text-align: center'>Editar</th>
-                        <th style='text-align: center'>Borrar</th>
+                        <th style='text-align: center'>Borrar</th>-->
                       </tr>
                     </thead>
                       <tbody >    
@@ -68,7 +68,7 @@ redirect(base_url());
                                      <td>
                                         <?php echo $grup_user->name; ?>
                                     </td>    
-                                     <td style='text-align: center'>
+                                     <!--<td style='text-align: center'>
                                 <?php if ($grup_user->activo == 't') {?>
                                     <input class='activar_desactivar' id='<?php echo $grup_user->id; ?>' type="checkbox" title='Desactivar el usuario <?php echo $grup_user->id;?>' checked="checked"/>
                                     <?php }else if ($grup_user->activo == 'f'){ ?>
@@ -82,7 +82,7 @@ redirect(base_url());
                                     <td style='text-align: center'>
 
                                         <a class='borrar' id='<?php echo $grup_user->id; ?>' title="Borrar" href="<?php echo base_url() ?>index.php/configuracion/prioridades/ControllersPrioridades/eliminar/<?= $grup_user->id; ?>"><i class="fa fa-trash"></i></a>
-                                    </td>
+                                    </td>-->
                                 </tr>
                                 <?php $i++ ?>
                             <?php } ?>
@@ -181,9 +181,9 @@ redirect(base_url());
         "aoColumns": [
             {"sClass": "registro center", "sWidth": "5%"},
             {"sClass": "registro center", "sWidth": "20%"},
-             {"sClass": "registro center", "sWidth": "20%"},
-            {"sWidth": "3%", "bSortable": false, "sClass": "center sorting_false", "bSearchable": false},
-            {"sWidth": "3%", "bSortable": false, "sClass": "center sorting_false", "bSearchable": false}
+            // {"sClass": "registro center", "sWidth": "20%"},
+            //{"sWidth": "3%", "bSortable": false, "sClass": "center sorting_false", "bSearchable": false},
+            //{"sWidth": "3%", "bSortable": false, "sClass": "center sorting_false", "bSearchable": false}
         ]
     });
     
@@ -195,44 +195,72 @@ redirect(base_url());
             $("table#tab_grupos").on('click', 'a.borrar', function (e) {
                 e.preventDefault();
                 var id = this.getAttribute('id');
-                //alert(id)
-
-                bootbox.dialog({
-                    message: "¿Desea eliminar este grupo de usuario?",
-                    title: "Borrar registro",
-                    buttons: {
-                        success: {
-                            label: "Descartar",
-                            className: "btn-primary",
-                            callback: function () {
-
-                            }
-                        },
-                        danger: {
-                            label: "Procesar",
-                            className: "btn-warning",
-                            callback: function () {
-                                //alert(id)
-                                $.post('<?php echo base_url(); ?>index.php/configuracion/grupos_usuarios/ControllersGrupoUsuarios/eliminar/' + id + '', function (response) {
-                                    
-                                    if (response[0] == "e") {
-
-                                        bootbox.alert("Disculpe, el grupo de usuario que desea eliminar se encuentra asociado a un usuario", function () {
-                                        }).on('hidden.bs.modal', function (event) {
-                                        });
-
-                                    } else {
-                                        bootbox.alert("Se elimino con exito", function () {
-                                        }).on('hidden.bs.modal', function (event) {
-                                            url = '<?php echo base_url(); ?>index.php/configuracion/grupos_usuarios/ControllersGrupoUsuarios';
-                                            window.location = url;
-                                        });
-                                    }
-                                });
-                            }
-                        }
-                    }
-                });
+															bootbox.prompt({
+																			message: "¿Desea eliminar este grupo de usuario?",
+                   title: "Borrar registro",
+																			inputType: 'password',
+																			size: 'small',
+																			callback: function (result) {
+																							console.log(result);
+																							var codigo_seg = result;
+																								$.post('<?php echo base_url(); ?>index.php/configuracion/grupos_usuarios/ControllersGrupoUsuarios/eliminar/' + id + '-' +codigo_seg, function (response) {
+																											
+																											if (response[0] == '1') {
+																															bootbox.alert("Disculpe, código de seguridad invalido", function () {
+																															}).on('hidden.bs.modal', function (event) {
+																																			$("#codigo").parent('div').addClass('has-error')
+																																			$("#codigo").focus();
+																															});
+																											}else if (response[0] == "e") {
+																															bootbox.alert("Disculpe, el grupo de usuario que desea eliminar se encuentra asociado a un usuario", function () {
+																															}).on('hidden.bs.modal', function (event) {
+																															});
+																											} else {
+																															bootbox.alert("Se elimino con exito", function () {
+																															}).on('hidden.bs.modal', function (event) {
+																																			url = '<?php echo base_url(); ?>index.php/configuracion/grupos_usuarios/ControllersGrupoUsuarios';
+																																			window.location = url;
+																															});
+																											}
+																							});
+																			}
+															});
+                //bootbox.dialog({
+                //    message: "¿Desea eliminar este grupo de usuario?",
+                //    title: "Borrar registro",
+                //    buttons: {
+                //        success: {
+                //            label: "Descartar",
+                //            className: "btn-primary",
+                //            callback: function () {
+                //
+                //            }
+                //        },
+                //        danger: {
+                //            label: "Procesar",
+                //            className: "btn-warning",
+                //            callback: function () {
+                //                alert(id);
+                //                //$.post('<?php echo base_url(); ?>index.php/configuracion/grupos_usuarios/ControllersGrupoUsuarios/eliminar/' + id + '', function (response) {
+                //                //    
+                //                //    if (response[0] == "e") {
+                //                //
+                //                //        bootbox.alert("Disculpe, el grupo de usuario que desea eliminar se encuentra asociado a un usuario", function () {
+                //                //        }).on('hidden.bs.modal', function (event) {
+                //                //        });
+                //                //
+                //                //    } else {
+                //                //        bootbox.alert("Se elimino con exito", function () {
+                //                //        }).on('hidden.bs.modal', function (event) {
+                //                //            url = '<?php echo base_url(); ?>index.php/configuracion/grupos_usuarios/ControllersGrupoUsuarios';
+                //                //            window.location = url;
+                //                //        });
+                //                //    }
+                //                //});
+                //            }
+                //        }
+                //    }
+                //});
             });
             
             $('#enviar').click(function () {
