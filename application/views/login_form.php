@@ -348,7 +348,7 @@
 						<div  style=" background-image: url('../../static/img/login_adm/registrar.png'); background-size: 102%; background-repeat: no-repeat">
 							<br>
 							<div class="row">
-								<a href="#" style="color: #513085; "><h3 style="font-weight: bold">REGISTRATE</h3></a><br>
+								<a href="#" style="color: #513085;" id="registrarse"><h3 style="font-weight: bold">REGISTRATE</h3></a><br>
 							</div>
 							<br><br>
 							

@@ -116,5 +116,30 @@ class CLPagos extends CI_Controller
             $this->MAuditoria->add($param);
         }
     }
+    
+    // Método para negar el pago
+    function negar($cod){
+        // Armamos la data a actualizar
+        $data = array(
+            'codigo' => $cod,
+            'estatus' => 2,
+            'operador_id' => $this->session->userdata['logged_in']['codigo'],
+            'fecha_verificacion' => date('Y-m-d'),
+        );
+        // Actualizamos el pago con los datos armados
+        $result = $this->MLPagos->actualizarPagoBit($data);
+        // Registramos los cambios en la Bitacora
+        if ($result) {
+            $param = array(
+                'tabla' => 'ref_rel_pagos_bitcoins',
+                'codigo' => $cod,
+                'accion' => 'Negación de Pago',
+                'fecha' => date('Y-m-d'),
+                'hora' => date("h:i:s a"),
+                'usuario' => $this->session->userdata['logged_in']['id'],
+            );
+            $this->MAuditoria->add($param);
+        }
+    }
 }
 

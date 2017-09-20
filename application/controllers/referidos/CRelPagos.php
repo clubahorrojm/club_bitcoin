@@ -98,8 +98,8 @@ class CRelPagos extends CI_Controller
         $datos = array(
             'codigo' => $this->input->post('cod_pago'),
             'dir_monedero'=> $this->input->post('dir_monedero'),
-            'fecha_pago'=> $fecha,
-            'monto'=> $this->input->post('monto'),
+            //~ 'fecha_pago'=> $fecha,
+            //~ 'monto'=> $this->input->post('monto'),
             'perfil_id'=> $this->input->post('pk_perfil'),
             'estatus'=> $status_pago,
             'hora_pago'=> date("h:i:s a"),

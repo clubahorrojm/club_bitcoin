@@ -1,10 +1,10 @@
 <fieldset id="fieldset_pago" style="display:block">
-	<h3>Recuerde tiene 90 segundos para registrar su pago</h3>
-	<center><div id="CountDownTimer" data-timer="90" style="width: 300px; height: 100px;"></div></center>
+	<!--<h3>Recuerde tiene 90 segundos para registrar su pago</h3>
+	<center><div id="CountDownTimer" data-timer="90" style="width: 300px; height: 100px;"></div></center>-->
 	<h2 class="fs-title">Información del pago</h2>
 	<!--<h3 class="fs-subtitle">Indica los datos de tu pago</h3>-->
 	<h3 class="fs-subtitle">( Usted debe realizar el pago a la dirección de nuestra empresa: <span style="color:#296293;"><?php $direccion = $monedero_emp->monedero; echo $direccion; ?></span> )</h3>
-	<h3 class="fs-subtitle" style="color:red !important;font-size:20px;">( Valores actuales: <span id="precio_bitcoin"></span> )</h3>
+	<!--<h3 class="fs-subtitle" style="color:red !important;font-size:20px;">( Valores actuales: <span id="precio_bitcoin"></span> )</h3>-->
 	
 	<!-- Main content -->
 	<section class="content">
@@ -51,13 +51,13 @@
 								<input type="text" placeholder="Ej: 011494191" maxlength="8" id="num_pago" value="<?php echo $pago[0]->num_pago ?>" class="form-control" >
 							</div>
 						</div>-->
-						<div class="col-md-12">
+						<div class="col-md-8">
 							<div class="form-group">
 								<label style="font-weight:bold">Dir. Monedero (desde el cual realizó el pago)</label><br>
 								<input type="text" placeholder="Ej: AxYz125cdJklmn14PqRs87Vwxy54Q7YcV4" maxlength="34" id="dir_monedero" value="<?php echo $pago[0]->dir_monedero ?>" class="form-control" >
 							</div>
 						</div>
-						<div class="col-md-4">
+						<!--<div class="col-md-4">
 							<div class="form-group">
 								<label style="font-weight:bold">Fecha</label>
 								<input type="text" placeholder="Ej: 01/10/2016" maxlength="10" id="fecha_pago"
@@ -67,14 +67,14 @@
 										echo $fecha;
 										}
 									?>" class="form-control" >
-							</div><!-- /.form-group -->
-						</div><!-- /.form-group -->
+							</div>
+						</div>
 						<div class="col-md-4">
 							<div class="form-group">
 								<label style="font-weight:bold">Monto</label>
 								<input type="text" placeholder="Ej: 50" maxlength="10" id="monto" class="form-control" value="<?php echo $pago[0]->monto ?>">
-							</div><!-- /.form-group -->
-						</div><!-- /.form-group -->
+							</div>
+						</div>-->
 						<div class="col-md-4">
 							<div class="form-group">
 								<label style="font-weight:bold">Estatus</label><br>
