@@ -41,6 +41,18 @@ Class Usuarios_model extends CI_Model {
             echo '1';  
         } 
     }
+	// Metodo publico, forma de insertar los datos
+    public function insertar2($datos) {
+		//echo $codigo_seg;
+		$result = $this->db->where('username =', $datos['username']);
+		$result = $this->db->get('usuarios');
+		if ($result->num_rows() > 0) {
+			echo '2';
+		} else {
+			$result = $this->db->insert("usuarios", $datos);
+			return $result;
+		}
+    }
 
     public function insert($data = array()) {
         if (!array_key_exists("created", $data)) {

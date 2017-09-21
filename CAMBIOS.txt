@@ -440,6 +440,30 @@ CAMBIOS AL 20-09-2017 (MARCEL)
 			- models/configuraciones/grupos_usuarios
 			- models/configuraciones/usuarios
 
+CAMBIOS AL 20-09-2017 (MARCEL)
+		+ Actualización de View:
+			- views/configuraciones/grupos_usuarios
+			- views/configuraciones/usuarios
+		+ Actualizacion de Controlador
+			- controllers/configuraciones/grupos_usuarios
+			- controllers/configuraciones/usuarios
+		+ Actualizacion de Models
+			- models/configuraciones/grupos_usuarios
+			- models/configuraciones/usuarios
+
+		dirección: 3ECJwvx9VgfotcUuEJMVNvmWnTGVMk179L
+		fecha: 09/07/2015
+		monto: 0.07775015
+
+CAMBIOS AL 21-09-2017 (MARCEL)
+		+ Actualización de View:
+			- views/login_form.php
+		+ Actualizacion de Controlador
+			- controllers/User_Authentication.php
+		+ Actualizacion de Models
+			- models/Usuarios_model.php
+			
+		
 		dirección: 3ECJwvx9VgfotcUuEJMVNvmWnTGVMk179L
 		fecha: 09/07/2015
 		monto: 0.07775015

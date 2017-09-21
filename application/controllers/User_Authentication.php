@@ -245,7 +245,7 @@ Class User_Authentication extends CI_Controller {
 		);
 		
 		// Registramos los datos del usuario y su perfil
-		$reg_usuario = $this->Usuarios_model->insertar($data_usuario);
+		$reg_usuario = $this->Usuarios_model->insertar2($data_usuario);
 		
 		if($reg_usuario){
 		
