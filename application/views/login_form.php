@@ -30,7 +30,7 @@
     ?>
     <head>
         <title>.:: Criptozone ::.</title>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+        <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">-->
         <link rel="stylesheet" href="<?= base_url() ?>static/bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="<?= base_url() ?>static/plugins/datepicker/datepicker3.css">
         <link rel="stylesheet" href="<?= base_url() ?>static/plugins/daterangepicker/daterangepicker-bs3.css">
@@ -75,7 +75,7 @@
                     }
                 });
 
-                $("select").select2();
+                //$("select").select2();
                 
 				$('#fecha_na').numeric({allow: "/"});
 				$('#username').alphanumeric();
@@ -241,20 +241,44 @@
 		
 		<style type="text/css">
 
-/*			input.placOn::-moz-placeholder {
-				color: #22274b !important; 
+			#modal_registrar input{
+				opacity: 0.5;
+				border-bottom-right-radius: 5px;
+				border-top-right-radius: 5px;
+				background-color: #4451A3;
+				width: 100%;
+				color: white !important;
+				border-color: #4451A3;
+				font-weight: bold;
+
+				
 			}
-			input.placOff::-moz-placeholder {
-				color: #edd727 !important; 
+			#modal_registrar span{
+				opacity: 0.5;
+				background-size: 100%;
+				background-repeat: no-repeat;
+				border-top-left-radius: 5px;
+				border-bottom-left-radius: 5px;
+				background-color: #4451A3;
+				border-color: #4451A3;
 			}
-			.select2-container .select2-choice {
-				background-color: #22274b;
-				width: 100%; 
-				color: #edd727;
+			#modal_registrar select{
+				background-color: #FFFFFF;
+				border-color: #FFFFFF;
 			}
-			.datepicker-dropdown {
-				background-color: #22274b !important;
-			}*/
+			#modal_registrar div{
+				border: hidden;
+				
+			}
+			::-moz-placeholder {
+				color: white !important;
+				font-size: 14px;
+				font-weight: bold;
+			}
+			input{
+				font-size: 14px;
+				font-weight: bold;
+			}
 		</style>
 		
     </head>
@@ -379,51 +403,67 @@
 
 		
 		<div class="modal" id="modal_registrar" style="height:auto;">
-		   <div class="modal-dialog" style="height:auto;">
-			  <div class="modal-content" style="height:auto;">
-				 <div class="modal-header" style="background-color:#22274b">
-					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-					<h4 class="modal-title">
-					   <center style="color: white !important"><span class="glyphicon glyphicon-search" style="color: white !important"></span>
-					   &nbsp;Formulario de Registro</center>
-					</h4>
+		   <div class="modal-dialog" style="height:auto; background-image: url('../static/img/modal_registro/fondo.png'); background-size: 100%; background-repeat: no-repeat">
+			  <div style="height:auto;">
+				 <div class="modal-header text-center" >
+					<label style="color: #001a5a !important; font-size: 24px; font-weight: bold" >
+					    Formulario de Registro
+					</label>
 				 </div>
 				 <div class="modal-body" style="height:auto;">
 					<form id="f_reg_usuario" name="f_reg_usuario" action="" method="post">
-					
-					   <div class="form-group">
-							<div class="col-sm-12">
-								<h4 style="color: #22274b; text-align: justify">Llene los datos solicitados en el formulario, recuerde que los campos identificados con (*) son obligatorios,
+							<div class="col-sm-12" style="margin-top: -5%">
+								<label style="color: #000000; font-weight: bold;" class="text-center">
+									Llene los datos solicitados en el formulario, recuerde que los campos identificados con (*) son obligatorios,
 									por lo tanto no pueden quedar en blanco.
-								</h4>
-							</div>
-							<div class="col-sm-6">
-								<input type="text" class="form-control" style="background-color: #22274b; width: 100%; color: #edd727 " id="first_name" name="first_name" placeholder="Nombre" autofocus="true">
-							</div>
-							<div class="col-sm-6">
-								<input type="text" class="form-control" style="background-color: #22274b; width: 100%; color: #edd727 " id="last_name" name="last_name" placeholder="Apellido" autofocus="true">
-							</div>
-							<div class="col-sm-6">
-								<input type="text" class="form-control" style="background-color: #22274b; width: 100%; color: #edd727 " id="fecha_na" name="fecha_na" placeholder="00/00/0000" autofocus="true">
-							</div>
-							</br></br></>
-							<div class="col-sm-6">
-								<input style="background-color: #22274b; width: 100%; color: #edd727 "  type="text" class="form-control" id="correo" name="correo" placeholder="Coreo Electrónico (*)"/>
-							</div>
-							<div class="col-sm-6">
+								</label>
 								<input type="hidden" id="codigo" name="codigo" value="<?php echo $codigo;?>">
 								<input type="hidden" id="link" name="link" value="<?php echo $link;?>">
-								<input type="text" class="form-control" style="background-color: #22274b; width: 100%; color: #edd727 " id="username_reg" name="username_reg" placeholder="Usuario (*)" autofocus="true">
 							</div>
-							</br></></br>
 							<div class="col-sm-6">
-								<input style="background-color: #22274b; width: 100%; color: #edd727 "  type="password" class="form-control" id="password_reg" name="password_reg" placeholder="Contraseña (*)"/>
+								<div class="input-group" >
+									<span class="input-group-addon" style=" background-image: url('../static/img/modal_registro/nombre.png'); "></span>
+									<input type="text" class="form-control"  id="first_name" name="first_name" placeholder="NOMBRE" autofocus="true">
+								</div>
 							</div>
-							</br></br></br>
+							
+							<div class="col-sm-6">
+								<div class="input-group">
+									<span class="input-group-addon" style=" background-image: url('../static/img/modal_registro/nombre.png'); "></span>
+									<input type="text" class="form-control"  id="last_name" name="last_name" placeholder="APELLIDO" autofocus="true">
+								</div>
+							</div>
+							<div class="col-sm-12">&nbsp;</div>
+							<div class="col-sm-6">
+								<div class="input-group" >
+									<span class="input-group-addon" style=" background-image: url('../static/img/modal_registro/fecha.png'); "></span>
+									<input type="text" class="form-control"  id="fecha_na" name="fecha_na" placeholder="00/00/0000" autofocus="true">
+								</div>
+							</div>
+							<div class="col-sm-6">
+								<div class="input-group" >
+									<span class="input-group-addon" style=" background-image: url('../static/img/modal_registro/correo.png'); "></span>
+									<input type="text" class="form-control" id="correo" name="correo" placeholder="CORREO ELECTRONICO (*)"/>
+								</div>
+							</div>
+							<div class="col-sm-12">&nbsp;</div>
+							<div class="col-sm-6">
+								<div class="input-group" >
+									<span class="input-group-addon" style=" background-image: url('../static/img/modal_registro/perfil.png'); "></span>
+									<input type="text" class="form-control" id="username_reg" name="username_reg" placeholder="USUARIO (*)" autofocus="true">
+								</div>
+							</div>
+							<div class="col-sm-6">
+								<div class="input-group" >
+									<span class="input-group-addon" style=" background-image: url('../static/img/modal_registro/pass.png'); "></span>
+									<input type="password" class="form-control" id="password_reg" name="password_reg" placeholder="CONTRASEÑA (*)"/>
+								</div>
+							</div>
+							<div class="col-sm-12">&nbsp;</div>
 							<div class="col-md-6">
 								<div class="form-group">
-									<label style="font-weight:bold">País</label>
-									<select class="form-control" id="pais_id" maxlength="7" name="pais_id">
+									<label style="font-weight:bold; color: #513085">PAÍS</label>
+									<select class="form-control select2" id="pais_id" maxlength="7" name="pais_id">
 										<option value="0">Seleccione</option>
 										<?php foreach ($listar_paises as $pais) { ?>
 											<option value="<?php echo $pais->codigo;?>"><?php echo $pais->descripcion;?></option>
@@ -433,8 +473,8 @@
 							</div><!-- /.form-group -->
 							<div class="col-md-6">
 								<div class="form-group">
-									<label style="font-weight:bold">Llegaste a nosotros por </label>
-									<select class="form-control" id="patrocinador_id" maxlength="7" name="patrocinador_id">
+									<label style="font-weight:bold; color: #513085">LLEGASTE A NOSOTROS POR </label>
+									<select class="form-control " id="patrocinador_id"  name="patrocinador_id" >
 										<option value="0">Seleccione</option>
 										<option value="1">Facebook</option>
 										<option value="2">Twitter</option>
@@ -447,21 +487,11 @@
 									</select>
 								</div><!-- /.form-group -->
 							</div><!-- /.form-group -->
-							<!--<div class="col-sm-12">
-								<select style="width: 100%;" class="form-control" id="tipo_moneda" name="tipo_moneda">
-									<option value="0">Seleccione</option>
-								</select>
-							</div>-->
-							</br>
-							<div class="col-sm-12" align="right">
-								<span class="input-btn">
-									<button class="btn" style=" background: linear-gradient(#edd727 , #998809); width:25%; font-weight: bold; color: white" type="button" id="registrar">
-										Registrar&nbsp;<span class="glyphicon glyphicon-share-alt"></span>
-									</button>
-								</span>
-							</div>
-							</br></br></br></br></br></br></br></br>
-					   </div>
+							<div class="col-md-12" align="center">
+								<button class="btn" style="border-radius: 25px; background-color: #001a5a; width:25%; font-weight: bold; color: white" type="button" id="registrar">
+									Registrar&nbsp;
+								</button>
+							</div>&nbsp;
 					</form>
 				 </div>
 				 
