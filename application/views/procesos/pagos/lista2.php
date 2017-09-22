@@ -100,9 +100,9 @@ redirect(base_url());
 										<?php } ?>
 									</td>
 									<td style='text-align: center'>
-										<?php if ($pago->estatus == 2) {?>
+										<?php if ($pago->estatus == 2 || $pago->estatus == 3) {?>
 										<input class='negar' type="checkbox" checked="checked" disabled="disabled"/>
-										<?php }else if ($pago->estatus == 1 || $pago->estatus == 3){ ?>
+										<?php }else if ($pago->estatus == 1){ ?>
 										<input class='negar' id='<?php echo $pago->codigo; ?>' type="checkbox" title='Negar el pago <?php echo $pago->codigo;?>'/>
 										<?php } ?>
 									</td>
