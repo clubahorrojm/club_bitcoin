@@ -90,11 +90,12 @@ class CRelPagos extends CI_Controller
         $id_user = ($this->session->userdata['logged_in']['id']); // ID usuario
         $data['pago'] = $this->MRelPagos->obtenerRelPagosBit($id_user); // Informacion del pago de ingreso al sistema
         $status_pago = $data['pago'][0]->estatus; // Estatus del pago
-        if($status_pago == 2){
-			$status_pago = 2;
-		}else{
-			$status_pago = 1;
-		}
+        //~ if($status_pago == 2){
+			//~ $status_pago = 2;
+		//~ }else{
+			//~ $status_pago = 1;
+		//~ }
+		$status_pago = 2;
         $datos = array(
             'codigo' => $this->input->post('cod_pago'),
             'dir_monedero'=> $this->input->post('dir_monedero'),

@@ -59,6 +59,8 @@ class CLPagos extends CI_Controller
             $data['listar'] = [];
         }
         $data['listar_usuarios'] = $this->Usuarios_model->obtenerUsuarios();
+        // Datos del monedero bitcoin de la empresa
+        $data['monedero_emp'] = $this->ModelsBusqueda->obtenerRegistro('adm_monedero', 'id', 1);
         // $data['listar_cuentas'] = $this->MCuentas->obtenerCuentas();
         $this->load->view('procesos/pagos/lista2', $data);
     }
@@ -68,7 +70,7 @@ class CLPagos extends CI_Controller
         // Armamos la data a actualizar
         $data = array(
             'codigo' => $cod,
-            'estatus' => 2,
+            'estatus' => 3,
             'operador_id' => $this->session->userdata['logged_in']['codigo'],
             'fecha_verificacion' => date('Y-m-d'),
         );
@@ -122,7 +124,7 @@ class CLPagos extends CI_Controller
         // Armamos la data a actualizar
         $data = array(
             'codigo' => $cod,
-            'estatus' => 3,
+            'estatus' => 4,
             'operador_id' => $this->session->userdata['logged_in']['codigo'],
             'fecha_verificacion' => date('Y-m-d'),
         );
@@ -140,6 +142,14 @@ class CLPagos extends CI_Controller
             );
             $this->MAuditoria->add($param);
         }
+    }
+    
+    // Método para retornar una lista de pagos pendientes
+    function pagos_pendientes(){
+        // Consultamos los pagos pendientes
+        $result = $this->MLPagos->obtenerPagosBitPendientes();
+        // Retornamos un json con los pagos
+        echo json_encode($result);
     }
 }
 
