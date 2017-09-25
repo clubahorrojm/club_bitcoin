@@ -21,7 +21,7 @@ class MLPagos extends CI_Model {
         $this->load->database();
     }
 
-    //Metodo público para obterner una lista de las cuentas
+    //Metodo público para obterner una lista de los pagos de la tablas 'ref_rel_pagos'
     public function obtenerPagos() {
         //~ $result = $this->db->where('estatus !=', 99);
         //~ $query = $this->db->order_by('estatus asc, id asc');
@@ -36,7 +36,7 @@ class MLPagos extends CI_Model {
          else return $query->result();
     }
 
-    //Metodo público para obterner una lista de las cuentas
+    //Metodo público para obterner una lista de los pagos de la tablas 'ref_rel_pagos_bitcoins'
     public function obtenerPagosBit() {
         //~ $result = $this->db->where('estatus !=', 99);
         //~ $query = $this->db->order_by('estatus asc, id asc');
@@ -48,6 +48,13 @@ class MLPagos extends CI_Model {
         $query = $this->db->query($sql);
         if($query->num_rows()>0) return $query->result();
          else return $query->result();
+    }
+
+    //Metodo público para obterner una lista de los pagos pendientes
+    public function obtenerPagosBitPendientes() {
+        $result = $this->db->where('estatus=', 1);
+        $query = $this->db->get('ref_rel_pagos_bitcoins');
+        return $query->result();
     }
     
     // Metodo público, para actualizar un registro 
