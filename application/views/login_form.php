@@ -225,14 +225,22 @@
 				$("#registrarse").click(function (e) {
 					e.preventDefault();  // Para evitar que se envíe por defecto
 					$.post('<?php echo base_url(); ?>index.php/User_Authentication/enlace_disponible2/', function(response) {
-						//alert(response);
-						var cadena = response.split("@@@");
-						var cod_link = cadena[0];
-						//var userd_id = cadena[1];
-						var num_link = cadena[1];
-						$("#codigo").val(cod_link.trim());
-						$("#link").val(num_link);
-						$("#modal_registrar").modal('show'); 
+						//alert(response.trim());
+						if (response.trim() == 1){
+							bootbox.alert('<h4>Disculpe, en este momento no hay links disponibles', function () {
+								url = '<?php echo base_url(); ?>index.php/'
+								window.location = url;
+							});
+						}else{
+							var cadena = response.split("@@@");
+							var cod_link = cadena[0];
+							//var userd_id = cadena[1];
+							var num_link = cadena[1];
+							$("#codigo").val(cod_link.trim());
+							$("#link").val(num_link);
+							$("#modal_registrar").modal('show'); 
+						}
+						
 					});
 				});
 			});
@@ -240,7 +248,7 @@
 		
 		
 		<style type="text/css">
-
+		
 			#modal_registrar input{
 				opacity: 0.5;
 				border-bottom-right-radius: 5px;
@@ -402,7 +410,7 @@
 		</div>
 
 		
-		<div class="modal" id="modal_registrar" style="height:auto;">
+		<div class="modal" id="modal_registrar" style="height:auto; margin-top: 3%">
 		   <div class="modal-dialog" style="height:auto; background-image: url('../static/img/modal_registro/fondo.png'); background-size: 100%; background-repeat: no-repeat">
 			  <div style="height:auto;">
 				 <div class="modal-header text-center" >
