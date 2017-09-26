@@ -150,7 +150,7 @@ class MMails extends CI_Model {
 						  <table border="0" cellpadding="0" cellspacing="0" style="border-collapse:separate;mso-table-lspace:0pt;mso-table-rspace:0pt;width:100%;">
 							<tr>
 							  <td>
-								<img src="'.static_url().'public/img/demos/medical/logo-medical.png" alt="No se pudo mostrar" width="80px;" height="50px;">
+								<img src="'.static_url().'img/circulo-01.png" alt="No se pudo mostrar" width="80px;" height="50px;">
 							  </td>
 							</tr>
 							<tr>
@@ -322,7 +322,7 @@ class MMails extends CI_Model {
 						  <table border="0" cellpadding="0" cellspacing="0" style="border-collapse:separate;mso-table-lspace:0pt;mso-table-rspace:0pt;width:100%;">
 							<tr>
 							  <td>
-								<img src="'.static_url().'static/img/circulo-01.png" alt="No se pudo mostrar" width="80px;" height="50px;">
+								<img src="'.static_url().'img/circulo-01.png" alt="No se pudo mostrar" width="80px;" height="50px;">
 							  </td>
 							</tr>
 							<tr>
@@ -343,11 +343,12 @@ class MMails extends CI_Model {
 									<strong>Correo:</strong>
 									'.$datos_reg['email'].'
 								  </li>
-								  <li style="display:block;margin:0;padding:5px 0;border-bottom:1px solid #eee">
-									<strong>Haga su pago a la siguiente dirección:</strong>
-									'.$datos_reg['monedero_emp'].'
-								  </li>
 								</ul>
+								
+								<p style="font-family:sans-serif;font-size:14px;font-weight:normal;margin:0;Margin-bottom:15px;">El siguiente paso es realizar el aporte de 10$ equivalente en bitcoin a la siguiente billetera: '.$datos_reg['monedero_emp'].'</p>
+								
+								<p style="font-family:sans-serif;font-size:14px;font-weight:normal;margin:0;Margin-bottom:15px;">Una vez efectuado el pago, ingresa nuevamente a www.criptozone.com con tu usuario y contraseña y registra tu dirección de billetera.</p>
+								
 							  </td>
 							</tr>
 						  </table>
