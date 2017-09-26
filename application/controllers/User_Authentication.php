@@ -30,7 +30,7 @@ Class User_Authentication extends CI_Controller {
 
 // Load database
         $this->load->model('Login_database');
-        $this->load->model('MMails');
+        $this->load->model('mails/MMails');
         $this->load->model('configuracion/usuarios/Usuarios_model');
         $this->load->model('administracion/MAuditoria');
         $this->load->model('administracion/MPaises');
