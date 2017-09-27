@@ -113,6 +113,12 @@ Class Usuarios_model extends CI_Model {
             echo '1';  
         }
     }
+	
+	public function actualizar2($id, $datos) {
+		$result = $this->db->where('id', $id);
+		$result = $this->db->update('usuarios', $datos);
+		return $result;
+    }
 
     public function eliminar($id) {
         $this->db->delete('usuarios', array('id' => $id));

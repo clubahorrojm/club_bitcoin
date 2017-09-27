@@ -65,8 +65,7 @@ if ($tipouser == 'Administrador') {
                                                         echo $usuario->last_name;
                                                     }}?>
                                                 </td>
-                                                <td><?php echo $top_dips->disponible;?> <i class="fa fa-btc"></i></td>
-                                                <!-- <td><?php echo $top_dips->nivel;?>  -->      
+                                                <td><?php echo $top_dips->disponible;?> $</td>    
                                             </tr>
                                         <?php $i++ ?>
                                     <?php } ?>
@@ -81,9 +80,9 @@ if ($tipouser == 'Administrador') {
 
     <footer class="main-footer">
         <div class="pull-right hidden-xs">
-            <b>Version</b> 2.3.0
+            <b>Version</b> 1.0
         </div>
-        <strong>Copyright &copy; 2014-2015 <a href="http://almsaeedstudio.com">Almsaeed Studio</a>.</strong> All rights reserved.
+        <strong>Copyright Criptozone 2017</strong>
     </footer>
 
 
@@ -96,7 +95,7 @@ if ($tipouser == 'Administrador') {
         "lengthChange": false,
         "autoWidth": false,
         "searching": false,
-        "ordering": true,
+        "ordering": false,
         "info": true,
         "iDisplayLength": 15,
         "iDisplayStart": 0,

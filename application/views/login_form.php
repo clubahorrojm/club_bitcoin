@@ -28,8 +28,8 @@
     //~ echo "Link: ".$link;
     
     ?>
-    <head>
-        <title>.:: Criptozone ::.</title>
+    <head><link  href="<?= base_url() ?>static/img/login_adm/logo-01.png" rel='shortcut icon' type='image/png'/>
+        <title>Criptozone</title>
         <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">-->
         <link rel="stylesheet" href="<?= base_url() ?>static/bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="<?= base_url() ?>static/plugins/datepicker/datepicker3.css">
@@ -339,7 +339,7 @@
 				<form id="frmlogin" class="form-horizontal"  method="POST" enctype="multipart/form-data" autocomplete="off" role="form">
 					<div class="login-box">
 						<!-- /.login-logo -->
-						<div  style=" background-image: url('../../static/img/login_adm/contenido.png'); background-size: 100%">
+						<div  style=" background-image: url('../static/img/login_adm/contenido.png'); background-size: 100%">
 							<br>
 							<div class="col-xs-12 text-left" ><img  src="<?= base_url() ?>static/img/login_adm/logo-01.png" style="width: 35%"/></div>
 							<center>
@@ -351,13 +351,13 @@
 							  <div class="col-xs-10">
 								  <div class="input-group"  style="border-bottom: solid  2px ;  border-bottom-color: #513085; ">
 									  
-									  <span class="input-group-addon" style="background-color: transparent; border: none; background-image: url('../../static/img/login_adm/clave.png'); background-size: 100%; background-repeat: no-repeat"></span>
+									  <span class="input-group-addon" style="background-color: transparent; border: none; background-image: url('../static/img/login_adm/nombre.png'); background-size: 100%; background-repeat: no-repeat"></span>
 									  <input style="background-color: transparent; border: none;" class="form-control" type="text" id="username" name="username" >
 									  
 								  </div>
 								  <br>
 								  <div class="input-group" style="border-bottom: solid  2px ;  border-bottom-color: #513085; ">
-									  <span class="input-group-addon" style="background-color: transparent; border: none; background-image: url('../../static/img/login_adm/nombre.png'); background-size: 100%; background-repeat: no-repeat"></span>
+									  <span class="input-group-addon" style="background-color: transparent; border: none; background-image: url('../static/img/login_adm/clave.png'); background-size: 100%; background-repeat: no-repeat"></span>
 									  <input style="background-color: transparent; border: none;" class="form-control" type="password" id="password" name="password" placeholder="">
 									  <input style="background-color: #22274b; width: 50%; color: #edd727; font-weight: bold "  type="hidden" id="type_user" name="type_user" value="BÁSICO">
 								  </div>
@@ -377,14 +377,12 @@
 						  
 						</div>
 						
-						<div  style=" background-image: url('../../static/img/login_adm/registrar.png'); background-size: 102%; background-repeat: no-repeat">
+						<div id="registrarse"  style=" background-image: url('../static/img/login_adm/registrar.png'); background-size: 102%; background-repeat: no-repeat">
 							<br>
 							<div class="row">
-								<a href="#" style="color: #513085;" id="registrarse"><h3 style="font-weight: bold">REGISTRATE</h3></a><br>
+								<a><h3 style="font-weight: bold; color: #513085;">REGISTRATE</h3></a><br>
 							</div>
 							<br><br>
-							
-							
 						</div>
 						<!-- /.login-box-body -->
 					  </div>

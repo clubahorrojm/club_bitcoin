@@ -56,27 +56,5 @@ class CRelRanking extends CI_Controller
         $data['listar_usuarios'] = $this->Usuarios_model->obtenerUsuarios(); // Listado de usuarios
         $this->load->view('referidos/perfil/paneles/ranking',$data);
     }
-    //metodo para guardar un nuevo registro
-    public function guardar(){
-        $datos = array(
-            'codigo' => $this->ModelsBusqueda->count_all_table('ref_rel_ayudas')+1,
-            'usuario_id' => $this->input->post('usuario_id'),
-            'motivo'=> $this->input->post('motivo'),
-            'pregunta'=> $this->input->post('preguntas'),
-            'estatus'=> 1,
-            'fecha_pre' => date('Y-m-d'),
-        );
-        $result = $this->MRelRanking->insertarRelRanking($datos);
-        if ($result) {
-            $param = array(
-                'tabla' => 'RelRanking',
-                'codigo' => $this->input->post('codigo'),
-                'accion' => 'Nueva solicitud de Soporte',
-                'fecha' => date('Y-m-d'),
-                'hora' => date("h:i:s a"),
-                'usuario' => $this->session->userdata['logged_in']['id'],
-            );
-            $this->MAuditoria->add($param);
-        }    
-    }
+
 }

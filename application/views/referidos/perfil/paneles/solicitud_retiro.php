@@ -176,10 +176,15 @@ if ($tipouser == 'Administrador') {
             <div class="col-md-6"><input type="text" style="background-color: #3e1c74; color: white; width: 100%" placeholder="Ej: 1850.33" maxlength="10" id="monto_retiro" onkeyup="validaFloat(this.value), suma()"  class="form-control" ></div>
             <div class="col-md-3">&nbsp;</div>
             <br>
-            <div class="col-md-12"><label style="font-weight:bold">&nbsp;</label></div>
-            <button type="button" class="btn " data-dismiss="modal" id="agregar_r" style="color: white; background-color: #c3b01c">&nbsp; Aceptar</button>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <button type="button" class="btn " data-dismiss="modal" id="cerrar_modal" style="color: white; background-color: #c3b01c">Cancelar</button>
+            <div class="col-md-12">&nbsp;</div>
+            <div class="form-group col-md-12">
+                <div class="col-md-12" style="text-align: center ">
+                    <button type="button" class="btn " data-dismiss="modal" id="agregar_r" style="color: white; background-color: #c3b01c">&nbsp; Aceptar</button>
+                    <button type="button" class="btn " data-dismiss="modal" id="cerrar_modal" style="color: white; background-color: #c3b01c">Cancelar</button>
+                </div>
+            </div>
+            <div class="col-md-3">&nbsp;</div>
+            <br><br><br><br><br>
           </div>
           <div class="modal-footer text-center" style="background-color: #001A5A; text-align: center" >
                 <span style="color: #FFFFFF">El monto debe ser expresado en $ y será cancelado en su equivalente a BTC</span>
@@ -196,9 +201,9 @@ if ($tipouser == 'Administrador') {
 
     <footer class="main-footer">
         <div class="pull-right hidden-xs">
-            <b>Version</b> 2.3.0
+            <b>Version</b> 1.0
         </div>
-        <strong>Copyright &copy; 2014-2015 <a href="http://almsaeedstudio.com">Almsaeed Studio</a>.</strong> All rights reserved.
+        <strong>Copyright Criptozone 2017</strong>
     </footer>
 
 

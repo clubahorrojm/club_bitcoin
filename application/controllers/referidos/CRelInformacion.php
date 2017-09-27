@@ -59,19 +59,19 @@ class CRelInformacion extends CI_Controller
     
    //Metodo para actualizar
    function actualizar(){
-		//~ $fecha = explode('/',$this->input->post('fecha_na'));
-        //~ $fecha = $fecha[2].'-'.$fecha[1].'-'.$fecha[0];
+		$fecha = explode('/',$this->input->post('fecha_na'));
+        $fecha = $fecha[2].'-'.$fecha[1].'-'.$fecha[0];
         $datos = array(
-            'cedula' => $this->input->post('cedula'),
-            //~ 'first_name' => $this->input->post('nombre'),
-            //~ 'last_name' => $this->input->post('apellido'),
-            //~ 'email'=> $this->input->post('correo'),
-			//~ 'fecha_na' => $fecha,
-            //~ 'pais_id' => $this->input->post('pais_id'),
-            //~ 'patrocinador_id'=> $this->input->post('patrocinador_id'),
+            //'cedula' => $this->input->post('cedula'),
+            'first_name' => $this->input->post('nombre'),
+            'last_name' => $this->input->post('apellido'),
+            'email'=> $this->input->post('correo'),
+			'fecha_na' => $fecha,
+            'pais_id' => $this->input->post('pais_id'),
+            'patrocinador_id'=> $this->input->post('patrocinador_id'),
         );
         $id = $this->input->post('usuario_id');
-		$result = $this->Usuarios_model->actualizar($id, $datos);
+		$result = $this->Usuarios_model->actualizar2($id, $datos);
 		
 		$id_user = ($this->session->userdata['logged_in']['id']); // ID usuario
 		$data['usuario'] = $this->Usuarios_model->obtenerUsuario($id_user);
