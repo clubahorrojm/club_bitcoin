@@ -496,7 +496,27 @@ CAMBIOS AL 26-09-2017 (MARCEL)
 			- controllers/CBots.php CRelInformacion.php CRelRanking.php
 		+ Actualizacion de Models
 			- models/MRelRanking.php Usuarios_model.php
+
+
+CAMBIOS AL 27-09-2017 (MARCEL)
+		+ Actualización de View:
+			base.php base2.php
+		+ Actualizacion de Controlador
+			- controllers/CRelPagos.php CRelInformacion.php
+
+		Aja te explico verifica toda la modal:
+		- por ejemplo cuando registras el pago yo ya lo corregi se registraba en estatus 2 y debia ser 1
+		- pero al logearte de nuevo aparece eso de estatus del pago sin haberlo validado en aprobado
+		- la validacion y el boton funciona fino y al pelo.
+		- utiliza 2 botones, uno que sera registrar el pago y el de siguiente solo para avanzar en la modal,
+		  osea que solo este disponible o habilitado si ya se valido el pago.
+		- quita la cedula (ya no se usara) no hace falta registrar nada salvo el monedero del usuario
+		- al darle finalizar no me genera ni los links ni me agrega el nivel al cual he subido llegado que es 1.
+		 y por eso no me carga el icono de nivel en el perfil.
+		 **Recuerda que todo lo que se va a actualizar o registrar en la tabla usuarios pasa por los mentodos actualizar2 y insertar2 que no piden clave de usuarii
+		   porque logicamente son usuarios base solo se cambiaran a si mismos y ya.
 		
 		dirección: 3ECJwvx9VgfotcUuEJMVNvmWnTGVMk179L
 		fecha: 09/07/2015
 		monto: 0.07775015
+

@@ -126,21 +126,15 @@ if (isset($this->session->userdata['logged_in'])) {
                 <section class="sidebar">
                     <!-- Sidebar user panel -->
                     <div class="user-panel">
-<!--						<?php if ($picture == '') { ?>
-								<img src="<?php echo base_url(); ?>static/img/default.gif" class="img-circle" alt="User Image">
-							<?php } else { ?>
-								<img src="<?php echo base_url(); ?>uploads/images/<?php echo $picture ?>" class="img-circle" alt="User Image">
-							<?php } ?> -->
                         <div class="pull-left image">
-                           <p style="color:#FFFFFF !important"><?php echo"$username ($tipouser)" ?> <i class="fa fa-circle text-success"></i></p>
-<!--
-                            <a href="<?php echo base_url(); ?>index.php/User_Authentication/logout/<?php echo $id ?>"><i class="glyphicon glyphicon-log-out"></i> Cerrar Sesión</a>
--->
-                            <a href="<?php echo base_url(); ?>index.php/User_Authentication/logout/<?php echo $id."?t_u=".$tipo_usuario; ?>"><img src="<?php echo base_url(); ?>static/img/cerrar-sesion-01.png" style="width:20px;"> Cerrar Sesión</a>
+							<p style="color:#FFFFFF !important"><?php echo"$username ($tipouser)" ?> <i class="fa fa-circle text-success"></i></p>
+                            <a href="<?php echo base_url(); ?>index.php/User_Authentication/logout/<?php echo $id ?>">
+							<img src="<?php echo base_url(); ?>static/img/cerrar-sesion-01.png" style="width:20px;"> Cerrar Sesión</a>
                         </div>
                         <div class="pull-left info">
-                           <!-- <p style="color:#FFFFFF !important"><?php echo"$username ($tipouser)" ?> <i class="fa fa-circle text-success"></i></p>
-                            <a href="<?php echo base_url(); ?>index.php/User_Authentication/logout/<?php echo $id."?t_u=".$tipo_usuario; ?>"><img src="<?php echo base_url(); ?>static/img/cerrar-sesion-01.png" style="width:20px;"> Cerrar Sesión</a>-->
+                            <!--<p style="color:#FFFFFF !important"><?php echo"$username ($tipouser)" ?> <i class="fa fa-circle text-success"></i></p>
+                            <a href="<?php echo base_url(); ?>index.php/User_Authentication/logout/<?php echo $id ?>">
+							<img src="<?php echo base_url(); ?>static/img/cerrar-sesion-01.png" style="width:20px;"> Cerrar Sesión</a>-->
                         </div>
                     </div>
                     <!-- search form -->
