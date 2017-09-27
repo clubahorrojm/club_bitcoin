@@ -217,7 +217,7 @@ class CBots extends CI_Controller
 						'fecha' => date('Y-m-d'),
 					);
 					// Registramos los datos del usuario y su perfil
-					$reg_usuario = $this->Usuarios_model->insertar($data_usuario);
+					$reg_usuario = $this->Usuarios_model->insertar2($data_usuario);
 					if ($reg_usuario) {
 						
 						$param = array(

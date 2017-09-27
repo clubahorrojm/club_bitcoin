@@ -56,12 +56,12 @@ if ($tipouser == 'Administrador') {
                                 </div>
                                 <br>
                                 <?php } ?>
-                                <div class="col-md-2">
+                              <!--  <div class="col-md-2">
                                     <div class="form-group">
                                         <label style="font-weight:bold">Cédula</label>
                                         <input type="text" placeholder="Cédula del usuario" value="<?php echo $usuario[0]->cedula ?>" maxlength="8" id="cedula" class="form-control"  >
-                                    </div><!-- /.form-group -->
-                                </div><!-- /.form-group -->
+                                    </div>
+                                </div>-->
                                 <div class="col-md-2">
                                     <div class="form-group">
                                         <label style="font-weight:bold">Nombre</label>
@@ -158,9 +158,9 @@ if ($tipouser == 'Administrador') {
     </div><!-- /.content-wrapper -->
     <footer class="main-footer">
         <div class="pull-right hidden-xs">
-            <b>Version</b> 2.3.0
+            <b>Version</b> 1.0
         </div>
-        <strong>Copyright &copy; 2014-2015 <a href="http://almsaeedstudio.com">Almsaeed Studio</a>.</strong> All rights reserved.
+        <strong>Copyright Criptozone 2017</strong>
     </footer>
 
 
@@ -206,29 +206,30 @@ if ($tipouser == 'Administrador') {
     $('#agregar4').click(function(e){
         e.preventDefault();
         //Para validar campos vacios
-        if ($("#cedula").val() == '') {
-            bootbox.alert("Debe colocar su cedula", function () {
-            }).on('hidden.bs.modal', function (event) {
-                    $("#cedula").parent('div').addClass('has-error')
-                    $("#cedula").focus();
-            });
-        }else if ($("#nombre").val() == '') {
+        //if ($("#cedula").val() == '') {
+        //    bootbox.alert("Debe colocar su cedula", function () {
+        //    }).on('hidden.bs.modal', function (event) {
+        //            $("#cedula").parent('div').addClass('has-error')
+        //            $("#cedula").focus();
+        //    });
+        //}else
+        if ($("#nombre").val() == '') {
             bootbox.alert("Debe colocar su nombre", function () {
             }).on('hidden.bs.modal', function (event) {
-                    $("#nombre").parent('div').addClass('has-error')
-                    $("#nombre").focus();
+                $("#nombre").parent('div').addClass('has-error');
+                $("#nombre").focus();
             });
         }else if ($("#apellido").val() == '') {
             bootbox.alert("Debe colocar su apellido", function () {
             }).on('hidden.bs.modal', function (event) {
-                $("#apellido").parent('div').addClass('has-error')
+                $("#apellido").parent('div').addClass('has-error');
                 $("#apellido").focus();
             });
         }else if ($("#correo").val() == '') {
             bootbox.alert("Debe colocar su correo electrónico", function () {
             }).on('hidden.bs.modal', function (event) {
-                    $("#correo").parent('div').addClass('has-error')
-                    $("#correo").focus();
+                $("#correo").parent('div').addClass('has-error');
+                $("#correo").focus();
             });
         }/*else if ($("#telefono").val() == '') {
             bootbox.alert("Debe colocar su telefono", function () {
@@ -269,19 +270,19 @@ if ($tipouser == 'Administrador') {
                     $("#dir_monedero_per2").focus();
             });
         }else{
-            cedula = $('#cedula').val()
-            nombre = $('#nombre').val()
-            apellido = $('#apellido').val()
-            correo = $('#correo').val()
+            //cedula = $('#cedula').val()
+            nombre = $('#nombre').val();
+            apellido = $('#apellido').val();
+            correo = $('#correo').val();
             //telefono = $('#telefono').val()
-            fecha_na = $('#fecha_na').val()
-            usuario_id = $('#usuario_id').val()
-            pais_id = $('#pais_id').val()
-            patrocinador_id = $('#patrocinador_id').val()
-            dir_monedero_per = $('#dir_monedero_per2').val()
-            pk_perfil = $('#cod_perfil').val()
+            fecha_na = $('#fecha_na').val();
+            usuario_id = $('#usuario_id').val();
+            pais_id = $('#pais_id').val();
+            patrocinador_id = $('#patrocinador_id').val();
+            dir_monedero_per = $('#dir_monedero_per2').val();
+            pk_perfil = $('#cod_perfil').val();
             $.post('<?php echo base_url(); ?>index.php/referidos/CRelInformacion/actualizar',
-                   $.param({'cedula': cedula})+'&'+$.param({'nombre': nombre})+'&'+$.param({'apellido': apellido})+'&'+
+                   $.param({'nombre': nombre})+'&'+$.param({'apellido': apellido})+'&'+
                    $.param({'pk_perfil': pk_perfil})+'&'+$.param({'correo': correo})+'&'+$.param({'fecha_na': fecha_na})+'&'+
 				   $.param({'pais_id': pais_id})+'&'+$.param({'patrocinador_id': patrocinador_id})+'&'+
                    $.param({'usuario_id': usuario_id})+'&'+$.param({'dir_monedero_per': dir_monedero_per}), 

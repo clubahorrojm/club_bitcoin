@@ -28,8 +28,8 @@
     //~ echo "Link: ".$link;
     
     ?>
-    <head>
-        <title>.:: Criptozone ::.</title>
+    <head><link  href="<?= base_url() ?>static/img/login_adm/logo-01.png" rel='shortcut icon' type='image/png'/>
+        <title>Criptozone</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="<?= base_url() ?>static/bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="<?= base_url() ?>static/plugins/datepicker/datepicker3.css">
