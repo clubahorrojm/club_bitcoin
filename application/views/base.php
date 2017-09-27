@@ -49,7 +49,7 @@ if (isset($this->session->userdata['logged_in'])) {
     <head><link  href="<?= base_url() ?>static/img/login_adm/logo-01.png" rel='shortcut icon' type='image/png'/>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title > Criptozone</title>
+        <title>Criptozone | Version 0.1</title>
         <!-- Tell the browser to be responsive to screen width -->
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
         <!-- Bootstrap 3.3.5 -->
@@ -234,7 +234,7 @@ if (isset($this->session->userdata['logged_in'])) {
                     <!-- Sidebar user panel -->
                     <div class="user-panel">
                         <div class="pull-left image">
-                           <p style="color:#FFFFFF !important"><?php echo"$username ($tipouser)" ?> <i class="fa fa-circle text-success"></i></p>
+                            <p style="color:#FFFFFF !important"><?php echo"$username ($tipouser)" ?> <i class="fa fa-circle text-success"></i></p>
 <!--
                             <a href="<?php echo base_url(); ?>index.php/User_Authentication/logout/<?php echo $id ?>"><i class="glyphicon glyphicon-log-out"></i> Cerrar Sesión</a>
 -->
@@ -242,6 +242,8 @@ if (isset($this->session->userdata['logged_in'])) {
                         </div>
                         <div class="pull-left info">
                            <!-- <p style="color:#FFFFFF !important"><?php echo"$username ($tipouser)" ?> <i class="fa fa-circle text-success"></i></p>
+                            <a href="<?php echo base_url(); ?>index.php/User_Authentication/logout/<?php echo $id ?>"><i class="glyphicon glyphicon-log-out"></i> Cerrar Sesión</a>
+
                             <a href="<?php echo base_url(); ?>index.php/User_Authentication/logout/<?php echo $id."?t_u=".$tipo_usuario; ?>"><img src="<?php echo base_url(); ?>static/img/cerrar-sesion-01.png" style="width:20px;"> Cerrar Sesión</a>-->
                         </div>
                     </div>
