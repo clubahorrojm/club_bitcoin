@@ -75,7 +75,8 @@ class CRelLinks extends CI_Controller
         $result = $this->MRelLinks->obtenerRelLinks($u_id);
 		$data['editar'] = $this->MReferidos->obtenerReferido($u_id);
 		$cod_perfil = $data['editar'][0]->codigo;
-        if (count($result) == 0){
+		
+        if ($result[0]->total == 0){
             for ($i=1; $i<6; $i++){
                 $datos = array(
 					'id' => $this->ModelsBusqueda->count_all_table('ref_rel_links')+1,

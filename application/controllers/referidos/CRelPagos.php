@@ -60,7 +60,7 @@ class CRelPagos extends CI_Controller
         $this->load->view('referidos/perfil/paneles/pagos',$data);
     }
     
-    //metodo para guardar un nuevo registro
+    // Método para guardar un nuevo registro
     public function guardar(){
         $result = $this->MRelPagos->insertarRelPagosBit($datos);
         if ($result) {
@@ -83,10 +83,10 @@ class CRelPagos extends CI_Controller
         echo json_encode($result);
     }
 
-    //metodo para guardar un nuevo registro
+    // Método para guardar un nuevo registro
     public function actualizar(){
-        $fecha = explode('/',$this->input->post('fecha_pago'));
-        $fecha = $fecha[2].'-'.$fecha[1].'-'.$fecha[0];
+        //~ $fecha = explode('/',$this->input->post('fecha_pago'));
+        //~ $fecha = $fecha[2].'-'.$fecha[1].'-'.$fecha[0];
         $id_user = ($this->session->userdata['logged_in']['id']); // ID usuario
         $data['pago'] = $this->MRelPagos->obtenerRelPagosBit($id_user); // Informacion del pago de ingreso al sistema
         $status_pago = $data['pago'][0]->estatus; // Estatus del pago
@@ -105,7 +105,7 @@ class CRelPagos extends CI_Controller
             'estatus'=> $status_pago,
             'hora_pago'=> date("h:i:s a"),
         );
-        //print_r($datos);
+        
         $result = $this->MRelPagos->actualizarRelPagosBit($datos);
         //~ $datos2 = array(
             //~ 'id'=> $this->input->post('pk_perfil'),
@@ -113,6 +113,31 @@ class CRelPagos extends CI_Controller
             //~ 'estatus'=> 2,
         //~ );
         //~ $result = $this->MReferidos->actualizarReferidos($datos2);
+        if ($result) {
+            $param = array(
+                'tabla' => 'RelPagos',
+                'codigo' => $this->input->post('cod_pago'),
+                'accion' => 'Actualización Pago al sistema',
+                'fecha' => date('Y-m-d'),
+                'hora' => date("h:i:s a"),
+                'usuario' => $this->session->userdata['logged_in']['id'],
+            );
+            $this->MAuditoria->add($param);
+        }
+    }
+    
+    // Método para actualizar el pago pero sin cambiar su estatus
+    public function actualizar_dir(){
+        $id_user = ($this->session->userdata['logged_in']['id']); // ID usuario
+        $data['pago'] = $this->MRelPagos->obtenerRelPagosBit($id_user); // Informacion del pago de ingreso al sistema
+        $datos = array(
+            'codigo' => $this->input->post('cod_pago'),
+            'dir_monedero'=> $this->input->post('dir_monedero'),
+            'perfil_id'=> $this->input->post('pk_perfil')
+        );
+        
+        $result = $this->MRelPagos->actualizarRelPagosBit($datos);
+        
         if ($result) {
             $param = array(
                 'tabla' => 'RelPagos',
