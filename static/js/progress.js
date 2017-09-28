@@ -213,6 +213,12 @@ $(document).ready(function () {
         });
     });
     
+    // Control de eventos de cierre de sesión
+    $('.cerrar_sesion').click(function(e){
+		e.preventDefault();
+		window.location = base_url+'index.php/User_Authentication/logout/'+user_id+'?t_u=3';
+	});
+    
 });
 
 // Función para validar los datos del pago del usuario
@@ -338,7 +344,7 @@ function valida_pago(){
 					   //~ $.param({'pk_perfil': pk_perfil})+'&'+$.param({'dir_monedero': dir_monedero})+'&'+$.param({'monto': monto})+'&'+
 					   //~ $.param({'fecha_pago': fecha_pago})+'&'+$.param({'cod_pago': cod_pago}), 
 					   //~ function (response){
-					$.post(base_url+'index.php/referidos/CRelPagos/actualizar',
+					$.post(base_url+'index.php/referidos/CRelPagos/actualizar_dir',
 					$.param({'pk_perfil': pk_perfil})+'&'+$.param({'dir_monedero': dir_monedero})+'&'+$.param({'cod_pago': cod_pago}), 
 					function (response){
 						if (response[0] == 1) {
@@ -349,7 +355,7 @@ function valida_pago(){
 							});
 						} else {
 							//~ bootbox.alert("Se validó y registró su pago con Éxito", function (){
-							bootbox.alert("Se registró su pago con Éxito", function (){
+							bootbox.alert("Espere un mensaje de confirmación de pago en su correo en un máximo de 72 horas, de no recibirlo por favor comunicarse a nuestro correo support@criptozone.com", function (){
 							}).on('hidden.bs.modal', function (event) {
 								//~ //window.location = '<?php echo base_url(); ?>index.php/referidos/CRelPagos/';
 								window.location = base_url+'index.php/referidos/CReferidos/';

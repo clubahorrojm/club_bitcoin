@@ -4,6 +4,7 @@
 	<h2 class="fs-title">Información del pago</h2>
 	<!--<h3 class="fs-subtitle">Indica los datos de tu pago</h3>-->
 	<h3 class="fs-subtitle">( Usted debe realizar el pago a la dirección de nuestra empresa: <span style="color:#296293;"><?php $direccion = $monedero_emp->monedero; echo $direccion; ?></span> )</h3>
+	<h3 class="fs-subtitle">Debe transferir el equivalente en Dólares convertidos a Bitcoin</h3>
 	<!--<h3 class="fs-subtitle" style="color:red !important;font-size:20px;">( Valores actuales: <span id="precio_bitcoin"></span> )</h3>-->
 	
 	<!-- Main content -->
@@ -14,43 +15,6 @@
 				<div class="box box-primary">
 					<div class="panel-body">
 						
-						<!--<div class="col-md-12">
-							<div class="form-group">
-								<label style="font-weight:bold">Cuenta</label><br>
-								<select id="cuenta_id" class="form-control select2" <?php if ($pago[0]->estatus == 2){echo "disabled='disabled'";}?>>
-									<?php foreach ($listar_cuentas as $cuentas) { ?>
-										<option value="<?php echo $cuentas->codigo?>">
-											<?php foreach ($listar_t_cuentas as $t_cuenta) { ?>
-												<?php if ($t_cuenta->codigo == $cuentas->tipo_cuenta_id): ?>
-													CTA. <?php echo $t_cuenta->descripcion?> 
-											   <?php endif; ?>
-											<?php }?>
-											<?php foreach ($listar_bancos as $bancos) { ?>
-												<?php if ($bancos->codigo == $cuentas->banco_id): ?>
-													 <?php echo $bancos->descripcion?> 
-											   <?php endif; ?>
-											<?php }?>
-											<?php echo $cuentas->descripcion?>
-										</option>
-									<?php }?>
-								</select>
-							</div>
-						</div>
-						<div class="col-md-4">
-							<div class="form-group">
-								<label style="font-weight:bold">Tipo de Pago</label><br>
-								<select id="tipo_pago" class="form-control select2" >
-									<option value=1>DEPOSITO</option>
-									<option value=2>TRANSFERENCIA</option>
-								</select>
-							</div>
-						</div>
-						<div class="col-md-4">
-							<div class="form-group">
-								<label style="font-weight:bold">Nº Pago</label>
-								<input type="text" placeholder="Ej: 011494191" maxlength="8" id="num_pago" value="<?php echo $pago[0]->num_pago ?>" class="form-control" >
-							</div>
-						</div>-->
 						<div class="col-md-8">
 							<div class="form-group">
 								<label style="font-weight:bold">Dir. Monedero (desde el cual realizó el pago)</label><br>
@@ -78,16 +42,16 @@
 						<div class="col-md-4">
 							<div class="form-group">
 								<label style="font-weight:bold">Estatus</label><br>
-								<?php if ($pago[0]->estatus == 1) {?>
+								<?php if ($pago[0]->estatus == 1 || $pago[0]->estatus == 2) {?>
 									<label style="font-weight:bold; color: blue">En verificación</label>
-								<?php }else if ($pago[0]->estatus == 2){ ?>
+								<?php }else if ($pago[0]->estatus == 3){ ?>
 									<label style="font-weight:bold; color: green">Aprobado</label>
 								<?php }else if ($pago[0]->estatus == 99){ ?>
 									<label style="font-weight:bold; color: grey">Pendiente</label>
 								<?php } ?>
 							</div><!-- /.form-group -->
 						</div><!-- /.form-group -->
-						<?php if ($pago[0]->estatus == 2){ ?>
+						<?php if ($pago[0]->estatus == 3){ ?>
 						   <div class="col-md-4">
 							<div class="form-group text-left">
 								<a class="btn btn-app ver" data-toggle="tab" id="recibo_pago" >
@@ -127,7 +91,8 @@
 			</div><!-- /.box-body-primary -->
 		</div><!-- /.col -->
 	</section><!-- /.content -->
-	
+	<h3 class="fs-subtitle">Si no ha hecho el pago requerido presione el botón <strong>Cancelar</strong>, de lo contrario haga clic en <strong>Confirmar</strong></h3>
 	<!--<input type="button" name="previous" class="previous action-button" value="Previous"/>-->
-	<input type="button" name="next" class="next action-button" id="info_pago" value="Siguiente"/>
+	<input type="button" name="next" class="next action-button" id="info_pago" value="Confirmar"/>
+	<input type="button" class="action-button cerrar_sesion" value="Cancelar"/>
 </fieldset>
