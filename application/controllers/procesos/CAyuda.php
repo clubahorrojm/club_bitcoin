@@ -43,6 +43,7 @@ class CAyuda extends CI_Controller
 		$this->load->model('referidos/MRelAyudas');
         $this->load->model('referidos/MReferidos');
 		$this->load->model('administracion/MNotificaciones');
+		$this->load->model('mails/MMailsSoporteRespuesta');
         
     }
 
@@ -83,6 +84,17 @@ class CAyuda extends CI_Controller
 			'estatus' => 1,
 		);
 		$this->MNotificaciones->insertarNotificacion($param2);
+		//////////////// CORREO ///////////////////////////////////////////
+		$id_user = $data['listar'][0]->usuario_id,
+        $data['usuario'] = $this->Usuarios_model->obtenerUsuario($id_user);
+        $correo = $data['usuario'][0]->email;
+        $username = $data['usuario'][0]->username;
+        $datos_reg = array(
+            'username' => $username,
+            'email' => $correo,
+        );
+        //print_r($datos_reg);
+        $this->MMailsSoporteRespuesta->enviarMailConfirm($datos_reg);
 		
         // Registramos los cambios en la Bitacora
         if ($result) {

@@ -37,6 +37,7 @@ class CRelAyudas extends CI_Controller
 // Load database
         $this->load->model('referidos/MReferidos');
         $this->load->model('referidos/MRelAyudas');
+        $this->load->model('mails/MMailsSoporte');
         $this->load->model('busquedas_ajax/ModelsBusqueda');
         $this->load->model('administracion/MAuditoria');
         $this->load->model('configuracion/usuarios/Usuarios_model');
@@ -76,6 +77,17 @@ class CRelAyudas extends CI_Controller
                 'usuario' => $this->session->userdata['logged_in']['id'],
             );
             $this->MAuditoria->add($param);
-        }    
+        }
+        /////////////////////// CORREO ///////////////////////////////////////////////
+        $id_user = $this->input->post('usuario_id');
+        $data['usuario'] = $this->Usuarios_model->obtenerUsuario($id_user);
+        $correo = $data['usuario'][0]->email;
+        $username = $data['usuario'][0]->username;
+        $datos_reg = array(
+            'username' => $username,
+            'email' => $correo,
+        );
+        //print_r($datos_reg);
+        $this->MMailsSoporte->enviarMailConfirm($datos_reg);
     }
 }

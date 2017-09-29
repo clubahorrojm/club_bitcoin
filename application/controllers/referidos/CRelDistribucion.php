@@ -44,6 +44,10 @@ class CRelDistribucion extends CI_Controller
 		$this->load->model('referidos/MRelLinks');
 		$this->load->model('referidos/MRelNivel');
 		$this->load->model('administracion/MNotificaciones');
+		$this->load->model('mails/MMailsNuevoReferido');
+		$this->load->model('mails/MMailsNuevoNivel');
+		$this->load->model('mails/MMailsFinJuego');
+		
     }
 	        // INDEX del modulo de perfil del referido
     function index(){
@@ -178,6 +182,16 @@ class CRelDistribucion extends CI_Controller
 					'estatus' => 1,
 				);
 				$this->MNotificaciones->insertarNotificacion($param5);
+				/////////////////////// CORREO ///////////////////////////////////////////////
+				$data['usuario'] = $this->Usuarios_model->obtenerUsuario($ref_id);
+				$correo = $data['usuario'][0]->email;
+				$username = $data['usuario'][0]->username;
+				$datos_reg = array(
+					'username' => $username,
+					'email' => $correo,
+				);
+				//print_r($datos_reg);
+				$this->MMailsNuevoReferido->enviarMailConfirm($datos_reg);
             }
 			////////////////////////////////////////////////////////////////////////////////
 			///////////////////////  PASO OPCIONAL (Subir nivel) ///////////////////////////
@@ -239,6 +253,20 @@ class CRelDistribucion extends CI_Controller
 						'estatus' => 1,
 					);
 					$this->MNotificaciones->insertarNotificacion($param2);
+					$data['usuario'] = $this->Usuarios_model->obtenerUsuario($ref_id);
+					$correo = $data['usuario'][0]->email;
+					$username = $data['usuario'][0]->username;
+					$datos_mail = array(
+						'username' => $username,
+						'email' => $correo,
+						'nivel' => $nivel,
+					);
+					//print_r($datos_reg);
+					/////////////////////// CORREO ///////////////////////////////////////////////
+					$this->MMailsNuevoNivel->enviarMailConfirm($datos_mail);
+					if ($nivel == 7){
+						$this->MMailsFinJuego->enviarMailConfirm($datos_mail);
+					}
 				}
 			};
 			
