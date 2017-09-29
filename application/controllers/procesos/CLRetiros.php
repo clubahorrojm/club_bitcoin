@@ -40,6 +40,7 @@ class CLRetiros extends CI_Controller
 		$this->load->model('administracion/MNotificaciones');
         $this->load->model('busquedas_ajax/ModelsBusqueda');
         $this->load->model('administracion/MAuditoria');
+        $this->load->model('mails/MMailsResRetiros');
         
 // Load base view
         $this->load->view('base2');
@@ -98,7 +99,20 @@ class CLRetiros extends CI_Controller
 			'estatus' => 1,
 		);
 		$this->MNotificaciones->insertarNotificacion($param2);
-		
+		////////////////// CORREO//////////////////////////////
+		$id_user = $data['listar'][0]->usuario_id,
+        $data['usuario'] = $this->Usuarios_model->obtenerUsuario($id_user);
+        $correo = $data['usuario'][0]->email;
+        $username = $data['usuario'][0]->username;
+        $datos_reg = array(
+            'username' => $username,
+            'email' => $correo,
+			'monto' => $this->input->post('monto'),
+			'codigo' => $this->ModelsBusqueda->count_all_table('ref_rel_retiros')+1,
+			'num_pago' => $this->input->post('num_pago'),
+        );
+        //print_r($datos_reg);
+        $this->MMailsResRetiros->enviarMailConfirm($datos_reg);
 		
         // Registramos los cambios en la Bitacora
 		$param = array(

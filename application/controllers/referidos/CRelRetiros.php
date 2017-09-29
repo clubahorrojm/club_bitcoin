@@ -40,13 +40,10 @@ class CRelRetiros extends CI_Controller
         $this->load->model('busquedas_ajax/ModelsBusqueda');
         $this->load->model('administracion/MAuditoria');
         $this->load->model('configuracion/usuarios/Usuarios_model');
-        // $this->load->model('administracion/MEmpresa');
         $this->load->model('configuracion/MTiposMonedas');
         $this->load->model('administracion/MPaises');
-        // $this->load->model('configuracion/MCuentas');
-        // $this->load->model('configuracion/MBancos');
-        // $this->load->model('configuracion/MTiposCuenta');
-        // $this->load->model('configuracion/MRetiroMinimo');
+		$this->load->model('mails/MMailsSolRetiros');
+
         
     }
     // INDEX del modulo de perfil del referido
@@ -84,6 +81,19 @@ class CRelRetiros extends CI_Controller
             'estatus'=> 1,
         );
         $result = $this->MRelRetiros->insertarRelRetiros($datos);
+		////////////////// CORREO//////////////////////////////
+		$id_user = $this->input->post('usuario_id');
+        $data['usuario'] = $this->Usuarios_model->obtenerUsuario($id_user);
+        $correo = $data['usuario'][0]->email;
+        $username = $data['usuario'][0]->username;
+        $datos_reg = array(
+            'username' => $username,
+            'email' => $correo,
+			'monto' => $this->input->post('monto'),
+			'codigo' => $this->ModelsBusqueda->count_all_table('ref_rel_retiros')+1,
+        );
+        //print_r($datos_reg);
+        $this->MMailsSolRetiros->enviarMailConfirm($datos_reg);
         if ($result) {
             $param = array(
                 'tabla' => 'RelRetiros',
