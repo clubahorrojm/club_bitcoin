@@ -531,3 +531,18 @@ CAMBIOS AL 28-09-2017 (José):
 			+ referidos/CRelLinks.php
 		- Actualización de archivo de validaciones
 			+ static/js/progress.js
+
+CAMBIOS AL 29-09-2017 (José):
+		- Actualización de Views:
+			+ base2.php
+		- Actualizacion de Controladores
+			+ administracion/CAMontos.php
+			+ administracion/CAuditoria.php
+			+ administracion/CMonedero.php
+			+ administracion/CPaises.php
+			+ configuracion/grupos_usuarios/ControllersGrupoUsuarios.php
+			+ configuracion/usuarios/Usuarios.php
+			+ configuracion/procesos/CLRetiros.php
+			+ configuracion/referidos/CRelPagos.php
+		- Actualización de modelo
+			+ mails/MMails.php

@@ -384,16 +384,28 @@ class MMails extends CI_Model {
 		</html>
 		';
 
-		//cargamos la configuración para enviar con mailtrap (config), gamil (configGmail) o yahoo (configYahoo)
-		$this->email->initialize($this->configGmail);
+		//~ //cargamos la configuración para enviar con mailtrap (config), gamil (configGmail) o yahoo (configYahoo)
+		//~ $this->email->initialize($this->configGmail);
+//~ 
+		//~ $this->email->from('contacto@criptozone.com');
+		//~ $this->email->to($para);
+		//~ $this->email->subject($título);
+		//~ $this->email->message($mensaje);
+		//~ $this->email->send();
+		//~ // con esto podemos ver el resultado
+		//~ // var_dump($this->email->print_debugger());
+		
+		// Envío con la función nativa de emails (mail())
+		$cabeceras = 'From: contacto@criptozone.com' . "\r\n" .
+		'Reply-To: contacto@criptozone.com' . "\r\n" .
+		'Content-type: text/html; charset=utf-8' . "\r\n".
+		'X-Mailer: PHP/' . phpversion();
 
-		$this->email->from('contacto@criptozone.com');
-		$this->email->to($para);
-		$this->email->subject($título);
-		$this->email->message($mensaje);
-		$this->email->send();
-		// con esto podemos ver el resultado
-		//~ var_dump($this->email->print_debugger());
+		if(mail($para, $título, $mensaje, $cabeceras)){
+			echo "Email enviado";
+		}else{
+			echo "No se pudo enviar";
+		}
 	}
 
 }

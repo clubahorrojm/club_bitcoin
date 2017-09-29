@@ -23,8 +23,6 @@ class Usuarios extends CI_Controller {
 
         $this->load->helper(array('url'));
 
-        $this->load->view('base2');
-
 // Load form validation library
         $this->load->library('form_validation');
 
@@ -37,6 +35,9 @@ class Usuarios extends CI_Controller {
         $this->load->model('administracion/MAuditoria');
         $this->load->model('busquedas_ajax/ModelsBusqueda');
         $this->load->model('configuracion/grupos_usuarios/ModelsGruposUsuarios');
+        
+// Load base view
+        $this->load->view('base2');
     }
 
     function index() {
