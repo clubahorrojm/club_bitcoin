@@ -26,8 +26,6 @@ class CAuditoria extends CI_Controller
 
         $this->load->helper(array('url'));
 
-        $this->load->view('base2');
-
 // Load form validation library
         $this->load->library('form_validation');
 
@@ -38,6 +36,9 @@ class CAuditoria extends CI_Controller
         $this->load->model('administracion/MAuditoria');
         $this->load->model('busquedas_ajax/ModelsBusqueda');
         $this->load->model('usuarios/Usuarios_model');
+       
+// Load base view
+        $this->load->view('base2');
         
     }
 

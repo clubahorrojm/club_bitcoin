@@ -133,7 +133,8 @@ class CRelPagos extends CI_Controller
         $datos = array(
             'codigo' => $this->input->post('cod_pago'),
             'dir_monedero'=> $this->input->post('dir_monedero'),
-            'perfil_id'=> $this->input->post('pk_perfil')
+            'perfil_id'=> $this->input->post('pk_perfil'),
+            'estatus'=> 1,
         );
         
         $result = $this->MRelPagos->actualizarRelPagosBit($datos);
