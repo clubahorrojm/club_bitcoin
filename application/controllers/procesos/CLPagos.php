@@ -42,6 +42,7 @@ class CLPagos extends CI_Controller
         $this->load->model('referidos/MRelPagos');
         $this->load->model('referidos/MRelLinks');
         $this->load->model('referidos/MReferidos');
+        $this->load->model('mails/MPagoConfirm');
         
     }
 
@@ -106,6 +107,13 @@ class CLPagos extends CI_Controller
 				'verif_pago'=> 1
 			);
 			$result = $this->MRelLinks->actualizarReferidoLinks($datos3);
+			
+			// Enviamos email de confirmación de pago
+			$datos_reg = array(
+				'username' => $usuario,
+				'password' => $nueva_clave
+			);
+			$this->MPagoConfirm->enviarMailPago($datos_reg);
 			
             $param = array(
                 'tabla' => 'ref_perfil',

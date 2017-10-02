@@ -243,6 +243,42 @@
 						
 					});
 				});
+				
+				// Activar modal al hacer click en el enlace de recuperación
+				$("#rec_password").click(function (e) {
+					e.preventDefault();  // Para evitar que se envíe por defecto
+					$("#modal_clave").modal('show');
+				});
+				
+				// Validar formulario
+				$("#cambiar").click(function (e) {
+					e.preventDefault();  // Para evitar que se envíe por defecto
+					
+					if($("#username_rec").val() == ''){
+						bootbox.alert("Introdúzca el Usuario", function () {
+						}).on('hidden.bs.modal', function (event) {
+							$("#username_rec").parent('div').addClass('has-error')
+							$("#username_rec").val('');
+							$("#username_rec").focus();
+						});
+					} else {
+						//~ alert($("#username_rec").val());
+						$.post('<?php echo base_url(); ?>index.php/User_Authentication/recuperar_basico/', $("#f_change_key").serialize(), function(response) {
+							//~ alert(response.trim());
+							if (response.trim() != "Usuario inexistente."){
+								bootbox.alert("<h4>Se ha generado su nueva clave con éxito, espere un mensaje de confirmación en su correo electrónico.</h4>", function () {
+								}).on('hidden.bs.modal', function (event) {
+									location.reload();
+								});
+							}else{
+								bootbox.alert("<h4>"+response.trim()+"</h4>", function () {
+								}).on('hidden.bs.modal', function (event) {
+									
+								});
+							}
+						});
+					}
+				});
 			});
 		</script>
 		
@@ -364,7 +400,7 @@
 								  <br>
 								  <button type="submit" class="btn-sm  btn-block btn-flat" id="submit" name="submit" style="width: 45%; background-color: #001a5a; color: white; font-weight: bold  ">INICIAR SESIÓN</button>
 								  <br>
-								  <a href="#" style="color: white">¿SE TE OLVIDÓ TU CONTRASEÑA?</a><br>
+								  <a href="#" id="rec_password" style="color: white">¿SE TE OLVIDÓ TU CONTRASEÑA?</a><br>
 								  
 							  </div>
 							  <div class="col-xs-1">&nbsp;</div>
@@ -407,7 +443,7 @@
 						   
 		</div>
 
-		
+		<!-- Modal para registro de usuarios nuevos -->
 		<div class="modal" id="modal_registrar" style="height:auto; margin-top: 3%">
 		   <div class="modal-dialog" style="height:auto; background-image: url('../static/img/modal_registro/fondo.png'); background-size: 100%; background-repeat: no-repeat">
 			  <div style="height:auto;">
@@ -504,6 +540,42 @@
 			  </div>
 		   </div>
 		</div>
+		<!-- Cierre Modal para registro de usuarios nuevos -->
+		
+		<!-- Modal para recuperación de clave de usuarios generales -->
+		<div class="modal" id="modal_clave">
+		   <div class="modal-dialog">
+			  <div class="modal-content">
+				 <div class="modal-header" style="background-color:#296293">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title">
+					   <center><span class="glyphicon glyphicon-search"></span>
+					   &nbsp;Introdúzca el Usuario y la Clave Maestra para Generar una Nueva Clave de Acceso</center>
+					</h4>
+				 </div>
+				 <div class="modal-body">
+					<form id="f_change_key" name="f_change_key" action="" method="post">
+					   <div class="form-group">
+							<div class="col-sm-12">
+								<input type="text" class="form-control" style="width: 100%; " id="username_rec" name="username_rec" placeholder="Usuario" autofocus="true">
+							</div>
+							</br></br>
+							<div class="col-sm-12" align="right">
+								<span class="input-btn">
+									<button class="btn btn-primary" type="button" id="cambiar">
+										Generar&nbsp;<span class="glyphicon glyphicon-share-alt"></span>
+									</button>
+								</span>
+							</div>
+							</br></br>
+					   </div>
+					</form>
+				 </div>
+				 
+			  </div>
+		   </div>
+		</div>
+		<!-- Cierre Modal para recuperación de clave de usuarios generales -->
 		
 	</body>
 </html>

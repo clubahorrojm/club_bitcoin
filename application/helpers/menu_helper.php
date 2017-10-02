@@ -43,6 +43,7 @@ if (!function_exists('menu')) {
 			<li><a href="<?php echo base_url(); ?>index.php/referidos/CRelLinks"><img src="<?php echo base_url(); ?>static/img/menu_usuario/invitados.png" style="width:20px;">&nbsp;Invitados</a></li>
             <li><a href="<?php echo base_url(); ?>index.php/referidos/CRelRetiros"><img src="<?php echo base_url(); ?>static/img/menu_usuario/retiros.png" style="width:20px;">&nbsp;Retiros</a></li>
             <li><a href="<?php echo base_url(); ?>index.php/referidos/CRelAyudas"><img src="<?php echo base_url(); ?>static/img/menu_usuario/soporte.png" style="width:20px;">&nbsp;Soporte a Usuarios</a></li> 
+            <li><a href="#" id="change_password"><i class="fa fa-shield"></i>Cambiar Contraseña</a></li>
         </li>
         <?php endif; ?>
         
