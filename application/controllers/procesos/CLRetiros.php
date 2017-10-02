@@ -100,7 +100,7 @@ class CLRetiros extends CI_Controller
 		);
 		$this->MNotificaciones->insertarNotificacion($param2);
 		////////////////// CORREO//////////////////////////////
-		$id_user = $data['listar'][0]->usuario_id,
+		$id_user = $data['listar'][0]->usuario_id;
         $data['usuario'] = $this->Usuarios_model->obtenerUsuario($id_user);
         $correo = $data['usuario'][0]->email;
         $username = $data['usuario'][0]->username;

@@ -3,7 +3,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 
-class MRecBasico extends CI_Model {
+class MPagoConfirm extends CI_Model {
 
 	//configuración para gmail
 	private $configGmail = array(
