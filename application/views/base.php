@@ -436,6 +436,7 @@ if (isset($this->session->userdata['logged_in'])) {
             <div class="control-sidebar-bg"></div>
         </div><!-- ./wrapper -->
 		
+		<!-- Modal para recuperación de clave de usuarios generales -->
 		<div class="modal" id="modal_clave">
 		   <div class="modal-dialog">
 			  <div class="modal-content">
@@ -472,6 +473,54 @@ if (isset($this->session->userdata['logged_in'])) {
 			  </div>
 		   </div>
 		</div>
+		<!-- Cierre Modal para recuperación de clave de usuarios generales -->
+		
+		<!-- Modal para cambio de clave de usuarios básicos -->
+		<div class="modal" id="modal_clave_basico">
+		   <div class="modal-dialog">
+			  <div class="modal-content">
+				 <div class="modal-header" style="background-color:#296293">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title">
+					   <center><span class="glyphicon glyphicon-search"></span>
+					   &nbsp;Introdúzca su clave actual y la nueva clave que desee</center>
+					</h4>
+				 </div>
+				 <div class="modal-body">
+					<form id="f_rec_usuario_basico" name="f_rec_usuario_basico" action="" method="post">
+					   <div class="form-group">
+							<div class="col-sm-12">
+								<input type="password" class="form-control" style="width: 100%; " id="clave_actual" name="clave_actual" placeholder="Clave Actual" autofocus="true">
+							</div>
+							</br></br></br>
+							<div class="col-sm-12">
+								<input style="width: 100%;" type="password" class="form-control" id="rep_clave_actual" name="rep_clave_actual" placeholder="Repita su Clave Actual"/>
+							</div>
+							</br></br></br>
+							<div class="col-sm-12">
+								<input type="password" class="form-control" style="width: 100%; " id="nueva_clave" name="nueva_clave" placeholder="Nueva Clave" autofocus="true">
+							</div>
+							</br></br></br>
+							<div class="col-sm-12">
+								<input style="width: 100%;" type="password" class="form-control" id="rep_nueva_clave" name="rep_nueva_clave" placeholder="Repita su Nueva Clave"/>
+							</div>
+							</br></br>
+							<div class="col-sm-12" align="right">
+								<span class="input-btn">
+									<button class="btn btn-primary" type="button" id="cambiar">
+										Generar&nbsp;<span class="glyphicon glyphicon-share-alt"></span>
+									</button>
+								</span>
+							</div>
+							</br></br>
+					   </div>
+					</form>
+				 </div>
+				 
+			  </div>
+		   </div>
+		</div>
+		<!-- Cierre Modal para cambio de clave de usuarios básicos -->
 
         <!-- jQuery 2.1.4 -->
         <script src="<?= base_url() ?>static/plugins/jQuery/jQuery-2.1.4.min.js"></script>
@@ -582,24 +631,24 @@ if (isset($this->session->userdata['logged_in'])) {
 					e.preventDefault();  // Para evitar que se envíe por defecto
 					
 					if($("#username_rec").val() == ''){
-						//~ bootbox.alert("Introduzca el Usuario", function () {
+						//~ bootbox.alert("Introdúzca el Usuario", function () {
 						//~ }).on('hidden.bs.modal', function (event) {
 							//~ $("#username_rec").parent('div').addClass('has-error')
 							//~ $("#username_rec").val('');
 							//~ $("#username_rec").focus();
 						//~ });
-						alert("Error: Introduzca el Usuario");
+						alert("Error: Introdúzca el Usuario");
 						$("#username_rec").parent('div').addClass('has-error')
 						$("#username_rec").val('');
 						$("#username_rec").focus();
 					} else if($("#password_rec").val() == ''){
-						//~ bootbox.alert("Introduzca la Clave Maestra", function () {
+						//~ bootbox.alert("Introdúzca la Clave Maestra", function () {
 						//~ }).on('hidden.bs.modal', function (event) {
 							//~ $("#password_rec").parent('div').addClass('has-error')
 							//~ $("#password_rec").val('');
 							//~ $("#password_rec").focus();
 						//~ });
-						alert("Error: Introduzca la Clave Maestra");
+						alert("Error: Introdúzca la Clave Maestra");
 						$("#password_rec").parent('div').addClass('has-error')
 						$("#password_rec").val('');
 						$("#password_rec").focus();
@@ -620,6 +669,67 @@ if (isset($this->session->userdata['logged_in'])) {
 								//~ }).on('hidden.bs.modal', function (event) {
 									//~ 
 								//~ });
+							}
+						});
+					}
+				});
+				
+				// Activar modal de cambio de contraseña de usuario básicos al hacer click en el enlace de cambio
+				$("#change_password").click(function (e) {
+					e.preventDefault();  // Para evitar que se envíe por defecto
+					$("#modal_clave_basico").modal('show');
+				});
+				
+				// Validar formulario de cambio de clave de usuarios básicos
+				$("#cambiar").click(function (e) {
+					e.preventDefault();  // Para evitar que se envíe por defecto
+					
+					if($("#clave_actual").val() == ''){
+						alert("Error: Introdúzca su Clave Actual");
+						$("#clave_actual").parent('div').addClass('has-error')
+						$("#clave_actual").val('');
+						$("#clave_actual").focus();
+					} else if($("#rep_clave_actual").val() == ''){
+						alert("Error: Repita su Clave Actual");
+						$("#rep_clave_actual").parent('div').addClass('has-error')
+						$("#rep_clave_actual").val('');
+						$("#rep_clave_actual").focus();
+					} else if($("#rep_clave_actual").val() != $("#clave_actual").val()){
+						alert("Error: Error de claves, por favor repítalas");
+						$("#clave_actual").parent('div').addClass('has-error')
+						$("#clave_actual").val('');
+						$("#rep_clave_actual").parent('div').addClass('has-error')
+						$("#rep_clave_actual").val('');
+						$("#clave_actual").focus();
+					} else if($("#nueva_clave").val() == ''){
+						alert("Error: Introdúzca su Nueva Clave");
+						$("#nueva_clave").parent('div').addClass('has-error')
+						$("#nueva_clave").val('');
+						$("#nueva_clave").focus();
+					} else if($("#rep_nueva_clave").val() == ''){
+						alert("Error: Repita su Nueva Clave");
+						$("#rep_nueva_clave").parent('div').addClass('has-error')
+						$("#rep_nueva_clave").val('');
+						$("#rep_nueva_clave").focus();
+					} else if($("#rep_nueva_clave").val() != $("#nueva_clave").val()){
+						alert("Error: Error de claves, por favor repítalas");
+						$("#nueva_clave").parent('div').addClass('has-error')
+						$("#nueva_clave").val('');
+						$("#rep_nueva_clave").parent('div').addClass('has-error')
+						$("#rep_nueva_clave").val('');
+						$("#nueva_clave").focus();
+					} else {
+						$.post('<?php echo base_url(); ?>index.php/User_Authentication/cambiar_basico/', $("#f_rec_usuario_basico").serialize(), function(response) {
+							//~ alert(response.trim());
+							if (response.trim() != "Usuario inexistente."){
+								bootbox.alert('<h4>Se ha generado su nueva clave con éxito, espere un mensaje de confirmación en su correo electrónico.</h4>', function () {
+									location.reload();
+								});
+								
+							}else{
+								bootbox.alert('<h4>'+response.trim()+'</h4>', function () {
+									
+								});
 							}
 						});
 					}

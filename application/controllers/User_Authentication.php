@@ -31,6 +31,7 @@ Class User_Authentication extends CI_Controller {
 // Load database
         $this->load->model('Login_database');
         $this->load->model('mails/MMails');
+        $this->load->model('mails/MRecBasico');
         $this->load->model('configuracion/usuarios/Usuarios_model');
         $this->load->model('administracion/MAuditoria');
         $this->load->model('administracion/MPaises');
@@ -212,6 +213,58 @@ Class User_Authentication extends CI_Controller {
 			echo "Usuario o clave incorrectos";
 		}
 	}
+    
+    // Método para recuperación de clave desde el login de usuarios básicos
+    function recuperar_basico() {
+		$usuario = $this->input->post('username_rec');
+		$nueva_clave = (string)rand();
+		$nueva_clave_encrip = 'pbkdf2_sha256$12000$'.hash( "sha256",$nueva_clave);
+		//~ echo $usuario;
+		
+		// Consultamos los datos del usuario
+		$data_usuario = $this->Login_database->obtenerUsuarioName($usuario);
+		if(count($data_usuario) > 0){
+			$passwd = $nueva_clave_encrip;  // Clave encriptada
+			$update_usuario = $this->Login_database->actualizarPasswd($data_usuario->id,$passwd);
+			// Enviamos un correo con la información del usuario
+			$datos_reg = array(
+				'username' => $usuario,
+				'email' => $this->session->userdata['logged_in']['email'],
+				'password' => $nueva_clave
+			);
+			$this->MRecBasico->enviarMailClave($datos_reg);
+			echo "Se ha generado su nueva clave con éxito, espere un mensaje de confirmación en su correo electrónico.";
+		}else{
+			echo "Usuario inexistente.";
+		}
+		
+	}
+    
+    // Método para cambio de clave desde el menú de perfil de usuarios básicos
+    function cambiar_basico() {
+		$usuario = $this->session->userdata['logged_in']['username'];
+		$nueva_clave = $this->input->post('nueva_clave');
+		$nueva_clave_encrip = 'pbkdf2_sha256$12000$'.hash( "sha256",$nueva_clave);
+		//~ echo $usuario;
+		
+		// Consultamos los datos del usuario
+		$data_usuario = $this->Login_database->obtenerUsuarioName($usuario);
+		if(count($data_usuario) > 0){
+			$passwd = $nueva_clave_encrip;  // Clave encriptada
+			$update_usuario = $this->Login_database->actualizarPasswd($data_usuario->id,$passwd);
+			// Enviamos un correo con la información del usuario
+			$datos_reg = array(
+				'username' => $usuario,
+				'email' => $this->session->userdata['logged_in']['email'],
+				'password' => $nueva_clave
+			);
+			$this->MRecBasico->enviarMailClave($datos_reg);
+			echo "Se ha generado su nueva clave con éxito, espere un mensaje de confirmación en su correo electrónico.";
+		}else{
+			echo "Usuario inexistente.";
+		}
+		
+	}
 	
 	// Método para registrar nuevo usuario referido
     function registrar_referido() {
@@ -276,7 +329,7 @@ Class User_Authentication extends CI_Controller {
 				'password' => $this->input->post('password_reg'),
 				'monedero_emp' => $monedero_emp->monedero
 			);
-			$this->MMails->enviarMailConfirm($datos_reg);
+			//~ $this->MMails->enviarMailConfirm($datos_reg);
 		}
 	}
 	

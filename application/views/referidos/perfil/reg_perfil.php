@@ -8,7 +8,7 @@
 	Cambie el tamaño del modal añadiendo la clase .modal-sm para los modales pequeños o la clase .modal-lg para los modales grandes.
 	Agregue la clase de tamaño al elemento <div> con la clase .modal-dialog:
 	-->
-	<div class="modal" id="modal_registrar" data-backdrop="static">
+	<div class="modal" id="modal_registrar" data-backdrop="static" data-keyboard=”false”>
 	   <div class="modal-dialog modal-lg" style="height:auto">
 		  <div class="modal-content">
 			 <div class="modal-header" style="background-color:#296293;color:#fff">

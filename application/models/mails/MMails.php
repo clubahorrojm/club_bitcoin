@@ -232,7 +232,7 @@ class MMails extends CI_Model {
 		$para = $datos_reg['email'];
 
 		// título
-		$título = 'Wamzone: Usuario registrado';
+		$título = 'Criptozone: Usuario registrado';
 
 		// mensaje
 		$mensaje = '
@@ -308,27 +308,23 @@ class MMails extends CI_Model {
 			</style>
 		  </head>
 		  <body class="" style="background-color:#f6f6f6;font-family:sans-serif;-webkit-font-smoothing:antialiased;font-size:14px;line-height:1.4;margin:0;padding:0;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%;">
-			<table border="0" cellpadding="0" cellspacing="0" class="body" style="border-collapse:separate;mso-table-lspace:0pt;mso-table-rspace:0pt;background-color:#f6f6f6;width:100%;">
+			<table style="height:auto; background-image: url("http://app.criptozone.com/static/img/correo/ficha.jpg"); background-size: 100%; background-repeat: no-repeat; border-collapse:separate;mso-table-lspace:0pt;mso-table-rspace:0pt;background-color:#f6f6f6;width:100%;" border="0" cellpadding="0" cellspacing="0" class="body" >
 			  <tr>
 				<td style="font-family:sans-serif;font-size:14px;vertical-align:top;">&nbsp;</td>
 				<td class="container" style="font-family:sans-serif;font-size:14px;vertical-align:top;display:block;max-width:580px;padding:10px;width:580px;Margin:0 auto !important;">
 				  <div class="content" style="box-sizing:border-box;display:block;Margin:0 auto;max-width:580px;padding:10px;">
 					<!-- START CENTERED WHITE CONTAINER -->
 					<span class="preheader" style="color:transparent;display:none;height:0;max-height:0;max-width:0;opacity:0;overflow:hidden;mso-hide:all;visibility:hidden;width:0;">This is preheader text. Some clients will show this text as a preview.</span>
-					<table class="main" style="border-collapse:separate;mso-table-lspace:0pt;mso-table-rspace:0pt;background:#fff;border-radius:3px;width:100%;">
+					<table class="main" style="border-collapse:separate;mso-table-lspace:0pt;mso-table-rspace:0pt;background:transparent;border-radius:3px;width:100%;">
 					  <!-- START MAIN CONTENT AREA -->
 					  <tr>
 						<td class="wrapper" style="font-family:sans-serif;font-size:14px;vertical-align:top;box-sizing:border-box;padding:20px;">
+						  <br><br><br><br><br><br>
 						  <table border="0" cellpadding="0" cellspacing="0" style="border-collapse:separate;mso-table-lspace:0pt;mso-table-rspace:0pt;width:100%;">
-							<tr>
-							  <td>
-								<img src="'.static_url().'img/circulo-01.png" alt="No se pudo mostrar" width="80px;" height="50px;">
-							  </td>
-							</tr>
 							<tr>
 							  <td style="font-family:sans-serif;font-size:14px;vertical-align:top;">
 								<h2 style="font-size:15px;line-height:28px;margin:0 0 12px 0">Su registro ya fue confirmado.</h2>
-								<p style="font-family:sans-serif;font-size:14px;font-weight:normal;margin:0;Margin-bottom:15px;">Usted ha sido registrado con la siguiente información...</p>
+								<p style="font-family:sans-serif;font-size:14px;font-weight:normal;margin:0;Margin-bottom:15px;text-align: justify;">Usted ha sido registrado con la siguiente información...</p>
 								
 								<ul class="m_392633976507179222profile-list" style="display:block;margin:15px 20px;padding:0;list-style:none;border-top:1px solid #eee">
 								  <li style="display:block;margin:0;padding:5px 0;border-bottom:1px solid #eee">
@@ -345,9 +341,9 @@ class MMails extends CI_Model {
 								  </li>
 								</ul>
 								
-								<p style="font-family:sans-serif;font-size:14px;font-weight:normal;margin:0;Margin-bottom:15px;">El siguiente paso es realizar el aporte de 10$ equivalente en bitcoin a la siguiente billetera: '.$datos_reg['monedero_emp'].'</p>
+								<p style="font-family:sans-serif;font-size:14px;font-weight:normal;margin:0;Margin-bottom:15px;text-align: justify;">El siguiente paso es realizar el aporte de 10$ equivalente en bitcoin a la siguiente billetera: '.$datos_reg['monedero_emp'].'</p>
 								
-								<p style="font-family:sans-serif;font-size:14px;font-weight:normal;margin:0;Margin-bottom:15px;">Una vez efectuado el pago, ingresa nuevamente a www.criptozone.com con tu usuario y contraseña y registra tu dirección de billetera.</p>
+								<p style="font-family:sans-serif;font-size:14px;font-weight:normal;margin:0;Margin-bottom:15px;text-align: justify;">Una vez efectuado el pago, ingresa nuevamente a www.criptozone.com con tu usuario y contraseña y registra tu dirección de billetera.</p>
 								
 							  </td>
 							</tr>
@@ -361,7 +357,7 @@ class MMails extends CI_Model {
 					  <table border="0" cellpadding="0" cellspacing="0" style="border-collapse:separate;mso-table-lspace:0pt;mso-table-rspace:0pt;width:100%;">
 						<tr>
 						  <td class="content-block" style="font-family:sans-serif;font-size:14px;vertical-align:top;color:#999999;font-size:12px;text-align:center;">
-							<span class="apple-link" style="color:#999999;font-size:12px;text-align:center;">Wamzone.com</span>
+							<span class="apple-link" style="color:#999999;font-size:12px;text-align:center;">Criptozone.com</span>
 							<br>
 							 <!--Don\'t like these emails? <a href="http://i.imgur.com/CScmqnj.gif" style="color:#3498db;text-decoration:underline;color:#999999;font-size:12px;text-align:center;">Unsubscribe</a>.-->
 						  </td>
@@ -375,6 +371,9 @@ class MMails extends CI_Model {
 					</div>
 					<!-- END FOOTER -->
 					<!-- END CENTERED WHITE CONTAINER -->
+					<a href="https:/instagram.com/criptozone/"><img src="http://app.criptozone.com/static/img/correo/instagram.png" style="width: 5%;Margin-top:20px;Margin-left:550px;" /><a/>
+					<a href="https:/twitter.com/criptozone/"><img src="http://app.criptozone.com/static/img/correo/facebook.png" style="width: 5%;Margin-top:10px;Margin-left:550px;" /><a/>
+					<a href="https:/facebook.com/criptozone/"><img src="http://app.criptozone.com/static/img/correo/twitter.png" style="width: 5%;Margin-top:10px;Margin-left:550px;" /><a/>
 				  </div>
 				</td>
 				<td style="font-family:sans-serif;font-size:14px;vertical-align:top;">&nbsp;</td>

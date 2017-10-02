@@ -546,3 +546,20 @@ CAMBIOS AL 29-09-2017 (José):
 			+ configuracion/referidos/CRelPagos.php
 		- Actualización de modelo
 			+ mails/MMails.php
+
+CAMBIOS AL 01-10-2017 (José):
+		- Actualización de Views:
+			+ base.php, 
+			+ login_form.php
+			+ referidos/perfil/reg_perfil.php
+		- Actualizacion de Controladores
+			+ procesos/CLPagos
+			+ User_Authentication.php
+		- Actualización de modelo
+			+ mails/MMails.php
+			+ mails/MRecBasico.php
+			+ mails/MPagoConfirm.php
+		- Actualización de helper de menú
+			+ menu_helper.php
+		- Actualización del index
+			+ index.php
