@@ -563,3 +563,12 @@ CAMBIOS AL 01-10-2017 (José):
 			+ menu_helper.php
 		- Actualización del index
 			+ index.php
+
+CAMBIOS AL 02-10-2017 (José):
+		- Actualización de Views:
+			+ referidos/perfil/reg_perfil.php
+		- Actualizacion de Controladores
+			+ procesos/CLRetiros
+			+ procesos/CLAyuda
+		- Actualización de modelo
+			+ mails/MPagoConfirm.php

@@ -12,7 +12,7 @@
 	   <div class="modal-dialog modal-lg" style="height:auto">
 		  <div class="modal-content">
 			 <div class="modal-header" style="background-color:#296293;color:#fff">
-				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<!--<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>-->
 				<h4 class="modal-title">
 				   <center>
 				   &nbsp;Introdúzca los siguientes datos para completar su perfil</center>
