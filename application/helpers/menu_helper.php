@@ -39,7 +39,7 @@ if (!function_exists('menu')) {
 			<!--<li><a href="<?php echo base_url(); ?>index.php/referidos/CRelPagos"><img src="<?php echo base_url(); ?>static/img/billete-dolar-01.png" style="width:20px;">&nbsp;Registrar Pago</a></li>-->
 			<li><a href="<?php echo base_url(); ?>index.php/referidos/CRelInformacion"><img src="<?php echo base_url(); ?>static/img/menu_usuario/perfil.png" style="width:20px;">&nbsp;Perfil</a></li>
             <!--<li><a href="<?php echo base_url(); ?>index.php/referidos/CRelDistribucion"><img src="<?php echo base_url(); ?>static/img/bolsa-de-dinero-01.png" style="width:20px;">&nbsp;Distribución de Capital</a></li>-->
-            <li><a href="<?php echo base_url(); ?>index.php/referidos/CRelRanking"><img src="<?php echo base_url(); ?>static/img/menu_usuario/ranking.png" style="width:20px;">Ranking</a></li>
+            <!--<li><a href="<?php echo base_url(); ?>index.php/referidos/CRelRanking"><img src="<?php echo base_url(); ?>static/img/menu_usuario/ranking.png" style="width:20px;">Ranking</a></li>-->
 			<li><a href="<?php echo base_url(); ?>index.php/referidos/CRelLinks"><img src="<?php echo base_url(); ?>static/img/menu_usuario/invitados.png" style="width:20px;">&nbsp;Invitados</a></li>
             <li><a href="<?php echo base_url(); ?>index.php/referidos/CRelRetiros"><img src="<?php echo base_url(); ?>static/img/menu_usuario/retiros.png" style="width:20px;">&nbsp;Retiros</a></li>
             <li><a href="<?php echo base_url(); ?>index.php/referidos/CRelAyudas"><img src="<?php echo base_url(); ?>static/img/menu_usuario/soporte.png" style="width:20px;">&nbsp;Soporte a Usuarios</a></li> 
