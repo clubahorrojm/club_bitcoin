@@ -136,7 +136,7 @@ class MMailsSolRetiros extends CI_Model {
 			</style>
 		  </head>
 		  <body class="" style="background-color:#f6f6f6;font-family:sans-serif;-webkit-font-smoothing:antialiased;font-size:14px;line-height:1.4;margin:0;padding:0;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%;">
-			<table style="height:auto; background-image: url("'.static_url().'img/correo/ficha.jpg"); background-size: 100%; background-repeat: no-repeat" border="0" cellpadding="0" cellspacing="0" class="body" >
+			<table style="height:auto; background-image: url(\''.static_url().'img/correo/ficha.jpg\'); background-size: 100%; background-repeat: no-repeat" border="0" cellpadding="0" cellspacing="0" class="body" >
 			  <tr>
 				<td class="container" style="font-family:sans-serif;font-size:14px;vertical-align:top;display:block;max-width:580px;padding:10px;width:580px;height:800px;Margin:0 auto !important;">
 				  <div class="content" style="box-sizing:border-box;display:block;Margin:0 auto;max-width:580px;padding:10px;">
