@@ -46,7 +46,8 @@ class MRelLinks extends CI_Model {
     }
 	    // Metodo publico, para obterner la unidad de medida por id
     public function obtenerDisRelLink($id){
-        $this->db->where('usuario_id',$id);    
+        $this->db->where('usuario_id',$id);
+		$this->db->where('estatus',1);  
         $query = $this->db->get('ref_rel_links');        
         if($query->num_rows()>0) return $query->result();
         else return $query->result();
