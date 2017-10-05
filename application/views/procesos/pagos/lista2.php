@@ -78,8 +78,8 @@ redirect(base_url());
                         <th style='text-align: center'>Item</th>
                         <th style='text-align: center'>Usuario</th>
                         <th style='text-align: center'>Monto</th>
-                        <!--<th style='text-align: center'>Cuenta</th>
-                        <th style='text-align: center'>N. Pago</th>-->
+                        <th style='text-align: center'>Correo</th>
+                        <!--<th style='text-align: center'>N. Pago</th>-->
                         <th style='text-align: center'>Dir. Monedero</th>
                         <th style='text-align: center'>Fecha</th>
                         <th style='text-align: center'>Estatus</th>
@@ -97,8 +97,8 @@ redirect(base_url());
                                     </td>
                                     <td><?php echo $pago->username;?></td> 
                                     <td><?php echo $pago->monto;?> <?php echo $pago->abreviatura;?></td> 
-                                    <!--<td><?php echo $pago->cuenta;?></td>                                 
-                                    <td><?php echo $pago->num_pago;?></td>-->
+                                    <td><?php echo $pago->email;?></td>                                 
+                                    <!--<td><?php echo $pago->num_pago;?></td>-->
                                     <td><?php echo $pago->dir_monedero;?></td>
                                     <td><?php echo $pago->fecha_pago." ".$pago->hora_pago;?></td>
 									<td>
@@ -169,6 +169,7 @@ redirect(base_url());
         "oLanguage": {"sUrl": "<?= base_url() ?>/static/js/es.txt"},
         "aoColumns": [
             {"sClass": "registro center", "sWidth": "5%"},
+            {"sClass": "registro center", "sWidth": "20%"},
             {"sClass": "registro center", "sWidth": "20%"},
             //~ {"sClass": "registro center", "sWidth": "50%"},
             {"sClass": "registro center", "sWidth": "20%"},

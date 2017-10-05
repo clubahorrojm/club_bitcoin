@@ -41,7 +41,7 @@ class MLPagos extends CI_Model {
         //~ $result = $this->db->where('estatus !=', 99);
         //~ $query = $this->db->order_by('estatus asc, id asc');
         //~ $query = $this->db->get('ref_rel_pagos');
-        $sql = "SELECT rrpb.codigo, usu.username, monto, cftm.abreviatura, rrpb.dir_monedero, rrpb.estatus, rrpb.fecha_pago, rrpb.hora_pago FROM ref_rel_pagos_bitcoins AS rrpb ";
+        $sql = "SELECT rrpb.codigo, usu.username, usu.email, monto, cftm.abreviatura, rrpb.dir_monedero, rrpb.estatus, rrpb.fecha_pago, rrpb.hora_pago FROM ref_rel_pagos_bitcoins AS rrpb ";
         $sql .= "INNER JOIN ref_perfil AS rpf ON rrpb.perfil_id=rpf.id ";
         $sql .= "INNER JOIN usuarios AS usu ON rrpb.usuario_id=usu.id ";
         $sql .= "INNER JOIN conf_tipos_monedas AS cftm ON rpf.t_moneda_id=cftm.id ORDER BY rrpb.id DESC";
