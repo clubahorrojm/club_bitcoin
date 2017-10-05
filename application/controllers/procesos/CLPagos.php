@@ -71,7 +71,7 @@ class CLPagos extends CI_Controller
         // Armamos la data a actualizar
         $data = array(
             'codigo' => $cod,
-            'estatus' => 3,
+            'estatus' => 2,
             'operador_id' => $this->session->userdata['logged_in']['codigo'],
             'fecha_verificacion' => date('Y-m-d'),
         );

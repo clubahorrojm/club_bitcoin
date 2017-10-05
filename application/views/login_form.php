@@ -375,7 +375,7 @@
 				<form id="frmlogin" class="form-horizontal"  method="POST" enctype="multipart/form-data" autocomplete="off" role="form">
 					<div class="login-box">
 						<!-- /.login-logo -->
-						<div  style=" background-image: url('../static/img/login_adm/contenido.png'); background-size: 100%">
+						<div  style=" background-image: url('<?= base_url() ?>static/img/login_adm/contenido.png'); background-size: 100%">
 							<br>
 							<div class="col-xs-12 text-left" ><img  src="<?= base_url() ?>static/img/login_adm/logo-01.png" style="width: 35%"/></div>
 							<center>
@@ -387,13 +387,13 @@
 							  <div class="col-xs-10">
 								  <div class="input-group"  style="border-bottom: solid  2px ;  border-bottom-color: #513085; ">
 									  
-									  <span class="input-group-addon" style="background-color: transparent; border: none; background-image: url('../static/img/login_adm/nombre.png'); background-size: 100%; background-repeat: no-repeat"></span>
+									  <span class="input-group-addon" style="background-color: transparent; border: none; background-image: url('<?= base_url() ?>static/img/login_adm/nombre.png'); background-size: 100%; background-repeat: no-repeat"></span>
 									  <input style="background-color: transparent; border: none;" class="form-control" type="text" id="username" name="username" >
 									  
 								  </div>
 								  <br>
 								  <div class="input-group" style="border-bottom: solid  2px ;  border-bottom-color: #513085; ">
-									  <span class="input-group-addon" style="background-color: transparent; border: none; background-image: url('../static/img/login_adm/clave.png'); background-size: 100%; background-repeat: no-repeat"></span>
+									  <span class="input-group-addon" style="background-color: transparent; border: none; background-image: url('<?= base_url() ?>static/img/login_adm/clave.png'); background-size: 100%; background-repeat: no-repeat"></span>
 									  <input style="background-color: transparent; border: none;" class="form-control" type="password" id="password" name="password" placeholder="">
 									  <input style="background-color: #22274b; width: 50%; color: #edd727; font-weight: bold "  type="hidden" id="type_user" name="type_user" value="BÁSICO">
 								  </div>
@@ -413,7 +413,7 @@
 						  
 						</div>
 						
-						<div id="registrarse"  style=" background-image: url('../static/img/login_adm/registrar.png'); background-size: 102%; background-repeat: no-repeat">
+						<div id="registrarse"  style=" background-image: url('<?= base_url() ?>static/img/login_adm/registrar.png'); background-size: 102%; background-repeat: no-repeat">
 							<br>
 							<div class="row">
 								<a><h3 style="font-weight: bold; color: #513085;">REGISTRATE</h3></a><br>
@@ -445,7 +445,7 @@
 
 		<!-- Modal para registro de usuarios nuevos -->
 		<div class="modal" id="modal_registrar" style="height:auto; margin-top: 3%">
-		   <div class="modal-dialog" style="height:auto; background-image: url('../static/img/modal_registro/fondo.png'); background-size: 100%; background-repeat: no-repeat">
+		   <div class="modal-dialog" style="height:auto; background-image: url('<?= base_url() ?>static/img/modal_registro/fondo.png'); background-size: 100%; background-repeat: no-repeat">
 			  <div style="height:auto;">
 				 <div class="modal-header text-center" >
 					<label style="color: #001a5a !important; font-size: 24px; font-weight: bold" >
@@ -464,40 +464,40 @@
 							</div>
 							<div class="col-sm-6">
 								<div class="input-group" >
-									<span class="input-group-addon" style=" background-image: url('../static/img/modal_registro/nombre.png'); "></span>
+									<span class="input-group-addon" style=" background-image: url('<?= base_url() ?>static/img/modal_registro/nombre.png'); "></span>
 									<input type="text" class="form-control"  id="first_name" name="first_name" placeholder="NOMBRE" autofocus="true">
 								</div>
 							</div>
 							
 							<div class="col-sm-6">
 								<div class="input-group">
-									<span class="input-group-addon" style=" background-image: url('../static/img/modal_registro/nombre.png'); "></span>
+									<span class="input-group-addon" style=" background-image: url('<?= base_url() ?>static/img/modal_registro/nombre.png'); "></span>
 									<input type="text" class="form-control"  id="last_name" name="last_name" placeholder="APELLIDO" autofocus="true">
 								</div>
 							</div>
 							<div class="col-sm-12">&nbsp;</div>
 							<div class="col-sm-6">
 								<div class="input-group" >
-									<span class="input-group-addon" style=" background-image: url('../static/img/modal_registro/fecha.png'); "></span>
+									<span class="input-group-addon" style=" background-image: url('<?= base_url() ?>static/img/modal_registro/fecha.png'); "></span>
 									<input type="text" class="form-control"  id="fecha_na" name="fecha_na" placeholder="00/00/0000" autofocus="true">
 								</div>
 							</div>
 							<div class="col-sm-6">
 								<div class="input-group" >
-									<span class="input-group-addon" style=" background-image: url('../static/img/modal_registro/correo.png'); "></span>
+									<span class="input-group-addon" style=" background-image: url('<?= base_url() ?>static/img/modal_registro/correo.png'); "></span>
 									<input type="text" class="form-control" id="correo" name="correo" placeholder="CORREO ELECTRONICO (*)"/>
 								</div>
 							</div>
 							<div class="col-sm-12">&nbsp;</div>
 							<div class="col-sm-6">
 								<div class="input-group" >
-									<span class="input-group-addon" style=" background-image: url('../static/img/modal_registro/perfil.png'); "></span>
+									<span class="input-group-addon" style=" background-image: url('<?= base_url() ?>static/img/modal_registro/perfil.png'); "></span>
 									<input type="text" class="form-control" id="username_reg" name="username_reg" placeholder="USUARIO (*)" autofocus="true">
 								</div>
 							</div>
 							<div class="col-sm-6">
 								<div class="input-group" >
-									<span class="input-group-addon" style=" background-image: url('../static/img/modal_registro/pass.png'); "></span>
+									<span class="input-group-addon" style=" background-image: url('<?= base_url() ?>static/img/modal_registro/pass.png'); "></span>
 									<input type="password" class="form-control" id="password_reg" name="password_reg" placeholder="CONTRASEÑA (*)"/>
 								</div>
 							</div>

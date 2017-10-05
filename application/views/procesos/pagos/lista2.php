@@ -45,9 +45,9 @@ redirect(base_url());
 						<legend><H4  style="color:#3C8DBC">Listado de Pagos</H4></legend>
 					</div>
 					<div class="text-left">
-						<button role="button" class="btn btn-primary" style="font-weight: bold;font-size: 13px; color: white " id="validar">
+						<!--<button role="button" class="btn btn-primary" style="font-weight: bold;font-size: 13px; color: white " id="validar">
 							&nbsp;<span class="glyphicon glyphicon-plus"></span>&nbsp;Pre-Validar Pagos
-						</button>
+						</button>-->
 						<input type="hidden" id="monedero_emp" value="<?php echo $monedero_emp->monedero; ?>">
 					</div>
 					<!-- Imagen de carga -->
@@ -105,11 +105,11 @@ redirect(base_url());
 										<?php 
 										if($pago->estatus == 1){
 											echo "<span style='color:red'>Pendiente</span>";
-										}else if($pago->estatus == 2){
+										}/*else if($pago->estatus == 2){
 											echo "<span style='color:green'>Pre-Validado</span>";
-										}else if($pago->estatus == 3){
+										}*/else if($pago->estatus == 2){
 											echo "<span style='color:#337ab7;'>Validado</span>";
-										}else if($pago->estatus == 4){
+										}else if($pago->estatus == 3){
 											echo "<span style='color:grey'>Negado</span>";
 										}else if($pago->estatus == 0){
 											echo "<span style='color:grey'>Inhabilitado</span>";
@@ -119,14 +119,14 @@ redirect(base_url());
 										?>
 									</td>
 									<td style='text-align: center'>
-										<?php if ($pago->estatus == 1 || $pago->estatus == 3 || $pago->estatus == 4) {?>
+										<?php if ($pago->estatus == 2 || $pago->estatus == 3) {?>
 										<input class='validar' type="checkbox" checked="checked" disabled="disabled"/>
-										<?php }else if ($pago->estatus == 2){ ?>
+										<?php }else if ($pago->estatus == 1){ ?>
 										<input class='validar' id='<?php echo $pago->codigo; ?>' type="checkbox" title='Validar el pago <?php echo $pago->codigo;?>'/>
 										<?php } ?>
 									</td>
 									<td style='text-align: center'>
-										<?php if ($pago->estatus == 2 || $pago->estatus == 3 || $pago->estatus == 4) {?>
+										<?php if ($pago->estatus == 2 || $pago->estatus == 3) {?>
 										<input class='negar' type="checkbox" checked="checked" disabled="disabled"/>
 										<?php }else if ($pago->estatus == 1){ ?>
 										<input class='negar' id='<?php echo $pago->codigo; ?>' type="checkbox" title='Negar el pago <?php echo $pago->codigo;?>'/>
