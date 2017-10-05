@@ -572,3 +572,10 @@ CAMBIOS AL 02-10-2017 (José):
 			+ procesos/CLAyuda
 		- Actualización de modelo
 			+ mails/MPagoConfirm.php
+
+CAMBIOS AL 05-10-2017 (José):
+		- Actualización de Views:
+			+ referidos/perfil/paneles_modal/pagos.php, procesos/pagos/lista2.php, login_form.php, admin_page.php, principal.php
+		- Actualizacion de Controladores
+			+ User_Authentication.php
+			+ procesos/CLPagos.php

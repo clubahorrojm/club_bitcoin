@@ -44,7 +44,7 @@
 								<label style="font-weight:bold">Estatus</label><br>
 								<?php if ($pago[0]->estatus == 1 || $pago[0]->estatus == 2) {?>
 									<label style="font-weight:bold; color: blue">En verificación</label>
-								<?php }else if ($pago[0]->estatus == 3){ ?>
+								<?php }else if ($pago[0]->estatus == 2){ ?>
 									<label style="font-weight:bold; color: green">Aprobado</label>
 								<?php }else if ($pago[0]->estatus == 99){ ?>
 									<label style="font-weight:bold; color: grey">Pendiente</label>

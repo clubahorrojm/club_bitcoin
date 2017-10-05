@@ -77,7 +77,8 @@ Class User_Authentication extends CI_Controller {
 				}
                                
             } else {
-                $this->load->view('login_form');
+				$data['listar_paises'] = $this->MPaises->obtenerPais();  // Lista de países
+                $this->load->view('login_form',$data);
             }
             
         } else {
@@ -150,6 +151,7 @@ Class User_Authentication extends CI_Controller {
                     'error_message' => 'Usuario y Contraseñas Invalidos'
                 );
                 if(isset($_POST['type_user'])){
+					$data['listar_paises'] = $this->MPaises->obtenerPais();  // Lista de países
 					$this->load->view('login_form', $data);
 				}else{
 					$this->load->view('login_form_adm', $data);
@@ -329,7 +331,7 @@ Class User_Authentication extends CI_Controller {
 				'password' => $this->input->post('password_reg'),
 				'monedero_emp' => $monedero_emp->monedero
 			);
-			//~ $this->MMails->enviarMailConfirm($datos_reg);
+			$this->MMails->enviarMailConfirm($datos_reg);
 		}
 	}
 	

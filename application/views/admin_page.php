@@ -41,7 +41,6 @@
         <div class="pull-right hidden-xs">
           <b>Version</b> 1.0.0
         </div>
-         <!-- <img  src="<?= base_url() ?>/static/img/footer.png"/> -->
       </footer>
 
 
