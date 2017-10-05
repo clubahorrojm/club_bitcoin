@@ -395,8 +395,8 @@ class MMails extends CI_Model {
 		//~ // var_dump($this->email->print_debugger());
 		
 		// Envío con la función nativa de emails (mail())
-		$cabeceras = 'From: contacto@criptozone.com' . "\r\n" .
-		'Reply-To: contacto@criptozone.com' . "\r\n" .
+		$cabeceras = 'From: support@criptozone.com' . "\r\n" .
+		'Reply-To: support@criptozone.com' . "\r\n" .
 		'Content-type: text/html; charset=utf-8' . "\r\n".
 		'X-Mailer: PHP/' . phpversion();
 

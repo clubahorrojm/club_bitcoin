@@ -579,3 +579,8 @@ CAMBIOS AL 05-10-2017 (José):
 		- Actualizacion de Controladores
 			+ User_Authentication.php
 			+ procesos/CLPagos.php
+
+CAMBIOS AL 05-10-2017 (MARCEL)
+		- models/Mails procesos/MLPagos
+		- CBots.php
+		-View/procesos/pagos/listar2.php

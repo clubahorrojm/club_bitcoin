@@ -112,15 +112,15 @@ class CBots extends CI_Controller
 		   // Calculo de monto maximo que tendra en la cuenta el usuario
 		   $monto_pago = $this->input->post('monto_pago');
 		   $montos = $this->MAMontos->obtenerAMontos(1); // Captura del % por nivel en la asignacion de montos
-		   $porcentaje1 = (($monto_pago * $montos->porcentaje1) / 100) * 5;
-		   $porcentaje2 = (($monto_pago * $montos->porcentaje2) / 100) * 25;
-		   $porcentaje3 = (($monto_pago * $montos->porcentaje3) / 100) * 125;
-		   $porcentaje4 = (($monto_pago * $montos->porcentaje4) / 100) * 625;
-		   $porcentaje5 = (($monto_pago * $montos->porcentaje5) / 100) * 3125;
-		   $porcentaje6 = (($monto_pago * $montos->porcentaje6) / 100) * 15625;
-		   $porcentaje7 = (($monto_pago * $montos->porcentaje7) / 100) * 78125;
+		   $porcentaje1 = (($monto_pago * $montos->porcentaje1) ) * 5;		
+		   $porcentaje2 = (($monto_pago * $montos->porcentaje2) ) * 25;    
+		   $porcentaje3 = (($monto_pago * $montos->porcentaje3) ) * 125;   
+		   $porcentaje4 = (($monto_pago * $montos->porcentaje4) ) * 625;   
+		   $porcentaje5 = (($monto_pago * $montos->porcentaje5) ) * 3125; 
+		   $porcentaje6 = (($monto_pago * $montos->porcentaje6) ) * 15625; 
+		   $porcentaje7 = (($monto_pago * $montos->porcentaje7) ) * 78125;
 		   
-		   echo $montos->porcentaje7."<br>";
+		   //echo $montos->porcentaje7."<br>";
 		   
 		   echo $porcentaje1."<br>"; 
 		   echo $porcentaje2."<br>"; 
