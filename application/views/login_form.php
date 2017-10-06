@@ -401,6 +401,7 @@
 								  <button type="submit" class="btn-sm  btn-block btn-flat" id="submit" name="submit" style="width: 45%; background-color: #001a5a; color: white; font-weight: bold  ">INICIAR SESIÓN</button>
 								  <br>
 								  <a href="#" id="rec_password" style="color: white">¿SE TE OLVIDÓ TU CONTRASEÑA?</a><br>
+								  <button  type="button" id="registrar_referido" name="registrar_referido">Registrar</button>
 								  
 							  </div>
 							  <div class="col-xs-1">&nbsp;</div>
