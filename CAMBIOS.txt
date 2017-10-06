@@ -584,3 +584,6 @@ CAMBIOS AL 05-10-2017 (MARCEL)
 		- models/Mails procesos/MLPagos
 		- CBots.php
 		-View/procesos/pagos/listar2.php
+
+CAMBIOS AL 06-10-2017 (José)
+		-views/login_form.php  (Se volvió a añadir el botón de registrar usuarios invitados)
