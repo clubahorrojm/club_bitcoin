@@ -108,10 +108,11 @@ class CLPagos extends CI_Controller
 			);
 			$result = $this->MRelLinks->actualizarReferidoLinks($datos3);
 			
+			// Consultamos los datos del usuario
+			$data_usuario = $this->ModelsBusqueda->obtenerRegistro('usuarios', 'id', $id_usuario);
 			// Enviamos email de confirmación de pago
 			$datos_reg = array(
-				'username' => $usuario,
-				'password' => $nueva_clave
+				'email' => $data_usuario->email
 			);
 			$this->MPagoConfirm->enviarMailPago($datos_reg);
 			
