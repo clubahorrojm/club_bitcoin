@@ -231,7 +231,7 @@ Class User_Authentication extends CI_Controller {
 			// Enviamos un correo con la información del usuario
 			$datos_reg = array(
 				'username' => $usuario,
-				'email' => $this->session->userdata['logged_in']['email'],
+				'email' => $data_usuario->email,
 				'password' => $nueva_clave
 			);
 			$this->MRecBasico->enviarMailClave($datos_reg);

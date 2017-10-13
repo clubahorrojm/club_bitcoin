@@ -198,6 +198,11 @@ class MPagoConfirm extends CI_Model {
 		//~ $this->email->to($para);
 		//~ $this->email->subject($título);
 		//~ $this->email->message($mensaje);
+		//~ if($this->email->send()){
+			//~ echo "Email enviado";
+		//~ }else{
+			//~ echo $this->email->print_debugger();
+		//~ }
 		//~ $this->email->send();
 		//~ // con esto podemos ver el resultado
 		//~ // var_dump($this->email->print_debugger());

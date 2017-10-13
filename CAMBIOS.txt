@@ -587,3 +587,10 @@ CAMBIOS AL 05-10-2017 (MARCEL)
 
 CAMBIOS AL 06-10-2017 (José)
 		-views/login_form.php  (Se volvió a añadir el botón de registrar usuarios invitados)
+		
+CAMBIOS AL 13-10-2017 (José):
+		- Actualizacion de Controlador
+			+ User_Authentication.php
+			+ procesos/CLPagos.php	
+		- Actualizacion de Modelos
+			+ mails/MPagoConfirm.php	
