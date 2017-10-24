@@ -594,3 +594,10 @@ CAMBIOS AL 13-10-2017 (José):
 			+ procesos/CLPagos.php	
 		- Actualizacion de Modelos
 			+ mails/MPagoConfirm.php	
+			
+CAMBIOS AL 20-102017 (MARCEL):
+		- Actualizacion de Controlador
+			+ CRelDistribucion.php
+		- Actualiacion de views todos por el copyrigt
+		- Actualizacion de Modelos
+			+ MLDesvincular.php

@@ -160,7 +160,7 @@ if ($tipouser == 'Administrador') {
         <div class="pull-right hidden-xs">
             <b>Version</b> 1.0
         </div>
-        <strong>Copyright Criptozone 2017</strong>
+        <strong>Network C. A.</strong> 
     </footer>
 
 

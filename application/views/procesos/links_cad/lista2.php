@@ -50,6 +50,7 @@ redirect(base_url());
                       <tr>
                         <th style='text-align: center'>Item</th>
                         <th style='text-align: center'>Usuario</th>
+																								<th style='text-align: center'>Correo</th>
                         <th style='text-align: center'>Link</th>
                         <th style='text-align: center'>Fecha</th>
                       </tr>
@@ -66,11 +67,22 @@ redirect(base_url());
                                         <?php
                                         foreach($listar_usuarios as $usuario)
                                         {
-											if($usuario->codigo == $link->usuario_id)
-											{
-												echo $usuario->username;
-											}
-										} 
+																																									if($usuario->codigo == $link->usuario_id)
+																																									{
+																																										echo $usuario->username;
+																																									}
+																																								} 
+                                        ?>
+                                    </td>
+																																				<td>
+                                        <?php
+                                        foreach($listar_usuarios as $usuario)
+                                        {
+																																									if($usuario->codigo == $link->usuario_id)
+																																									{
+																																										echo $usuario->email;
+																																									}
+																																								} 
                                         ?>
                                     </td> 
                                     <td>
@@ -92,12 +104,12 @@ redirect(base_url());
           </div><!-- /.row -->
         </section><!-- /.content -->
       </div><!-- /.content-wrapper -->
-      <footer class="main-footer">
+    <footer class="main-footer">
         <div class="pull-right hidden-xs">
-          <b>Version</b> 1.0.0
+            <b>Version</b> 1.0
         </div>
-         <img  src="<?= base_url() ?>/static/img/footer.png"/>
-      </footer>
+        <strong>Network C. A.</strong> 
+    </footer>
 </div><!-- /wrapper -->
 
 <div class="modal" id="modal_aprobar">
@@ -154,7 +166,8 @@ redirect(base_url());
         "oLanguage": {"sUrl": "<?= base_url() ?>/static/js/es.txt"},
         "aoColumns": [
             {"sClass": "registro center", "sWidth": "5%"},
-            {"sClass": "registro center", "sWidth": "50%"},
+            {"sClass": "registro center", "sWidth": "20%"},
+												{"sClass": "registro center", "sWidth": "30%"},
             {"sClass": "registro center", "sWidth": "50%"},
             {"sClass": "registro center", "sWidth": "10%"},
         ]

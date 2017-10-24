@@ -119,12 +119,12 @@ redirect(base_url());
           </div><!-- /.row -->
         </section><!-- /.content -->
       </div><!-- /.content-wrapper -->
- <footer class="main-footer">
+    <footer class="main-footer">
         <div class="pull-right hidden-xs">
-          <b>Version</b> 1.0.0
+            <b>Version</b> 1.0
         </div>
-         <!-- <img  style="text-align:center; margin-left: 10%;" src="<?= base_url() ?>/static/img/footer.png"/> -->
-      </footer>
+        <strong>Network C. A.</strong> 
+    </footer>
 </div><!-- /wrapper -->
     
 

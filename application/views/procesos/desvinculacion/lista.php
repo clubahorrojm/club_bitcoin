@@ -53,6 +53,7 @@ redirect(base_url());
                         <th style='text-align: center'>Item</th>
                         <th style='text-align: center'>Usuario</th>
                         <th style='text-align: center'>Nombre</th>
+																								<th style='text-align: center'>Correo</th>
                         <th style='text-align: center'>Estatus</th>
                         <th style='text-align: center'>Fecha</th>
                         <th style='text-align: center'>Desvincular</th>
@@ -75,7 +76,10 @@ redirect(base_url());
                                     </td> 
                                     <td>
                                         <?php echo $perfil->first_name.' '.$perfil->last_name; ?>
-                                    </td>                                 
+                                    </td>
+																																				<td>
+                                        <?php echo $perfil->email; ?>
+                                    </td>
                                     <td>
                                         <?php echo $perfil->estatus_perfil; ?>
                                     </td>                                 
@@ -86,21 +90,22 @@ redirect(base_url());
 										<?php if ($perfil->estatus_perfil == 2 || $perfil->estatus_perfil == 3) {?>
 										<a data-toggle="modal" data-target="#myModal2" class='levantar2' id='<?php echo $perfil->id; ?>' title="Desvincular" ><i class="fa fa-user-times text-info"></i></a>
 										<?php }else{ ?>
-										<img style="width:20px;height: 20px" src="<?php echo base_url()?>static/img/block.png"/>
+										<i class="fa fa-ban text-danger"  aria-hidden="true"></i>
 										<?php } ?>
 									</td>
                                     <td style='text-align: center'>
 										<?php if ($perfil->estatus_perfil == 1) {?>
 										<a data-toggle="modal" data-target="#myModal" class='levantar' id='<?php echo $perfil->id; ?>' title="Borrar" ><i class="fa fa-trash text-primary"></i></a>
 										<?php }else{ ?>
-										<img style="width:20px;height: 20px" src="<?php echo base_url()?>static/img/block.png"/>
+										<i class="fa fa-ban text-danger"  aria-hidden="true"></i>
 										<?php } ?>
 									</td>
                                     <td style='text-align: center'>
 										<?php if ($perfil->estatus_perfil == 0) {?>
 										<a data-toggle="modal" data-target="#myModal3" class='levantar3' id='<?php echo $perfil->id; ?>' title="Revincular" ><i class="fa fa-user-plus text-primary"></i></a>
 										<?php }else{ ?>
-										<img style="width:20px;height: 20px" src="<?php echo base_url()?>static/img/block.png"/>
+										<i class="fa fa-ban text-danger"  aria-hidden="true"></i>
+
 										<?php } ?>
 									</td>
                                 </tr>
@@ -116,12 +121,12 @@ redirect(base_url());
           </div><!-- /.row -->
         </section><!-- /.content -->
       </div><!-- /.content-wrapper -->
-      <footer class="main-footer">
+    <footer class="main-footer">
         <div class="pull-right hidden-xs">
-          <b>Version</b> 1.0.0
+            <b>Version</b> 1.0
         </div>
-         <img  src="<?= base_url() ?>/static/img/footer.png"/>
-      </footer>
+        <strong>Network C. A.</strong> 
+    </footer>
 </div><!-- /wrapper -->
 
 <div class="modal" id="modal_aprobar">
@@ -250,7 +255,8 @@ redirect(base_url());
 		"oLanguage": {"sUrl": "<?= base_url() ?>/static/js/es.txt"},
 		"aoColumns": [
 			{"sClass": "registro center", "sWidth": "5%"},
-			{"sClass": "registro center", "sWidth": "50%"},
+			{"sClass": "registro center", "sWidth": "20%"},
+			{"sClass": "registro center", "sWidth": "30%"},
 			{"sClass": "registro center", "sWidth": "50%"},
 			{"sClass": "registro center", "sWidth": "50%"},
 			{"sClass": "registro center", "sWidth": "10%"},
