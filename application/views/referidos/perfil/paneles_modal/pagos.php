@@ -17,7 +17,7 @@
 						
 						<div class="col-md-8">
 							<div class="form-group">
-								<label style="font-weight:bold">Dir. Monedero (desde el cual realizó el pago)</label><br>
+								<label style="font-weight:bold">Dirección del Monedero (desde el cual realizó el pago)</label><br>
 								<input type="text" placeholder="Ej: AxYz125cdJklmn14PqRs87Vwxy54Q7YcV4" maxlength="34" id="dir_monedero" value="<?php echo $pago[0]->dir_monedero ?>" class="form-control" >
 							</div>
 						</div>

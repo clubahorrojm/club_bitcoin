@@ -120,7 +120,7 @@ class CRelDistribucion extends CI_Controller
             //$monto_pago = $this->MMontoPago->obtenerMontoPago(1);
             //$monto_pago = $monto_pago->monto_pago; // Monto estandar del sistema
             
-            $pago = ($monto_pago * $porcentaje) / 100; //Cantidad a pagar al usuario
+            $pago = ($monto_pago * $porcentaje); //Cantidad a pagar al usuario
             $datos_distribucion = array(
                'codigo' => $this->ModelsBusqueda->count_all_table('ref_rel_distribucion')+1,
                'usuario_id' => $cod_user,
@@ -156,7 +156,7 @@ class CRelDistribucion extends CI_Controller
                 // Se consulta el monto estandar de pago para ingresar al sistema
 				$monto_pago = $perfil[0]->monto_pago;
     			
-    			$pago = ($monto_pago * $porcentaje) / 100; //Cantidad a pagar al usuario
+    			$pago = ($monto_pago * $porcentaje); //Cantidad a pagar al usuario
 
     			///////////////////////////////////////////////////////////////
                 // PASO 3 (Actualizacion del perfil de cada referido padre)

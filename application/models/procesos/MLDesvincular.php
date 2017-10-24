@@ -23,7 +23,7 @@ class MLDesvincular extends CI_Model {
 
     // Método público para obterner una lista de los perfiles en estatus 1
     public function obtenerPerfilesIniciados() {
-        $this->db->select('usuarios.id, usuarios.username, usuarios.first_name, usuarios.last_name, ref_perfil.codigo as codigo_perfil, ref_perfil.estatus as estatus_perfil, ref_perfil.fecha');
+        $this->db->select('usuarios.id, usuarios.username, usuarios.first_name, usuarios.last_name, usuarios.email, ref_perfil.codigo as codigo_perfil, ref_perfil.estatus as estatus_perfil, ref_perfil.fecha');
 		$this->db->from('usuarios');
 		$this->db->join('ref_perfil', 'usuarios.id = ref_perfil.usuario_id');
 		$this->db->where('ref_perfil.estatus<4');
