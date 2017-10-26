@@ -153,6 +153,46 @@ redirect(base_url());
     </footer>
 </div><!-- /wrapper -->
 
+<!-- Modal de indicación de motivo al negar un pago -->
+<div class="modal" id="modal_motivo" style="height:auto; margin-top: 3%">
+   <div class="modal-dialog">
+	  <div class="modal-content">
+		 <div class="modal-header text-center" style="background-color:#296293">
+			<label style="color: #ffffff !important; font-size: 24px; font-weight: bold" >
+				Selección de Motivo
+			</label>
+		 </div>
+		 <div class="modal-body" style="height:auto;">
+			<form id="f_reg_usuario" name="f_reg_usuario" action="" method="post">
+					<div class="col-sm-12">
+						<label style="color: #000000; font-weight: bold;" class="text-center">
+							Seleccione el motivo por el cual estaría negando el pago.
+						</label>
+						<input type="hidden" id="codigo" name="codigo">
+					</div>
+					<div class="col-md-12">
+						<div class="form-group">
+							<label style="font-weight:bold; color: #513085">MOTIVO</label>
+							<select class="form-control " id="motivo_negacion" name="motivo_negacion">
+								<option value="0">Seleccione</option>
+								<option value="No se refleja el pago">No se refleja el pago</option>
+								<option value="Pago Insuficiente">Pago Insuficiente</option>
+							</select>
+						</div><!-- /.form-group -->
+					</div><!-- /.form-group -->
+					<div class="col-md-12" align="center">
+						<button class="btn" style="border-radius: 25px; background-color: #001a5a; width:25%; font-weight: bold; color: white" type="button" id="negar_pago">
+							Negar&nbsp;
+						</button>
+					</div>&nbsp;
+			</form>
+		 </div>
+		 
+	  </div>
+   </div>
+</div>
+<!-- Cierre Modal de indicación de motivo al negar un pago -->
+
     <script>
     
        var TTCuentas = $('#tab_pagos').dataTable({
@@ -217,7 +257,7 @@ redirect(base_url());
 	   
 	});
 	
-	// Función para negar un pago
+	// Función para levantar modal de negación de pagos
 	$("table#tab_pagos").on('ifChanged', 'input.negar', function (e) {
 	    e.preventDefault();
  
@@ -226,19 +266,36 @@ redirect(base_url());
 
 		bootbox.confirm("¿Desea negar este pago?", function(result) {
 			if (result) {
-
-				$.post('<?php echo base_url(); ?>index.php/procesos/CLPagos/negar/' + cod, function(response) {
-					bootbox.alert("El pago fue negado exitosamente", function () {
-					}).on('hidden.bs.modal', function (event) {
-						location.reload();
-					});
-				})
+				
+				$("#codigo").val(cod);
+				$("#modal_motivo").modal('show');
 				
 			} else {
 				this.prop('checked','false');
 			}
 		}); 
 	   
+	});
+	
+	// Función para ejecutar la negación de pagos
+	$("#negar_pago").on('click', function (e) {
+		e.preventDefault();
+		
+		var cod = $("#codigo").val().trim();
+		
+		if($("#motivo_negacion").val() == 0){
+			bootbox.alert("Debe seleccionar el motivo...", function () {
+			}).on('hidden.bs.modal', function (event) {
+				
+			});
+		}else{
+			$.post('<?php echo base_url(); ?>index.php/procesos/CLPagos/negar/' + cod, {'motivo':$("#motivo_negacion").val()}, function(response) {
+				bootbox.alert("El pago fue negado exitosamente", function () {
+				}).on('hidden.bs.modal', function (event) {
+					location.reload();
+				});
+			})
+		}
 	});
 	
 	// Función para validar pagos pendientes tomando en cuenta sólo la dirección desde la que se haya hecho

@@ -43,6 +43,8 @@ class CLPagos extends CI_Controller
         $this->load->model('referidos/MRelLinks');
         $this->load->model('referidos/MReferidos');
         $this->load->model('mails/MPagoConfirm');
+        $this->load->model('mails/MMotivoNegacion1');
+        $this->load->model('mails/MMotivoNegacion2');
         
     }
 
@@ -133,14 +135,34 @@ class CLPagos extends CI_Controller
         // Armamos la data a actualizar
         $data = array(
             'codigo' => $cod,
-            'estatus' => 4,
+            'estatus' => 3,
             'operador_id' => $this->session->userdata['logged_in']['codigo'],
             'fecha_verificacion' => date('Y-m-d'),
+            'motivo_negacion' => $this->input->post('motivo'),
         );
         // Actualizamos el pago con los datos armados
         $result = $this->MLPagos->actualizarPagoBit($data);
         // Registramos los cambios en la Bitacora
         if ($result) {
+			// Capturamos el id del usuario
+			$data['pagos'] = $this->MRelPagos->obtenerRelPagos2Bit($cod);
+			$id_usuario = $data['pagos'][0]->usuario_id;
+			// Consultamos los datos del usuario
+			$data_usuario = $this->ModelsBusqueda->obtenerRegistro('usuarios', 'id', $id_usuario);
+			// Envío de correo según motivo
+			$datos_reg = array(
+				'email' => $data_usuario->email
+			);
+			if($this->input->post('motivo') == "No se refleja el pago"){
+				//~ echo "Enviando correo 1...";
+				$this->MMotivoNegacion1->enviarMailNegacion($datos_reg);
+			}else if($this->input->post('motivo') == "Pago Insuficiente"){
+				//~ echo "Enviando correo 2...";
+				$this->MMotivoNegacion2->enviarMailNegacion($datos_reg);
+			}else{
+				echo $this->input->post('motivo');
+			}
+			
             $param = array(
                 'tabla' => 'ref_rel_pagos_bitcoins',
                 'codigo' => $cod,

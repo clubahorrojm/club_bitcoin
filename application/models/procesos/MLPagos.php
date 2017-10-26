@@ -67,6 +67,7 @@ class MLPagos extends CI_Model {
     public function actualizarPagoBit($datos) {
 		$result = $this->db->where('codigo', $datos['codigo']);
 		$result = $this->db->update('ref_rel_pagos_bitcoins', $datos);
+		return $result;
     }
     
     // Método público para listar pagos específicos
