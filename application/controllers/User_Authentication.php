@@ -54,6 +54,15 @@ Class User_Authentication extends CI_Controller {
     public function index_login_adm() {
         $this->load->view('login_form_adm');
     }
+	public function info_gestores() {
+        $this->load->view('asesores/info_asesores');
+    }
+	public function reg_gestores() {
+		$data['listar_paises'] = $this->MPaises->obtenerPais();  // Lista de países
+		$data['dias'] = range(1,31);  // Lista de países
+		$data['year'] = range(1940,date('Y'));  // Lista de países
+        $this->load->view('asesores/reg_asesores',$data);
+    }
 // Check for user login process
     public function user_login_process() {
 
