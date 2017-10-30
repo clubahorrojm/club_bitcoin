@@ -55,5 +55,8 @@ $route['translate_uri_dashes'] = FALSE;
 
 // Login admin
 $route['log_adm_op_crip'] = 'User_Authentication/index_login_adm/';
+
+// Módulo de gestores
+$route['log_gestores_op_crip'] = 'User_Authentication/index_login_gestores/';
 $route['reg_gestores'] = 'User_Authentication/reg_gestores/';
 $route['info_gestores'] = 'User_Authentication/info_gestores/';
