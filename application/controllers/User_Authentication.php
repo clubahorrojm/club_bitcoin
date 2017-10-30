@@ -44,7 +44,7 @@ Class User_Authentication extends CI_Controller {
 		
     }
 
-// Show login page
+	// Show login page
     public function index() {
         $data['fecha'] = $this->uri->segment(1);
         //~ print_r($data);
@@ -53,6 +53,9 @@ Class User_Authentication extends CI_Controller {
     }
     public function index_login_adm() {
         $this->load->view('login_form_adm');
+    }
+    public function index_login_gestores() {
+        $this->load->view('login_form_gestores');
     }
 	public function info_gestores() {
         $this->load->view('asesores/info_asesores');
@@ -63,7 +66,8 @@ Class User_Authentication extends CI_Controller {
 		$data['year'] = range(1940,date('Y'));  // Lista de países
         $this->load->view('asesores/reg_asesores',$data);
     }
-// Check for user login process
+    
+	// Check for user login process
     public function user_login_process() {
 
         $this->form_validation->set_rules('username', 'Username', 'required');
@@ -97,10 +101,15 @@ Class User_Authentication extends CI_Controller {
 				'password' => 'pbkdf2_sha256$12000$'.hash( "sha256", $this->input->post('password') )
 			);
 			
-			// Si los datos provienen del login básico usamos la validación que verifica si es usuario 'BÁSICO'
+			// Si los datos provienen del login básico, usamos la validación que verifica si es usuario 'BÁSICO',
+			// si no, si los datos provienen del login de gestores, usamos la validación que verifica si es usuario 'GESTOR',
 			// si no, usamos la validación que verifica si es usuario 'Administrador' u 'OPERADOR'.
             if(isset($_POST['type_user'])){
-				$result = $this->Login_database->login($data);
+				if($_POST['type_user'] == "BÁSICO"){
+					$result = $this->Login_database->login($data);
+				}else{
+					$result = $this->Login_database->login_gestores($data);
+				}
 			}else{
 				$result = $this->Login_database->login_admin($data);
 			}
@@ -135,7 +144,7 @@ Class User_Authentication extends CI_Controller {
                         
                     );
 
-// Add user data in session
+					// Add user data in session
                     $this->session->set_userdata('logged_in', $session_data);
                     if($session_data['tipo_usuario'] == 'BÁSICO'){
 						$this->load->view('base');
@@ -160,8 +169,12 @@ Class User_Authentication extends CI_Controller {
                     'error_message' => 'Usuario y Contraseñas Invalidos'
                 );
                 if(isset($_POST['type_user'])){
-					$data['listar_paises'] = $this->MPaises->obtenerPais();  // Lista de países
-					$this->load->view('login_form', $data);
+					if($_POST['type_user'] == "BÁSICO"){
+						$data['listar_paises'] = $this->MPaises->obtenerPais();  // Lista de países
+						$this->load->view('login_form', $data);
+					}else{
+						$this->load->view('login_form_gestores', $data);
+					}
 				}else{
 					$this->load->view('login_form_adm', $data);
 				}
@@ -170,10 +183,10 @@ Class User_Authentication extends CI_Controller {
         }
     }
 
-// Logout from admin page
+	// Logout from admin page
     public function logout($id) {
 
-// Removing session data
+	// Removing session data
         $sess_array = array(
             'username' => ''
         );
@@ -182,6 +195,8 @@ Class User_Authentication extends CI_Controller {
         $data['listar_paises'] = $this->MPaises->obtenerPais();  // Lista de países
         if($_GET['t_u'] == '3'){
 			$this->load->view('login_form', $data);
+		}else if($_GET['t_u'] == '5'){
+			$this->load->view('login_form_gestores', $data);
 		}else{
 			$this->load->view('login_form_adm', $data);
 		}
@@ -380,6 +395,7 @@ Class User_Authentication extends CI_Controller {
 		
 		$reg_perfil = $this->Usuarios_model->insertar_perfil($data_perfil);
 	}
+	
 	// Método para registro de perfil nuevo con la identificación (código) del usuario padre
 	public function actualizar_perfil(){
 		$datos2 = array(
@@ -393,6 +409,7 @@ Class User_Authentication extends CI_Controller {
 	public function enlace_disponible(){
 		echo $result = $this->ModelsBusqueda->search_next_link();
 	}
+	
 	// Método para búsqueda de siguiente enlace correspondiente para registro de nuevo usuario
 	public function enlace_disponible2(){
 		echo $result = $this->ModelsBusqueda->search_next_link2();
@@ -442,6 +459,7 @@ Class User_Authentication extends CI_Controller {
 		
 		echo json_encode($lista_regs);
     }
+    
 	function cargar_grafica_pagos(){
 		$cod_user = $this->session->userdata['logged_in']['id'];
         $resultado = $this->ModelsBusqueda->search_pagos($cod_user);

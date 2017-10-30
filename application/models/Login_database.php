@@ -16,7 +16,7 @@ Class Login_Database extends CI_Model {
 
 
 
-// Read data using username and password
+	// Read data using username and password
     public function login($data) {
 
         $condition = "username =" . "'" . $data['username'] . "' AND " . "password =" . "'" . $data['password'] . "' AND estatus = 't' AND tipo_usuario = '3'";
@@ -33,7 +33,7 @@ Class Login_Database extends CI_Model {
         }
     }
 
-// Read data using username and password
+	// Read data using username and password
     public function login_admin($data) {
 
         $condition = "username = '".$data['username']."' AND password ='".$data['password']."' AND estatus = 't' AND tipo_usuario IN ('1','2')";
@@ -50,7 +50,24 @@ Class Login_Database extends CI_Model {
         }
     }
 
-// Read data from database to show data in admin page
+	// Read data using username and password
+    public function login_gestores($data) {
+
+        $condition = "username = '".$data['username']."' AND password ='".$data['password']."' AND estatus = 't' AND tipo_usuario IN ('5')";
+        $this->db->select('*');
+        $this->db->from('usuarios');
+        $this->db->where($condition);
+        $this->db->limit(1);
+        $query = $this->db->get();
+
+        if ($query->num_rows() == 1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+	// Read data from database to show data in admin page
     public function read_user_information($username) {
 
         $condition = "username =" . "'" . $username . "'";
